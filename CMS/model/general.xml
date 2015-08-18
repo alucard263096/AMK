@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <name>页面文字</name>
+  <tablename>tb_general</tablename>
+  <searchcondition>1=1</searchcondition>
+  <fields>
+    <field>
+      <name>代码</name>
+      <key>code</key>
+      <type>text</type>
+      <notnull>1</notnull>
+      <displayinlist>1</displayinlist>
+      <gotodetail>1</gotodetail>
+      <search>1</search>
+      <disableindetail>1</disableindetail>
+    </field>
+    <field>
+      <name>内容</name>
+      <key>content</key>
+      <type>html</type>
+    </field>
+    <field>
+      <name>说明</name>
+      <key>remarks</key>
+      <type>longtext</type>
+      <notnull>1</notnull>
+      <displayinlist>1</displayinlist>
+      <search>1</search>
+    </field>
+  </fields>
+  <options>
+    <option>
+      <name>新增</name>
+      <type>function</type>
+      <function>addNew()</function>
+    </option>
+    <option>
+    </option>
+  </options>
+</root>
