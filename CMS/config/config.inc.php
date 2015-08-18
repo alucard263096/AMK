@@ -29,7 +29,7 @@ $CONFIG['error_handler'] ="E_ALL";
 
 #[Database]
 $CONFIG['database']['provider']	= 'sqlsrv';  //mssql,sqlsrv
-$CONFIG['database']['host']		= '.';  
+$CONFIG['database']['host']		= '120.24.239.49';  
 $CONFIG['database']['database']	= 'AMK150818';  
 $CONFIG['database']['user']		= 'sa';  
 $CONFIG['database']['psw']		= 'hack2rpc'; 
