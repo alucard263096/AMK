@@ -95,6 +95,7 @@
         <option>
           <name>启用</name>
           <value>A</value>
+          <default>1</default>
         </option>
         <option>
           <name>禁用</name>

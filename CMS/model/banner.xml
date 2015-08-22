@@ -15,7 +15,7 @@
       <disableindetail>1</disableindetail>
     </field>
     <field>
-      <name>广告标题（简体）</name>
+      <name>广告标题</name>
       <key>title</key>
       <type>longtext</type>
       <notnull>1</notnull>

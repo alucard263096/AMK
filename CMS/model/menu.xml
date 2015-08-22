@@ -55,6 +55,17 @@
           <url>/Website/general.php?action=add</url>
           <onlyadmin>1</onlyadmin>
         </submenu>
+        <submenu>
+          <id>news_list</id>
+          <name>新闻列表</name>
+          <url>/Website/news.php</url>
+        </submenu>
+        <submenu>
+          <id>news_add</id>
+          <name>新闻新增</name>
+          <url>/Website/news.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
       </submenus>
     </mainmenu>
     <mainmenu>
