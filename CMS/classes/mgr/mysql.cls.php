@@ -118,6 +118,17 @@ class DbMysql
 		return $query;
 	}
 	
+	function getNewId($tablename){
+		$sql="select ifnull(max(id),0)+1 from ".$tablename;
+		$query = $this->query($sql);
+		$result = $this->fetch_array($query); 
+		$id=$result[0];
+		return $id;
+	}
+
+	function getDate(){
+		return " now() ";
+	}
 	/**
 	* execute sql statement, only get one record
 	* @param string $sql: sql statement

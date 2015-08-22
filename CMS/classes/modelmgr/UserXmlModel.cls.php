@@ -10,7 +10,7 @@ class UserXmlModel extends XmlModel{
 	Global $SysLang; 
 		if($request["primary_id"]==""){
 			$login_id=$request["login_id"];
-			$loginname=mysql_real_escape_string($login_id);
+			$loginname=parameter_filter($login_id);
 			$sql="select * from tb_user where login_id='$login_id' ";
 			$query = $dbMgr->query($sql);
 			$userRows = $dbMgr->fetch_array_all($query); 
