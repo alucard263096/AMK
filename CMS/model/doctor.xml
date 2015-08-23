@@ -24,6 +24,16 @@
       <search>1</search>
     </field>
     <field>
+      <name>医生头像</name>
+      <key>photo</key>
+      <type>upload</type>
+      <displayinlist>1</displayinlist>
+      <gotodetail>1</gotodetail>
+      <notnull>1</notnull>
+      <uploadmodule>doctor</uploadmodule>
+      <filetype>image</filetype>
+    </field>
+    <field>
       <name>科室</name>
       <key>office</key>
       <type>text</type>

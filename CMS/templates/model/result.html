@@ -16,11 +16,20 @@
             {{if $key!="id"}}
             {{foreach from=$ModelData.fields.field item=rs}}
                 {{if $key==$rs.key && $rs.displayinlist=="1"}}
+                    <td class="result_{{$rs.key}}">                        
                     {{if $rs.gotodetail=="1"}}
-                    <td class="result_{{$rs.key}}"><a href="{{$PageName}}?action=edit&id={{$row.id}}">{{$col}}</a></td>
-                    {{else}}
-                    <td class="result_{{$rs.key}}">{{$col}}</td>
+                    <a href="{{$PageName}}?action=edit&id={{$row.id}}">                        
                     {{/if}}
+
+                    {{if $rs.type=="upload" && $rs.filetype=="image"}}
+                    <img src="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$col}}" alt="ÔÝÎÞÍ¼Æ¬" style="height:50px;" />
+                    {{else}}
+                    {{$col}}
+                    {{/if}}
+                    {{if $rs.gotodetail=="1"}}
+                    </a>
+                    {{/if}}
+                    </td>
                 {{/if}}
             {{/foreach}}
             {{/if}}

@@ -36,7 +36,7 @@ $CONFIG['database']['psw']		= 'hack2rpc';
 
 
 #[File upload]
-$CONFIG['fileupload']['upload_path']	= "FilesServer";
+$CONFIG['fileupload']['upload_path']	= "../FilesServer";
 $CONFIG['fileupload']['nt_check']		= false;
 $CONFIG['fileupload']['ftp_url']		= "127.0.0.1";
 $CONFIG['fileupload']['ftp_user']		= "anonymous";

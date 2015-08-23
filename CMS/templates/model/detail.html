@@ -102,7 +102,12 @@
                                             <label class="col-md-4 control-label" >{{$rs.name}}</label>
                                             <div class="col-md-8">
                                                 <input  {{if $action!="add" and $rs.disableindetail=="1"}}disabled="disabled"{{/if}}  class="form-control uniform_on" name="file_{{$rs.key}}" id="file_{{$rs.key}}" onchange="upload('{{$rs.key}}', '{{$rs.uploadmodule}}')" type="file" />
+                                                {{if $rs.filetype=="image"}}
+                                                <br />
+                                                <img id="view_{{$rs.key}}" {{if $rs.value=="" }}style="display:none;height:100px;" {{else}}style="height:100px;" src="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$rs.value}}" {{/if}} />
+                                                {{else}}
                                                 <a id="view_{{$rs.key}}" target="_blank" {{if $rs.value==""}}style="display:none;"{{else}}href="{{$uploadpath}}/{{$rs.uploadmodule}}/{{$rs.value}}"{{/if}} >{{$SysLang.model.viewupload}}</a>
+                                                {{/if}}
                                                 <input class="uniform_on" type="hidden" id="content_{{$rs.key}}" value="{{$rs.value}}" />
                                             </div>
                                         </div>                                                 
@@ -363,7 +368,10 @@
 			        if (data.substring(0, 7) == "success") {
 			            str = data.substring(7, data.length);
 			            $("#content_" + key).val(str.split('|~~|')[1]);
-			            $("#view_" + key).attr("href", "{{$uploadpath}}/"+module+"/" + str.split('|~~|')[1]).show();
+
+			            $("#view_" + key).attr("href", "{{$uploadpath}}/"+module+"/" + str.split('|~~|')[1])
+                            .attr("src", "{{$uploadpath}}/"+module+"/" + str.split('|~~|')[1])
+                            .show();
                         
 			        } else {
 			            errorDialog("{{$SysLang.model.uploaderror}}");
