@@ -66,6 +66,17 @@
           <url>/Website/news.php?action=add</url>
           <onlyadmin>1</onlyadmin>
         </submenu>
+        <submenu>
+          <id>notice_list</id>
+          <name>消息列表</name>
+          <url>/Website/notice.php</url>
+        </submenu>
+        <submenu>
+          <id>notice_add</id>
+          <name>消息发布</name>
+          <url>/Website/notice.php?action=add</url>
+          <onlyadmin>1</onlyadmin>
+        </submenu>
       </submenus>
     </mainmenu>
     <mainmenu>

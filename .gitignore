@@ -26,3 +26,9 @@ proguard/
 # Log Files
 *.log
 /packages
+/logs
+
+
+# template Files
+*.template
+/templates_c
