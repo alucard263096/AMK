@@ -7,7 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Owin;
 using Doctor.Web.Models;
 
 namespace Doctor.Web.Controllers
@@ -15,17 +17,27 @@ namespace Doctor.Web.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationUserManager _userManager;
+
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
         }
 
-        public UserManager<ApplicationUser> UserManager { get; private set; }
+        public ApplicationUserManager UserManager {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         //
         // GET: /Account/Login
@@ -45,7 +57,7 @@ namespace Doctor.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
+                var user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -57,7 +69,7 @@ namespace Doctor.Web.Controllers
                 }
             }
 
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -78,11 +90,18 @@ namespace Doctor.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -91,8 +110,125 @@ namespace Doctor.Web.Controllers
                 }
             }
 
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
+            // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null) 
+            {
+                return View("Error");
+            }
+
+            IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
+            if (result.Succeeded)
+            {
+                return View("ConfirmEmail");
+            }
+            else
+            {
+                AddErrors(result);
+                return View();
+            }
+        }
+
+        //
+        // GET: /Account/ForgotPassword
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/ForgotPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
+                    return View();
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ForgotPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+	
+        //
+        // GET: /Account/ResetPassword
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string code)
+        {
+            if (code == null) 
+            {
+                return View("Error");
+            }
+            return View();
+        }
+
+        //
+        // POST: /Account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "No user found.");
+                    return View();
+                }
+                IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ResetPasswordConfirmation", "Account");
+                }
+                else
+                {
+                    AddErrors(result);
+                    return View();
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // GET: /Account/ResetPasswordConfirmation
+        [AllowAnonymous]
+        public ActionResult ResetPasswordConfirmation()
+        {
+            return View();
         }
 
         //
@@ -105,6 +241,8 @@ namespace Doctor.Web.Controllers
             IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                await SignInAsync(user, isPersistent: false);
                 message = ManageMessageId.RemoveLoginSuccess;
             }
             else
@@ -119,10 +257,10 @@ namespace Doctor.Web.Controllers
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "你的密码已更改。"
-                : message == ManageMessageId.SetPasswordSuccess ? "已设置你的密码。"
-                : message == ManageMessageId.RemoveLoginSuccess ? "已删除外部登录名。"
-                : message == ManageMessageId.Error ? "出现错误。"
+                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -145,6 +283,8 @@ namespace Doctor.Web.Controllers
                     IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
+                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        await SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
@@ -176,7 +316,7 @@ namespace Doctor.Web.Controllers
                 }
             }
 
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -187,7 +327,7 @@ namespace Doctor.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            // 请求重定向到外部登录提供程序
+            // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -214,7 +354,7 @@ namespace Doctor.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
 
@@ -237,7 +377,7 @@ namespace Doctor.Web.Controllers
             {
                 return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             if (result.Succeeded)
             {
                 return RedirectToAction("Manage");
@@ -259,20 +399,27 @@ namespace Doctor.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                // 从外部登录提供程序获取有关用户的信息
+                // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user);
+                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
+                        
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
+                        
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -319,7 +466,7 @@ namespace Doctor.Web.Controllers
             base.Dispose(disposing);
         }
 
-        #region 帮助程序
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -334,8 +481,7 @@ namespace Doctor.Web.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
         }
 
         private void AddErrors(IdentityResult result)
@@ -354,6 +500,11 @@ namespace Doctor.Web.Controllers
                 return user.PasswordHash != null;
             }
             return false;
+        }
+
+        private void SendEmail(string email, string callbackUrl, string subject, string message)
+        {
+            // For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
         }
 
         public enum ManageMessageId
