@@ -30,6 +30,26 @@
       <displayinlist>1</displayinlist>
       <options>
         <option>
+          <name>一般</name>
+          <value>M</value>
+          <default>1</default>
+        </option>
+        <option>
+          <name>重要</name>
+          <value>I</value>
+        </option>
+      </options>
+      <search>1</search>
+      <notnull>1</notnull>
+      <disableindetail>1</disableindetail>
+    </field>
+    <field>
+      <name>发送对象</name>
+      <key>sent_type</key>
+      <type>select</type>
+      <displayinlist>1</displayinlist>
+      <options>
+        <option>
           <name>会员</name>
           <value>M</value>
           <default>1</default>
