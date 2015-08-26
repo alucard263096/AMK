@@ -4,14 +4,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 
-public class MainActivity extends FragmentActivity implements OnClickListener {
+
+public class MainActivity extends MyFragmentActivity implements OnClickListener {
 
     // 三个tab布局
     private RelativeLayout knowLayout, iWantKnowLayout, meLayout;

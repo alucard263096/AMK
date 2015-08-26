@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dip"
             android:background="@color/topbar_bg" >
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:id="@+id/iv_logo3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,12 +63,37 @@
                 android:layout_weight="1.0" >
 
                 <ImageView
+                    android:id="@+id/iv_know1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/bar_home"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    android:id="@+id/tv_know1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_know1"
+                    android:layout_centerHorizontal="true"
+                    android:text="首页"
+                    android:textColor="@color/bottomtab_normal"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_know"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0" >
+
+                <ImageView
                     android:id="@+id/iv_know"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/btn_know_nor"
-                    android:contentDescription="@null"/>
+                    android:src="@drawable/bar_home"
+                    android:contentDescription="@null" />
 
                 <TextView
                     android:id="@+id/tv_know"
@@ -76,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/iv_know"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_know"
+                    android:text="首页"
                     android:textColor="@color/bottomtab_normal"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -92,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/btn_wantknow_nor"
+                    android:src="@drawable/bar_news"
                     android:contentDescription="@null" />
 
                 <TextView
@@ -101,7 +126,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_i_want_know"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_wantknow"
+                    android:text="新闻"
                     android:textColor="@color/bottomtab_normal"
                     android:textSize="12sp" />
             </RelativeLayout>
@@ -117,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/btn_my_nor"
+                    android:src="@drawable/bar_doctor"
                     android:contentDescription="@null" />
 
 
@@ -127,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_me"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/bottom_tab_my"
+                    android:text="医生"
                     android:textColor="@color/bottomtab_normal"
                     android:textSize="12sp" />
             </RelativeLayout>
