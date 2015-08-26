@@ -11,4 +11,7 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="bottom_tab_know">知道</string>
+    <string name="bottom_tab_wantknow">我想知道</string>
+    <string name="bottom_tab_my">我的</string>
 </resources>
