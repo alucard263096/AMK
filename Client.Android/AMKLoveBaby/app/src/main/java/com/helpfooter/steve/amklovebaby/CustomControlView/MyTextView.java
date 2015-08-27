@@ -26,11 +26,6 @@ public class MyTextView  extends TextView {
         init(context);
     }
 
-    /***
-     * …Ë÷√◊÷ÃÂ
-     *
-     * @return
-     */
     public void init(Context context) {
         try {
             setTypeface(FontUtil.setFont(context));

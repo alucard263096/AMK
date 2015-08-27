@@ -50,112 +50,12 @@
         <LinearLayout
             android:id="@+id/ll_bottom_tab"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="58dp"
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:baselineAligned="true">
 
-            <RelativeLayout
-                android:id="@+id/rl_know"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0" >
-
-                <ImageView
-                    android:id="@+id/iv_know1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/bar_home"
-                    android:contentDescription="@null" />
-
-                <TextView
-                    android:id="@+id/tv_know1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_know1"
-                    android:layout_centerHorizontal="true"
-                    android:text="首页"
-                    android:textColor="@color/bottomtab_normal"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_know"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0" >
-
-                <ImageView
-                    android:id="@+id/iv_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/bar_home"
-                    android:contentDescription="@null" />
-
-                <TextView
-                    android:id="@+id/tv_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/iv_know"
-                    android:layout_centerHorizontal="true"
-                    android:text="首页"
-                    android:textColor="@color/bottomtab_normal"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_want_know"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0" >
-
-                <ImageView
-                    android:id="@+id/iv_i_want_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/bar_news"
-                    android:contentDescription="@null" />
-
-                <TextView
-                    android:id="@+id/tv_i_want_know"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_i_want_know"
-                    android:layout_centerHorizontal="true"
-                    android:text="新闻"
-                    android:textColor="@color/bottomtab_normal"
-                    android:textSize="12sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_me"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0" >
-
-                <ImageView
-                    android:id="@+id/iv_me"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/bar_doctor"
-                    android:contentDescription="@null" />
-
-
-                <TextView
-                    android:id="@+id/tv_me"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/iv_me"
-                    android:layout_centerHorizontal="true"
-                    android:text="医生"
-                    android:textColor="@color/bottomtab_normal"
-                    android:textSize="12sp" />
-            </RelativeLayout>
         </LinearLayout>
 
         <!-- 内容部分， fragment切换 -->

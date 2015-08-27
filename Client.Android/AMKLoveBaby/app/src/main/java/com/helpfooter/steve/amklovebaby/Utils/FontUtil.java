@@ -17,33 +17,20 @@ public class FontUtil {
     static Typeface tfNormal;
     static Typeface tfMedium;
 
-    /***
-     * 设置字体
-     *
-     * @return
-     */
     public static Typeface setFont(Context context) {
         if(tfLight==null){
             tfLight = Typeface.createFromAsset(context.getAssets(), fongUrlLight);
         }
         return tfLight;
     }
-    /***
-     * 设置字体
-     *
-     * @return
-     */
+    
     public static Typeface setFontNormal(Context context) {
         if(tfNormal==null){
             tfNormal = Typeface.createFromAsset(context.getAssets(), fongUrlNormal);
         }
         return tfNormal;
     }
-    /***
-     * 设置字体
-     *
-     * @return
-     */
+
     public static Typeface setFontMedium(Context context) {
         if(tfMedium==null){
             tfMedium = Typeface.createFromAsset(context.getAssets(), fongUrlMedium);

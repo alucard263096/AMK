@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
+import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends MyFragmentActivity implements OnClickListener {
@@ -28,13 +32,16 @@ public class MainActivity extends MyFragmentActivity implements OnClickListener 
     // 底部标签的文本
     private TextView knowTv, iWantKnowTv, meTv;
 
+    private LinearLayout bottomTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initUI();
-        initTab();
+        //initTab();
+        InitBottomBar();
     }
 
 
@@ -42,20 +49,21 @@ public class MainActivity extends MyFragmentActivity implements OnClickListener 
      * 初始化UI
      */
     private void initUI() {
-        knowLayout = (RelativeLayout) findViewById(R.id.rl_know);
-        iWantKnowLayout = (RelativeLayout) findViewById(R.id.rl_want_know);
-        meLayout = (RelativeLayout) findViewById(R.id.rl_me);
-        knowLayout.setOnClickListener(this);
-        iWantKnowLayout.setOnClickListener(this);
-        meLayout.setOnClickListener(this);
+//        knowLayout = (RelativeLayout) findViewById(R.id.rl_know);
+//        iWantKnowLayout = (RelativeLayout) findViewById(R.id.rl_want_know);
+//        meLayout = (RelativeLayout) findViewById(R.id.rl_me);
+//        knowLayout.setOnClickListener(this);
+//        iWantKnowLayout.setOnClickListener(this);
+//        meLayout.setOnClickListener(this);
+//
+//        knowImg = (ImageView) findViewById(R.id.iv_know);
+//        iWantKnowImg = (ImageView) findViewById(R.id.iv_i_want_know);
+//        meImg = (ImageView) findViewById(R.id.iv_me);
+//        knowTv = (TextView) findViewById(R.id.tv_know);
+//        iWantKnowTv = (TextView) findViewById(R.id.tv_i_want_know);
+//        meTv = (TextView) findViewById(R.id.tv_me);
 
-        knowImg = (ImageView) findViewById(R.id.iv_know);
-        iWantKnowImg = (ImageView) findViewById(R.id.iv_i_want_know);
-        meImg = (ImageView) findViewById(R.id.iv_me);
-        knowTv = (TextView) findViewById(R.id.tv_know);
-        iWantKnowTv = (TextView) findViewById(R.id.tv_i_want_know);
-        meTv = (TextView) findViewById(R.id.tv_me);
-
+        bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
     }
 
     /**
@@ -89,19 +97,19 @@ public class MainActivity extends MyFragmentActivity implements OnClickListener 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.rl_know: // 知道
-                clickTab1Layout();
-                break;
-            case R.id.rl_want_know: // 我想知道
-                clickTab2Layout();
-                break;
-            case R.id.rl_me: // 我的
-                clickTab3Layout();
-                break;
-            default:
-                break;
-        }
+//        switch (view.getId()) {
+//            case R.id.rl_know: // 知道
+//                clickTab1Layout();
+//                break;
+//            case R.id.rl_want_know: // 我想知道
+//                clickTab2Layout();
+//                break;
+//            case R.id.rl_me: // 我的
+//                clickTab3Layout();
+//                break;
+//            default:
+//                break;
+//        }
     }
 
     /**
@@ -158,6 +166,19 @@ public class MainActivity extends MyFragmentActivity implements OnClickListener 
                 R.color.bottomtab_normal));
         meImg.setImageResource(R.drawable.btn_my_pre);
         meTv.setTextColor(getResources().getColor(R.color.bottomtab_press));
+
+    }
+
+
+    public void InitBottomBar(){
+
+        ArrayList<BottomBarButton> lstBottomBar=new ArrayList<BottomBarButton>();
+        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", null));
+        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null));
+        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", null));
+
+        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout,lstBottomBar);
+
 
     }
 
