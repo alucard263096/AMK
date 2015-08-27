@@ -4,6 +4,7 @@ package com.helpfooter.steve.amklovebaby.CustomObject;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;

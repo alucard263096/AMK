@@ -14,4 +14,7 @@
     <string name="bottom_tab_know">知道</string>
     <string name="bottom_tab_wantknow">我想知道</string>
     <string name="bottom_tab_my">我的</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
