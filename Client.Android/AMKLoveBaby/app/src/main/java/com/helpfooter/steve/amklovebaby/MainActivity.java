@@ -4,18 +4,23 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
+import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends MyFragmentActivity{
+public class MainActivity extends MyFragmentActivity implements View.OnClickListener {
 
     private LinearLayout bottomTabLayout;
     private Fragment currentFragment;
-
+    private TextView titleTextView;
+    ArrayList<BottomBarButton> lstBottomBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +36,8 @@ public class MainActivity extends MyFragmentActivity{
      */
     private void initUI() {
 
-
+        titleTextView=(TextView)findViewById(R.id.title);
+        titleTextView.setOnClickListener(this);
         bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
     }
 
@@ -64,20 +70,50 @@ public class MainActivity extends MyFragmentActivity{
 //
 //    }
 
-
+    @Override
+    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case MyResourceIdUtil.GetMyResourceId("bar_"): // 知道
+//                clickTab1Layout();
+//                break;
+//            case R.id.rl_want_know: // 我想知道
+//                clickTab2Layout();
+//                break;
+//            case R.id.rl_me: // 我的
+//                clickTab3Layout();
+//                break;
+//            default:
+//                break;
+//        }
+        Fragment fragment= new HomeFragment();
+        if(!fragment.isAdded()){
+            FragmentManager fm=getFragmentManager();
+            FragmentTransaction transaction=fm.beginTransaction();
+            transaction.add(R.id.content_layout, fragment).commit();
+            titleTextView.setText("in");
+        }else {
+            titleTextView.setText("out");
+        }
+    }
 
 
     public void InitBottomBar(){
 
-        ArrayList<BottomBarButton> lstBottomBar=new ArrayList<BottomBarButton>();
+        lstBottomBar=new ArrayList<BottomBarButton>();
         lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", new HomeFragment() ));
         lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null));
         lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", null));
 
-        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar);
-        Fragment fragment= lstBottomBar.get(0).GetFragment();
-        FragmentManager fm=getSupportFragmentManager();
-        addOrShowFragment(getSupportFragmentManager().beginTransaction(), fragment);
+        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar,this);
+//        lstBottomBar.get(0).GetEnteryLayout().callOnClick();
+//        Fragment fragment= lstBottomBar.get(0).GetFragment();
+//        FragmentManager fm=getFragmentManager();
+//        FragmentTransaction transaction=fm.beginTransaction();
+//        //addOrShowFragment(transaction, fragment);
+////        if(!fragment.isAdded()){
+////            transaction.add(R.id.content_layout, fragment).commit();
+////        }
+//        String str="a";
     }
 
     /**

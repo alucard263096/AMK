@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
+import com.helpfooter.steve.amklovebaby.MainActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 
@@ -141,39 +142,23 @@ public class BottomBarButton {
         entryLayout.setLayoutParams(params);
         entryLayout.addView(GetImageView());
         entryLayout.addView(GetTextView());
+        entryLayout.setBackgroundColor(Color.WHITE);
 
         return  entryLayout;
     }
 
-    public static void CreateEnteryBottomBar(LinearLayout layout,ArrayList<BottomBarButton> lstBottomBar) {
+    public static void CreateEnteryBottomBar(LinearLayout layout, ArrayList<BottomBarButton> lstBottomBar, View.OnClickListener clickLinstenerActivity) {
 
         for (BottomBarButton barButton : lstBottomBar) {
             LinearLayout barLayout=barButton.GetEnteryLayout();
             barLayout.setTag(barButton);
-            ClickBottomBarEvent clickevent=new ClickBottomBarEvent();
-            clickevent.lstBottomBar=lstBottomBar;
-            barLayout.setOnClickListener(clickevent.clickBottomBar);
+            barLayout.setOnClickListener(clickLinstenerActivity);
             layout.addView(barLayout);
         }
 
 
 
     }
-    public static class  ClickBottomBarEvent{
 
-        public ArrayList<BottomBarButton> lstBottomBar;
-
-        public LinearLayout.OnClickListener clickBottomBar = new LinearLayout.OnClickListener() {
-            public void onClick(View v) {
-
-                for (BottomBarButton barButton : lstBottomBar) {
-                    barButton.SetDefault();
-                }
-
-                BottomBarButton barButton=(BottomBarButton)v.getTag();
-                barButton.SetActive();
-            }
-        };
-    }
 
 }

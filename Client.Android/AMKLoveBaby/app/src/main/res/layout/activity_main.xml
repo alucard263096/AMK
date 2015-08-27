@@ -15,7 +15,7 @@
             android:layout_height="50dip"
             android:background="@color/topbar_bg" >
             <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:id="@+id/iv_logo3"
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -50,7 +50,7 @@
         <LinearLayout
             android:id="@+id/ll_bottom_tab"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="80dp"
             android:layout_alignParentBottom="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
