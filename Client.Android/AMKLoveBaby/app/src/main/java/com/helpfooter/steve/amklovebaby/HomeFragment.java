@@ -4,20 +4,21 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ViewFlipper;
+
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.helpfooter.steve.amklovebaby.CustomObject.ADInfo;
-import com.helpfooter.steve.amklovebaby.CustomControlView.CycleViewPager;
-import com.helpfooter.steve.amklovebaby.CustomControlView.CycleViewPagerHandler;
-import com.helpfooter.steve.amklovebaby.Utils.ViewFactory;
-import com.helpfooter.steve.amklovebaby.CustomControlView.CycleViewPager.ImageCycleViewListener;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -32,14 +33,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private List<ImageView> views = new ArrayList<ImageView>();
-    private List<ADInfo> infos = new ArrayList<ADInfo>();
-    private CycleViewPager cycleViewPager;
-    private String[] imageUrls = {"http://img.taodiantong.cn/v55183/infoimg/2013-07/130720115322ky.jpg",
-            "http://pic30.nipic.com/20130626/8174275_085522448172_2.jpg",
-            "http://pic18.nipic.com/20111215/577405_080531548148_2.jpg",
-            "http://pic15.nipic.com/20110722/2912365_092519919000_2.jpg",
-            "http://pic.58pic.com/58pic/12/64/27/55U58PICrdX.jpg"};
+    private ImageSilderView mImageSilder;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,6 +56,8 @@ public class HomeFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
+
         return fragment;
     }
 
@@ -76,63 +72,32 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        initBanner();
+        initUI();
 
     }
 
-    private void initBanner() {
+    private void initUI() {
 
-        cycleViewPager = (CycleViewPager) getFragmentManager()
-                .findFragmentById(R.id.fragment_cycle_viewpager_content);
-
-        for(int i = 0; i < imageUrls.length; i ++){
-            ADInfo info = new ADInfo();
-            info.setUrl(imageUrls[i]);
-            info.setContent("图片-->" + i );
-            infos.add(info);
-        }
-
-        // 将最后一个ImageView添加进来
-        views.add(ViewFactory.getImageView(this.getActivity(), infos.get(infos.size() - 1).getUrl()));
-        for (int i = 0; i < infos.size(); i++) {
-            views.add(ViewFactory.getImageView(this.getActivity(), infos.get(i).getUrl()));
-        }
-        // 将第一个ImageView添加进来
-        views.add(ViewFactory.getImageView(this.getActivity(), infos.get(0).getUrl()));
-
-        // 设置循环，在调用setData方法前调用
-        cycleViewPager.setCycle(true);
-
-        // 在加载数据前设置是否循环
-        cycleViewPager.setData(views, infos, mAdCycleViewListener);
-        //设置轮播
-        cycleViewPager.setWheel(true);
-
-        // 设置轮播时间，默认5000ms
-        cycleViewPager.setTime(2000);
-        //设置圆点指示图标组居中显示，默认靠右
-        cycleViewPager.setIndicatorCenter();
     }
-    private ImageCycleViewListener mAdCycleViewListener = new ImageCycleViewListener() {
 
-        @Override
-        public void onImageClick(ADInfo info, int position, View imageView) {
-            if (cycleViewPager.isCycle()) {
-                position = position - 1;
-                Toast.makeText(HomeFragment.this.getActivity(),
-                        "position-->" + info.getContent(), Toast.LENGTH_SHORT)
-                        .show();
-            }
+    public void initBanner(View view)  {
 
-        }
+        mImageSilder = (ImageSilderView)view.findViewById(R.id.imageSlider);
+        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/150823110076B08F4A44A820EC7BF46541AFB04FFA7.jpg");
+        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/15082900027Chrysanthemum.jpg");
+        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/150823110076B08F4A44A820EC7BF46541AFB04FFA7.jpg");
+        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/15082900027Chrysanthemum.jpg");
+        mImageSilder.StartCircle(this.getActivity());
+    }
 
-    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View view= inflater.inflate(R.layout.fragment_home, container, false);
+        initBanner(view);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
