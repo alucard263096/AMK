@@ -22,6 +22,21 @@
 	{
 		
 	}
+
+	
+	public function getBannerListByCondition($condition,$lastupdate_time)
+	{
+		$condition=parameter_filter($condition);
+		$lastupdate_time=parameter_filter($lastupdate_time);
+		$sql="select * from tb_banner where code like '$condition'  ";
+		if($lastupdate_time!=""){
+		$sql.=" and updated_date>'$lastupdate_time'  ";
+		}
+		//echo $sql;
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
 	
 	public function getBannerList($lastupdate_time)
 	{
