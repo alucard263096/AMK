@@ -60,9 +60,5 @@ require ROOT.'/classes/mgr/common_function.php';
 
 include ROOT.'/classes/mgr/'.$CONFIG['database']['provider'].'.cls.php';
 
-include ROOT.'/classes/mgr/smarty.cls.php';
-
-
-
 
 ?>

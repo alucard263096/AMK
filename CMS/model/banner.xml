@@ -33,6 +33,7 @@
       <key>pic</key>
       <type>upload</type>
       <uploadmodule>banner</uploadmodule>
+      <filetype>image</filetype>
     </field>
     <field>
       <name>说明</name>
