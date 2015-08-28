@@ -6,4 +6,7 @@
     <color name="bottomtab_press">#EA7598</color>
     <color name="line">#c8bca5</color>
     <color name="light_font">#949494</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="gray">#666666</color>
 </resources>
