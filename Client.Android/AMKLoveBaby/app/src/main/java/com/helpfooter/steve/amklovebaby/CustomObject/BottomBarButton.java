@@ -97,6 +97,7 @@ public class BottomBarButton {
         txt.setTextColor(Color.WHITE);
     }
 
+
     public TextView GetTextView(){
 //        GetTextView<TextView
 //        android:id="@+id/tv_know1"
@@ -113,7 +114,7 @@ public class BottomBarButton {
 
         txtView=new MyTextView(ctx);
         txtView.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_txt_" + name));
-        LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,20);
         //txtParam.addRule(RelativeLayout.BELOW, GetImageView().getId());
         txtView.setGravity(Gravity.CENTER);
         //txtParam.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
@@ -123,6 +124,11 @@ public class BottomBarButton {
         //txtView.setBackgroundColor(Color.BLUE);
         return  txtView;
     }
+
+    public String GetLayoutIdName(){
+        return  "bottom_bar_layout_" + name;
+    }
+
     public LinearLayout GetEnteryLayout(){
         if(entryLayout!=null){
             return  entryLayout;
@@ -135,7 +141,7 @@ public class BottomBarButton {
 //        android:layout_weight="1.0" >
 
 
-        entryLayout.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_layout_" + name));
+        entryLayout.setId(MyResourceIdUtil.GetMyResourceId(GetLayoutIdName()));
         entryLayout.setOrientation(LinearLayout.VERTICAL);
         LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(0,RelativeLayout.LayoutParams.MATCH_PARENT);
         params.weight=1;
@@ -155,8 +161,6 @@ public class BottomBarButton {
             barLayout.setOnClickListener(clickLinstenerActivity);
             layout.addView(barLayout);
         }
-
-
 
     }
 

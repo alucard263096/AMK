@@ -3,6 +3,7 @@ package com.helpfooter.steve.amklovebaby;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -15,12 +16,15 @@ import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import java.util.ArrayList;
 
 
-public class MainActivity extends MyFragmentActivity implements View.OnClickListener {
+public class MainActivity extends MyFragmentActivity implements View.OnClickListener,HomeFragment.OnFragmentInteractionListener {
 
-    private LinearLayout bottomTabLayout;
+    private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
+
+    private BottomBarButton homeBarButton,newsBarButton,doctorBarButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,81 +43,47 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         titleTextView=(TextView)findViewById(R.id.title);
         titleTextView.setOnClickListener(this);
         bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
+        contentLayout=(LinearLayout)findViewById(R.id.content_layout);
+
+        homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", new HomeFragment() );
+        newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null);
+        doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", null);
     }
 
-//    /**
-//     * 初始化底部标签
-//     */
-//    private void initTab() {
-//        if (knowFragment == null) {
-//           return;
-//        }
-//
-//        if (!knowFragment.isAdded()) {
-//            // 提交事务
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.content_layout, knowFragment).commit();
-//
-//            // 记录当前Fragment
-//            currentFragment = knowFragment;
-//            // 设置图片文本的变化
-//            knowImg.setImageResource(R.drawable.btn_know_pre);
-//            knowTv.setTextColor(getResources()
-//                    .getColor(R.color.bottomtab_press));
-//            iWantKnowImg.setImageResource(R.drawable.btn_wantknow_nor);
-//            iWantKnowTv.setTextColor(getResources().getColor(
-//                    R.color.bottomtab_normal));
-//            meImg.setImageResource(R.drawable.btn_my_nor);
-//            meTv.setTextColor(getResources().getColor(R.color.bottomtab_normal));
-//
-//        }
-//
-//    }
 
     @Override
     public void onClick(View view) {
-//        switch (view.getId()) {
-//            case MyResourceIdUtil.GetMyResourceId("bar_"): // 知道
-//                clickTab1Layout();
-//                break;
-//            case R.id.rl_want_know: // 我想知道
-//                clickTab2Layout();
-//                break;
-//            case R.id.rl_me: // 我的
-//                clickTab3Layout();
-//                break;
-//            default:
-//                break;
-//        }
-        Fragment fragment= new HomeFragment();
-        if(!fragment.isAdded()){
-            FragmentManager fm=getFragmentManager();
-            FragmentTransaction transaction=fm.beginTransaction();
-            transaction.add(R.id.content_layout, fragment).commit();
-            titleTextView.setText("in");
-        }else {
-            titleTextView.setText("out");
+        for(BottomBarButton barButton:lstBottomBar){
+            if(view==barButton.GetEnteryLayout()){
+                buttonBarClick(barButton);
+                return;
+            }
+        }
+
+    }
+
+    private void buttonBarClick(BottomBarButton barButton) {
+        for (BottomBarButton otherBarButton:lstBottomBar){
+            otherBarButton.SetDefault();
+        }
+        barButton.SetActive();
+        if(barButton.GetFragment()!=null){
+            titleTextView.setText("No in?");
+
+            addOrShowFragment(getFragmentManager().beginTransaction(),barButton.GetFragment());
         }
     }
 
 
     public void InitBottomBar(){
-
         lstBottomBar=new ArrayList<BottomBarButton>();
-        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", new HomeFragment() ));
-        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null));
-        lstBottomBar.add(new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", null));
+        lstBottomBar.add(homeBarButton);
+        lstBottomBar.add(newsBarButton);
+        lstBottomBar.add(doctorBarButton);
 
-        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar,this);
-//        lstBottomBar.get(0).GetEnteryLayout().callOnClick();
-//        Fragment fragment= lstBottomBar.get(0).GetFragment();
-//        FragmentManager fm=getFragmentManager();
-//        FragmentTransaction transaction=fm.beginTransaction();
-//        //addOrShowFragment(transaction, fragment);
-////        if(!fragment.isAdded()){
-////            transaction.add(R.id.content_layout, fragment).commit();
-////        }
-//        String str="a";
+        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar, this);
+        this.onClick(lstBottomBar.get(0).GetEnteryLayout());
+
     }
 
     /**
@@ -124,6 +94,16 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
      */
     private void addOrShowFragment(FragmentTransaction transaction,
                                    Fragment fragment) {
+
+        if(currentFragment==null){
+            if(!fragment.isAdded()) {
+                transaction .add(R.id.content_layout, fragment).commit();
+                titleTextView.setText("c2");
+            }
+            currentFragment = fragment;
+            return;
+        }
+
         if (currentFragment == fragment)
             return;
 
@@ -135,5 +115,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
 
         currentFragment = fragment;
+    }
+
+    public void onFragmentInteraction(Uri uri){
+        //you can leave it empty
     }
 }
