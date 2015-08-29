@@ -76,10 +76,10 @@ return json_encode($item);
 
 function outputXml($result){
 header("Content-type: text/xml");
-  $str="<table>\r\n";
+  $str="<table>";
   $row_count=count($result);
   for($i=0;$i<$row_count;$i++){
-	$str.="	<row>\r\n";
+	$str.="	<row>";
 	$j=0;
 	foreach($result[$i] as $key => $value){
 		if($j%2==1){
@@ -87,13 +87,13 @@ header("Content-type: text/xml");
 			,'<'=>'&lt;'
 			,'>'=>'&gt;'
 			,'"'=>'&quot;');
-			$str.="		<$key>".strtr($value,$value_change)."</$key>\r\n";
+			$str.="		<$key>".strtr($value,$value_change)."</$key>";
 		}
 		$j++;
 	}
-	$str.="	</row>\r\n";
+	$str.="	</row>";
   }
-  $str.="</table>\r\n";
+  $str.="</table>";
   echo $str;
   exit;
 }
