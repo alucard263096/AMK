@@ -79,7 +79,7 @@ header("Content-type: text/xml");
   $str="<table>";
   $row_count=count($result);
   for($i=0;$i<$row_count;$i++){
-	$str.="	<row>";
+	$str.="<row>";
 	$j=0;
 	foreach($result[$i] as $key => $value){
 		if($j%2==1){
@@ -87,11 +87,11 @@ header("Content-type: text/xml");
 			,'<'=>'&lt;'
 			,'>'=>'&gt;'
 			,'"'=>'&quot;');
-			$str.="		<$key>".strtr($value,$value_change)."</$key>";
+			$str.="<$key>".strtr($value,$value_change)."</$key>";
 		}
 		$j++;
 	}
-	$str.="	</row>";
+	$str.="</row>";
   }
   $str.="</table>";
   echo $str;
