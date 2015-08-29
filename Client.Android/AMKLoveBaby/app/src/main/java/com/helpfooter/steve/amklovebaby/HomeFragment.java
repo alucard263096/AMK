@@ -14,6 +14,9 @@ import android.widget.ViewFlipper;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView;
+import com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView;
+import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private ImageSilderView mImageSilder;
+    private IndexBannerSilderView mImageSilder;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,12 +85,13 @@ public class HomeFragment extends Fragment {
 
     public void initBanner(View view)  {
 
-        mImageSilder = (ImageSilderView)view.findViewById(R.id.imageSlider);
-        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/150823110076B08F4A44A820EC7BF46541AFB04FFA7.jpg");
-        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/15082900027Chrysanthemum.jpg");
-        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/150823110076B08F4A44A820EC7BF46541AFB04FFA7.jpg");
-        mImageSilder.AddImage(this.getActivity(),"http://www.myhkdoc.com/AMK/FilesServer/doctor/15082900027Chrysanthemum.jpg");
-        mImageSilder.StartCircle(this.getActivity());
+        mImageSilder = (IndexBannerSilderView)view.findViewById(R.id.imageSlider);
+        mImageSilder.LoadBanner();
+        mImageSilder.StartCircle();
+        BannerLoader bannerLoader=new BannerLoader(this.getActivity());
+        bannerLoader.setCallBack(mImageSilder);
+        bannerLoader.setCallCode(StaticVar.IndexBannerApi);
+        bannerLoader.start();
     }
 
     @Override

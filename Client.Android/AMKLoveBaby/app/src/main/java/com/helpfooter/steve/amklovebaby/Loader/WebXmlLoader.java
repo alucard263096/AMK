@@ -9,20 +9,48 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
+
+import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.XmlDataTableReader;
 
 public abstract class WebXmlLoader extends Thread{
+
+	protected Context ctx;
+	protected String callApi="";
+	public WebXmlLoader(Context ctx,String defaultCallApi){
+		this.ctx=ctx;
+		this.callApi=defaultCallApi;
+	}
+	public void setCallCode(String val){
+		callApi=val;
+	}
+
+	public String getCallUrl() {
+		// TODO Auto-generated method stub
+		ParamsDao dao=new ParamsDao(ctx);
+		String api=callApi;
+		String url=StaticVar.dictHashMap.get(callApi);
+		String update_date=dao.getParam(callApi, "1991-1-1");
+		url= (url+"?last_time="+update_date).replace(" ", "%20");
+		Log.i("callurl", url);
+		return url;
+	}
 	
-	abstract public String getCallUrl();
-	
-	abstract public void doXml(InputStream is);
+	abstract public void doXml(ArrayList<HashMap<String,String>> lstRow);
 	
 	public void run(){
 		String path=getCallUrl();
 		InputStream is=getXml(path);
 		if(is!=null){
-			doXml(is);
+			XmlDataTableReader xmlreader=new XmlDataTableReader(is);
+			doXml(xmlreader.getDataTableValue());
 			try {
 				is.close();
 			} catch (IOException e) {
@@ -46,7 +74,8 @@ public abstract class WebXmlLoader extends Thread{
 	             is = conn.getInputStream();  
 	            
 	            // 返回一个URI对象  
-	            //String ret= convertStreamToString(is);  
+	            //String ret= convertStreamToString(is);
+				//Log.i("returnXml",ret);
 	            //is.close();   
 	            return is;
 	        }

@@ -94,7 +94,7 @@ public class BannerDao extends AbstractDao {
 
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into tb_banner (id,code  ,title,link,pic,status,updated_date ) values (?,?,?,?,?,?,?)");
-		Object[] bindArgs = {obj.getId(),obj,obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus(),obj.getUpdated_date()};
+		Object[] bindArgs = {obj.getId(),obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus(),obj.getUpdated_date()};
 		util.execSQL(sql.toString(),bindArgs);
 
 		util.close();

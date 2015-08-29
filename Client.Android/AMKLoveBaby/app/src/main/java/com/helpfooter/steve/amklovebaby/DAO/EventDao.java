@@ -7,12 +7,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.EventObj;
 
 public class EventDao extends AbstractDao {
 	
 	public EventDao(Context ctx) {
-		super(ctx);
+		super(ctx,"");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -139,5 +140,15 @@ public class EventDao extends AbstractDao {
          cursor.close();
          
          return haveData;
+	}
+
+	@Override
+	void insertObj(AbstractObj obj) {
+
+	}
+
+	@Override
+	void updateObj(AbstractObj obj) {
+
 	}
 }

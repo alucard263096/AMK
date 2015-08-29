@@ -27,11 +27,11 @@ public class XmlDataTableReader {
 			Element elmtInfo = doc.getDocumentElement();
 
 			NodeList StartNode = elmtInfo.getChildNodes();
-			Node tableNode=StartNode.item(0);
-			NodeList rowNodeList=tableNode.getChildNodes();
-			for (int i = 0; i < rowNodeList.getLength(); i++){
+			//Node tableNode=StartNode.item(0);
+			//NodeList rowNodeList=tableNode.getChildNodes();
+			for (int i = 0; i < StartNode.getLength(); i++){
 
-				Node rowNode = rowNodeList.item(i);
+				Node rowNode = StartNode.item(i);
 				NodeList colList= rowNode.getChildNodes();
 				HashMap<String,String> dictCol=getColDict(colList);
 

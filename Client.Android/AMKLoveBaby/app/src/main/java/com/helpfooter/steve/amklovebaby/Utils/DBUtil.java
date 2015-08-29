@@ -13,7 +13,7 @@ import android.util.Log;
 public  class DBUtil {
 
 	private static final String TAG = "DBUtil";
-	private static final String DATABASE_NAME = "BASE.DB";
+	private static final String DATABASE_NAME = "AMKLoveBaby.DB";
 	private static final int DATABASE_VERSION = 1;
 	private static  Context mCtx;
 	private DatabaseHelper mDbHelper;
@@ -31,15 +31,25 @@ public  class DBUtil {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
-			//Log.i("db on create?", "yes");
-//			db.beginTransaction();
-//			try {
-//				StringBuffer sql = new StringBuffer();
-//
-//				db.setTransactionSuccessful();
-//			} finally {
-//				db.endTransaction();
-//			}
+			Log.i("db on create?", "yes");
+			db.beginTransaction();
+			try {
+				StringBuffer sql = new StringBuffer();
+
+
+				sql = new StringBuffer();
+				sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
+				db.execSQL(sql.toString());
+
+				sql = new StringBuffer();
+				sql.append("create table IF NOT EXISTS  tb_banner (id int,code varchar,title varchar,link varchar,pic varchar,status varchar,updated_date varchar)");
+				db.execSQL(sql.toString());
+
+
+				db.setTransactionSuccessful();
+			} finally {
+				db.endTransaction();
+			}
 
 		}
 

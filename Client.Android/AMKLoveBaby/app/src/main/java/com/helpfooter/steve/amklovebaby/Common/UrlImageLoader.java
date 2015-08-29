@@ -27,13 +27,13 @@ public class UrlImageLoader extends Thread {
 		this.imgView=_imgView;
 		this.url=_url;
 	}
-	private Handler mHandler = new Handler(){  
-        public void handleMessage(android.os.Message msg) {  
-            if(msg.what == 0){  
+	private Handler mHandler = new Handler(){
+        public void handleMessage(android.os.Message msg) {
+            if(msg.what == 0){
             	imgView.setImageURI(uri);
-            }  
-        };  
-    }; 
+            }
+        };
+    };
 	public void run(){
 		File f=new File(ALBUM_PATH);
 		if(f.exists()==false){
@@ -42,22 +42,19 @@ public class UrlImageLoader extends Thread {
 		}
 		try{
 			uri= GetImageURI(this.url,f);
+            imgView.setImageURI(uri);
 		}catch(Exception e){
 			e.printStackTrace();
-		}
-		if(uri!=null){
-			mHandler.sendEmptyMessage(0);
 		}
 	}
 	
 	public Uri GetImageURI(String path, File cache) throws Exception {
         String name = ToolsUtil.Encryption(path) + path.substring(path.lastIndexOf("."));
-        File file = new File(cache, name);  
-        //如果图片存在本地缓存目录，则不去服务器下载
+        File file = new File(cache, name);
         if (file.exists()) {
-            return Uri.fromFile(file);//Uri.fromFile(path)这个方法能得到文件的URI  
+            return Uri.fromFile(file);
         } else {
-            // 从网络上获取图片  
+
             URL url = new URL(path);  
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
             conn.setConnectTimeout(5000);  
@@ -73,8 +70,7 @@ public class UrlImageLoader extends Thread {
                     fos.write(buffer, 0, len);  
                 }  
                 is.close();  
-                fos.close();  
-                // 返回一个URI对象  
+                fos.close();
                 return Uri.fromFile(file);  
             }  
         }  

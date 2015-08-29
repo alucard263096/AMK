@@ -9,13 +9,13 @@
         android:orientation="vertical" >
 
     <!-- TODO: Update blank fragment layout -->
-        <com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:background="#000456"
             android:flipInterval="5000" >
-        </com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView>
+        </com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView>
 
 
     </LinearLayout>

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,31 +19,31 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import utils.StaticVar;
-import utils.XmlReader;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.sunstar.doctor_android.EventListFragment;
-import com.sunstar.doctor_android.dao.EventDao;
-import com.sunstar.doctor_android.dao.ParamsDao;
-import com.sunstar.doctor_android.objects.EventObj;
 
 public class EventListLoader extends WebXmlLoader {
+	public EventListLoader(Context ctx, String defaultCallApi) {
+		super(ctx, defaultCallApi);
+	}
+
 	@Override
 	public String getCallUrl() {
 		return null;
 	}
 
 	@Override
-	public void doXml(InputStream is) {
+	public void doXml(ArrayList<HashMap<String, String>> lstRow) {
 
 	}
+
 
 //	EventListFragment eventListFragment;
 //
