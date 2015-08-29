@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import java.util.ArrayList;
 
@@ -98,7 +99,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(currentFragment==null){
             if(!fragment.isAdded()) {
                 transaction .add(R.id.content_layout, fragment).commit();
-                titleTextView.setText("c2");
+                titleTextView.setText(StaticVar.GetSystemTimeString());
             }
             currentFragment = fragment;
             return;

@@ -27,13 +27,6 @@ public class UrlImageLoader extends Thread {
 		this.imgView=_imgView;
 		this.url=_url;
 	}
-	private Handler mHandler = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            if(msg.what == 0){
-            	imgView.setImageURI(uri);
-            }
-        };
-    };
 	public void run(){
 		File f=new File(ALBUM_PATH);
 		if(f.exists()==false){

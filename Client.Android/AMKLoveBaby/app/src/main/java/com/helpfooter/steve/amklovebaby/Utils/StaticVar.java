@@ -17,7 +17,7 @@ public final class StaticVar {
 	}
 
 	public static String GetSystemTimeString(){
-		SimpleDateFormat formatter    =   new    SimpleDateFormat    ("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formatter    =   new    SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date curDate    =   new    Date(System.currentTimeMillis());//获取当前时间
 		String    str    =    formatter.format(curDate);
 		return str;

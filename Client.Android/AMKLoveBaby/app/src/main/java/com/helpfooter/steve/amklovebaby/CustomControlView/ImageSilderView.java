@@ -51,6 +51,7 @@ public class ImageSilderView extends ViewFlipper  {
     }
 
     public void StartCircle(){
+        this.removeAllViews();
 
         for (ImageView img:GetImageViewList()){
             this.addView(img);

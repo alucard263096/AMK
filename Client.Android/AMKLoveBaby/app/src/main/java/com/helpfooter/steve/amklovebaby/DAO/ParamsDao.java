@@ -46,12 +46,12 @@ public class ParamsDao extends AbstractDao {
 		util.execSQL(sql_insert.toString(),bindArgs);
 	}
 
-	public void updateParam(String fieldname, String updatevalue) {
+	public void updateParam(String id, String updatevalue) {
 		// TODO Auto-generated method stub
 		
         StringBuffer sql_insert = new StringBuffer();
-        sql_insert.append("UPDATE  tb_param set "+fieldname+"=?");
-        Object[] bindArgs = {updatevalue};
+        sql_insert.append("UPDATE  tb_param set val=? where id=?");
+        Object[] bindArgs = {updatevalue,id};
         util.execSQL(sql_insert.toString(),bindArgs);
 	}
 

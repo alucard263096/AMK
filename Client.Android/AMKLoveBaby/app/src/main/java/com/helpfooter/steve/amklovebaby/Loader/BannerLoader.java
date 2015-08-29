@@ -46,7 +46,7 @@ public class BannerLoader extends WebXmlLoader {
 			}
 
 	        ParamsDao paramdao=new ParamsDao(this.ctx);
-			paramdao.updateParam(StaticVar.IndexBannerApi,StaticVar.GetSystemTimeString());
+			paramdao.updateParam(this.callApi,StaticVar.GetSystemTimeString());
 		}
 	}
 

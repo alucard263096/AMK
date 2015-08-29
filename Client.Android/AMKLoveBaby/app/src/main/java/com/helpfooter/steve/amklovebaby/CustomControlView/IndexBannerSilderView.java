@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
@@ -29,6 +30,7 @@ public class IndexBannerSilderView extends BannerSilderView {
 
         BannerDao dao=new BannerDao(this.getContext());
         ArrayList<BannerObj> lstBannerObj=dao.getIndexBanner();
+        Log.i("IndexBanner_debugCount",String.valueOf(lstBannerObj.size()));
         for(BannerObj obj:lstBannerObj){
             super.AddImage(StaticVar.ImageFolderURL+"banner/"+obj.getPic());
         }

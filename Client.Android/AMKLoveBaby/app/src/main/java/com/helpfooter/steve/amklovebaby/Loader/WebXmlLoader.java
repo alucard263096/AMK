@@ -39,7 +39,7 @@ public abstract class WebXmlLoader extends Thread{
 		String url=StaticVar.dictHashMap.get(callApi);
 		String update_date=dao.getParam(callApi, "1991-1-1");
 		url= (url+"?last_time="+update_date).replace(" ", "%20");
-		Log.i("callurl", url);
+		Log.i("IndexBanner_debugUrl", url);
 		return url;
 	}
 	
@@ -73,10 +73,10 @@ public abstract class WebXmlLoader extends Thread{
 	
 	             is = conn.getInputStream();  
 	            
-	            // 返回一个URI对象  
+	            //返回一个URI对象
 	            //String ret= convertStreamToString(is);
 				//Log.i("returnXml",ret);
-	            //is.close();   
+	            //is.close();
 	            return is;
 	        }
 		} catch (MalformedURLException e) {
@@ -91,7 +91,7 @@ public abstract class WebXmlLoader extends Thread{
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
         return is;
 	}
 	
