@@ -1,80 +1,78 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-    <RelativeLayout
-        android:id="@+id/rl_main"
+    android:layout_height="match_parent">
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <!-- 顶部 -->
-
-        <RelativeLayout
-            android:id="@+id/top_tab"
-            android:layout_width="match_parent"
-            android:layout_height="50dip"
-            android:background="@color/topbar_bg" >
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:focusable="false"
-                android:textSize="24dp"
-                android:text="hello"
-                android:contentDescription="@null"
-                android:textColor="#ffffff" />
-            <!--
-            <ImageView
-                android:id="@+id/iv_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:focusable="false"
-                android:layout_centerVertical="true"
-                android:src="@drawable/zhidao_logo"
-                android:contentDescription="@null" />
-            <ImageView
-                android:id="@+id/iv_logo2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:focusable="false"
-                android:src="@drawable/zhidao_logo"
-                android:contentDescription="@null" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff">
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="7%"
+        android:background="@color/topbar_bg">
+        <!--
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:focusable="false"
+            android:layout_centerVertical="true"
+            android:src="@drawable/zhidao_logo"
+            android:contentDescription="@null" />
+        <ImageView
+            android:id="@+id/iv_logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:focusable="false"
+            android:src="@drawable/zhidao_logo"
+            android:contentDescription="@null" />
 -->
-        </RelativeLayout>
-
-        <!-- 底部tab -->
-
-        <LinearLayout
-            android:id="@+id/ll_bottom_tab"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:baselineAligned="true">
-
-        </LinearLayout>
-
-        <!-- 内容部分， fragment切换 -->
-
-        <LinearLayout
-            android:id="@+id/content_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/line"
-            android:layout_below="@+id/top_tab"
-            android:orientation="vertical" >
-        </LinearLayout>
-
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="hello"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            app:layout_marginLeftPercent="10%"
+            app:layout_marginRightPercent="10%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout>
+    <LinearLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_heightPercent="80%"
+        app:layout_marginBottomPercent="3%"
+        android:background="#ffffff">
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_bottom_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:baselineAligned="true"
+        app:layout_heightPercent="10%">
+    </LinearLayout>
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_above="@id/ll_bottom_tab"
             android:background="@color/line" />
-    </RelativeLayout>
-
-</FrameLayout>  
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout>

@@ -5,12 +5,17 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
+import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -33,6 +38,26 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
         initUI();
         InitBottomBar();
+        InitData();
+
+        WindowManager wm = this.getWindowManager();
+
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;     // 屏幕宽度（像素）
+        int height = metric.heightPixels;   // 屏幕高度（像素）
+        float density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
+        int densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
+        Log.i("screen_info_width",String.valueOf(width));
+        Log.i("screen_info_height",String.valueOf(height));
+        Log.i("screen_info_density",String.valueOf(density));
+        Log.i("screen_info_Dpi",String.valueOf(densityDpi));
+    }
+
+    private void InitData() {
+        BannerLoader bannerLoader=new BannerLoader(this);
+        bannerLoader.setCallCode(StaticVar.BannerApi);
+        bannerLoader.start();
     }
 
 
@@ -42,7 +67,6 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     private void initUI() {
 
         titleTextView=(TextView)findViewById(R.id.title);
-        titleTextView.setOnClickListener(this);
         bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
         contentLayout=(LinearLayout)findViewById(R.id.content_layout);
 
@@ -69,8 +93,6 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
         barButton.SetActive();
         if(barButton.GetFragment()!=null){
-            titleTextView.setText("No in?");
-
             addOrShowFragment(getFragmentManager().beginTransaction(),barButton.GetFragment());
         }
     }
@@ -99,7 +121,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(currentFragment==null){
             if(!fragment.isAdded()) {
                 transaction .add(R.id.content_layout, fragment).commit();
-                titleTextView.setText(StaticVar.GetSystemTimeString());
+            }
+            if(fragment instanceof IMyFragment){
+                IMyFragment myFragment=(IMyFragment)fragment;
+                titleTextView.setText(myFragment.getTitle());
             }
             currentFragment = fragment;
             return;
@@ -115,6 +140,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
             transaction.hide(currentFragment).show(fragment).commit();
         }
 
+        if(fragment instanceof IMyFragment){
+            IMyFragment myFragment=(IMyFragment)fragment;
+            titleTextView.setText(myFragment.getTitle());
+        }
         currentFragment = fragment;
     }
 

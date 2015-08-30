@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.MainActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
@@ -67,14 +69,18 @@ public class BottomBarButton {
         }
         imgView=new ImageView(ctx);
         imgView.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_image_" + name));
-        LinearLayout.LayoutParams imageParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        imageParam.gravity= Gravity.CENTER_HORIZONTAL;
-        imageParam.width=100;
-        imageParam.height=100;
-        imageParam.topMargin=10;
+
+        PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.heightPercent=0.6f;
+        layoutinfo.topMarginPercent=0.1f;
+        layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        param.mPercentLayoutInfo=layoutinfo;
+
+        param.gravity= Gravity.CENTER_HORIZONTAL;
         imgView.setImageResource(this.imageResId);
         //img.setBackgroundColor(Color.parseColor("#ee00ee"));
-        imgView.setLayoutParams(imageParam);
+        imgView.setLayoutParams(param);
 
         return  imgView;
     }
@@ -114,13 +120,21 @@ public class BottomBarButton {
 
         txtView=new MyTextView(ctx);
         txtView.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_txt_" + name));
-        LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,20);
+        //LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,20);
+
+        PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.heightPercent=0.3f;
+        layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        param.mPercentLayoutInfo=layoutinfo;
+
         //txtParam.addRule(RelativeLayout.BELOW, GetImageView().getId());
         txtView.setGravity(Gravity.CENTER);
         //txtParam.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         txtView.setText(displayName);
         txtView.setTextColor(Color.parseColor("#949494"));
         txtView.setTextSize(12);
+        txtView.setLayoutParams(param);
         //txtView.setBackgroundColor(Color.BLUE);
         return  txtView;
     }
@@ -133,7 +147,7 @@ public class BottomBarButton {
         if(entryLayout!=null){
             return  entryLayout;
         }
-        entryLayout=new LinearLayout(ctx);
+        entryLayout=new PercentLinearLayout(ctx,null);
 //        <RelativeLayout
 //        android:id="@+id/rl_know"
 //        android:layout_width="0dp"

@@ -10,10 +10,12 @@ public final class StaticVar {
 	public static String APIURL="http://www.myhkdoc.com/AMK/API/";
 
 	public static String IndexBannerApi="index_banner";
+	public static String BannerApi="banner";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 
 	static {
-		dictHashMap.put(IndexBannerApi,APIURL+"/"+"Banner/index_banner.php");
+		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
+		dictHashMap.put(BannerApi,APIURL+"banner.php");
 	}
 
 	public static String GetSystemTimeString(){
