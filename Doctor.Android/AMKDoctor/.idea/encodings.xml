@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Common/ImageFactory.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Common/UrlImageLoader.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/CustomObject/BottomBarButton.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/CustomObject/MyFragmentActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/DAO/AbstractDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/DAO/BannerDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/DAO/ParamsDao.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/DataObjs/AbstractObj.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/DataObjs/BannerObj.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Extents/PercentLayout/PercentFrameLayout.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Extents/PercentLayout/PercentLayoutHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Extents/PercentLayout/PercentLinearLayout.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Extents/PercentLayout/PercentRelativeLayout.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Interfaces/IMyFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Interfaces/IWebLoaderCallBack.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Loader/BannerLoader.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Loader/WebXmlLoader.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/DBUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/FontUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/MyResourceIdUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/StaticVar.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/ToolsUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/helpfooter/steve/amkdoctor/Utils/XmlDataTableReader.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/attrs.xml" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
