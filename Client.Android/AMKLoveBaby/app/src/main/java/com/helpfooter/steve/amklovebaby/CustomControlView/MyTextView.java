@@ -28,7 +28,7 @@ public class MyTextView  extends TextView {
 
     public void init(Context context) {
         try {
-            setTypeface(FontUtil.setFont(context));
+            //setTypeface(FontUtil.setFont(context));
         }catch (Exception ex){
             Log.e("LoadFontError",ex.getMessage());
         }

@@ -37,7 +37,7 @@
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#EA7598"
+                android:background="#FD7CAD"
                 android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#EEE939"
+                android:background="#F7CB20"
                 android:orientation="vertical"
                 >
                 <ImageView
@@ -101,7 +101,7 @@
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#F7CB20"
+                android:background="#B9E5C3"
                 android:orientation="vertical"
                 >
                 <ImageView
