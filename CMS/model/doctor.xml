@@ -58,6 +58,14 @@
       <displayinlist>1</displayinlist>
     </field>
     <field>
+      <name>职称</name>
+      <key>title</key>
+      <type>text</type>
+      <notnull>1</notnull>
+      <search>1</search>
+      <displayinlist>1</displayinlist>
+    </field>
+    <field>
       <name>坐诊时间</name>
       <key>bookingtime</key>
       <type>text</type>
