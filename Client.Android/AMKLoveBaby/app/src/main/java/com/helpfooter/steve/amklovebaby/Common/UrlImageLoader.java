@@ -28,6 +28,16 @@ public class UrlImageLoader extends Thread {
 	public UrlImageLoader(ImageView _imgView,String _url){
 		this.imgView=_imgView;
 		this.url=_url;
+
+        File f=new File(ALBUM_PATH);
+        if(f.exists()==false){
+            f.mkdirs();
+        }
+        String name = ToolsUtil.Encryption(this.url) + this.url.substring(this.url.lastIndexOf("."));
+        File file = new File(f, name);
+        if (file.exists()) {
+            imgView.setImageURI(Uri.fromFile(file));
+        }
 	}
 	public void run(){
 		File f=new File(ALBUM_PATH);
@@ -36,7 +46,10 @@ public class UrlImageLoader extends Thread {
 		}
 		try{
 			uri= GetImageURI(this.url,f);
-            imgView.setImageURI(uri);
+            Log.i("imageloader_ready", "yes");
+            if(uri!=null){
+                imgView.setImageURI(uri);
+            }
 		}catch(Exception e){
             Log.i("imageloader_geterror",e.getMessage());
 			e.printStackTrace();
@@ -51,7 +64,7 @@ public class UrlImageLoader extends Thread {
             int remoteFileLength = GetFileContentLength(path);
             Log.i("imageloader_length",String.valueOf(remoteFileLength)+"="+String.valueOf(file.length()));
             if(file.length()==remoteFileLength) {
-                return Uri.fromFile(file);
+                return null;
             }else {
                 file.delete();
                 file = new File(cache, name);

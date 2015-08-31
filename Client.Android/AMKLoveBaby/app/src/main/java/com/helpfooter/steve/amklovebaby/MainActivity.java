@@ -22,10 +22,14 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class MainActivity extends MyFragmentActivity implements View.OnClickListener,HomeFragment.OnFragmentInteractionListener {
+public class MainActivity extends MyFragmentActivity implements View.OnClickListener
+        ,HomeFragment.OnFragmentInteractionListener
+        ,DoctorListFragment.OnFragmentInteractionListener {
 
     private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
+    private HomeFragment homeFragment;
+    private DoctorListFragment doctorListFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
 
@@ -70,14 +74,21 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
         contentLayout=(LinearLayout)findViewById(R.id.content_layout);
 
-        homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", new HomeFragment() );
+        homeFragment=new HomeFragment();
+        doctorListFragment=new DoctorListFragment();
+
+
+        homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null);
-        doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", null);
+        doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
     }
 
 
     @Override
     public void onClick(View view) {
+        if(view.getId()==R.id.doctor){
+            buttonBarClick(doctorBarButton);
+        }
         for(BottomBarButton barButton:lstBottomBar){
             if(view==barButton.GetEnteryLayout()){
                 buttonBarClick(barButton);

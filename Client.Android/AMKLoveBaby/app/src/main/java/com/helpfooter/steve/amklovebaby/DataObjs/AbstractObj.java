@@ -9,6 +9,9 @@ public abstract class AbstractObj {
     public int getId(){
         return  id;
     }
+    public void setId(int val){
+        this.id=val;
+    }
 
-    abstract void parseXmlDataTable(HashMap<String,String> lstRowValue);
+    public abstract void parseXmlDataTable(HashMap<String, String> lstRowValue);
 }

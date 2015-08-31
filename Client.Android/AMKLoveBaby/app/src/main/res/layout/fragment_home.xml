@@ -32,13 +32,14 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="55%"
+                app:layout_widthPercent="54%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
                 android:background="#FD7CAD"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/doctor">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -66,7 +67,7 @@
                 app:layout_marginBottomPercent="1%"
                 android:background="#F7CB20"
                 android:orientation="vertical"
-                >
+                android:id="@+id/news">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -103,7 +104,7 @@
                 app:layout_marginBottomPercent="1%"
                 android:background="#B9E5C3"
                 android:orientation="vertical"
-                >
+                android:id="@+id/member">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -130,8 +131,7 @@
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
                 android:background="#37A4D4"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

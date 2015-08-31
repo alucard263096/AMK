@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ViewFlipper;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
@@ -37,6 +38,8 @@ public class HomeFragment extends Fragment implements IMyFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private LinearLayout mDoctor,mNews,mMember;
+
     private IndexBannerSilderView mImageSilder;
 
     // TODO: Rename and change types of parameters
@@ -60,8 +63,6 @@ public class HomeFragment extends Fragment implements IMyFragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
-
-
         return fragment;
     }
 
@@ -76,12 +77,12 @@ public class HomeFragment extends Fragment implements IMyFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        initUI();
 
     }
 
-    private void initUI() {
-
+    private void initUI(View view) {
+        mDoctor=(LinearLayout)view.findViewById(R.id.doctor);
+        mDoctor.setOnClickListener(((MainActivity)this.getActivity()));
     }
 
     public void initBanner(View view)  {
@@ -101,6 +102,7 @@ public class HomeFragment extends Fragment implements IMyFragment {
         // Inflate the layout for this fragment
 
         View view= inflater.inflate(R.layout.fragment_home, container, false);
+        initUI(view);
         initBanner(view);
         return view;
     }

@@ -72,7 +72,6 @@ public class BannerDao extends AbstractDao {
 				obj.setLink(link);
 				obj.setPic(pic);
 				obj.setStatus(status);
-				obj.setUpdated_date(updated_date);
 			}
 
 		} catch (Exception e) {
@@ -93,8 +92,8 @@ public class BannerDao extends AbstractDao {
 		BannerObj obj=(BannerObj)abobj;
 
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into tb_banner (id,code  ,title,link,pic,status,updated_date ) values (?,?,?,?,?,?,?)");
-		Object[] bindArgs = {obj.getId(),obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus(),obj.getUpdated_date()};
+		sql.append("insert into tb_banner (id,code  ,title,link,pic,status ) values (?,?,?,?,?,?)");
+		Object[] bindArgs = {obj.getId(),obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus()};
 		util.execSQL(sql.toString(),bindArgs);
 
 		util.close();
@@ -108,8 +107,8 @@ public class BannerDao extends AbstractDao {
 		BannerObj obj=(BannerObj)abobj;
 
 		StringBuffer sql = new StringBuffer();
-		sql.append("update tb_banner set code=?  ,title=?,link=?,pic=?,status=?,updated_date=? where id=? ");
-		Object[] bindArgs = {obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus(),obj.getUpdated_date(),obj.getId()};
+		sql.append("update tb_banner set code=?  ,title=?,link=?,pic=?,status=? where id=? ");
+		Object[] bindArgs = {obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus(),obj.getId()};
 		util.execSQL(sql.toString(),bindArgs);
 
 		util.close();

@@ -4,12 +4,18 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
+
+import java.util.ArrayList;
 
 
 /**
@@ -68,7 +74,12 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor_list, container, false);
+        View view= inflater.inflate(R.layout.fragment_doctor_list, container, false);
+        DoctorLoader loader=new DoctorLoader(this.getActivity());
+        loader.run();
+        ArrayList<DoctorObj> lst=(new DoctorDao(this.getActivity())).getDoctorList();
+        Log.i("getdoctorcount", String.valueOf(lst.size()));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

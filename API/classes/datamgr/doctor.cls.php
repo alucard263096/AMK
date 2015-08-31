@@ -40,7 +40,7 @@
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select license,name,office,title,bookingtime,introduce,credentials,expert
-		,enable_videochat,videochat_price,enable_charchat,charchat_price,status,updated_date
+		,enable_videochat,videochat_price,enable_charchat,charchat_price,status
 		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score
 		from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";

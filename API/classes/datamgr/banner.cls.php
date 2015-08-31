@@ -28,7 +28,7 @@
 	{
 		$condition=parameter_filter($condition);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,code,title,link,pic,status,updated_date from tb_banner where code like '$condition'  ";
+		$sql="select id,code,title,link,pic,status from tb_banner where code like '$condition'  ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
 		}
@@ -41,7 +41,7 @@
 	public function getBannerList($lastupdate_time)
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select  id,code,title,link,pic,status,updated_date  from tb_banner where 1=1  ";
+		$sql="select  id,code,title,link,pic,status  from tb_banner where 1=1  ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
 		}
