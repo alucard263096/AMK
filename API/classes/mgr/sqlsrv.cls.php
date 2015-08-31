@@ -57,7 +57,8 @@ class DbSqlsrv
 		
 		if(!$this->conn = sqlsrv_connect( "$dbhost", $connectionInfo))
 		{
-			$this->halt('service unavailable');
+			$res=outResult(-1433,"Server unaviliable");
+			outputXml($res);
 		}
 		
 		return $this->conn;
@@ -126,10 +127,12 @@ class DbSqlsrv
 			}
 
 			if($CONFIG['solution_configuration']=="debug"){
-				print_r(sqlsrv_errors());
-				echo "<br /> ".$sql;
+				$res=outResult(-1435,"Sql Error:".$sql);
+				outputXml($res);
 			}else{
-				$msg='Sqlsrv Query Error';
+				
+				$res=outResult(-1435,"Sql Error");
+				outputXml($res);
 			}
 			
 			$this->halt($msg, $sql);
@@ -150,6 +153,9 @@ class DbSqlsrv
 	}
 	function getDate(){
 		return " GETDATE() ";
+	}
+	function getIsNull($field,$default){
+		return " isnull($field,$default)"
 	}
 	function query2($sql,$type,$value) 
 	{

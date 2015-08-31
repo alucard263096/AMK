@@ -98,4 +98,13 @@ header("Content-type: text/xml");
   exit;
 }
 
+function outResult($num,$message){
+	$array=Array();
+	$arr=Array();
+	$arr["id"]=$num;
+	$arr["result"]=$message;
+	$array[]=$arr;
+	return $array;
+}
+
 ?>

@@ -129,6 +129,9 @@ class DbMysql
 	function getDate(){
 		return " now() ";
 	}
+	function getIsNull($field,$default){
+		return " ifnull($field,$default)"
+	}
 	/**
 	* execute sql statement, only get one record
 	* @param string $sql: sql statement
