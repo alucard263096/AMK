@@ -2,8 +2,10 @@ package com.helpfooter.steve.amklovebaby.Common;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
@@ -30,13 +32,13 @@ public class UrlImageLoader extends Thread {
 	public void run(){
 		File f=new File(ALBUM_PATH);
 		if(f.exists()==false){
-			boolean b=f.mkdirs();
-            String a="";
+			f.mkdirs();
 		}
 		try{
 			uri= GetImageURI(this.url,f);
             imgView.setImageURI(uri);
 		}catch(Exception e){
+            Log.i("imageloader_geterror",e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -44,29 +46,53 @@ public class UrlImageLoader extends Thread {
 	public Uri GetImageURI(String path, File cache) throws Exception {
         String name = ToolsUtil.Encryption(path) + path.substring(path.lastIndexOf("."));
         File file = new File(cache, name);
-        if (file.exists()) {
-            return Uri.fromFile(file);
-        } else {
 
-            URL url = new URL(path);  
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
-            conn.setConnectTimeout(5000);  
-            conn.setRequestMethod("GET");  
-            conn.setDoInput(true);  
-            if (conn.getResponseCode() == 200) {  
-  
-                InputStream is = conn.getInputStream();  
-                FileOutputStream fos = new FileOutputStream(file);
-                byte[] buffer = new byte[1024];  
-                int len = 0;  
-                while ((len = is.read(buffer)) != -1) {  
-                    fos.write(buffer, 0, len);  
-                }  
-                is.close();  
-                fos.close();
-                return Uri.fromFile(file);  
-            }  
-        }  
-        return null;  
-    }  
+        if (file.exists()) {
+            int remoteFileLength = GetFileContentLength(path);
+            Log.i("imageloader_length",String.valueOf(remoteFileLength)+"="+String.valueOf(file.length()));
+            if(file.length()==remoteFileLength) {
+                return Uri.fromFile(file);
+            }else {
+                file.delete();
+                file = new File(cache, name);
+            }
+        }
+        Log.i("imageloader_notexists","Yes");
+        URL url = new URL(path);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setConnectTimeout(5000);
+        conn.setRequestMethod("GET");
+        conn.setDoInput(true);
+        if (conn.getResponseCode() == 200) {
+
+            InputStream is = conn.getInputStream();
+            FileOutputStream fos = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int len = 0;
+            while ((len = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, len);
+            }
+            is.close();
+            fos.close();
+            return Uri.fromFile(file);
+        }
+        Log.i("imageloader_loadgood","Yes");
+        return null;
+    }
+
+    public int GetFileContentLength(String path) {
+
+        try {
+            URL url = new URL(path);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(5 * 1000);
+            return Integer.parseInt(conn.getHeaderField("Content-Length"));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

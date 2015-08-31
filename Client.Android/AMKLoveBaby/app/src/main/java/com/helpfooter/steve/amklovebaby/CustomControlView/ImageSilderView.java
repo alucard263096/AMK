@@ -51,12 +51,11 @@ public class ImageSilderView extends ViewFlipper  {
     }
 
     public void StartCircle(){
+        this.stopFlipping();
         this.removeAllViews();
-
         for (ImageView img:GetImageViewList()){
             this.addView(img);
         }
-
         this.setInAnimation(AnimationUtils.loadAnimation(this.getContext(),
                 R.anim.push_left_in));
         this.setOutAnimation(AnimationUtils.loadAnimation(this.getContext(),
