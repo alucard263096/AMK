@@ -30,9 +30,9 @@
 			return	outResult(-1,"news_id can not be null");
 		}
 		$id=parameter_filter($id);
-		$sql="select id,title,publish_date,news_type,doctor_id,summary,status,context,thumbnail,upvote
+		$sql="select id,title,publish_date,news_type,doctor_id,summary,status,context,thumbnail,".$this->dbmgr->getIsNull("upvote",5)." as upvote
 		from tb_news m
-		inner join tb_news_statistic ms on m.id=ms.news_id
+		left join tb_news_statistic ms on m.id=ms.news_id
 		where m.id=$id ";
 		
 		//echo $sql;
@@ -44,9 +44,9 @@
 	public function getNewsList($lastupdate_time)
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,title,publish_date,news_type,doctor_id,summary,status,thumbnail,upvote
+		$sql="select id,title,publish_date,news_type,doctor_id,summary,status,thumbnail,".$this->dbmgr->getIsNull("upvote",5)." as upvote
 		from tb_news m
-		inner join tb_news_statistic on m.id=ms.news_id 
+		left join tb_news_statistic ms on m.id=ms.news_id 
 		where 1=1 ";
 
 		if($lastupdate_time!=""){
@@ -59,7 +59,7 @@
 		return $result;
 	}
 
-	public function voteNews($newsid){
+	public function voteNews($news_id){
 		$news_id=parameter_filter($news_id);
 
 		if($news_id==""){
@@ -67,17 +67,17 @@
 		}
 
 		$sql="select 1
-		from tb_news_statistic news_id=$news_id";
+		from tb_news_statistic where news_id=$news_id";
 
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 
 		if(count($result)==0){
-			$sql="insert into tb_news_statistic (news_id) value ($news_id)";
+			$sql="insert into tb_news_statistic (news_id) values ($news_id)";
 			$this->dbmgr->query($sql);
 		}
 
-		$sql="update tb_news_statistic set upvote=".$this->getIsNull("upvote",0)."+1 where news_id=$news_id";
+		$sql="update tb_news_statistic set upvote=".$this->dbmgr->getIsNull("upvote",0)."+1 where news_id=$news_id";
 		$this->dbmgr->query($sql);
 
 		return	outResult(0,"success");

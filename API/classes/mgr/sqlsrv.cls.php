@@ -155,7 +155,7 @@ class DbSqlsrv
 		return " GETDATE() ";
 	}
 	function getIsNull($field,$default){
-		return " isnull($field,$default)"
+		return " isnull($field,$default) ";
 	}
 	function query2($sql,$type,$value) 
 	{

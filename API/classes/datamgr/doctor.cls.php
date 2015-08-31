@@ -41,9 +41,9 @@
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select license,name,office,bookingtime,introduce,credentials,expert
 		,enable_videochat,videochat_price,enable_charchat,charchat_price,status,updated_date
-		,".$this->getIsNull("m.general",5)."
+		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score
 		from tb_doctor m
-		inner join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";
+		left join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
 		}

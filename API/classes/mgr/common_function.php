@@ -76,16 +76,19 @@ return json_encode($item);
 
 function outputXml($result){
 header("Content-type: text/xml");
-  $str="<table>";
+  $str="<?xml version=\"1.0\" encoding=\"utf-8\" ?><table>";
   $row_count=count($result);
   for($i=0;$i<$row_count;$i++){
 	$str.="<row>";
 	$j=0;
 	foreach($result[$i] as $key => $value){
-		if($j%2==1){
-			$value_change = array('&'=>'$amp;'
+		if($j%2==1){ 
+			$value_change = array('&'=>'&amp;'
+			,'#'=>'&#35;'
 			,'<'=>'&lt;'
+			,chr(0x0)=>''
 			,'>'=>'&gt;'
+			,'\''=>'&apos;'
 			,'"'=>'&quot;');
 			$str.="<$key>".strtr($value,$value_change)."</$key>";
 		}
@@ -101,7 +104,9 @@ header("Content-type: text/xml");
 function outResult($num,$message){
 	$array=Array();
 	$arr=Array();
+	$arr[0]=$num;
 	$arr["id"]=$num;
+	$arr[1]=$message;
 	$arr["result"]=$message;
 	$array[]=$arr;
 	return $array;

@@ -130,7 +130,7 @@ class DbMysql
 		return " now() ";
 	}
 	function getIsNull($field,$default){
-		return " ifnull($field,$default)"
+		return " ifnull($field,$default) ";
 	}
 	/**
 	* execute sql statement, only get one record
