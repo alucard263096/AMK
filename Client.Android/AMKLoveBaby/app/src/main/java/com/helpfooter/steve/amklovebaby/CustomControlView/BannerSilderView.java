@@ -2,6 +2,8 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.content.Context;
 import android.content.Loader;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -35,6 +37,13 @@ public class BannerSilderView extends ImageSilderView implements IWebLoaderCallB
     @Override
     public void CallBack() {
         LoadBanner();
-        StartCircle();
+        mHandler.sendEmptyMessageDelayed(0, 0);
     }
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            StartCircle();
+        }
+    };
 }

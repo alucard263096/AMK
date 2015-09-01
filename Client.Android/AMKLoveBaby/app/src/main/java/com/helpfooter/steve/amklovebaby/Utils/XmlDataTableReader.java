@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ public class XmlDataTableReader {
 			NodeList StartNode = elmtInfo.getChildNodes();
 			//Node tableNode=StartNode.item(0);
 			//NodeList rowNodeList=tableNode.getChildNodes();
+			//Log.i("XmlDataTableReaderRowNumber",String.valueOf(StartNode.getLength()));
 			for (int i = 0; i < StartNode.getLength(); i++){
 
 				Node rowNode = StartNode.item(i);

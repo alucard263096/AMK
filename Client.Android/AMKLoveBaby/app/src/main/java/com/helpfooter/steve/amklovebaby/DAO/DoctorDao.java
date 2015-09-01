@@ -87,7 +87,7 @@ public class DoctorDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_doctor (id, license, name, office, bookingtime, introduce, credentials, expert" +
-                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status ,general_score) values (?,?,?,?,?,?,?.?,?,?,?,?,?,?)");
+                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status ,general_score) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getLicense(),obj.getName(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
         ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore()};
         util.execSQL(sql.toString(),bindArgs);

@@ -72,8 +72,7 @@ public abstract class WebXmlLoader extends Thread{
 	        if (conn.getResponseCode() == 200) {  
 	
 	             is = conn.getInputStream();  
-	            
-	            //返回一个URI对象
+
 	            //String ret= convertStreamToString(is);
 				//Log.i("returnXml",ret);
 	            //is.close();

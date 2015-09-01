@@ -41,6 +41,7 @@ public  class DBUtil {
 				sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
 				db.execSQL(sql.toString());
 
+
 				sql = new StringBuffer();
 				sql.append("create table IF NOT EXISTS  tb_banner " +
 						"(id int,code varchar,title varchar,link varchar,pic varchar,status varchar)");

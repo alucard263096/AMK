@@ -58,7 +58,10 @@ public abstract class AbstractDao {
 			}
 
 			util.setTransactionSuccessful();
-		} finally{
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}finally
+		{
 			util.endTransaction();
 		}
 		util.close();

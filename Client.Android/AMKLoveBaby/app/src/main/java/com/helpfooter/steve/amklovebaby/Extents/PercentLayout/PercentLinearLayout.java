@@ -15,6 +15,11 @@ public class PercentLinearLayout extends LinearLayout
 
     private PercentLayoutHelper mPercentLayoutHelper;
 
+    public PercentLinearLayout(Context context)
+    {
+        super(context);
+        mPercentLayoutHelper = new PercentLayoutHelper(this);
+    }
     public PercentLinearLayout(Context context, AttributeSet attrs)
     {
         super(context, attrs);
