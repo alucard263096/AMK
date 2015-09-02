@@ -14,8 +14,14 @@ import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
+import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -43,6 +49,16 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         initUI();
         InitBottomBar();
         InitData();
+//        ParamsDao dao=new ParamsDao(this);
+//        BannerDao bdao=new BannerDao(this);
+//        ArrayList<BannerObj> lstBanner=bdao.getIndexBanner();
+//        Log.i("indexbannercount",String.valueOf(lstBanner.size()));
+//
+//        DoctorLoader loader=new DoctorLoader(this);
+//        loader.start();
+//        DoctorDao ddao=new DoctorDao(this);
+//        ArrayList<DoctorObj> lstDoctor=ddao.getDoctorList();
+//        Log.i("indexbannercount",String.valueOf(lstDoctor.size()));
 
         WindowManager wm = this.getWindowManager();
 

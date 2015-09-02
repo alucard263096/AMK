@@ -34,36 +34,36 @@ public  class DBUtil {
 			Log.i("db on create?", "yes");
 			db.beginTransaction();
 			try {
-				StringBuffer sql = new StringBuffer();
-
-
-				sql = new StringBuffer();
-				sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
-				db.execSQL(sql.toString());
-
-
-				sql = new StringBuffer();
-				sql.append("create table IF NOT EXISTS  tb_banner " +
-						"(id int,code varchar,title varchar,link varchar,pic varchar,status varchar)");
-				db.execSQL(sql.toString());
-
-				sql = new StringBuffer();
-				sql.append("create table IF NOT EXISTS  tb_doctor " +
-						"(id int," +
-						"license varchar," +
-						"name varchar," +
-						"office varchar," +
-						"bookingtime varchar," +
-						"introduce varchar," +
-						"credentials varchar," +
-						"expert varchar," +
-						"enable_videochat varchar," +
-						"videochat_price int," +
-						"enable_charchat varchar," +
-						"charchat_price int," +
-						"status varchar," +
-						"general_score double)");
-				db.execSQL(sql.toString());
+//				StringBuffer sql = new StringBuffer();
+//
+//
+//				sql = new StringBuffer();
+//				sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
+//				db.execSQL(sql.toString());
+//
+//
+//				sql = new StringBuffer();
+//				sql.append("create table IF NOT EXISTS  tb_banner " +
+//						"(id int,code varchar,title varchar,link varchar,pic varchar,status varchar)");
+//				db.execSQL(sql.toString());
+//
+//				sql = new StringBuffer();
+//				sql.append("create table IF NOT EXISTS  tb_doctor " +
+//						"(id int," +
+//						"license varchar," +
+//						"name varchar," +
+//						"office varchar," +
+//						"bookingtime varchar," +
+//						"introduce varchar," +
+//						"credentials varchar," +
+//						"expert varchar," +
+//						"enable_videochat varchar," +
+//						"videochat_price int," +
+//						"enable_charchat varchar," +
+//						"charchat_price int," +
+//						"status varchar," +
+//						"general_score double)");
+//				db.execSQL(sql.toString());
 
 				db.setTransactionSuccessful();
 			} finally {

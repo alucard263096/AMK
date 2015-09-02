@@ -18,7 +18,14 @@ public abstract class AbstractDao {
 		util=new DBUtil(ctx);
 		util.open();
 		this.TableName=tablename;
+		try {
+			createTable();
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
 	}
+	abstract void createTable();
+	abstract void gotoCreateTableSql();
 
 
 	public boolean checkExists(int id){
@@ -40,11 +47,9 @@ public abstract class AbstractDao {
 
 	public void batchUpdate(ArrayList<AbstractObj> lstObj) {
 		// TODO Auto-generated method stub
-		util.open();
-
-		util.beginTransaction();
 		try {
 
+			util.beginTransaction();
 			for(AbstractObj obj:lstObj){
 
 				if(checkExists(obj.getId())){
@@ -64,7 +69,6 @@ public abstract class AbstractDao {
 		{
 			util.endTransaction();
 		}
-		util.close();
 	}
 
 	abstract void insertObj(AbstractObj obj);

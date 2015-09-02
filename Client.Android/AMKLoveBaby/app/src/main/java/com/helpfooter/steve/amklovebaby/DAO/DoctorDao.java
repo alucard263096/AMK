@@ -73,9 +73,41 @@ public class DoctorDao extends AbstractDao {
             if (cursor != null) {
                 cursor.close();
             }
-            util.close();
         }
         return lst;
+    }
+
+    @Override
+    void gotoCreateTableSql() {
+        util.open();
+       StringBuffer sql = new StringBuffer();
+//        sql.append("drop table tb_doctor");
+//        util.execSQL(sql.toString(), new Object[]{});
+//        sql=new StringBuffer();
+        sql.append("create table IF NOT EXISTS  tb_doctor " +
+                "(id int," +
+                "license varchar," +
+                "name varchar," +
+                "office varchar," +
+                "bookingtime varchar," +
+                "introduce varchar," +
+                "credentials varchar," +
+                "expert varchar," +
+                "enable_videochat varchar," +
+                "videochat_price int," +
+                "enable_charchat varchar," +
+                "charchat_price int," +
+                "status varchar," +
+                "general_score double)");
+        util.execSQL(sql.toString(), new Object[]{});
+
+    }
+    static boolean hascheckcreate=false;
+    public void createTable(){
+        if(hascheckcreate==false){
+            gotoCreateTableSql();
+            hascheckcreate=true;
+        }
     }
 
     @Override
@@ -103,7 +135,7 @@ public class DoctorDao extends AbstractDao {
         DoctorObj obj=(DoctorObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_banner set license=?, name=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
+        sql.append("update tb_doctor set license=?, name=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
                 ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=? where id=? ");
         Object[] bindArgs = {obj.getLicense(),obj.getName(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
                 ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getId()};

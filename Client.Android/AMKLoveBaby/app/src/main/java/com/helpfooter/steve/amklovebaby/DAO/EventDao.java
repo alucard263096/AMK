@@ -143,6 +143,16 @@ public class EventDao extends AbstractDao {
 	}
 
 	@Override
+	void createTable() {
+
+	}
+
+	@Override
+	void gotoCreateTableSql() {
+
+	}
+
+	@Override
 	void insertObj(AbstractObj obj) {
 
 	}

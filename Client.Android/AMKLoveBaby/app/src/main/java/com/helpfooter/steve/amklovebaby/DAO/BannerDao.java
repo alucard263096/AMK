@@ -84,6 +84,7 @@ public class BannerDao extends AbstractDao {
 		return obj;
 	}
 
+
 	@Override
 	public void insertObj(AbstractObj abobj) {
 		// TODO Auto-generated method stub
@@ -94,7 +95,7 @@ public class BannerDao extends AbstractDao {
 		StringBuffer sql = new StringBuffer();
 		sql.append("insert into tb_banner (id,code  ,title,link,pic,status ) values (?,?,?,?,?,?)");
 		Object[] bindArgs = {obj.getId(),obj.getCode(),obj.getTitle(),obj.getLink(),obj.getPic(),obj.getStatus()};
-		util.execSQL(sql.toString(),bindArgs);
+		util.execSQL(sql.toString(), bindArgs);
 
 		util.close();
 	}
@@ -114,4 +115,20 @@ public class BannerDao extends AbstractDao {
 		util.close();
 	}
 
+	@Override
+	void gotoCreateTableSql() {
+		util.open();
+		StringBuffer sql = new StringBuffer();
+		sql.append("create table IF NOT EXISTS  tb_banner " +
+				"(id int,code varchar,title varchar,link varchar,pic varchar,status varchar)");
+		util.execSQL(sql.toString(), new Object[]{});
+
+	}
+	static boolean hascheckcreate=false;
+	public void createTable(){
+		if(hascheckcreate==false){
+			gotoCreateTableSql();
+			hascheckcreate=true;
+		}
+	}
 }

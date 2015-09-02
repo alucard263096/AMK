@@ -3,10 +3,12 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 import android.content.Context;
 import android.graphics.Color;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.R;
 
 import java.util.ArrayList;
 
@@ -26,16 +28,14 @@ public class DoctorListLoadView {
     public void LoadDoctorListData(){
         int i=0;
         for(DoctorObj obj:lstDoctor){
-
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams param=getLayoutParam();
             param.mPercentLayoutInfo.heightPercent=0.2f;
             param.mPercentLayoutInfo.topMarginPercent=0.02f;
             param.mPercentLayoutInfo.bottomMarginPercent=0.02f;
-            layout.setBackgroundColor(Color.GRAY);
+            layout.setBackgroundColor(Color.BLUE);
             layout.setLayoutParams(param);
             this.mainlayout.addView(layout);
-
             i++;
         }
     }

@@ -16,27 +16,27 @@ public class ParamsDao extends AbstractDao {
 	
 	public String getParam(String id,String defaultvalue) {
 		// TODO Auto-generated method stub
-
-		Cursor cursor = null;
-		try {
-			util.open();
-			cursor = util
-					.rawQuery(
-							"select val  from tb_param where id='"+id+"'",new String[] { });
-			while (cursor.moveToNext()) {
-				return cursor.getString(cursor.getColumnIndex("val"));
-			}
-			insertPram(id,defaultvalue);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
-			util.close();
-		}
-		return defaultvalue;
+return defaultvalue;
+//		Cursor cursor = null;
+//		try {
+//			util.open();
+//			cursor = util
+//					.rawQuery(
+//							"select val  from tb_param where id='"+id+"'",new String[] { });
+//			while (cursor.moveToNext()) {
+//				return cursor.getString(cursor.getColumnIndex("val"));
+//			}
+//			insertPram(id,defaultvalue);
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (cursor != null) {
+//				cursor.close();
+//			}
+//			util.close();
+//		}
+//		return defaultvalue;
 	}
 
 	public void insertPram(String id,String val){
@@ -53,6 +53,22 @@ public class ParamsDao extends AbstractDao {
         sql_insert.append("UPDATE  tb_param set val=? where id=?");
         Object[] bindArgs = {updatevalue,id};
         util.execSQL(sql_insert.toString(),bindArgs);
+	}
+
+	@Override
+	void gotoCreateTableSql() {
+		util.open();
+		StringBuffer sql = new StringBuffer();
+		sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
+		util.execSQL(sql.toString(),new Object[]{});
+
+	}
+	static boolean hascheckcreate=false;
+	public void createTable(){
+		if(hascheckcreate==false){
+			gotoCreateTableSql();
+			hascheckcreate=true;
+		}
 	}
 
 	@Override
