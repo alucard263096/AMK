@@ -27,7 +27,7 @@
 	public function getDoctorInfoByLoginId($login_id)
 	{
 		$login_id=parameter_filter($login_id);
-		$sql="select id, license,name,office,title,bookingtime,introduce,credentials,expert,status,login_id,password 
+		$sql="select id, license,name,photo,office,title,bookingtime,introduce,credentials,expert,status,login_id,password 
 		from tb_doctor where login_id='$login_id' ";
 		
 		//echo $sql;
@@ -39,7 +39,7 @@
 	public function getDoctorList($lastupdate_time)
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id, license,name,office,title,bookingtime,introduce,credentials,expert
+		$sql="select id, license,name,photo,office,title,bookingtime,introduce,credentials,expert
 		,enable_videochat,videochat_price,enable_charchat,charchat_price,status
 		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score
 		from tb_doctor m
