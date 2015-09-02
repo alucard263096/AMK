@@ -28,14 +28,14 @@ public class DoctorListLoadView {
     public void LoadDoctorListData(){
         int i=0;
         for(DoctorObj obj:lstDoctor){
-            PercentLinearLayout layout=new PercentLinearLayout(ctx);
-            PercentLinearLayout.LayoutParams param=getLayoutParam();
-            param.mPercentLayoutInfo.heightPercent=0.2f;
-            param.mPercentLayoutInfo.topMarginPercent=0.02f;
-            param.mPercentLayoutInfo.bottomMarginPercent=0.02f;
-            layout.setBackgroundColor(Color.BLUE);
-            layout.setLayoutParams(param);
-            this.mainlayout.addView(layout);
+            //PercentLinearLayout layou/t=new PercentLinearLayout(ctx);
+            //PercentLinearLayout.LayoutParams param=getLayoutParam();
+            //param.mPercentLayoutInfo.heightPercent=0.2f;
+            //param.mPercentLayoutInfo.topMarginPercent=0.02f;
+            //param.mPercentLayoutInfo.bottomMarginPercent=0.02f;
+//            layout.setBackgroundColor(Color.BLUE);
+//            layout.setLayoutParams(param);
+//            this.mainlayout.addView(layout);
             i++;
         }
     }

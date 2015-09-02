@@ -16,27 +16,26 @@ public class ParamsDao extends AbstractDao {
 	
 	public String getParam(String id,String defaultvalue) {
 		// TODO Auto-generated method stub
-return defaultvalue;
-//		Cursor cursor = null;
-//		try {
-//			util.open();
-//			cursor = util
-//					.rawQuery(
-//							"select val  from tb_param where id='"+id+"'",new String[] { });
-//			while (cursor.moveToNext()) {
-//				return cursor.getString(cursor.getColumnIndex("val"));
-//			}
-//			insertPram(id,defaultvalue);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (cursor != null) {
-//				cursor.close();
-//			}
-//			util.close();
-//		}
-//		return defaultvalue;
+		Cursor cursor = null;
+		try {
+			util.open();
+			cursor = util
+					.rawQuery(
+							"select val  from tb_param where id='"+id+"'",new String[] { });
+			while (cursor.moveToNext()) {
+				return cursor.getString(cursor.getColumnIndex("val"));
+			}
+			insertPram(id,defaultvalue);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+			util.close();
+		}
+		return defaultvalue;
 	}
 
 	public void insertPram(String id,String val){

@@ -78,11 +78,11 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         View view= inflater.inflate(R.layout.fragment_doctor_list, container, false);
 
 
-        //ArrayList<DoctorObj> lst=(new DoctorDao(this.getActivity())).getDoctorList();
-        //DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list),lst);
-        //lstLoad.LoadDoctorListData();
-
-        Log.i("getdoctorcount", String.valueOf(lst.size()));
+//        ArrayList<DoctorObj> lst=(new DoctorDao(this.getActivity())).getDoctorList();
+//        DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list),lst);
+//        lstLoad.LoadDoctorListData();
+//
+//        Log.i("getdoctorcount", String.valueOf(lst.size()));
         DoctorLoader loader=new DoctorLoader(this.getActivity());
         loader.start();
 

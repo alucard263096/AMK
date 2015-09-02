@@ -96,7 +96,7 @@ public class PercentLinearLayout extends LinearLayout
     public static class LayoutParams extends LinearLayout.LayoutParams
             implements PercentLayoutHelper.PercentLayoutParams
     {
-        private PercentLayoutHelper.PercentLayoutInfo mPercentLayoutInfo;
+        public PercentLayoutHelper.PercentLayoutInfo mPercentLayoutInfo;
 
         public LayoutParams(Context c, AttributeSet attrs)
         {

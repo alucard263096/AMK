@@ -72,8 +72,8 @@ public class BottomBarButton {
 
         PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
-        layoutinfo.heightPercent=0.6f;
-        layoutinfo.topMarginPercent=0.1f;
+        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,true);
+        layoutinfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
         layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
 
@@ -124,7 +124,7 @@ public class BottomBarButton {
 
         PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
-        layoutinfo.heightPercent=0.3f;
+        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
         layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
 
