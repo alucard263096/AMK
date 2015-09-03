@@ -1,10 +1,11 @@
-package com.helpfooter.steve.amkdoctor.DAO;
+package com.helpfooter.steve.amklovebaby.DAO;
 
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
-import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 
 public class ParamsDao extends AbstractDao {
 
@@ -15,7 +16,7 @@ public class ParamsDao extends AbstractDao {
 	
 	public String getParam(String id,String defaultvalue) {
 		// TODO Auto-generated method stub
-
+		//return defaultvalue;
 		Cursor cursor = null;
 		try {
 			util.open();
@@ -55,6 +56,22 @@ public class ParamsDao extends AbstractDao {
 	}
 
 	@Override
+	void gotoCreateTableSql() {
+		util.open();
+		StringBuffer sql = new StringBuffer();
+		sql.append("create table IF NOT EXISTS tb_param (id varchar,val varchar)");
+		util.execSQL(sql.toString(),new Object[]{});
+
+	}
+	static boolean hascheckcreate=false;
+	public void createTable(){
+		if(hascheckcreate==false){
+			gotoCreateTableSql();
+			hascheckcreate=true;
+		}
+	}
+
+	@Override
 	void insertObj(AbstractObj obj) {
 
 	}
@@ -62,5 +79,10 @@ public class ParamsDao extends AbstractDao {
 	@Override
 	void updateObj(AbstractObj obj) {
 
+	}
+
+	@Override
+	AbstractObj newRealObj() {
+		return null;
 	}
 }

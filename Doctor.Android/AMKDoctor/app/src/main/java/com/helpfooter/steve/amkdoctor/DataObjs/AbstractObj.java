@@ -1,5 +1,8 @@
-package com.helpfooter.steve.amkdoctor.DataObjs;
+package com.helpfooter.steve.amklovebaby.DataObjs;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class AbstractObj {
@@ -8,6 +11,9 @@ public abstract class AbstractObj {
     public int getId(){
         return  id;
     }
-
-    abstract void parseXmlDataTable(HashMap<String,String> lstRowValue);
+    public void setId(int val){
+        this.id=val;
+    }
+    public abstract void parseCursor(Cursor cursor);
+    public abstract void parseXmlDataTable(HashMap<String, String> lstRowValue);
 }

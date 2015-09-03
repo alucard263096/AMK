@@ -1,20 +1,19 @@
-package com.helpfooter.steve.amkdoctor.DataObjs;
+package com.helpfooter.steve.amklovebaby.DataObjs;
 
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class BannerObj extends  AbstractObj {
-	int id;
 	String code;
 	String title;
 	String link;
 	String pic;
 	String status;
-	String updated_date;
 
-	public int getId(){
-		return  id;
-	}
 
 	@Override
 	public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
@@ -24,7 +23,6 @@ public class BannerObj extends  AbstractObj {
 		this.link=lstRowValue.get("link");
 		this.pic=lstRowValue.get("pic");
 		this.status=lstRowValue.get("status");
-		this.updated_date=lstRowValue.get("updated_date");
 	}
 
 	public String getCode(){
@@ -42,12 +40,20 @@ public class BannerObj extends  AbstractObj {
 	public String getStatus(){
 		return status;
 	}
-	public String getUpdated_date(){
-		return  updated_date;
-	}
 	public void  setId(int val){
 		id=val;
 	}
+
+	@Override
+	public void parseCursor(Cursor cursor) {
+		setId(cursor.getInt(cursor.getColumnIndex("id")));
+		setCode(cursor.getString(cursor.getColumnIndex("code")));
+		setTitle(cursor.getString(cursor.getColumnIndex("title")));
+		setLink(cursor.getString(cursor.getColumnIndex("link")));
+		setPic(cursor.getString(cursor.getColumnIndex("pic")));
+		setStatus(cursor.getString(cursor.getColumnIndex("status")));
+	}
+
 	public void setCode(String val){
 		code=val;
 	}
@@ -62,9 +68,6 @@ public class BannerObj extends  AbstractObj {
 	}
 	public void setStatus(String val){
 		status=val;
-	}
-	public void setUpdated_date(String val){
-		updated_date=val;
 	}
 
 
