@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
+import android.database.Cursor;
+
 import java.util.HashMap;
 
 /**
@@ -8,6 +10,8 @@ import java.util.HashMap;
 public class DoctorObj extends AbstractObj {
     String license;
     String name;
+    String photo;
+    String title;
     String office;
     String bookingtime;
     String introduce;
@@ -19,6 +23,7 @@ public class DoctorObj extends AbstractObj {
     int charchat_price;
     String status;
     double general_score;
+    int querycount;
 
     public String getLicense(){
         return license;
@@ -28,6 +33,9 @@ public class DoctorObj extends AbstractObj {
     }
     public String getOffice(){
         return office;
+    }
+    public String getPhoto(){
+        return photo;
     }
     public String getBookingtime(){
         return bookingtime;
@@ -63,6 +71,9 @@ public class DoctorObj extends AbstractObj {
     public void  setName(String val){
         name=val;
     }
+    public void  setPhoto(String val){
+        photo=val;
+    }
     public void  setOffice(String val){
         office=val;
     }
@@ -93,6 +104,29 @@ public class DoctorObj extends AbstractObj {
     public void  setStatus(String val){
         status=val;
     }
+
+    @Override
+    public void parseCursor(Cursor cursor) {
+
+        setId(cursor.getInt(cursor.getColumnIndex("id")));
+        setLicense(cursor.getString(cursor.getColumnIndex("license")));
+        setName(cursor.getString(cursor.getColumnIndex("name")));
+        setTitle(cursor.getString(cursor.getColumnIndex("title")));
+        setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+        setOffice(cursor.getString(cursor.getColumnIndex("office")));
+        setBookingtime(cursor.getString(cursor.getColumnIndex("bookingtime")));
+        setIntroduce(cursor.getString(cursor.getColumnIndex("introduce")));
+        setCredentials(cursor.getString(cursor.getColumnIndex("credentials")));
+        setExpert(cursor.getString(cursor.getColumnIndex("expert")));
+        setEnableVideochat(cursor.getString(cursor.getColumnIndex("enable_videochat")));
+        setEnable_charchat(cursor.getString(cursor.getColumnIndex("enable_charchat")));
+        setVideochatPrice(cursor.getInt(cursor.getColumnIndex("videochat_price")));
+        setCharchat_price(cursor.getInt(cursor.getColumnIndex("charchat_price")));
+        setStatus(cursor.getString(cursor.getColumnIndex("status")));
+        setGeneralScore(cursor.getDouble(cursor.getColumnIndex("general_score")));
+        setQuerycount(cursor.getInt(cursor.getColumnIndex("querycount")));
+    }
+
     @Override
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
 
@@ -100,6 +134,8 @@ public class DoctorObj extends AbstractObj {
         this.license=lstRowValue.get("license");
         this.name=lstRowValue.get("name");
         this.office=lstRowValue.get("office");
+        this.title=lstRowValue.get("title");
+        this.photo=lstRowValue.get("photo");
         this.bookingtime=lstRowValue.get("bookingtime");
         this.introduce=lstRowValue.get("introduce");
         this.credentials=lstRowValue.get("credentials");
@@ -110,6 +146,7 @@ public class DoctorObj extends AbstractObj {
         this.charchat_price=Integer.parseInt(lstRowValue.get("charchat_price"));
         this.status=lstRowValue.get("status");
         this.general_score=Double.parseDouble(lstRowValue.get("general_score"));
+        this.querycount=Integer.parseInt(lstRowValue.get("querycount"));
 
     }
 
@@ -118,5 +155,19 @@ public class DoctorObj extends AbstractObj {
     }
     public void  setGeneralScore(double val){
         this.general_score=val;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+    public  void setTitle(String val){
+        this.title=val;
+    }
+
+    public int getQuerycount() {
+        return querycount;
+    }
+    public  void setQuerycount(int val){
+        this.querycount=val;
     }
 }

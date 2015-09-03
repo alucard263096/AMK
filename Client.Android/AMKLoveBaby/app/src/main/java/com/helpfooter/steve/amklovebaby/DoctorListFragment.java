@@ -78,13 +78,10 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         View view= inflater.inflate(R.layout.fragment_doctor_list, container, false);
 
 
-//        ArrayList<DoctorObj> lst=(new DoctorDao(this.getActivity())).getDoctorList();
-//        DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list),lst);
-//        lstLoad.LoadDoctorListData();
-//
-//        Log.i("getdoctorcount", String.valueOf(lst.size()));
-        DoctorLoader loader=new DoctorLoader(this.getActivity());
-        loader.start();
+        DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list));
+        lstLoad.LoadDoctorListData();
+        //DoctorLoader loader=new DoctorLoader(this.getActivity());
+        //loader.start();
 
         return view;
     }
@@ -118,6 +115,8 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         return "医生咨询";
     }
 
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -132,5 +131,7 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
+
 
 }

@@ -16,74 +16,9 @@ public class BannerDao extends AbstractDao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArrayList<BannerObj> getIndexBanner(){
-		ArrayList<BannerObj> bannerList=new ArrayList<BannerObj>();
-		
-		Cursor cursor = null;
-		try {
-			util.open();
-			cursor = util
-					.rawQuery(
-							"select * from tb_banner where status='A' and code like 'index_banner_%' order by code  ",new String[] {  });
-			while (cursor.moveToNext()) {
-				int id=cursor.getInt(cursor.getColumnIndex("id"));
-				String title=cursor.getString(cursor.getColumnIndex("title"));
-				String link=cursor.getString(cursor.getColumnIndex("link"));
-				String pic=cursor.getString(cursor.getColumnIndex("pic"));
-
-				BannerObj obj=new BannerObj();
-				obj.setId(id);
-				obj.setTitle(title);
-				obj.setLink(link);
-				obj.setPic(pic);
-				bannerList.add(obj);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
-			util.close();
-		}
-		return bannerList;
+	public ArrayList<AbstractObj> getIndexBanner(){
+		return super.getList(" status='A' and code like 'index_banner_%' order by code  ");
 	}
-
-	public BannerObj getBanner(int id) {
-		// TODO Auto-generated method stub
-		BannerObj obj=null;
-		Cursor cursor = null;
-		try {
-			cursor = util
-					.rawQuery(
-							"select  * from tb_banner where id=?  ",new String[] {String.valueOf(id)  });
-			while (cursor.moveToNext()) {
-				String code=cursor.getString(cursor.getColumnIndex("code"));
-				String title=cursor.getString(cursor.getColumnIndex("title"));
-				String link=cursor.getString(cursor.getColumnIndex("link"));
-				String pic=cursor.getString(cursor.getColumnIndex("pic"));
-				String status=cursor.getString(cursor.getColumnIndex("status"));
-				String updated_date=cursor.getString(cursor.getColumnIndex("updated_date"));
-
-				obj.setId(id);
-				obj.setCode(code);
-				obj.setTitle(title);
-				obj.setLink(link);
-				obj.setPic(pic);
-				obj.setStatus(status);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (cursor != null) {
-				cursor.close();
-			}
-		}
-		return obj;
-	}
-
 
 	@Override
 	public void insertObj(AbstractObj abobj) {
@@ -113,6 +48,11 @@ public class BannerDao extends AbstractDao {
 		util.execSQL(sql.toString(),bindArgs);
 
 		util.close();
+	}
+
+	@Override
+	AbstractObj newRealObj() {
+		return new BannerObj();
 	}
 
 	@Override

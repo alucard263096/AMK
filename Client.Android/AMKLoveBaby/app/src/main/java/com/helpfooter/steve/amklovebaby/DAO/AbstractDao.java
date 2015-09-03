@@ -1,15 +1,12 @@
 package com.helpfooter.steve.amklovebaby.DAO;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.EventObj;
 import com.helpfooter.steve.amklovebaby.Utils.DBUtil;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class AbstractDao {
 	protected DBUtil util;
@@ -71,7 +68,63 @@ public abstract class AbstractDao {
 		}
 	}
 
-	abstract void insertObj(AbstractObj obj);
+	public void deleteTable(){
+		util.execSQL("delete from "+TableName+"",new Object[]{});
+	}
 
+	public ArrayList<AbstractObj> getList(String condition){
+		ArrayList<AbstractObj> lst=new ArrayList<AbstractObj>();
+
+		Cursor cursor = null;
+		try {
+			util.open();
+			String sql="select * from "+TableName+" ";
+			if(condition.length()>1){
+				sql+=" where "+condition;
+			}
+			cursor = util.rawQuery(sql,new String[] {  });
+			while (cursor.moveToNext()) {
+				AbstractObj obj=newRealObj();
+				obj.parseCursor(cursor);
+				lst.add(obj);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+			util.close();
+		}
+		return lst;
+	}
+
+	public AbstractObj getObj(int id){
+		Cursor cursor = null;
+		try {
+			util.open();
+			cursor = util
+					.rawQuery(
+							"select * from "+TableName+" where id=? ",new String[] { String.valueOf(id) });
+			while (cursor.moveToNext()) {
+
+				AbstractObj obj=this.newRealObj();
+				obj.parseCursor(cursor);
+				return obj;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+		return null;
+	}
+
+	abstract void insertObj(AbstractObj obj);
 	abstract void updateObj(AbstractObj obj);
+	abstract AbstractObj newRealObj();
 }

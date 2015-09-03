@@ -16,6 +16,7 @@ public class ParamsDao extends AbstractDao {
 	
 	public String getParam(String id,String defaultvalue) {
 		// TODO Auto-generated method stub
+		//return defaultvalue;
 		Cursor cursor = null;
 		try {
 			util.open();
@@ -78,5 +79,10 @@ public class ParamsDao extends AbstractDao {
 	@Override
 	void updateObj(AbstractObj obj) {
 
+	}
+
+	@Override
+	AbstractObj newRealObj() {
+		return null;
 	}
 }

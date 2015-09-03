@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.Loader;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
@@ -26,6 +27,17 @@ public class DoctorLoader extends WebXmlLoader {
 		callBack=val;
 	}
 
+//	@Override
+//	public String getCallUrl() {
+//		// TODO Auto-generated method stub
+//		ParamsDao dao=new ParamsDao(ctx);
+//		String api=callApi;
+//		String url=StaticVar.dictHashMap.get(callApi);
+//		String update_date="1991-1-1";
+//		url= (url+"?last_time="+update_date).replace(" ", "%20");
+//		Log.i("IndexBanner_debugUrl", url);
+//		return url;
+//	}
 
 	@Override
 	public void doXml(ArrayList<HashMap<String,String>> lstRows) {

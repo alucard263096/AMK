@@ -72,9 +72,15 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_height",String.valueOf(height));
         Log.i("screen_info_density",String.valueOf(density));
         Log.i("screen_info_Dpi",String.valueOf(densityDpi));
+
+//        DoctorDao dao=new DoctorDao(this);
+//        dao.deleteTable();
     }
 
     private void InitData() {
+        DoctorLoader loader=new DoctorLoader(this);
+        loader.start();
+
         BannerLoader bannerLoader=new BannerLoader(this);
         bannerLoader.setCallCode(StaticVar.BannerApi);
         bannerLoader.start();

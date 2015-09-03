@@ -1,6 +1,8 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
 
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -41,6 +43,17 @@ public class BannerObj extends  AbstractObj {
 	public void  setId(int val){
 		id=val;
 	}
+
+	@Override
+	public void parseCursor(Cursor cursor) {
+		setId(cursor.getInt(cursor.getColumnIndex("id")));
+		setCode(cursor.getString(cursor.getColumnIndex("code")));
+		setTitle(cursor.getString(cursor.getColumnIndex("title")));
+		setLink(cursor.getString(cursor.getColumnIndex("link")));
+		setPic(cursor.getString(cursor.getColumnIndex("pic")));
+		setStatus(cursor.getString(cursor.getColumnIndex("status")));
+	}
+
 	public void setCode(String val){
 		code=val;
 	}
