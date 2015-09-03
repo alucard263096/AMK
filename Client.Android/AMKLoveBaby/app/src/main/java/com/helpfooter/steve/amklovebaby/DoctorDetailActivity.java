@@ -42,6 +42,7 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
 
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(doctor.getName());
+        txtName.getPaint().setFakeBoldText(true);;
 
         txtOfficeTitle=(TextView)findViewById(R.id.txtOfficeTitle);
         txtOfficeTitle.setText(doctor.getOffice()+"/"+doctor.getTitle());

@@ -3,6 +3,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -52,8 +53,8 @@ public class DoctorListLoadView implements View.OnClickListener {
             param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
             param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,false);
             param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,false);
-            String backgroundcolor=getBackgroundColor(i);
-            layout.setBackgroundColor(Color.parseColor(backgroundcolor));
+            //String backgroundcolor=getBackgroundColor(i);
+            //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
             layout.setLayoutParams(param);
             layout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -104,7 +105,8 @@ public class DoctorListLoadView implements View.OnClickListener {
         txtName.setGravity(Gravity.CENTER_VERTICAL);
         txtName.setLayoutParams(nameparam);
         txtName.setText(doctor.getName());
-        txtName.setTextColor(Color.WHITE);
+        TextPaint tp= txtName.getPaint();
+        tp.setFakeBoldText(true);
         nameRatiolayout.addView(txtName);
 
 
@@ -125,11 +127,10 @@ public class DoctorListLoadView implements View.OnClickListener {
         officeparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
         officeparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.12f,true);
         officeparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.06f,true);
-        officeparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        officeparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f, true);
         txtOfficePosition.setGravity(Gravity.CENTER_VERTICAL);
         txtOfficePosition.setLayoutParams(officeparam);
         txtOfficePosition.setText(doctor.getOffice() + "/" + doctor.getTitle());
-        txtOfficePosition.setTextColor(Color.WHITE);
 
         TextView txtExpert=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams expertparam=getLayoutParam();
@@ -137,10 +138,9 @@ public class DoctorListLoadView implements View.OnClickListener {
         expertparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
         expertparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         expertparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        expertparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        expertparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f, true);
         txtExpert.setLayoutParams(expertparam);
         txtExpert.setText(doctor.getExpert());
-        txtExpert.setTextColor(Color.WHITE);
 
         layout.addView(nameRatiolayout);
         layout.addView(txtOfficePosition);
