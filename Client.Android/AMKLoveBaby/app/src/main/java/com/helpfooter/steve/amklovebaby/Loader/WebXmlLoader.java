@@ -50,6 +50,7 @@ public abstract class WebXmlLoader extends Thread{
 		InputStream is=getXml(path);
 		if(is!=null){
 			XmlDataTableReader xmlreader=new XmlDataTableReader(is);
+			Log.i("webload_apirow",callApi+":"+String.valueOf(xmlreader.getDataTableValue().size()));
 			doXml(xmlreader.getDataTableValue());
 			try {
 				is.close();
@@ -98,12 +99,8 @@ public abstract class WebXmlLoader extends Thread{
 
 		   BufferedReader reader = new BufferedReader(new InputStreamReader(is));   
 
-		        StringBuilder sb = new StringBuilder();   
-
-		    
-
-		        String line = null;   
-
+		        StringBuilder sb = new StringBuilder();
+		        String line = null;
 		        try {   
 
 		            while ((line = reader.readLine()) != null) {   

@@ -22,6 +22,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -36,6 +37,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     private Fragment currentFragment;
     private HomeFragment homeFragment;
     private DoctorListFragment doctorListFragment;
+    private NewsListFragment newsListFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
 
@@ -84,6 +86,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         BannerLoader bannerLoader=new BannerLoader(this);
         bannerLoader.setCallCode(StaticVar.BannerApi);
         bannerLoader.start();
+
+        NewsLoader newsLoader=new NewsLoader(this);
+        newsLoader.start();
     }
 
 
@@ -98,10 +103,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
         homeFragment=new HomeFragment();
         doctorListFragment=new DoctorListFragment();
-
+        newsListFragment=new NewsListFragment();
 
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
-        newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", null);
+        newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
     }
 

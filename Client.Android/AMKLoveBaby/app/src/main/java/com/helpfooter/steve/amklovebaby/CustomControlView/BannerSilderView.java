@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.R;
 
@@ -34,11 +35,6 @@ public class BannerSilderView extends ImageSilderView implements IWebLoaderCallB
         this.GetImageViewList().clear();
     }
 
-    @Override
-    public void CallBack() {
-        LoadBanner();
-        mHandler.sendEmptyMessageDelayed(0, 0);
-    }
     private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg)
@@ -46,4 +42,10 @@ public class BannerSilderView extends ImageSilderView implements IWebLoaderCallB
             StartCircle();
         }
     };
+
+    @Override
+    public void CallBack(ArrayList<AbstractObj> lstObjs) {
+        LoadBanner();
+        mHandler.sendEmptyMessageDelayed(0, 0);
+    }
 }

@@ -52,7 +52,7 @@ public class DoctorLoader extends WebXmlLoader {
 			DoctorDao dao=new DoctorDao(ctx);
 			dao.batchUpdate(lsObj);
 			if(callBack!=null){
-				callBack.CallBack();
+				callBack.CallBack(lsObj);
 			}
 
 	        ParamsDao paramdao=new ParamsDao(this.ctx);

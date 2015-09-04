@@ -44,6 +44,8 @@ public abstract class AbstractDao {
 
 	public void batchUpdate(ArrayList<AbstractObj> lstObj) {
 		// TODO Auto-generated method stub
+
+		Log.i("batchupdate_row",TableName+":"+String.valueOf(lstObj.size()));
 		try {
 
 			util.beginTransaction();
@@ -56,9 +58,8 @@ public abstract class AbstractDao {
 					Log.i("act event", "insert");
 					insertObj(obj);
 				}
-
 			}
-
+			Log.i("batchupdate_succ",TableName+":"+String.valueOf(lstObj.size()));
 			util.setTransactionSuccessful();
 		}catch (Exception ex) {
 			ex.printStackTrace();
