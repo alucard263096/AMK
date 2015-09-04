@@ -31,7 +31,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends MyFragmentActivity implements View.OnClickListener
         ,HomeFragment.OnFragmentInteractionListener
-        ,DoctorListFragment.OnFragmentInteractionListener {
+        ,DoctorListFragment.OnFragmentInteractionListener
+        ,NewsListFragment.OnFragmentInteractionListener {
 
     private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
