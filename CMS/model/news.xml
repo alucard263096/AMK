@@ -14,6 +14,15 @@
       <search>1</search>
     </field>
     <field>
+      <name>发布日期</name>
+      <key>publish_date</key>
+      <type>datetime</type>
+      <displayinlist>1</displayinlist>
+      <gotodetail>1</gotodetail>
+      <notnull>1</notnull>
+      <search>1</search>
+    </field>
+    <field>
       <name>缩率图</name>
       <key>thumbnail</key>
       <type>upload</type>
@@ -24,13 +33,11 @@
       <filetype>image</filetype>
     </field>
     <field>
-      <name>发布日期</name>
-      <key>publish_date</key>
-      <type>datetime</type>
-      <displayinlist>1</displayinlist>
-      <gotodetail>1</gotodetail>
-      <notnull>1</notnull>
-      <search>1</search>
+      <name>详情页大图</name>
+      <key>photo</key>
+      <type>upload</type>
+      <uploadmodule>news</uploadmodule>
+      <filetype>image</filetype>
     </field>
     <field>
       <name>新闻类型</name>
