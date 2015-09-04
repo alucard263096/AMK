@@ -52,6 +52,36 @@
       <notnull>1</notnull>
     </field>
     <field>
+      <name>新闻分类</name>
+      <key>category</key>
+      <type>select</type>
+      <displayinlist>1</displayinlist>
+      <options>
+        <option>
+          <name>健康食谱</name>
+          <value>H</value>
+        </option>
+        <option>
+          <name>孕产常识</name>
+          <value>P</value>
+        </option>
+        <option>
+          <name>四级生长指标</name>
+          <value>F</value>
+        </option>
+        <option>
+          <name>早教方法</name>
+          <value>E</value>
+        </option>
+        <option>
+          <name>营养及运动</name>
+          <value>V</value>
+        </option>
+      </options>
+      <search>1</search>
+      <notnull>1</notnull>
+    </field>
+    <field>
       <name>关联医生</name>
       <key>doctor_id</key>
       <type>fkey</type>
