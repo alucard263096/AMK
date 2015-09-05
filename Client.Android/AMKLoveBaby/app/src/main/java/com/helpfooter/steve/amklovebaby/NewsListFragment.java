@@ -1,13 +1,18 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorListLoadView;
+import com.helpfooter.steve.amklovebaby.CustomControlView.NewsListLoadView;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 
 
@@ -19,16 +24,18 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
  * Use the {@link NewsListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsListFragment extends Fragment implements IMyFragment {
+public class NewsListFragment extends Fragment implements IMyFragment,View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private TextView btnCategoryH,btnCategoryP,btnCategoryF,btnCategoryE,btnCategoryV;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    NewsListLoadView lstLoad;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -66,7 +73,30 @@ public class NewsListFragment extends Fragment implements IMyFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_list, container, false);
+        View view= inflater.inflate(R.layout.fragment_news_list, container, false);
+         lstLoad=new NewsListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.news_list));
+        lstLoad.LoadNewsListData();
+        InitUI(view);
+        //DoctorLoader loader=new DoctorLoader(this.getActivity());
+        //loader.start();
+
+        return view;
+    }
+
+    private void InitUI(View view) {
+        btnCategoryH =(TextView)view.findViewById(R.id.btnCategoryH);
+        btnCategoryH.setOnClickListener(this);
+        btnCategoryP =(TextView)view.findViewById(R.id.btnCategoryP);
+        btnCategoryP.setOnClickListener(this);
+        btnCategoryE =(TextView)view.findViewById(R.id.btnCategoryE);
+        btnCategoryE.setOnClickListener(this);
+        btnCategoryV =(TextView)view.findViewById(R.id.btnCategoryV);
+        btnCategoryV.setOnClickListener(this);
+        btnCategoryF =(TextView)view.findViewById(R.id.btnCategoryF);
+        btnCategoryF.setOnClickListener(this);
+
+        onClick(btnCategoryH);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -97,6 +127,39 @@ public class NewsListFragment extends Fragment implements IMyFragment {
     public String getTitle() {
         return "新闻资讯";
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnCategoryE:
+            case R.id.btnCategoryF:
+            case R.id.btnCategoryV:
+            case R.id.btnCategoryH:
+            case R.id.btnCategoryP:
+                clickNewsFiler(v);
+        }
+    }
+
+    private void clickNewsFiler(View v) {
+        String category=(String)v.getTag();
+        lstLoad.FilterByCategory(category);
+        setFilterButtonWhite(btnCategoryE);
+        setFilterButtonWhite(btnCategoryF);
+        setFilterButtonWhite(btnCategoryV);
+        setFilterButtonWhite(btnCategoryH);
+        setFilterButtonWhite(btnCategoryP);
+
+        TextView btn=(TextView)v;
+        btn.setBackgroundColor(Color.parseColor("#FD7CAD"));
+        btn.setTextColor(Color.WHITE);
+
+    }
+
+    private void setFilterButtonWhite(TextView btnCategory) {
+        btnCategory.setTextColor(Color.BLACK);
+        btnCategory.setBackgroundColor(Color.WHITE);
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this

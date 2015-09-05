@@ -83,6 +83,9 @@ public class HomeFragment extends Fragment implements IMyFragment {
     private void initUI(View view) {
         mDoctor=(LinearLayout)view.findViewById(R.id.doctor);
         mDoctor.setOnClickListener(((MainActivity)this.getActivity()));
+
+        mNews=(LinearLayout)view.findViewById(R.id.news);
+        mNews.setOnClickListener(((MainActivity)this.getActivity()));
     }
 
     public void initBanner(View view)  {

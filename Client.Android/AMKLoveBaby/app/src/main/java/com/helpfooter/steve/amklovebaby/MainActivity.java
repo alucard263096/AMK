@@ -117,6 +117,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(view.getId()==R.id.doctor){
             buttonBarClick(doctorBarButton);
         }
+        if(view.getId()==R.id.news){
+            buttonBarClick(newsBarButton);
+        }
         for(BottomBarButton barButton:lstBottomBar){
             if(view==barButton.GetEnteryLayout()){
                 buttonBarClick(barButton);

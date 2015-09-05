@@ -78,6 +78,22 @@ public class NewsObj extends  AbstractObj {
 		this.content = content;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 	String title;
 	String publish_date;
 	String news_type;
@@ -86,8 +102,9 @@ public class NewsObj extends  AbstractObj {
 	String thumbnail;
 	String status;
 	int upvote;
-
 	String content;
+	String category;
+	String photo;
 
 
 	@Override
@@ -102,6 +119,8 @@ public class NewsObj extends  AbstractObj {
 		this.status=lstRowValue.get("status");
 		this.upvote=Integer.parseInt(lstRowValue.get("upvote"));
 		this.content=lstRowValue.get("content");
+		this.category=lstRowValue.get("category");
+		this.photo=lstRowValue.get("photo");
 	}
 
 
@@ -116,7 +135,13 @@ public class NewsObj extends  AbstractObj {
 		this.thumbnail=cursor.getString(cursor.getColumnIndex("thumbnail"));
 		this.status=cursor.getString(cursor.getColumnIndex("status"));
 		this.upvote=cursor.getInt(cursor.getColumnIndex("upvote"));
-		this.content=cursor.getString(cursor.getColumnIndex("content"));
+		try {
+			this.content = cursor.getString(cursor.getColumnIndex("content"));
+		}catch (Exception ex){
+
+		}
+		this.category=cursor.getString(cursor.getColumnIndex("category"));
+		this.photo=cursor.getString(cursor.getColumnIndex("photo"));
 	}
 
 

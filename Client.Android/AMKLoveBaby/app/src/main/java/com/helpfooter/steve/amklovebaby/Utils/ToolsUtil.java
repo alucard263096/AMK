@@ -1,5 +1,10 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -29,5 +34,20 @@ public class ToolsUtil {
             e.printStackTrace();
         }
         return re_md5;
+    }
+    public static PercentLinearLayout.LayoutParams getLayoutParam(){
+        PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.MATCH_PARENT);
+        param.mPercentLayoutInfo=layoutinfo;
+        return param;
+    }
+    public static  String FormatString(String str){
+        String notice = "";
+        try{
+            notice = URLEncoder.encode(str, "utf-8");
+        }catch(UnsupportedEncodingException ex){
+        }
+        return str;
     }
 }

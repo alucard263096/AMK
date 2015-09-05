@@ -16,7 +16,7 @@ public class NewsDao extends AbstractDao {
 	}
 
 	public ArrayList<AbstractObj> getNewsList(){
-		return super.getList(" status='A' order by publish desc  ");
+		return super.getList(" status='A' order by publish_date,id desc  ");
 	}
 
 	@Override
@@ -27,8 +27,8 @@ public class NewsDao extends AbstractDao {
 		NewsObj obj=(NewsObj)abobj;
 
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into tb_news (id,title  ,publish_date,news_type,doctor_id,summary,thumbnail,status,upvote ) values (?,?,?,?,?,?,?,?,?)");
-		Object[] bindArgs = {obj.getId(),obj.getTitle(),obj.getPublish_date(),obj.getNews_type(),obj.getDoctor_id(),obj.getSummary(),obj.getThumbnail(),obj.getStatus(),obj.getUpvote()};
+		sql.append("insert into tb_news (id,title  ,publish_date,news_type,category,doctor_id,summary,thumbnail,photo,status,upvote ) values (?,?,?,?,?,?,?,?,?,?,?)");
+		Object[] bindArgs = {obj.getId(),obj.getTitle(),obj.getPublish_date(),obj.getNews_type(),obj.getCategory(),obj.getDoctor_id(),obj.getSummary(),obj.getThumbnail(),obj.getPhoto(),obj.getStatus(),obj.getUpvote()};
 		util.execSQL(sql.toString(), bindArgs);
 
 		util.close();
@@ -42,8 +42,8 @@ public class NewsDao extends AbstractDao {
 		NewsObj obj=(NewsObj)abobj;
 
 		StringBuffer sql = new StringBuffer();
-		sql.append("update tb_news set title=?  ,publish_date=?,news_type=?,doctor_id=?,summary=?,thumbnail=?,status=?,upvote=? where id=? ");
-		Object[] bindArgs = {obj.getTitle(),obj.getPublish_date(),obj.getNews_type(),obj.getDoctor_id(),obj.getSummary(),obj.getThumbnail(),obj.getStatus(),obj.getUpvote(),obj.getId()};
+		sql.append("update tb_news set title=?  ,publish_date=?,news_type=?,category=?,doctor_id=?,summary=?,thumbnail=?,photo=?,status=?,upvote=? where id=? ");
+		Object[] bindArgs = {obj.getTitle(),obj.getPublish_date(),obj.getNews_type(),obj.getCategory(),obj.getDoctor_id(),obj.getSummary(),obj.getThumbnail(),obj.getPhoto(),obj.getStatus(),obj.getUpvote(),obj.getId()};
 		util.execSQL(sql.toString(),bindArgs);
 
 		util.close();
@@ -58,8 +58,8 @@ public class NewsDao extends AbstractDao {
 	void gotoCreateTableSql() {
 		util.open();
 		StringBuffer sql = new StringBuffer();
-		sql.append("create table IF NOT EXISTS  tb_banner " +
-				"(id int,title varchar ,publish_date varchar,news_type varchar,doctor_id int,summary varchar,thumbnail varchar,status varchar,upvote int )");
+		sql.append("create table IF NOT EXISTS  tb_news " +
+				"(id int,title varchar ,publish_date varchar,news_type varchar,category varchar,doctor_id int,summary varchar,thumbnail varchar,photo varchar,status varchar,upvote int )");
 		util.execSQL(sql.toString(), new Object[]{});
 
 	}

@@ -63,6 +63,7 @@ public abstract class AbstractDao {
 			util.setTransactionSuccessful();
 		}catch (Exception ex) {
 			ex.printStackTrace();
+			Log.i("batchupdate_err", TableName + ":" + ex.getMessage());
 		}finally
 		{
 			util.endTransaction();

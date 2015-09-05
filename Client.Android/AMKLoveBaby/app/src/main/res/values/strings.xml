@@ -19,5 +19,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_doctor_detail">DoctorDetailActivity</string>
 
-    <string name="hello_world">Hello world!</string>>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>>
 </resources>

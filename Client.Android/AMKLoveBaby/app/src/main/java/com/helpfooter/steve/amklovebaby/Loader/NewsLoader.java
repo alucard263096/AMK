@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DAO.NewsDao;
 import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -55,11 +56,13 @@ public class NewsLoader extends WebXmlLoader {
 				if(callBack!=null){
 					callBack.CallBack(lsObj);
 				}
+				NewsDao dao=new NewsDao(ctx);
+				dao.batchUpdate(lsObj);
 			}
 		}else {
 			String updatedate="";
 			if(lsObj.size()>0){
-				DoctorDao dao=new DoctorDao(ctx);
+				NewsDao dao=new NewsDao(ctx);
 				dao.batchUpdate(lsObj);
 				if(callBack!=null){
 					callBack.CallBack(lsObj);

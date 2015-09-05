@@ -39,7 +39,6 @@ public abstract class WebXmlLoader extends Thread{
 		String url=StaticVar.dictHashMap.get(callApi);
 		String update_date=dao.getParam(callApi, "1991-1-1");
 		url= (url+"?last_time="+update_date).replace(" ", "%20");
-		Log.i("IndexBanner_debugUrl", url);
 		return url;
 	}
 	
@@ -47,6 +46,7 @@ public abstract class WebXmlLoader extends Thread{
 	
 	public void run(){
 		String path=getCallUrl();
+		Log.i("webload_debugUrl", path);
 		InputStream is=getXml(path);
 		if(is!=null){
 			XmlDataTableReader xmlreader=new XmlDataTableReader(is);
