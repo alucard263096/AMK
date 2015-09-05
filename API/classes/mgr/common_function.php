@@ -90,6 +90,7 @@ header("Content-type: text/xml");
 			,'>'=>'&gt;'
 			,'\''=>'&apos;'
 			,'"'=>'&quot;');
+			$value = utf8_for_xml($value);
 			$str.="<$key>".strtr($value,$value_change)."</$key>";
 		}
 		$j++;
@@ -100,7 +101,11 @@ header("Content-type: text/xml");
   echo $str;
   exit;
 }
-
+function utf8_for_xml($string)
+{
+    $ret= preg_replace ('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
+	return $ret;
+}
 function outResult($num,$message){
 	$array=Array();
 	$arr=Array();
