@@ -30,7 +30,7 @@
 			return	outResult(-1,"news_id can not be null");
 		}
 		$id=parameter_filter($id);
-		$sql="select id,title,publish_date,news_type,category,doctor_id,summary,status,context,thumbnail,photo,".$this->dbmgr->getIsNull("upvote",5)." as upvote
+		$sql="select id,title,publish_date,news_type,category,doctor_id,summary,status,content,thumbnail,photo,".$this->dbmgr->getIsNull("upvote",5)." as upvote
 		from tb_news m
 		left join tb_news_statistic ms on m.id=ms.news_id
 		where m.id=$id ";

@@ -105,7 +105,7 @@
     </field>
     <field>
       <name>正文</name>
-      <key>context</key>
+      <key>content</key>
       <type>html</type>
       <notnull>1</notnull>
     </field>
