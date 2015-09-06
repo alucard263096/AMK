@@ -41,7 +41,8 @@
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select id, license,name,photo,office,title,bookingtime,introduce,credentials,expert
 		,enable_videochat,videochat_price,enable_charchat,charchat_price,status
-		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score,".$this->dbmgr->getIsNull("ms.querycount",120)." as querycount
+		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score
+		,".$this->dbmgr->getIsNull("ms.videoquerycount",120)." as videoquerycount,".$this->dbmgr->getIsNull("ms.charquerycount",120)." as charquerycount
 		from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";
 		if($lastupdate_time!=""){
