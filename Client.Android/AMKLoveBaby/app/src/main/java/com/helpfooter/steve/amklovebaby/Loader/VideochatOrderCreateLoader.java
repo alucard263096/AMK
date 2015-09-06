@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.Loader;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
@@ -43,10 +44,12 @@ public class VideochatOrderCreateLoader extends WebXmlLoader {
         url= (url+"?doctor_id="+String.valueOf(doctor_id)
                 +"&order_date="+order_date
                 +"&order_time="+order_time
-                +"?member_id="+String.valueOf(member_id)
+                +"&member_id="+String.valueOf(member_id)
                 +"&name="+name
                 +"&mobile="+mobile
                 +"&description="+description).replace(" ", "%20").replace("\n","%20");
+        Log.i("ordercreate_url",url);
+
         return url;
     }
 
