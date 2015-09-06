@@ -70,7 +70,8 @@
 
 		if($date!=""){
 			$date=parameter_filter($date);
-			$sql="select order_time from v_order_videochat where doctor_id=$doctor_id and order_date='$date' ";
+			//F:fail,D:delete,C:cancel
+			$sql="select order_time from v_order_videochat where doctor_id=$doctor_id and order_date='$date' and status<>'F' and status<>'D' and status<>'C' ";
 			$query = $this->dbmgr->query($sql);
 			$ordertime = $this->dbmgr->fetch_array_all($query); 
 		}

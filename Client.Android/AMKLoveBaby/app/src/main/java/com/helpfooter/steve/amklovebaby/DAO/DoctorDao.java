@@ -52,7 +52,8 @@ public class DoctorDao extends AbstractDao {
                 "enable_charchat varchar," +
                 "charchat_price int," +
                 "status varchar," +
-                "querycount int," +
+                "videoquerycount int," +
+                "charquerycount int," +
                 "general_score double)");
         util.execSQL(sql.toString(), new Object[]{});
 
@@ -74,9 +75,9 @@ public class DoctorDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_doctor (id, license, name,photo,title, office, bookingtime, introduce, credentials, expert" +
-                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status ,general_score,querycount) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status ,general_score,videoquerycount,charquerycount) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-        ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getQuerycount()};
+        ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getVideoquerycount()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -91,9 +92,9 @@ public class DoctorDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("update tb_doctor set license=?, name=?,photo=?,title=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
-                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?,general_score=?,querycount=? where id=? ");
+                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?,general_score=?,videoquerycount=?,charquerycount=? where id=? ");
         Object[] bindArgs = {obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getQuerycount(),obj.getId()};
+                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getVideoquerycount(),obj.getCharquerycount(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();

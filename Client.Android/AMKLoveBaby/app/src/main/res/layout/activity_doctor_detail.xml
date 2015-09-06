@@ -112,6 +112,10 @@
                 android:autoText="false"
                 android:elegantTextHeight="false"
                 android:gravity="center_vertical" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#37A4D4"></LinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -119,21 +123,30 @@
                 app:layout_heightPercent="20%"
                 app:layout_widthPercent="100%">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:id="@+id/txtQueryCount"
+                    android:id="@+id/txtCharQueryCount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="XXX人咨询"
                     android:gravity="bottom"
-                    app:layout_textSizePercent="60%"
-                    app:layout_widthPercent="50%"/>
+                    app:layout_textSizePercent="40%"
+                    app:layout_widthPercent="40%"/>
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:id="@+id/txtVideoQueryCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="XXX人咨询"
+                    android:gravity="bottom"
+                    app:layout_textSizePercent="40%"
+                    app:layout_widthPercent="40%"/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:id="@+id/txtGeneralScore"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="综合评价:X分"
+                    android:text="X分"
                     android:gravity="bottom"
-                    app:layout_textSizePercent="60%"
-                    app:layout_widthPercent="50%"/>
+                    app:layout_textSizePercent="40%"
+                    app:layout_widthPercent="20%"
+                    android:textColor="@color/topbar_bg"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

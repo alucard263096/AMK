@@ -23,7 +23,26 @@ public class DoctorObj extends AbstractObj {
     int charchat_price;
     String status;
     double general_score;
-    int querycount;
+
+
+    public int getCharquerycount() {
+        return charquerycount;
+    }
+
+    public void setCharquerycount(int charquerycount) {
+        this.charquerycount = charquerycount;
+    }
+
+    public int getVideoquerycount() {
+        return videoquerycount;
+    }
+
+    public void setVideoquerycount(int videoquerycount) {
+        this.videoquerycount = videoquerycount;
+    }
+
+    int charquerycount;
+    int videoquerycount;
 
     public String getLicense(){
         return license;
@@ -124,7 +143,8 @@ public class DoctorObj extends AbstractObj {
         setCharchat_price(cursor.getInt(cursor.getColumnIndex("charchat_price")));
         setStatus(cursor.getString(cursor.getColumnIndex("status")));
         setGeneralScore(cursor.getDouble(cursor.getColumnIndex("general_score")));
-        setQuerycount(cursor.getInt(cursor.getColumnIndex("querycount")));
+        setVideoquerycount(cursor.getInt(cursor.getColumnIndex("videoquerycount")));
+        setCharquerycount(cursor.getInt(cursor.getColumnIndex("charquerycount")));
     }
 
     @Override
@@ -146,7 +166,8 @@ public class DoctorObj extends AbstractObj {
         this.charchat_price=Integer.parseInt(lstRowValue.get("charchat_price"));
         this.status=lstRowValue.get("status");
         this.general_score=Double.parseDouble(lstRowValue.get("general_score"));
-        this.querycount=Integer.parseInt(lstRowValue.get("querycount"));
+        this.videoquerycount=Integer.parseInt(lstRowValue.get("videoquerycount"));
+        this.charquerycount=Integer.parseInt(lstRowValue.get("charquerycount"));
 
     }
 
@@ -164,10 +185,4 @@ public class DoctorObj extends AbstractObj {
         this.title=val;
     }
 
-    public int getQuerycount() {
-        return querycount;
-    }
-    public  void setQuerycount(int val){
-        this.querycount=val;
-    }
 }

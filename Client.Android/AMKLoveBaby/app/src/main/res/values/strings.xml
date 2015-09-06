@@ -20,5 +20,7 @@
     <string name="title_activity_doctor_detail">DoctorDetailActivity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_news_detail">NewsDetailActivity</string>>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
+    <string name="title_activity_video_chat_order">VideoChatOrderActivity</string>
+    <string name="title_activity_order">OrderActivity</string>>
 </resources>

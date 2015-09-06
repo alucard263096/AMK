@@ -9,4 +9,11 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="gray">#666666</color>
+
+
+    <color name="myred">#FD7CAD</color>
+    <color name="myblue">#37A4D4</color>
+    <color name="myyello">#F7CB20</color>
+    <color name="mygreen">#B9E5C3</color>
+    <color name="mylightblue">#81CAE6</color>
 </resources>

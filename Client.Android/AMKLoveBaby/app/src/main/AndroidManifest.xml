@@ -41,6 +41,16 @@
             android:label="@string/title_activity_news_detail"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".VideoChatOrderActivity"
+            android:label="@string/title_activity_video_chat_order"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".VedioOrderSubmitActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

@@ -110,13 +110,15 @@ function utf8_for_xml($string)
     $ret= preg_replace ('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
 	return $ret;
 }
-function outResult($num,$message){
+function outResult($num,$message,$return=""){
 	$array=Array();
 	$arr=Array();
 	$arr[0]=$num;
 	$arr["id"]=$num;
 	$arr[1]=$message;
 	$arr["result"]=$message;
+	$arr[2]=$return;
+	$arr["return"]=$return;
 	$array[]=$arr;
 	return $array;
 }
