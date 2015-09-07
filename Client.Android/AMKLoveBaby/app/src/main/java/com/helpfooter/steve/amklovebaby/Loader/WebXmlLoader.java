@@ -32,6 +32,12 @@ public abstract class WebXmlLoader extends Thread{
 		callApi=val;
 	}
 
+	//N for Not yet, F for Fail, D for done
+	public String getStatus() {
+		return status;
+	}
+	String status="N";
+
 	public String getCallUrl() {
 		// TODO Auto-generated method stub
 		ParamsDao dao=new ParamsDao(ctx);
@@ -50,15 +56,20 @@ public abstract class WebXmlLoader extends Thread{
 		InputStream is=getXml(path);
 		if(is!=null){
 			XmlDataTableReader xmlreader=new XmlDataTableReader(is);
-			Log.i("webload_apirow",callApi+":"+String.valueOf(xmlreader.getDataTableValue().size()));
-			doXml(xmlreader.getDataTableValue());
+			Log.i("webload_apirow", callApi + ":" + String.valueOf(xmlreader.getDataTableValue().size()));
+			ArrayList<HashMap<String,String>> lstResult=xmlreader.getDataTableValue();
+
+			doXml(lstResult);
+			status="D";
 			try {
 				is.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return;
 		}
+		status="F";
 	}
 	
 	protected InputStream getXml(String path){

@@ -83,6 +83,7 @@ header("Content-type: text/xml");
 	$j=0;
 	foreach($result[$i] as $key => $value){
 		if($j%2==1){ 
+			//echo "~".$value."!";
 			if($value instanceof DateTime){
 				$value= $value->format('Y-m-d H:i:s');
 			}

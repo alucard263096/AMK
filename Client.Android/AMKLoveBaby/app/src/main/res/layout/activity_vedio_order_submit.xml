@@ -173,6 +173,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtMobile"
             app:layout_marginTopPercent="1%"
+            android:maxLength="11"
+            android:inputType="phone"
             android:hint="请输入有效的手机号码" />
 
         <EditText
@@ -181,6 +183,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtDescription"
             app:layout_marginTopPercent="1%"
+            android:maxLines="3"
             android:hint="请尽可能详细的描述您的病情" />
 
 

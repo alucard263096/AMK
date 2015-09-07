@@ -17,6 +17,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.VideochatOrderCreateLoader;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import java.util.ArrayList;
 import java.util.logging.Handler;
@@ -71,6 +72,7 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()){
             case R.id.btnBack:
                 this.finish();
@@ -80,7 +82,7 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
                     Toast.makeText(this, "请尽可能详细地完善你的个人资料", Toast.LENGTH_LONG).show();
                     return;
                 }else {
-                    VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time,1,txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
+                    VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time, StaticVar.member_id,txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
                     loader.setCallBack(this);
                     loader.start();
                 }
@@ -93,6 +95,7 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
         @Override
         public void handleMessage(Message msg)
         {
+
             switch (res.getId()){
                 case -103:
                     Toast.makeText(VedioOrderSubmitActivity.this,  "您选择的时间已经被使用", Toast.LENGTH_LONG).show();
@@ -107,7 +110,9 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
                     Toast.makeText(VedioOrderSubmitActivity.this, "您的会员身份无效", Toast.LENGTH_LONG).show();
                     return;
                 case 0:
-                    Toast.makeText(VedioOrderSubmitActivity.this, "成功创建订单，ID是"+res.getRet(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(VedioOrderSubmitActivity.this, OrderPaymentActivity.class);
+                    intent.putExtra("Id", res.getRet());
+                    startActivity(intent);
                     return;
                 default:
                     Toast.makeText(VedioOrderSubmitActivity.this, "其它错误", Toast.LENGTH_LONG).show();
@@ -119,9 +124,11 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
-        res=(ResultObj)lstObjs.get(0);
-        resultHandler.sendEmptyMessage(0);
+        if(lstObjs.size()>0){
 
+            res=(ResultObj)lstObjs.get(0);
+            resultHandler.sendEmptyMessage(0);
 
+        }
     }
 }

@@ -71,7 +71,9 @@
 		if($date!=""){
 			$date=parameter_filter($date);
 			//F:fail,D:delete,C:cancel
-			$sql="select order_time from v_order_videochat where doctor_id=$doctor_id and order_date='$date' and status<>'F' and status<>'D' and status<>'C' ";
+			$sql="select order_time from tb_order o
+			inner join tb_order_videochat ov on o.id=ov.order_id
+			 where doctor_id=$doctor_id and order_date='$date' and status<>'F' and status<>'D' and status<>'C' ";
 			$query = $this->dbmgr->query($sql);
 			$ordertime = $this->dbmgr->fetch_array_all($query); 
 		}

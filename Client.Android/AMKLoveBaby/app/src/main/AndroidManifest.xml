@@ -51,6 +51,15 @@
             android:label="@string/title_activity_order"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".OrderPaymentActivity"
+            android:label="@string/title_activity_order_payment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PaymentSuccActivity"
+            android:label="@string/title_activity_payment_succ" >
+        </activity>
     </application>
 
 </manifest>
