@@ -19,7 +19,7 @@ public class PaymentLoader extends WebXmlLoader {
     int order_id,member_id;
     String payment_type;
     public PaymentLoader(Context ctx, int order_id, int member_id,String payment_type) {
-        super(ctx, StaticVar.OrderGetApi);
+        super(ctx, StaticVar.PaymentApi);
         this.order_id=order_id;
         this.member_id=member_id;
         this.payment_type=payment_type;

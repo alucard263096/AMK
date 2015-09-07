@@ -78,7 +78,7 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
                 this.finish();
                 return;
             case R.id.btnSubmit:
-                if(txtName.getText().toString().length()<2||txtMobile.getText().toString().length()!=11||txtDescription.getText().toString().length()<10){
+                if(txtName.getText().toString().length()<2||txtMobile.getText().toString().length()!=11){//||txtDescription.getText().toString().length()<10
                     Toast.makeText(this, "请尽可能详细地完善你的个人资料", Toast.LENGTH_LONG).show();
                     return;
                 }else {
@@ -111,7 +111,8 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
                     return;
                 case 0:
                     Intent intent = new Intent(VedioOrderSubmitActivity.this, OrderPaymentActivity.class);
-                    intent.putExtra("Id", res.getRet());
+                    int returnId=Integer.parseInt(res.getRet());
+                    intent.putExtra("Id", returnId);
                     startActivity(intent);
                     return;
                 default:

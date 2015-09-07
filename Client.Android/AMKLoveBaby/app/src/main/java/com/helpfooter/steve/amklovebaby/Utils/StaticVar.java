@@ -19,7 +19,7 @@ public final class StaticVar {
 	public static String OrderGetApi="orderget";
 	public static String PaymentApi="payment";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
-	public static int member_id=0;
+	public static int member_id=1;
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");

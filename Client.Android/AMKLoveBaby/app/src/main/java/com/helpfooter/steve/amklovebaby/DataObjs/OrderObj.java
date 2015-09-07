@@ -40,7 +40,7 @@ public class OrderObj extends AbstractObj {
         this.name= lstRowValue.get("name");
         this.mobile= lstRowValue.get("mobile");
         this.price=Integer.parseInt(lstRowValue.get("price"));
-        this.discount=Integer.parseInt(lstRowValue.get("discount"));
+        //this.discount=Integer.parseInt(lstRowValue.get("discount"));
         this.act= lstRowValue.get("act");
         this.created_time= lstRowValue.get("created_time");
         this.status= lstRowValue.get("status");

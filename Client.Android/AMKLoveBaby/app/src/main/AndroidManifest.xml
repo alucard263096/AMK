@@ -58,7 +58,8 @@
         </activity>
         <activity
             android:name=".PaymentSuccActivity"
-            android:label="@string/title_activity_payment_succ" >
+            android:label="@string/title_activity_payment_succ"
+            android:screenOrientation="portrait"  >
         </activity>
     </application>
 
