@@ -11,6 +11,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ToolsUtil {
 	public static String Encryption(String plainText) {
@@ -59,5 +61,13 @@ public class ToolsUtil {
         Date in12AM=new Date(Calendar.YEAR,Calendar.MONTH,Calendar.DAY_OF_MONTH,12,0,0);
         return (curDate.getTime()>in12AM.getTime());
     }
+    public static boolean isMobileNO(String mobiles){
 
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+
+       Matcher m = p.matcher(mobiles);
+
+        return m.matches();
+
+    }
 }

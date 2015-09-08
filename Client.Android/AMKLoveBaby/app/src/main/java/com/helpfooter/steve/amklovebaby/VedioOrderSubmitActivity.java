@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -38,9 +40,17 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vedio_order_submit);
 
+        if(MemberMgr.CheckIsLogin(this)) {
+            InitData();
+            InitUI();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         InitData();
         InitUI();
-
     }
 
     private void InitData() {
@@ -59,13 +69,20 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
 
         ((TextView)findViewById(R.id.txtDoctorName)).setText(doctor.getName());
         ((TextView)findViewById(R.id.txtPrice)).setText(String.valueOf(doctor.getVideochatPrice())+"次/20分钟");
-        ((TextView)findViewById(R.id.txtOrderDatetime)).setText(order_date+" "+order_time);
+        ((TextView)findViewById(R.id.txtOrderDatetime)).setText(order_date + " " + order_time);
 
         ((Button)findViewById(R.id.btnSubmit)).setOnClickListener(this);
 
         txtName=(EditText)findViewById(R.id.txtName);
         txtMobile=(EditText)findViewById(R.id.txtMobile);
         txtDescription=(EditText)findViewById(R.id.txtDescription);
+
+        if(StaticVar.Member!=null){
+            txtName.setText(StaticVar.Member.getName());
+            txtMobile.setText(StaticVar.Member.getMobile());
+        }
+
+
     }
 
 
@@ -82,7 +99,7 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
                     Toast.makeText(this, "请尽可能详细地完善你的个人资料", Toast.LENGTH_LONG).show();
                     return;
                 }else {
-                    VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time, StaticVar.member_id,txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
+                    VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time, StaticVar.Member.getId(),txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
                     loader.setCallBack(this);
                     loader.start();
                 }

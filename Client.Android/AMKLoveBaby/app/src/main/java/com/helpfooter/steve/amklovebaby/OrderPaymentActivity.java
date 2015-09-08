@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -36,7 +37,16 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_payment);
+        if(MemberMgr.CheckIsLogin(this)) {
+            ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
+            InitData();
+        }
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         InitData();
     }
@@ -56,7 +66,7 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
         Intent intent = getIntent();
         order_id = intent.getIntExtra("Id", 0);
 
-        OrderLoader loader=new OrderLoader(this,order_id, StaticVar.member_id);
+        OrderLoader loader=new OrderLoader(this,order_id, StaticVar.Member.getId());
         loader.setCallBack(this);
         loader.start();
     }
@@ -70,7 +80,7 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                 return;
             case R.id.btnSubmit:
                 action="PAYMENT";
-                PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.member_id,"ALIPAY");
+                PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.Member.getId(),"ALIPAY");
                 loader.setCallBack(this);
                 loader.start();
                 return;
@@ -80,7 +90,7 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
     private android.os.Handler paymentHandler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(res==null||res.getId()!=0){
+            if(res==null){
                 Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
             }else {
                 switch (res.getId()){

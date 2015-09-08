@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,8 +20,12 @@ public final class StaticVar {
 	public static String VideochatOrderCreateApi="videochatordercreate";
 	public static String OrderGetApi="orderget";
 	public static String PaymentApi="payment";
+	public static String LoginSendApi="loginsend";
+	public static String RegisterApi="register";
+	public static String RegisterSendApi="registersend";
+	public static String MemberApi="member";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
-	public static int member_id=1;
+	public static MemberObj Member=null;
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");
@@ -30,6 +36,10 @@ public final class StaticVar {
 		dictHashMap.put(VideochatOrderCreateApi,APIURL+"Order/videochat_create.php");//?doctor_id=1&order_date=2015-9-7&order_time=9:30&member_id=1&description=verygood");
 		dictHashMap.put(OrderGetApi,APIURL+"Order/order_get.php");
 		dictHashMap.put(PaymentApi,APIURL+"Order/order_payment.php");
+		dictHashMap.put(LoginSendApi,APIURL+"Member/login_send.php");
+		dictHashMap.put(RegisterApi,APIURL+"Member/reg.php");
+		dictHashMap.put(RegisterSendApi,APIURL+"Member/reg_send.php");
+		dictHashMap.put(MemberApi,APIURL+"Member/member_get.php");
 	}
 
 	public static String GetSystemTimeString(){

@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
@@ -75,6 +76,8 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_height",String.valueOf(height));
         Log.i("screen_info_density",String.valueOf(density));
         Log.i("screen_info_Dpi",String.valueOf(densityDpi));
+
+        MemberMgr.GetMemberInfoFromDb(this);
 
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
