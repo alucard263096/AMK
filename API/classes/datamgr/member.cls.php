@@ -112,13 +112,12 @@
 		}
 
 		$id=$this->dbmgr->getNewId("tb_member");
-
 		$sql="insert into tb_member (id,mobile,password,name,status,created_date) values
 		($id,'$mobile','$password','$name','A',".$this->dbmgr->getDate().")";
 
 		$query = $this->dbmgr->query($sql);
 
-		return	outResult(0,"register success");
+		return	outResult(0,"register success",$id);
 	}
 
  }

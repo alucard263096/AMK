@@ -1,0 +1,169 @@
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.helpfooter.steve.amklovebaby.RegisterActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">>
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_widthPercent="100%"
+        android:background="@color/topbar_bg">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/back"
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="快速注册"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_marginTopPercent="2%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginRightPercent="5%">
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#cccccc">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="20%"
+                android:gravity="center"
+                android:text="+86"/>
+            <EditText android:id="@+id/txtMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="手机号"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:maxLength="11"
+                android:focusable="true"
+                android:textSize="14dp"
+                android:textColorHint="#aaaaaa"
+                app:layout_widthPercent="50%"
+                android:singleLine="true"
+                android:phoneNumber="true"
+                android:editable="true" />
+            <Button
+                android:id="@+id/btnSendVerifyCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_marginTopPercent="10%"
+                app:layout_marginBottomPercent="10%"
+                app:layout_marginLeftPercent="3%"
+                app:layout_marginRightPercent="3%"
+                app:layout_widthPercent="24%"
+                android:background="@color/mygreen"
+                android:gravity="center"
+                android:textSize="10dp"
+                android:text="获取验证码"
+                />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#cccccc"
+            app:layout_marginTopPercent="3%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="20%"
+                android:gravity="center"
+                android:text="验证码"/>
+            <EditText android:id="@+id/txtVerifyCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入验证码"
+                android:textColorHint="#aaaaaa"
+                android:inputType="number"
+                android:maxLines="1"
+                android:focusable="true"
+                android:textSize="14dp"
+                android:maxLength="6"
+                app:layout_widthPercent="70%"
+                android:singleLine="true"
+                android:phoneNumber="true"
+                android:editable="true" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#cccccc"
+            app:layout_marginTopPercent="3%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="20%"
+                android:gravity="center"
+                android:text="密码"/>
+            <EditText android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="6-32位字母数字组合"
+                android:textColorHint="#aaaaaa"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:focusable="true"
+                android:textSize="14dp"
+                android:maxLength="6"
+                app:layout_widthPercent="70%"
+                android:singleLine="true"
+                android:phoneNumber="true"
+                android:editable="true" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/myblue"
+            app:layout_marginTopPercent="3%"
+            app:layout_marginLeftPercent="20%"
+            app:layout_marginRightPercent="20%"
+            app:layout_widthPercent="60%"
+            android:gravity="center"
+            android:text="注册"
+            android:textSize="16dp"
+            android:textColor="#ffffff"
+            />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
