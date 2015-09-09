@@ -15,7 +15,7 @@ import java.util.HashMap;
 /**
  * Created by Steve on 2015/9/7.
  */
-public class PaymentLoader extends WebXmlLoader {
+public class PaymentLoader extends ResultLoader {
     int order_id,member_id;
     String payment_type;
     public PaymentLoader(Context ctx, int order_id, int member_id,String payment_type) {
@@ -36,22 +36,4 @@ public class PaymentLoader extends WebXmlLoader {
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
-
-    @Override
-    public void doXml(ArrayList<HashMap<String, String>> lstRow) {
-        ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
-        for(HashMap<String,String> cols:lstRow){
-            ResultObj obj=new ResultObj();
-            obj.parseXmlDataTable(cols);
-            lsObj.add(obj);
-        }
-
-        if(callBack!=null){
-            callBack.CallBack(lsObj);
-        }
-    }
 }

@@ -49,6 +49,10 @@ public class VedioOrderSubmitActivity extends Activity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
+        if(StaticVar.Member==null){
+            this.finish();
+            return;
+        }
         InitData();
         InitUI();
     }

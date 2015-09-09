@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.CustomObject.VerifyCodeButtonDisable;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
@@ -54,6 +55,7 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
     String threadstatus;
     Button btnSendVerifyCode,btnLogin;
     EditText txtMobile,txtVerifyCode;
+    TextView btnReg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,11 +65,22 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(StaticVar.Member!=null){
+            this.finish();
+        }
+    }
+
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
 
         btnSendVerifyCode=((Button)findViewById(R.id.btnSendVerifyCode));
         btnSendVerifyCode.setOnClickListener(this);
+
+        btnReg=(TextView)findViewById(R.id.btnReg);
+        btnReg.setOnClickListener(this);
 
 
         btnLogin=((Button)findViewById(R.id.btnLogin));
@@ -98,23 +111,28 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
                     loader.setCallBack(this);
                     loader.start();
                     threadstatus="sendcode";
+                    VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
+                    sendTh.start();;
                 }else {
                     Toast.makeText(this, "你输入的手机号码不正确", Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.btnLogin:
                 String verifycode=txtVerifyCode.getText().toString();
-                if(verifycode.length()!=6){
-                    Toast.makeText(this, "请输入6位的验证码", Toast.LENGTH_LONG).show();
+                if(verifycode.length()==0){
+                    Toast.makeText(this, "请输入验证码或者密码", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-
                 mobile=txtMobile.getText().toString();
                 MemberLoader loader=new MemberLoader(this,mobile);
                 loader.setCallBack(this);
                 loader.start();
                 threadstatus="verifymember";
+                break;
+            case R.id.btnReg:
+                Intent intent = new Intent();
+                intent.setClass(this, RegisterActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -158,7 +176,7 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
                 Toast.makeText(LoginActivity.this, "该手机号码注册的用户不存在", Toast.LENGTH_LONG).show();
             }else {
                 String verifycode=txtVerifyCode.getText().toString();
-                if(verifycode.equals(memberObj.getVerifycode())){
+                if(verifycode.equals(memberObj.getVerifycode())||ToolsUtil.Encryption(verifycode).equals(memberObj.getPassword())){
                     StaticVar.Member=memberObj;
                     MemberDao memberDao=new MemberDao(LoginActivity.this);
                     memberDao.refreshMember(memberObj);
@@ -171,17 +189,7 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
     };
 
 
-    public class ThreadSendVerifyCode extends Thread{
-        Button btn;
-        public ThreadSendVerifyCode(Button btn){
-            this.btn=btn;
-        }
 
-        @Override
-        public void run() {
-
-        }
-    }
 
 }
 

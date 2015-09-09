@@ -14,9 +14,9 @@ import java.util.HashMap;
 /**
  * Created by Steve on 2015/9/8.
  */
-public class LoginSendLoader extends WebXmlLoader {
+public class LoginSendLoader extends ResultLoader {
 
-String mobile;
+    String mobile;
     public LoginSendLoader(Context ctx, String mobile) {
         super(ctx, StaticVar.LoginSendApi);
         this.mobile=mobile;
@@ -32,22 +32,4 @@ String mobile;
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
-
-    @Override
-    public void doXml(ArrayList<HashMap<String, String>> lstRow) {
-        ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
-        for(HashMap<String,String> cols:lstRow){
-            ResultObj obj=new ResultObj();
-            obj.parseXmlDataTable(cols);
-            lsObj.add(obj);
-        }
-
-        if(callBack!=null){
-            callBack.CallBack(lsObj);
-        }
-    }
 }

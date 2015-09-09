@@ -10,8 +10,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="7%"
+        android:layout_height="40dp"
         app:layout_widthPercent="100%"
         android:background="@color/topbar_bg">
         <ImageView
@@ -38,6 +37,21 @@
             android:elegantTextHeight="false"
             android:gravity="center"
             android:textSize="24dp" />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/btnReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="注册"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="10%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="15dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
@@ -106,11 +120,10 @@
             <EditText android:id="@+id/txtVerifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入验证码"
+                android:hint="请输入验证码或密码"
                 android:textColorHint="#aaaaaa"
-                android:inputType="phone"
+                android:inputType="textPassword"
                 android:maxLines="1"
-                android:maxLength="6"
                 android:focusable="true"
                 android:textSize="14dp"
                 app:layout_widthPercent="70%"
@@ -127,7 +140,6 @@
             app:layout_marginTopPercent="3%"
             app:layout_marginLeftPercent="20%"
             app:layout_marginRightPercent="20%"
-            app:layout_heightPercent="10%"
             app:layout_widthPercent="60%"
             android:gravity="center"
             android:text="登录"

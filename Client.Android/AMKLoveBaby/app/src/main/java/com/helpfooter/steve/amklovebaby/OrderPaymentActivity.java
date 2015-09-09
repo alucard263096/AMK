@@ -47,6 +47,10 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
     @Override
     protected void onResume() {
         super.onResume();
+        if(StaticVar.Member==null){
+            this.finish();
+            return;
+        }
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         InitData();
     }

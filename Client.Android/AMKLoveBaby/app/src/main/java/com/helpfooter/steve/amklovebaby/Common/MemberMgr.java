@@ -22,6 +22,7 @@ public class MemberMgr {
             intent.setClass(ctx, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
             ctx.startActivity(intent);
+            
             return false;
         }
         return true;
@@ -31,7 +32,7 @@ public class MemberMgr {
         MemberDao memberDao=new MemberDao(ctx);
         ArrayList<AbstractObj> lstMember=memberDao.getList("");
         if(lstMember.size()>0){
-            MemberObj member=(MemberObj)lstMember.get(0);
+            //MemberObj member=(MemberObj)lstMember.get(0);
         }
     }
 
