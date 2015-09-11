@@ -33,17 +33,19 @@ import java.util.ArrayList;
 public class MainActivity extends MyFragmentActivity implements View.OnClickListener
         ,HomeFragment.OnFragmentInteractionListener
         ,DoctorListFragment.OnFragmentInteractionListener
-        ,NewsListFragment.OnFragmentInteractionListener {
+        ,NewsListFragment.OnFragmentInteractionListener
+        ,MemberMainFragment.OnFragmentInteractionListener{
 
     private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
     private HomeFragment homeFragment;
     private DoctorListFragment doctorListFragment;
     private NewsListFragment newsListFragment;
+    private MemberMainFragment memberMainFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
 
-    private BottomBarButton homeBarButton,newsBarButton,doctorBarButton;
+    private BottomBarButton homeBarButton,newsBarButton,doctorBarButton,memberMainBarButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_width",String.valueOf(width));
         Log.i("screen_info_height",String.valueOf(height));
         Log.i("screen_info_density",String.valueOf(density));
-        Log.i("screen_info_Dpi",String.valueOf(densityDpi));
+        Log.i("screen_info_Dpi", String.valueOf(densityDpi));
 
         //MemberMgr.GetMemberInfoFromDb(this);
 
@@ -108,10 +110,12 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         homeFragment=new HomeFragment();
         doctorListFragment=new DoctorListFragment();
         newsListFragment=new NewsListFragment();
+        memberMainFragment=new MemberMainFragment();
 
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_doctor_active,  "我的", memberMainFragment);
     }
 
 
@@ -148,6 +152,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         lstBottomBar.add(homeBarButton);
         lstBottomBar.add(newsBarButton);
         lstBottomBar.add(doctorBarButton);
+        lstBottomBar.add(memberMainBarButton);
 
         BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar, this);
         this.onClick(lstBottomBar.get(0).GetEnteryLayout());
