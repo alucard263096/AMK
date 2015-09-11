@@ -77,7 +77,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_density",String.valueOf(density));
         Log.i("screen_info_Dpi",String.valueOf(densityDpi));
 
-        MemberMgr.GetMemberInfoFromDb(this);
+        //MemberMgr.GetMemberInfoFromDb(this);
 
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();

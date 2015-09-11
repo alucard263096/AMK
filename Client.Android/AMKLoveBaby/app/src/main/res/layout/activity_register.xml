@@ -43,17 +43,21 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="124dp"
         android:orientation="vertical"
-        app:layout_marginTopPercent="2%"
+        app:layout_marginTopPercent="5%"
         app:layout_marginLeftPercent="5%"
-        app:layout_marginRightPercent="5%">
+        app:layout_marginRightPercent="5%"
+        android:background="@color/myred">
 
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:background="#cccccc">
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -95,8 +99,10 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:background="#cccccc"
-            app:layout_marginTopPercent="3%">
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -124,8 +130,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:orientation="horizontal"
-            android:background="#cccccc"
-            app:layout_marginTopPercent="3%">
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -148,21 +157,23 @@
                 android:editable="true" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/myblue"
-            app:layout_marginTopPercent="3%"
-            app:layout_marginLeftPercent="20%"
-            app:layout_marginRightPercent="20%"
-            app:layout_widthPercent="60%"
-            android:gravity="center"
-            android:text="注册"
-            android:textSize="16dp"
-            android:textColor="#ffffff"
-            />
+
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/myred"
+        app:layout_marginTopPercent="3%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginRightPercent="5%"
+        app:layout_widthPercent="90%"
+        android:gravity="center"
+        android:text="注册"
+        android:textSize="16dp"
+        android:textColor="#ffffff"
+        />
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
