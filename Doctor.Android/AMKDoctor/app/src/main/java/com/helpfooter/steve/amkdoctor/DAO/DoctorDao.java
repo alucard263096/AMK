@@ -1,12 +1,12 @@
-package com.helpfooter.steve.amklovebaby.DAO;
+package com.helpfooter.steve.amkdoctor.DAO;
 
 
 import android.content.Context;
 import android.database.Cursor;
 
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.BannerObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +38,7 @@ public class DoctorDao extends AbstractDao {
 //        sql=new StringBuffer();
         sql.append("create table IF NOT EXISTS  tb_doctor " +
                 "(id int," +
+                "userid int," +
                 "license varchar," +
                 "name varchar," +
                 "title varchar," +
@@ -98,6 +99,25 @@ public class DoctorDao extends AbstractDao {
 
         util.close();
     }
+
+    public boolean CheckLogin(String userName,String passWord)
+    {
+        boolean bResult =false;
+        StringBuffer sql=new StringBuffer();
+        sql.append("select 1 from tb_doctor where username=? and password=?");
+        String[] bindArgs={userName,passWord};
+
+        Cursor cursor = util.rawQuery(sql.toString(),bindArgs);
+        while (cursor.moveToNext()) {
+            bResult=true;
+
+        }
+        cursor.close();
+        return  bResult;
+
+    }
+
+
 
     @Override
     AbstractObj newRealObj() {

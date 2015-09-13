@@ -1,11 +1,11 @@
-package com.helpfooter.steve.amklovebaby.DAO;
+package com.helpfooter.steve.amkdoctor.DAO;
 
 
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 
 public class ParamsDao extends AbstractDao {
 

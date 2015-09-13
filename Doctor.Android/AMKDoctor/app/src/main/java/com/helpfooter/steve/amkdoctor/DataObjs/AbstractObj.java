@@ -1,4 +1,4 @@
-package com.helpfooter.steve.amklovebaby.DataObjs;
+package com.helpfooter.steve.amkdoctor.DataObjs;
 
 import android.database.Cursor;
 

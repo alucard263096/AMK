@@ -1,11 +1,14 @@
 package com.helpfooter.steve.amkdoctor.Loader;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.helpfooter.steve.amkdoctor.DAO.BannerDao;
+import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DAO.ParamsDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BannerObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
@@ -13,12 +16,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class BannerLoader extends WebXmlLoader {
+public class DoctorLoader extends WebXmlLoader {
 
-	public BannerLoader(Context ctx) {
+	private String UserName;
+	public DoctorLoader(Context ctx) {
 		super(ctx, "");
 	}
-
+    public DoctorLoader(Context ctx,String username)
+	{
+		super(ctx,"");
+		UserName=username;
+	}
 	IWebLoaderCallBack callBack;
 	public void setCallBack(IWebLoaderCallBack val){
 		callBack=val;
@@ -30,12 +38,12 @@ public class BannerLoader extends WebXmlLoader {
 		String updatedate="";
 		ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
 		for(HashMap<String,String> cols:lstRows){
-			BannerObj obj=new BannerObj();
+			DoctorObj obj=new DoctorObj();
 			obj.parseXmlDataTable(cols);
 			lsObj.add(obj);
 		}
 		if(lsObj.size()>0){
-			BannerDao dao=new BannerDao(ctx);
+			DoctorDao dao=new DoctorDao(ctx);
 			dao.batchUpdate(lsObj);
 			if(callBack!=null){
 				callBack.CallBack(lsObj);
@@ -69,15 +77,13 @@ public class BannerLoader extends WebXmlLoader {
 //    };
 //
 //
-//	@Override
-//	public String getCallUrl() {
-//		// TODO Auto-generated method stub
-//		ParamsDao dao=new ParamsDao(eventListFragment.getActivity());
-//		String update_date=dao.getParam("last_event_update_time", "1991-1-1");
-//		String url= StaticVar.CMSURL+"event_interface.aspx?type=geteventlist&request_date="+update_date.replace(" ", "%20");
-//		Log.i("callurl", url);
-//		return url;
-//	}
+	@Override
+	public String getCallUrl() {
+		// TODO Auto-generated method stub
+		String url="http://www.myhkdoc.com/AMK/API/Doctor/doctor_info.php?login_id="+UserName;
+		Log.i("callurl", url);
+		return url;
+	}
 //
 //	@Override
 //	public void doXml(InputStream is) {

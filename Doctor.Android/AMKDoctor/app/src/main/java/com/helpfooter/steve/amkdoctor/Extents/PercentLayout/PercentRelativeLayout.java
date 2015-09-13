@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.helpfooter.steve.amklovebaby.Extents.PercentLayout;
+package com.helpfooter.steve.amkdoctor.Extents.PercentLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.RelativeLayout;
 
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentRelativeLayout;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentFrameLayout;
 
 /**
  * Subclass of {@link RelativeLayout} that supports percentage based dimensions and

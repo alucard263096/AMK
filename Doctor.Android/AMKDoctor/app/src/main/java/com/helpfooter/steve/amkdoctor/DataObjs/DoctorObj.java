@@ -1,4 +1,4 @@
-package com.helpfooter.steve.amklovebaby.DataObjs;
+package com.helpfooter.steve.amkdoctor.DataObjs;
 
 import android.database.Cursor;
 
@@ -22,6 +22,8 @@ public class DoctorObj extends AbstractObj {
     String enable_charchat;
     int charchat_price;
     String status;
+    String password;
+    String username;
     double general_score;
     int querycount;
 
@@ -64,7 +66,12 @@ public class DoctorObj extends AbstractObj {
     public String getStatus(){
         return status;
     }
-
+    public String getPassWord(){
+        return password;
+    }
+    public String getUserName(){
+        return username;
+    }
     public void  setLicense(String val){
         license=val;
     }
@@ -101,8 +108,14 @@ public class DoctorObj extends AbstractObj {
     public void  setCharchat_price(int val){
         charchat_price=val;
     }
+    public void  setPassWord(String val){
+        password=val;
+    }
     public void  setStatus(String val){
         status=val;
+    }
+    public void  setUserName(String val){
+        username=val;
     }
 
     @Override
@@ -123,6 +136,8 @@ public class DoctorObj extends AbstractObj {
         setVideochatPrice(cursor.getInt(cursor.getColumnIndex("videochat_price")));
         setCharchat_price(cursor.getInt(cursor.getColumnIndex("charchat_price")));
         setStatus(cursor.getString(cursor.getColumnIndex("status")));
+        setPassWord(cursor.getString(cursor.getColumnIndex("password")));
+        setUserName(cursor.getString(cursor.getColumnIndex("username")));
         setGeneralScore(cursor.getDouble(cursor.getColumnIndex("general_score")));
         setQuerycount(cursor.getInt(cursor.getColumnIndex("querycount")));
     }
@@ -141,13 +156,26 @@ public class DoctorObj extends AbstractObj {
         this.credentials=lstRowValue.get("credentials");
         this.expert=lstRowValue.get("expert");
         this.enable_videochat=lstRowValue.get("enable_videochat");
-        this.videochat_price=Integer.parseInt(lstRowValue.get("videochat_price"));
+        if(lstRowValue.get("videochat_price") != null)
+        {
+            this.videochat_price=Integer.parseInt(lstRowValue.get("videochat_price"));
+        }
+        if(lstRowValue.get("charchat_price") != null)
+        {
+            this.charchat_price=Integer.parseInt(lstRowValue.get("charchat_price"));
+        }
         this.enable_charchat = lstRowValue.get("enable_charchat");
-        this.charchat_price=Integer.parseInt(lstRowValue.get("charchat_price"));
+        if(lstRowValue.get("general_score") != null)
+        {
+            this.general_score=Double.parseDouble(lstRowValue.get("general_score"));
+        }
         this.status=lstRowValue.get("status");
-        this.general_score=Double.parseDouble(lstRowValue.get("general_score"));
-        this.querycount=Integer.parseInt(lstRowValue.get("querycount"));
-
+        if(lstRowValue.get("querycount") != null)
+        {
+            this.querycount=Integer.parseInt(lstRowValue.get("querycount"));
+        }
+        this.username = lstRowValue.get("login_id");
+        this.password = lstRowValue.get("password");
     }
 
     public double getGeneralScore() {
@@ -170,4 +198,6 @@ public class DoctorObj extends AbstractObj {
     public  void setQuerycount(int val){
         this.querycount=val;
     }
+
+
 }

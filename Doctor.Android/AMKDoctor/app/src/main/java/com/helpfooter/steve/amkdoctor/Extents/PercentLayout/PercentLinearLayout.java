@@ -1,9 +1,9 @@
-package com.helpfooter.steve.amklovebaby.Extents.PercentLayout;
+package com.helpfooter.steve.amkdoctor.Extents.PercentLayout;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;

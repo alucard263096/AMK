@@ -3,13 +3,13 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.helpfooter.steve.amklovebaby.Extents.PercentLayout;
+package com.helpfooter.steve.amkdoctor.Extents.PercentLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentRelativeLayout;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentFrameLayout;
+import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentFrameLayout;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;

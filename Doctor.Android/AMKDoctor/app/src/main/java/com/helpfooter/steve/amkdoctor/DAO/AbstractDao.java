@@ -1,7 +1,7 @@
-package com.helpfooter.steve.amklovebaby.DAO;
+package com.helpfooter.steve.amkdoctor.DAO;
 
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.Utils.DBUtil;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
+import com.helpfooter.steve.amkdoctor.Utils.DBUtil;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;

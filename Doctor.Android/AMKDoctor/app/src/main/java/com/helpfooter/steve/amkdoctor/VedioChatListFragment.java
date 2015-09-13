@@ -7,7 +7,9 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.helpfooter.steve.amkdoctor.CustomControlView.BookListLoadView;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
 
 
@@ -66,7 +68,11 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
+       // return inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
+        View view= inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
+        BookListLoadView lstLoad=new BookListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.vedio_chat_list));
+        lstLoad.LoadDoctorListData();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,7 +101,7 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
 
     @Override
     public String getTitle() {
-        return "Vedio Chat";
+        return "预约看诊清单";
     }
 
     /**

@@ -1,10 +1,10 @@
-package com.helpfooter.steve.amklovebaby.DAO;
+package com.helpfooter.steve.amkdoctor.DAO;
 
 import android.content.Context;
 import android.database.Cursor;
 
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.BannerObj;
 
 import java.util.ArrayList;
 import java.util.List;

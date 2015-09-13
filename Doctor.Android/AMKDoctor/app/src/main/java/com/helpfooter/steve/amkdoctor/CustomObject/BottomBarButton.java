@@ -4,15 +4,22 @@ package com.helpfooter.steve.amkdoctor.CustomObject;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentTransaction;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amkdoctor.MainActivity;
+import com.helpfooter.steve.amkdoctor.R;
 import com.helpfooter.steve.amkdoctor.Utils.MyResourceIdUtil;
 
 import java.util.ArrayList;
@@ -57,9 +64,6 @@ public class BottomBarButton {
 //        android:layout_centerHorizontal="true"
 //        android:src="@drawable/bar_home"
 //        android:contentDescription="@null" />
-        if(imageResId==0){
-            return null;
-        }
         if(imgView!=null){
             return imgView;
         }
@@ -68,8 +72,8 @@ public class BottomBarButton {
 
         PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
-        layoutinfo.heightPercent=0.6f;
-        layoutinfo.topMarginPercent=0.1f;
+        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,false);
+        layoutinfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,false);
         layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
 
@@ -82,10 +86,8 @@ public class BottomBarButton {
     }
 
     public  void SetDefault(){
-        if(imageResId!=0) {
-            ImageView img = GetImageView();
-            img.setImageResource(this.imageResId);
-        }
+        ImageView img=GetImageView();
+        img.setImageResource(this.imageResId);
         LinearLayout layout=GetEnteryLayout();
         layout.setBackgroundColor(Color.WHITE);
         TextView txt=GetTextView();
@@ -93,12 +95,10 @@ public class BottomBarButton {
     }
 
     public  void SetActive(){
-        if(imageResId!=0) {
-            ImageView img = GetImageView();
-            img.setImageResource(this.activeImageResId);
-        }
+        ImageView img=GetImageView();
+        img.setImageResource(this.activeImageResId);
         LinearLayout layout=GetEnteryLayout();
-        layout.setBackgroundColor(Color.parseColor("#2EA3D7"));
+        layout.setBackgroundColor(Color.parseColor("#EA7598"));
         TextView txt=GetTextView();
         txt.setTextColor(Color.WHITE);
     }
@@ -118,14 +118,13 @@ public class BottomBarButton {
             return txtView;
         }
 
-        txtView=new TextView(ctx);
+        txtView=new MyTextView(ctx);
         txtView.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_txt_" + name));
         //LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,20);
 
         PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
-        layoutinfo.heightPercent=1f;
-        layoutinfo.widthPercent=1f;
+        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,false);
         layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
 
@@ -134,7 +133,7 @@ public class BottomBarButton {
         //txtParam.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         txtView.setText(displayName);
         txtView.setTextColor(Color.parseColor("#949494"));
-        txtView.setTextSize(20);
+        txtView.setTextSize(12);
         txtView.setLayoutParams(param);
         //txtView.setBackgroundColor(Color.BLUE);
         return  txtView;
@@ -161,9 +160,7 @@ public class BottomBarButton {
         LinearLayout.LayoutParams params=new LinearLayout.LayoutParams(0,RelativeLayout.LayoutParams.MATCH_PARENT);
         params.weight=1;
         entryLayout.setLayoutParams(params);
-        if(imageResId!=0){
-            entryLayout.addView(GetImageView());
-        }
+        entryLayout.addView(GetImageView());
         entryLayout.addView(GetTextView());
         entryLayout.setBackgroundColor(Color.WHITE);
 

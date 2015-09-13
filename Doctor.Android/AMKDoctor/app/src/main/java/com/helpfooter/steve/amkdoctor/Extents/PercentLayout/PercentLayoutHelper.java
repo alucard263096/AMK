@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.helpfooter.steve.amklovebaby.Extents.PercentLayout;
+package com.helpfooter.steve.amkdoctor.Extents.PercentLayout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.helpfooter.steve.amklovebaby.R;
+import com.helpfooter.steve.amkdoctor.R;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
