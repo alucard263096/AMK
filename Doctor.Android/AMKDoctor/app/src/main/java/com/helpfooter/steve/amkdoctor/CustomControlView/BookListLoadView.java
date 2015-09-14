@@ -2,6 +2,8 @@ package com.helpfooter.steve.amkdoctor.CustomControlView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.TextPaint;
 import android.util.Log;
@@ -27,6 +29,9 @@ import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 import com.helpfooter.steve.amkdoctor.Utils.ToolsUtil;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -59,12 +64,12 @@ public class BookListLoadView implements View.OnClickListener {
             //String backgroundcolor=getBackgroundColor(i);
             //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
             layout.setLayoutParams(param);
-            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setOrientation(LinearLayout.HORIZONTAL);
 
-            LinearLayout infofirstlayout=getFirstInfoLayout(obj);
-            layout.addView(infofirstlayout);
-            LinearLayout infosecondlayout=getSecondInfolayout(obj);
-            layout.addView(infosecondlayout);
+            ImageView imgPhoto=getPhotoView(obj);
+            layout.addView(imgPhoto);
+            LinearLayout infolayout=getInfoLayout(obj);
+            layout.addView(infolayout);
 
             layout.setTag(obj);
             layout.setOnClickListener(this);
@@ -72,94 +77,84 @@ public class BookListLoadView implements View.OnClickListener {
             i++;
         }
     }
+    public ImageView getPhotoView(BookerObj obj){
+        ImageView img=new ImageView(this.ctx);
+        img.setScaleType(ImageView.ScaleType.FIT_XY);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
+        String url= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
+        Log.i("doctor_photo", url);
+        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();
 
+        img.setLayoutParams(param);
 
-    public LinearLayout getFirstInfoLayout(BookerObj booker){
+        return img;
+    }
+
+    public LinearLayout getInfoLayout(BookerObj booker){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.62f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         layout.setLayoutParams(param);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+
+        TextView txtOrderTime=new MyTextView(this.ctx);
+        PercentLinearLayout.LayoutParams titleparam=ToolsUtil.getLayoutParam();
+        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.62f,true);
+        titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.13f,true);
+        txtOrderTime.setTextSize(15);
+        //txtTitle.setGravity(Gravity.CENTER_VERTICAL);
+        txtOrderTime.setLayoutParams(titleparam);
+        txtOrderTime.setText(booker.getOrderdate()+" "+booker.getOrdertime());
+        TextPaint tp= txtOrderTime.getPaint();
+        tp.setFakeBoldText(true);
+        Log.i("video_chatTime", booker.getOrderdate()+" "+booker.getOrdertime());
 
         TextView txtName=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParam();
-        nameparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        nameparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.08f,true);
-        nameparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        PercentLinearLayout.LayoutParams custnameparam=ToolsUtil.getLayoutParam();
+        custnameparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
         txtName.setGravity(Gravity.CENTER_VERTICAL);
+        txtName.setLayoutParams(custnameparam);
+        txtName.setTextColor(Color.GRAY);
         txtName.setText(booker.getCustname());
-        txtName.setLayoutParams(nameparam);
+        txtName.setTextSize(15);
+        TextPaint tnp= txtName.getPaint();
+        tnp.setFakeBoldText(true);
+        Log.i("video_chatName", booker.getCustname());
 
-        Button btnChart = new Button(this.ctx);
-        PercentLinearLayout.LayoutParams chatparam=ToolsUtil.getLayoutParam();
-        chatparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        chatparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.08f,true);
-        chatparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        btnChart.setGravity(Gravity.CENTER_VERTICAL);
-        btnChart.setLayoutParams(chatparam);
-        btnChart.setText("开始视频");
-        btnChart.setTag(booker);
-        btnChart.setOnClickListener(this) ;
 
-        Button btnCustInfo = new Button(this.ctx);
-        PercentLinearLayout.LayoutParams custparam=ToolsUtil.getLayoutParam();
-        custparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.34f,true);
-        custparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.08f,true);
-        custparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        btnCustInfo.setGravity(Gravity.CENTER_VERTICAL);
-        btnCustInfo.setLayoutParams(custparam);
-        btnCustInfo.setText("查看资料");
-        btnCustInfo.setTag(booker);
-        btnCustInfo.setOnClickListener(this) ;
+        PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParam();
+        buttonparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.67f,true);
+        buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.17f,true);
+        tipsLayout.setLayoutParams(buttonparam);
+        tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
 
 
 
-//        RatingBar ratio=new RatingBar(this.ctx);
-//        ratio.setBackgroundColor(Color.RED);
-//        PercentLinearLayout.LayoutParams ratioparam=getLayoutParam();
-//        ratioparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.40f,true);
-//        ratioparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-//        ratio.setNumStars(5);
-//        ratio.setRating(Float.parseFloat(String.valueOf(doctor.getGeneralScore())));
-//        ratio.setLayoutParams(ratioparam);
-//        nameRatiolayout.addView(ratio);
+        TextView txtBeginChart=new MyTextView(this.ctx);
+        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
+        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
+        txtBeginChart.setLayoutParams(upvoteparam);
+        txtBeginChart.setClickable(true);
 
+
+        txtBeginChart.setBackgroundColor(Color.parseColor("#37A4D4"));
+        txtBeginChart.setTextColor(Color.parseColor("#ffffff"));
+        txtBeginChart.setGravity(Gravity.RIGHT);
+        txtBeginChart.setText("开始视频");
+        txtBeginChart.setTextSize(15);
+        tipsLayout.addView(txtBeginChart);
+
+        layout.addView(txtOrderTime);
         layout.addView(txtName);
-        layout.addView(btnChart);
-        layout.addView(btnCustInfo);
+        layout.addView(tipsLayout);
         return  layout;
     }
 
-    public LinearLayout getSecondInfolayout(BookerObj booker){
-        PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        layout.setLayoutParams(param);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-
-        TextView txtName=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParam();
-        nameparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        nameparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.08f,true);
-        nameparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        txtName.setGravity(Gravity.CENTER_VERTICAL);
-        txtName.setText("预约时间");
-        txtName.setLayoutParams(nameparam);
-
-        TextView txtTime=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams timeparam=ToolsUtil.getLayoutParam();
-        timeparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.67f,true);
-        timeparam.mPercentLayoutInfo.textSizePercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.08f,true);
-        timeparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        txtTime.setGravity(Gravity.CENTER_VERTICAL);
-        txtTime.setText(booker.getOrderdate() + booker.getOrdertime());
-        txtTime.setLayoutParams(timeparam);
-
-
-        layout.addView(txtName);
-        layout.addView(txtTime);
-        return  layout;
-    }
 
     private String getBackgroundColor(int number) {
         switch (number%4){
