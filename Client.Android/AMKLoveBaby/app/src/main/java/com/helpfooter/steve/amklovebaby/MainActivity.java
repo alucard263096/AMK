@@ -79,7 +79,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_density",String.valueOf(density));
         Log.i("screen_info_Dpi", String.valueOf(densityDpi));
 
-        //MemberMgr.GetMemberInfoFromDb(this);
+        MemberMgr.GetMemberInfoFromDb(this);
 
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
@@ -145,7 +145,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
         barButton.SetActive();
         if(barButton.GetFragment()!=null){
-            addOrShowFragment(getFragmentManager().beginTransaction(),barButton.GetFragment());
+            addOrShowFragment(getFragmentManager().beginTransaction(), barButton.GetFragment());
         }
     }
 
@@ -202,5 +202,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
+    }
+
+    public void SetToHome() {
+        buttonBarClick(homeBarButton);
     }
 }

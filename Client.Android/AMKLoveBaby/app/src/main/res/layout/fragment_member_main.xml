@@ -9,28 +9,6 @@
     android:background="#ffffff">
 
 
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="7%"
-        app:layout_widthPercent="100%"
-        android:background="@color/topbar_bg">
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:focusable="false"
-            android:text="我的"
-            android:contentDescription="@null"
-            android:textColor="#ffffff"
-            app:layout_widthPercent="100%"
-            app:layout_heightPercent="100%"
-            android:autoText="false"
-            android:elegantTextHeight="false"
-            android:gravity="center"
-            android:textSize="24dp" />
-    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -68,6 +46,16 @@
         ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -96,7 +84,6 @@
         android:layout_height="1px"
         android:background="#cccccc"
         ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
 
 
 
@@ -276,4 +263,6 @@
         android:layout_height="1px"
         android:background="#cccccc"
         ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+</ScrollView>
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
