@@ -95,7 +95,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment {
 
     @Override
     public String getTitle() {
-        return null;
+        return "我的";
     }
 
     /**

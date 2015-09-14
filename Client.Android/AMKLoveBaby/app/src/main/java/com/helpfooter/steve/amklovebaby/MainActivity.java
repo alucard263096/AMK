@@ -115,7 +115,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
-        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_doctor_active,  "我的", memberMainFragment);
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_a,  "我的", memberMainFragment);
     }
 
 
@@ -126,6 +126,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
         if(view.getId()==R.id.news){
             buttonBarClick(newsBarButton);
+        }
+        if(view.getId()==R.id.member){
+            buttonBarClick(memberMainBarButton);
         }
         for(BottomBarButton barButton:lstBottomBar){
             if(view==barButton.GetEnteryLayout()){

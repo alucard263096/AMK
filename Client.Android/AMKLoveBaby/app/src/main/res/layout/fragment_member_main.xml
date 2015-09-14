@@ -1,10 +1,279 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.helpfooter.steve.amklovebaby.MemberMainFragment">
+    tools:context="com.helpfooter.steve.amklovebaby.MemberMainFragment"
+    android:orientation="vertical"
+    android:background="#ffffff">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="7%"
+        app:layout_widthPercent="100%"
+        android:background="@color/topbar_bg">
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="我的"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="100%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="30%"
+        android:gravity="center"
+        android:orientation="vertical">
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="60%"
+            app:layout_marginTopPercent="10%"
+            android:id="@+id/imgMyPhoto"
+            android:gravity="center">
+            <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:border_width="2dp"
+                app:border_color="#cccccc"
+                android:src="@drawable/logo1" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/txtMyName"
+            android:gravity="center"
+            android:text="我的名字"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMyInfo"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/myinfo"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="个人资料"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMyNotice"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/mynotice"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="消息通知"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMyOrder"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/myorder"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="订单查询"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMyDoctor"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/mypay"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="关注的医生"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMySetting"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/myset"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="设置"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnMyFeedback"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/mycon"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="意见反馈"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="12%"
+        android:id="@+id/btnAboutus"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="10%"
+            app:layout_marginLeftPercent="10%"
+            android:src="@drawable/myaboutus"
+            />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            app:layout_marginLeftPercent="10%"
+            android:text="关于我们"
+            android:textSize="20dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"
+        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
