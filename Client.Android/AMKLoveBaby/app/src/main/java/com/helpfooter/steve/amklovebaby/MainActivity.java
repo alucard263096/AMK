@@ -24,6 +24,7 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
+import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -95,6 +96,11 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
         NewsLoader newsLoader=new NewsLoader(this);
         newsLoader.start();
+
+        if(StaticVar.Member!=null){
+            OrderListLoader orderListLoader=new OrderListLoader(this);
+            orderListLoader.start();
+        }
     }
 
 

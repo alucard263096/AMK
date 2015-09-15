@@ -10,7 +10,23 @@ import java.util.HashMap;
 public class OrderObj extends AbstractObj {
     @Override
     public void parseCursor(Cursor cursor) {
-
+        this.id=cursor.getInt(cursor.getColumnIndex("id"));
+        this.order_no= cursor.getString(cursor.getColumnIndex("order_no"));
+        this.guid=cursor.getString(cursor.getColumnIndex("guid"));
+        this.member_id=cursor.getInt(cursor.getColumnIndex("member_id"));
+        this.name= cursor.getString(cursor.getColumnIndex("name"));
+        this.mobile= cursor.getString(cursor.getColumnIndex("mobile"));
+        this.price=cursor.getInt(cursor.getColumnIndex("price"));
+        this.act= cursor.getString(cursor.getColumnIndex("act"));
+        this.created_time= cursor.getString(cursor.getColumnIndex("created_time"));
+        this.status= cursor.getString(cursor.getColumnIndex("status"));
+        this.process_status= cursor.getString(cursor.getColumnIndex("process_status"));
+        this.order_date= cursor.getString(cursor.getColumnIndex("order_date"));
+        this.order_time= cursor.getString(cursor.getColumnIndex("order_time"));
+        this.description= cursor.getString(cursor.getColumnIndex("description"));
+        this.payment= cursor.getString(cursor.getColumnIndex("payment"));
+        this.payment_type= cursor.getString(cursor.getColumnIndex("payment_type"));
+        this.payment_time= cursor.getString(cursor.getColumnIndex("payment_time"));
     }
 
     String order_no;

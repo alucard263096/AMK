@@ -32,7 +32,8 @@ public class MemberMgr {
         MemberDao memberDao=new MemberDao(ctx);
         ArrayList<AbstractObj> lstMember=memberDao.getList("");
         if(lstMember.size()>0){
-            //MemberObj member=(MemberObj)lstMember.get(0);
+            MemberObj member=(MemberObj)lstMember.get(0);
+            StaticVar.Member=member;
         }
     }
 

@@ -24,6 +24,7 @@ public final class StaticVar {
 	public static String RegisterApi="register";
 	public static String RegisterSendApi="registersend";
 	public static String MemberApi="member";
+	public static String OrderListApi="orderlist";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
 	static {
@@ -40,6 +41,7 @@ public final class StaticVar {
 		dictHashMap.put(RegisterApi,APIURL+"Member/reg.php");
 		dictHashMap.put(RegisterSendApi,APIURL+"Member/reg_send.php");
 		dictHashMap.put(MemberApi,APIURL+"Member/member_get.php");
+		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
 	}
 
 	public static String GetSystemTimeString(){

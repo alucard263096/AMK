@@ -92,8 +92,6 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
         if(StaticVar.Member!=null){
             txtMobile.setText(StaticVar.Member.getMobile());
         }
-
-
     }
 
     @Override
@@ -111,8 +109,6 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
                     loader.setCallBack(this);
                     loader.start();
                     threadstatus="sendcode";
-                    VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
-                    sendTh.start();;
                 }else {
                     Toast.makeText(this, "你输入的手机号码不正确", Toast.LENGTH_LONG).show();
                 }
@@ -162,6 +158,8 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
                 if(sendcodeResult.getId()==-2){
                     Toast.makeText(LoginActivity.this, "该手机号码尚未注册，请先注册。", Toast.LENGTH_LONG).show();
                 }else {
+                    VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
+                    sendTh.start();;
                     Toast.makeText(LoginActivity.this, "验证码已发送", Toast.LENGTH_LONG).show();
                 }
             }

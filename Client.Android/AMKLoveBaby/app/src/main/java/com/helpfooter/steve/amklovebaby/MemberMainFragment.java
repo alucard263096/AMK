@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -88,7 +89,9 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         // Inflate the layout for this fragment
 
 
-        return inflater.inflate(R.layout.fragment_member_main, container, false);
+        View view= inflater.inflate(R.layout.fragment_member_main, container, false);
+        initUI(view);
+        return  view;
     }
     private void initUI(View view) {
         ((LinearLayout) view.findViewById(R.id.btnMyInfo)).setOnClickListener(this);
@@ -112,6 +115,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
             case R.id.btnMyNotice:
                 return;
             case R.id.btnMyOrder:
+                Intent intent = new Intent(this.getActivity(), OrderListActivity.class);
+                startActivity(intent);
                 return;
             case R.id.btnMyDoctor:
                 return;

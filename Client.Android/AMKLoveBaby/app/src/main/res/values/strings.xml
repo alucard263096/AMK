@@ -25,5 +25,6 @@
     <string name="title_activity_order">OrderActivity</string>
     <string name="title_activity_order_payment">OrderPaymentActivity</string>
     <string name="title_activity_payment_succ">PaymentSuccActivity</string>
-    <string name="title_activity_register">RegisterActivity</string>>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_order_list">OrderListActivity</string>>
 </resources>

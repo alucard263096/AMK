@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.helpfooter.steve.amklovebaby.OrderPaymentActivity"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:context="com.helpfooter.steve.amklovebaby.OrderPaymentActivity">
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
