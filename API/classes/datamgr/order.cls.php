@@ -44,7 +44,7 @@
 		return $result;
 	}
 
-	public function getMemberOrderList($doctor_id,$lastupdate_time){
+	public function getMemberOrderList($member_id,$lastupdate_time){
 		if($member_id==""){
 			return	outResult(-1,"member_id can not be null");
 		}
