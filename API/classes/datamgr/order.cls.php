@@ -50,8 +50,10 @@
 		}
 		$member_id=parameter_filter($member_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select * 
-		from v_order    
+		$sql="select * from (
+( select v.*,v1.doctor_id tag from v_order v
+inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
+) v
 		where member_id=$member_id ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
