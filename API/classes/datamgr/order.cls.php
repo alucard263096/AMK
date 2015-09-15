@@ -133,8 +133,8 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		$price=$doctor["videochat_price"];
 
 		$id=$this->dbmgr->getNewId("tb_order");
-		$sql="insert into tb_order (id,order_no,member_id,name,mobile,price,act,created_time,status,process_status,order_date,order_time,description)
-		values ($id,'$order_no',$member_id,'$name','$mobile',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description'  )   ";
+		$sql="insert into tb_order (id,order_no,member_id,name,mobile,price,act,created_time,status,process_status,order_date,order_time,description,updated_user,updated_date)
+		values ($id,'$order_no',$member_id,'$name','$mobile',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description',-1, ".$this->dbmgr->getDate()." )   ";
 		$query = $this->dbmgr->query($sql);
 
 		$sql="insert into tb_order_videochat (order_id,doctor_id) values ($id ,$doctor_id )";

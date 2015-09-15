@@ -17,20 +17,15 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.CustomControlView.OrderListLoadView;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderListActivity extends Activity implements View.OnClickListener {
-
-    private ViewPager mPager;//页卡内容
-    private List<View> listViews; // Tab页面列表
-    private ImageView cursor;// 动画图片
-    private TextView t1, t2, t3;// 页卡头标
-    private int offset = 0;// 动画图片偏移量
-    private int currIndex = 0;// 当前页卡编号
-    private int bmpW;// 动画图片宽度
+    OrderListLoadView orderListLoadView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +44,10 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         ((TextView) findViewById(R.id.btnShowOrdered)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowAll)).setOnClickListener(this);
 
+        orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),"P");
+        orderListLoadView.LoadList();
     }
 
-    public class MyOnClickListener implements View.OnClickListener {
-        private int index = 0;
-
-        public MyOnClickListener(int i) {
-            index = i;
-        }
-
-        @Override
-        public void onClick(View v) {
-            mPager.setCurrentItem(index);
-        }
-    };
 
     private void InitData() {
 

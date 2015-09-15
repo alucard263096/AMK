@@ -50,12 +50,12 @@ public class OrderListLoader extends WebXmlLoader {
         if(lsObj.size()>0){
             OrderDao dao=new OrderDao(ctx);
             dao.batchUpdate(lsObj);
-            if(callBack!=null){
-                callBack.CallBack(lsObj);
-            }
 
             ParamsDao paramdao=new ParamsDao(this.ctx);
             paramdao.updateParam(this.callApi,StaticVar.GetSystemTimeString());
+        }
+        if(callBack!=null){
+            callBack.CallBack(lsObj);
         }
     }
 }

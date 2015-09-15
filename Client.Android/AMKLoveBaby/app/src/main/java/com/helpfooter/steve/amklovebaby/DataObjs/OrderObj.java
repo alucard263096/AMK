@@ -27,6 +27,7 @@ public class OrderObj extends AbstractObj {
         this.payment= cursor.getString(cursor.getColumnIndex("payment"));
         this.payment_type= cursor.getString(cursor.getColumnIndex("payment_type"));
         this.payment_time= cursor.getString(cursor.getColumnIndex("payment_time"));
+        this.tag= cursor.getString(cursor.getColumnIndex("tag"));
     }
 
     String order_no;
@@ -47,6 +48,18 @@ public class OrderObj extends AbstractObj {
     String payment;
     String payment_type;
     String payment_time;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    String tag;
+
+
     @Override
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
         this.id=Integer.parseInt(lstRowValue.get("id"));
@@ -67,6 +80,7 @@ public class OrderObj extends AbstractObj {
         this.payment= lstRowValue.get("payment");
         this.payment_type= lstRowValue.get("payment_type");
         this.payment_time= lstRowValue.get("payment_time");
+        this.tag= lstRowValue.get("tag");
     }
 
     public String getOrder_no() {

@@ -24,7 +24,7 @@ public class ParamsDao extends AbstractDao {
 					.rawQuery(
 							"select val  from tb_param where id='"+id+"'",new String[] { });
 			while (cursor.moveToNext()) {
-				return cursor.getString(cursor.getColumnIndex("val"));
+				return cursor.getString(cursor.getColumnIndex("val"));//"1991-1-1";
 			}
 			insertPram(id,defaultvalue);
 

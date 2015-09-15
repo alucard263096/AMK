@@ -79,6 +79,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
 
             main.SetToHome();
 
+        }else {
+            ((TextView)this.getActivity().findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
         }
     }
 
@@ -103,9 +105,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
 
         if(StaticVar.Member!=null){
-            ((TextView) view.findViewById(R.id.txtMyName)).setText(StaticVar.Member.getName());
+            ((TextView) view.findViewById(R.id.txtMyName)).setText("你好,"+StaticVar.Member.getName());
         }
-
     }
     @Override
     public void onClick(View v) {

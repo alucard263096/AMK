@@ -86,25 +86,20 @@
         android:layout_height="1px"
         android:background="@color/mydeepblue"></LinearLayout>
 
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_marginLeftPercent="5%"
+        app:layout_widthPercent="90%">
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layoutOrderList"
         android:gravity="center"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="30%"
-            android:src="@drawable/no_order"/>
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="10%"
-            android:gravity="center"
-            android:text="你还没有相关订单"
-            />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
+</ScrollView>
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

@@ -51,7 +51,8 @@ public class OrderDao extends AbstractDao {
                 "description varchar," +
                 "payment varchar," +
                 "payment_type varchar," +
-                "payment_time varchar )");
+                "payment_time varchar," +
+                "tag varchar )");
         util.execSQL(sql.toString(), new Object[]{});
     }
 
@@ -63,10 +64,10 @@ public class OrderDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,price,act,created_time,status,process_status," +
-                "order_date,order_time,description,payment,payment_type,payment_time ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                "order_date,order_time,description,payment,payment_type,payment_time,tag ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
-                obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getProcess_status(),
-                obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time()};
+                obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
+                obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag()};
         util.execSQL(sql.toString(), bindArgs);
 
         util.close();
@@ -81,10 +82,10 @@ public class OrderDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("update tb_order set order_no=?,guid=?,member_id=?,name=?,mobile=?,price=?,act=?,created_time=?,status=?,process_status=?," +
-                "order_date=?,order_time=?,description=?,payment=?,payment_type=?,payment_time=? where id=?");
+                "order_date=?,order_time=?,description=?,payment=?,payment_type=?,payment_time=?,tag=? where id=?");
         Object[] bindArgs = {obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
-                obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getProcess_status(),
-                obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getId()};
+                obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
+                obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag(), obj.getId()};
         util.execSQL(sql.toString(), bindArgs);
 
         util.close();
@@ -96,7 +97,7 @@ public class OrderDao extends AbstractDao {
     }
 
     public ArrayList<OrderObj> getOrderList(){
-        ArrayList<AbstractObj> lst=  super.getList(" where status!='D' order by desc created_date");
+        ArrayList<AbstractObj> lst=  super.getList("  status<>'D' order by created_time desc ");
         ArrayList<OrderObj> lstr=new ArrayList<OrderObj>();
         for(AbstractObj abobj:lst){
             lstr.add((OrderObj)abobj);
