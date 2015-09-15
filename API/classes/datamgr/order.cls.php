@@ -50,7 +50,7 @@
 		}
 		$member_id=parameter_filter($member_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,chat_time ,description
+		$sql="select * 
 		from v_order    
 		where member_id=$member_id ";
 		if($lastupdate_time!=""){
