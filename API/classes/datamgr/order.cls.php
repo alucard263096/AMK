@@ -44,6 +44,25 @@
 		return $result;
 	}
 
+	public function getMemberOrderList($doctor_id,$lastupdate_time){
+		if($member_id==""){
+			return	outResult(-1,"member_id can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$lastupdate_time=parameter_filter($lastupdate_time);
+		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,chat_time ,description
+		from v_order    
+		where member_id=$member_id ";
+		if($lastupdate_time!=""){
+		$sql.=" and updated_date>'$lastupdate_time'  ";
+		}
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+
+	}
+
 	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description){
 		if($doctor_id==""){
 			return	outResult(-1,"doctor_id can not be null");
