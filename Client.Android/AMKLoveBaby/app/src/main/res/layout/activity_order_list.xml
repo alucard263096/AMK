@@ -46,7 +46,7 @@
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         >
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
@@ -83,6 +83,12 @@
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="4px"
+        app:layout_widthPercent="25%"
+        android:id="@+id/underScroll"
+        android:background="@color/mydeepblue"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/mydeepblue"></LinearLayout>
 
@@ -92,6 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_marginLeftPercent="5%"
+        android:id="@+id/scrollView"
         app:layout_widthPercent="90%">
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -99,6 +106,21 @@
         android:id="@+id/layoutOrderList"
         android:gravity="center"
         android:orientation="vertical">
+        <ImageView
+        android:id="@+id/imgNoOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_marginTopPercent="30%"
+        app:layout_heightPercent="30%"
+        android:src="@drawable/no_order"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/txtNoOrder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="10%"
+            android:gravity="center"
+            android:text="你还没有相关订单"
+            />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 </ScrollView>
 

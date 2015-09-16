@@ -86,6 +86,9 @@ public class HomeFragment extends Fragment implements IMyFragment {
 
         mNews=(LinearLayout)view.findViewById(R.id.news);
         mNews.setOnClickListener(((MainActivity)this.getActivity()));
+
+        mMember=(LinearLayout)view.findViewById(R.id.member);
+        mMember.setOnClickListener(((MainActivity)this.getActivity()));
     }
 
     public void initBanner(View view)  {
