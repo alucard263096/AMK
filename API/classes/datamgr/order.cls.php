@@ -44,6 +44,27 @@
 		return $result;
 	}
 
+	public function getMemberOrderList($member_id,$lastupdate_time){
+		if($member_id==""){
+			return	outResult(-1,"member_id can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$lastupdate_time=parameter_filter($lastupdate_time);
+		$sql="select * from (
+( select v.*,v1.doctor_id tag from v_order v
+inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
+) v
+		where member_id=$member_id ";
+		if($lastupdate_time!=""){
+		$sql.=" and updated_date>'$lastupdate_time'  ";
+		}
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+
+	}
+
 	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description){
 		if($doctor_id==""){
 			return	outResult(-1,"doctor_id can not be null");
@@ -112,8 +133,8 @@
 		$price=$doctor["videochat_price"];
 
 		$id=$this->dbmgr->getNewId("tb_order");
-		$sql="insert into tb_order (id,order_no,member_id,name,mobile,price,act,created_time,status,process_status,order_date,order_time,description)
-		values ($id,'$order_no',$member_id,'$name','$mobile',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description'  )   ";
+		$sql="insert into tb_order (id,order_no,member_id,name,mobile,price,act,created_time,status,process_status,order_date,order_time,description,updated_user,updated_date)
+		values ($id,'$order_no',$member_id,'$name','$mobile',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description',-1, ".$this->dbmgr->getDate()." )   ";
 		$query = $this->dbmgr->query($sql);
 
 		$sql="insert into tb_order_videochat (order_id,doctor_id) values ($id ,$doctor_id )";

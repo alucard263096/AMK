@@ -11,7 +11,9 @@ import java.util.ArrayList;
 public abstract class AbstractDao {
 	protected DBUtil util;
 	protected String TableName;
+	Context ctx;
 	public AbstractDao(Context ctx,String tablename){
+		this.ctx=ctx;
 		util=new DBUtil(ctx);
 		util.open();
 		this.TableName=tablename;
@@ -129,4 +131,7 @@ public abstract class AbstractDao {
 	abstract void insertObj(AbstractObj obj);
 	abstract void updateObj(AbstractObj obj);
 	abstract AbstractObj newRealObj();
+
+
+
 }

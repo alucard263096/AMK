@@ -65,11 +65,10 @@ public class MemberDao extends AbstractDao {
     }
 
     public void refreshMember(MemberObj memberObj) {
-        util.open();
-        StringBuffer sql = new StringBuffer();
-        sql.append("delete from "+TableName);
-        Object[] bindArgs = {};
-        util.execSQL(sql.toString(), bindArgs);
+        super.deleteTable();
+
+       OrderDao orderDao=new OrderDao(ctx);
+        orderDao.deleteTable();
 
         insertObj(memberObj);
 

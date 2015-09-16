@@ -142,6 +142,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener,I
                 if(sendcodeResult.getId()==2){
                     Toast.makeText(RegisterActivity.this, "该手机号码已经注册，请直接登录。", Toast.LENGTH_LONG).show();
                 }else if(sendcodeResult.getId()==0){
+                    VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
+                    sendTh.start();;
                     Toast.makeText(RegisterActivity.this, "验证码已发送", Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(RegisterActivity.this, "注册失败，请检查网络", Toast.LENGTH_LONG).show();

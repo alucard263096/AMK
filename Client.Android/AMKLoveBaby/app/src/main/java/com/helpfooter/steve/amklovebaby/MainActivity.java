@@ -24,6 +24,7 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
+import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -79,7 +80,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_density",String.valueOf(density));
         Log.i("screen_info_Dpi", String.valueOf(densityDpi));
 
-        //MemberMgr.GetMemberInfoFromDb(this);
+        MemberMgr.GetMemberInfoFromDb(this);
 
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
@@ -95,6 +96,11 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
         NewsLoader newsLoader=new NewsLoader(this);
         newsLoader.start();
+
+        if(StaticVar.Member!=null){
+            OrderListLoader orderListLoader=new OrderListLoader(this);
+            orderListLoader.start();
+        }
     }
 
 
@@ -115,7 +121,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
-        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_doctor_active,  "我的", memberMainFragment);
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_a,  "我的", memberMainFragment);
     }
 
 
@@ -126,6 +132,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
         if(view.getId()==R.id.news){
             buttonBarClick(newsBarButton);
+        }
+        if(view.getId()==R.id.member){
+            buttonBarClick(memberMainBarButton);
         }
         for(BottomBarButton barButton:lstBottomBar){
             if(view==barButton.GetEnteryLayout()){
@@ -142,7 +151,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
         barButton.SetActive();
         if(barButton.GetFragment()!=null){
-            addOrShowFragment(getFragmentManager().beginTransaction(),barButton.GetFragment());
+            addOrShowFragment(getFragmentManager().beginTransaction(), barButton.GetFragment());
         }
     }
 
@@ -199,5 +208,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
+    }
+
+    public void SetToHome() {
+        buttonBarClick(homeBarButton);
     }
 }

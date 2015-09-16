@@ -1,14 +1,19 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
 /**
@@ -19,7 +24,7 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
  * Use the {@link MemberMainFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MemberMainFragment extends Fragment  implements IMyFragment {
+public class MemberMainFragment extends Fragment  implements IMyFragment,View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,13 +65,69 @@ public class MemberMainFragment extends Fragment  implements IMyFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        if(MemberMgr.CheckIsLogin(this.getActivity())) {
+
+        }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(StaticVar.Member==null){
+           MainActivity main= (MainActivity)this.getActivity();
+
+            main.SetToHome();
+
+        }else {
+            ((TextView)this.getActivity().findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_member_main, container, false);
+
+
+        View view= inflater.inflate(R.layout.fragment_member_main, container, false);
+        initUI(view);
+        return  view;
+    }
+    private void initUI(View view) {
+        ((LinearLayout) view.findViewById(R.id.btnMyInfo)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnMyNotice)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnMyOrder)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnMyDoctor)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnMyFeedback)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
+
+        if(StaticVar.Member!=null){
+            ((TextView) view.findViewById(R.id.txtMyName)).setText("你好,"+StaticVar.Member.getName());
+        }
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnMyInfo:
+                return;
+            case R.id.btnMyNotice:
+                return;
+            case R.id.btnMyOrder:
+                Intent intent = new Intent(this.getActivity(), OrderListActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnMyDoctor:
+                return;
+            case R.id.btnMySetting:
+                return;
+            case R.id.btnMyFeedback:
+                return;
+            case R.id.btnAboutus:
+                return;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,8 +156,9 @@ public class MemberMainFragment extends Fragment  implements IMyFragment {
 
     @Override
     public String getTitle() {
-        return null;
+        return "我的";
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
