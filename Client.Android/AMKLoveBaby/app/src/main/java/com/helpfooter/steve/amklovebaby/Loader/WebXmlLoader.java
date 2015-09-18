@@ -38,6 +38,7 @@ public abstract class WebXmlLoader extends Thread{
 	}
 	String status="N";
 
+	//默认的远端数据接口URL的调用，可用于重载
 	public String getCallUrl() {
 		// TODO Auto-generated method stub
 		ParamsDao dao=new ParamsDao(ctx);
@@ -47,9 +48,11 @@ public abstract class WebXmlLoader extends Thread{
 		url= (url+"?last_time="+update_date).replace(" ", "%20");
 		return url;
 	}
-	
+
+	//需要重写的doXml方法，对返回的业务数据进行交互操作
 	abstract public void doXml(ArrayList<HashMap<String,String>> lstRow);
-	
+
+	//多线程调用的线程方法
 	public void run(){
 		String path=getCallUrl();
 		Log.i("webload_debugUrl", path);
@@ -71,7 +74,7 @@ public abstract class WebXmlLoader extends Thread{
 		}
 		status="F";
 	}
-	
+	//获取远端XML的工作流
 	protected InputStream getXml(String path){
 		InputStream is=null;
 		URL url;
@@ -83,11 +86,7 @@ public abstract class WebXmlLoader extends Thread{
 	        conn.setDoInput(true);  
 	        if (conn.getResponseCode() == 200) {  
 	
-	             is = conn.getInputStream();  
-
-	            //String ret= convertStreamToString(is);
-				//Log.i("returnXml",ret);
-	            //is.close();
+	             is = conn.getInputStream();
 	            return is;
 	        }
 		} catch (MalformedURLException e) {
@@ -105,42 +104,24 @@ public abstract class WebXmlLoader extends Thread{
 		}
         return is;
 	}
-	
+	//把工作流转换为字符串
 	public String convertStreamToString(InputStream is) {   
-
-		   BufferedReader reader = new BufferedReader(new InputStreamReader(is));   
-
+		   BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 		        StringBuilder sb = new StringBuilder();
 		        String line = null;
 		        try {   
-
-		            while ((line = reader.readLine()) != null) {   
-
-		                sb.append(line + "/n");   
-
-		            }   
-
-		        } catch (IOException e) {   
-
-		            e.printStackTrace();   
-
-		        } finally {   
-
-		            try {   
-
-		                is.close();   
-
-		            } catch (IOException e) {   
-
-		                e.printStackTrace();   
-
-		            }   
-
-		        }   
-
-		    
-
-		        return sb.toString();   
-
+		            while ((line = reader.readLine()) != null) {
+		                sb.append(line + "/n");
+		            }
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        } finally {
+		            try {
+		                is.close();
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            }
+		        }
+		        return sb.toString();
 		    }
 }

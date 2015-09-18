@@ -67,14 +67,9 @@ public class NewsLoader extends WebXmlLoader {
 				if(callBack!=null){
 					callBack.CallBack(lsObj);
 				}
-
 				ParamsDao paramdao=new ParamsDao(this.ctx);
 				paramdao.updateParam(this.callApi,StaticVar.GetSystemTimeString());
 			}
 		}
 	}
-
-	
-	
-	
 }

@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,8 +51,10 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         ((TextView) findViewById(R.id.btnShowWaitpayment)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowAll)).setOnClickListener(this);
 
-        orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),"P");
+        orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),(ImageView)findViewById(R.id.imgNoOrder),(TextView)findViewById(R.id.txtNoOrder),"P");
         orderListLoadView.LoadList();
+
+
     }
 
 
@@ -77,19 +80,24 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
     }
 
     private void SetOnFilterOnSelect(View v) {
-        float position=0f;
+        ((LinearLayout)findViewById(R.id.udShowAll)).setVisibility(View.INVISIBLE);
+        ((LinearLayout)findViewById(R.id.udShowFinished)).setVisibility(View.INVISIBLE);
+        ((LinearLayout)findViewById(R.id.udShowWaitpayment)).setVisibility(View.INVISIBLE);
+        ((LinearLayout)findViewById(R.id.udShowOrdered)).setVisibility(View.INVISIBLE);
+
+
         switch (v.getId()){
             case R.id.btnShowOrdered:
-                position=0f;
+                ((LinearLayout)findViewById(R.id.udShowOrdered)).setVisibility(View.VISIBLE);
                 break;
             case R.id.btnShowFinished:
-                position=0.25f;
+                ((LinearLayout)findViewById(R.id.udShowFinished)).setVisibility(View.VISIBLE);
                 break;
             case R.id.btnShowWaitpayment:
-                position=0.5f;
+                ((LinearLayout)findViewById(R.id.udShowWaitpayment)).setVisibility(View.VISIBLE);
                 break;
             case R.id.btnShowAll:
-                position=0.75f;
+                ((LinearLayout)findViewById(R.id.udShowAll)).setVisibility(View.VISIBLE);
                 break;
         }
         //PercentLinearLayout.LayoutParams positionlayout=(PercentLinearLayout.LayoutParams)((LinearLayout)findViewById(R.id.underScroll)).getLayoutParams();
