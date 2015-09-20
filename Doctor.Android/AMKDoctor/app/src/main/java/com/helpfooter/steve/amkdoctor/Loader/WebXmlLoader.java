@@ -40,10 +40,11 @@ public abstract class WebXmlLoader extends Thread{
 		Log.i("IndexBanner_debugUrl", url);
 		return url;
 	}
-	
+
 	abstract public void doXml(ArrayList<HashMap<String,String>> lstRow);
 	
 	public void run(){
+
 		String path=getCallUrl();
 		InputStream is=getXml(path);
 		if(is!=null){

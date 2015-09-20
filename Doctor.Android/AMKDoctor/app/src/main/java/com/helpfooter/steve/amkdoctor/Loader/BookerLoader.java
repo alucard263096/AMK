@@ -11,7 +11,10 @@ import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
+import com.helpfooter.steve.amkdoctor.Utils.XmlDataTableReader;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,6 +34,9 @@ public class BookerLoader extends WebXmlLoader {
 	public void setCallBack(IWebLoaderCallBack val){
 		callBack=val;
 	}
+
+
+
 
 
 	@Override

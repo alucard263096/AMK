@@ -42,12 +42,12 @@ public class DoctorLoader extends WebXmlLoader {
 			obj.parseXmlDataTable(cols);
 			lsObj.add(obj);
 		}
-		if(lsObj.size()>0){
+
 			DoctorDao dao=new DoctorDao(ctx);
 			dao.batchUpdate(lsObj);
 			if(callBack!=null){
 				callBack.CallBack(lsObj);
-			}
+
 
 	        ParamsDao paramdao=new ParamsDao(this.ctx);
 			paramdao.updateParam(this.callApi,StaticVar.GetSystemTimeString());

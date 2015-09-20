@@ -175,7 +175,7 @@ public class BookerObj extends AbstractObj {
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
 
         this.id=Integer.parseInt(lstRowValue.get("id"));
-        this.custid=lstRowValue.get("order_no");
+        this.bookno=lstRowValue.get("order_no");
         this.custid=lstRowValue.get("member_id");
         this.custname=lstRowValue.get("name");
         this.mobile=lstRowValue.get("mobile");

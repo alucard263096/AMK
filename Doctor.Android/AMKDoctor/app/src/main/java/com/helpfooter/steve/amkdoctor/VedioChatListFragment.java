@@ -10,7 +10,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.helpfooter.steve.amkdoctor.CustomControlView.BookListLoadView;
+import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
+import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,13 +32,13 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private View view;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private Activity mActivity;
     private OnFragmentInteractionListener mListener;
-
+    private static Bundle margs;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -43,16 +49,20 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
      */
     // TODO: Rename and change types and number of parameters
     public static VedioChatListFragment newInstance(String param1, String param2) {
-        VedioChatListFragment fragment = new VedioChatListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        VedioChatListFragment fragment = new VedioChatListFragment(margs);
+
+        margs.putString(ARG_PARAM1, param1);
+        margs.putString(ARG_PARAM2, param2);
+        fragment.setArguments(margs);
         return fragment;
     }
 
-    public VedioChatListFragment() {
-        // Required empty public constructor
+   public VedioChatListFragment(Bundle args){
+       this.margs=args;
+   };
+    public VedioChatListFragment(Activity activ){
+
+        this.mActivity=activ;
     }
 
     @Override
@@ -62,6 +72,10 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
     }
 
     @Override
@@ -69,9 +83,11 @@ public class VedioChatListFragment extends Fragment implements IMyFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        // return inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
-        View view= inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
-        BookListLoadView lstLoad=new BookListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.vedio_chat_list));
-        lstLoad.LoadDoctorListData();
+        view= inflater.inflate(R.layout.fragment_vedio_chat_list, container, false);
+        final BookListLoadView lstLoad=new BookListLoadView(this.mActivity,view.getContext(),(LinearLayout)view.findViewById(R.id.vedio_chat_list));
+        lstLoad.LoadList();
+
+
         return view;
     }
 

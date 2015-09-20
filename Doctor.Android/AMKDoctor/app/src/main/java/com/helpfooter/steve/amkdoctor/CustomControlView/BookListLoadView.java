@@ -1,10 +1,17 @@
 package com.helpfooter.steve.amkdoctor.CustomControlView;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,6 +23,7 @@ import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bairuitech.callcenter.VideoActivity;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.Common.UrlImageLoader;
@@ -24,9 +32,16 @@ import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
+import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
 import com.helpfooter.steve.amkdoctor.R;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 import com.helpfooter.steve.amkdoctor.Utils.ToolsUtil;
+import com.helpfooter.steve.amkdoctor.MainActivity;
+import com.bairuitech.bussinesscenter.BussinessCenter;
+import com.bairuitech.bussinesscenter.UserItem;
+import com.bairuitech.bussinesscenter.SessionItem;
+import com.bairuitech.util.DialogFactory;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.File;
@@ -37,30 +52,88 @@ import java.util.ArrayList;
 /**
  * Created by scai on 2015/9/1.
  */
-public class BookListLoadView implements View.OnClickListener {
+public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack {
     public LinearLayout mainlayout;
-    public ArrayList<BookerObj> lstBooker;
+    public ArrayList<BookerObj> lstBooker=new ArrayList<BookerObj>() ;
     public Context ctx;
-    public  BookListLoadView(Context ctx,LinearLayout layout){
+    public boolean IsFristRun=true;
+    public Activity mActivity;
+    ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
+    public  BookListLoadView(Activity activ,Context ctx,LinearLayout layout){
+        this.mActivity=activ;
         this.ctx=ctx;
         this.mainlayout=layout;
-        BookerDao dao=new BookerDao(this.ctx);
-        ArrayList<AbstractObj> lst=dao.getBookerList();
-        lstBooker=new ArrayList<BookerObj>();
-        for(AbstractObj obj:lst){
-            lstBooker.add((BookerObj)obj);
-        }
+
     }
 
-    public void LoadDoctorListData(){
-        int i=1;
+    public void LoadList(){
+        BookerLoader loader=new BookerLoader(this.ctx);
+        loader.setCallBack(this);
+        loader.start();
+    }
+
+    private Handler onloadAllHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            OnloadBooker();
+        }
+    };
+    private void OnloadBooker() {
+
+        if(this.mainlayout.getChildCount()>0) {
+            this.mainlayout.removeViews(0, this.mainlayout.getChildCount() - 1);
+        }
+        //mainlayout.removeAllViewsInLayout();
         for(BookerObj obj:lstBooker){
+
+            LinearLayout sublayout=null;
+            //int i;
+            //for(LinearLayout oldlayout : lstLayout) {
+              //  BookerObj oldObj = (BookerObj)oldlayout.getTag();
+                //如果订单编号相同，并且时间相同，continue
+                //if(oldObj.getBookno().equals(obj.getBookno()) && oldObj.getOrderdate().eq)
+            //}
+            if(obj.getStatus().equals("P")){
+                sublayout=LoadBookerListData(obj);
+            }
+            if(sublayout!=null){
+                sublayout.setTag(obj);
+                mainlayout.addView(sublayout);
+                lstLayout.add(sublayout);
+            }
+
+        }
+
+    }
+
+
+    public LinearLayout LoadBookerListData(BookerObj obj){
+        PercentLinearLayout toplayout=new PercentLinearLayout(ctx);
+        PercentLinearLayout.LayoutParams topparam=ToolsUtil.getLayoutParam();
+        topparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.19f,false);
+        topparam.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,false);
+        topparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+        topparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+
+
+        toplayout.setBackgroundResource(R.drawable.cardlinearlayout);
+        // layout.setBackgroundColor(Color.parseColor("#ffffff"));
+        //String backgroundcolor=getBackgroundColor(i);
+        //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
+        toplayout.setLayoutParams(topparam);
+        toplayout.setOrientation(LinearLayout.HORIZONTAL);
+
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-            param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.16f,false);
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,false);
-            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,false);
+            param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.98f,false);
+            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+
+
+
+            layout.setBackgroundColor(Color.parseColor("#ffffff"));
             //String backgroundcolor=getBackgroundColor(i);
             //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
             layout.setLayoutParams(param);
@@ -70,12 +143,12 @@ public class BookListLoadView implements View.OnClickListener {
             layout.addView(imgPhoto);
             LinearLayout infolayout=getInfoLayout(obj);
             layout.addView(infolayout);
+        toplayout.addView(layout);
+            return toplayout;
+            //layout.setTag(obj);
+            //layout.setOnClickListener(this);
+            //this.mainlayout.addView(layout);
 
-            layout.setTag(obj);
-            layout.setOnClickListener(this);
-            this.mainlayout.addView(layout);
-            i++;
-        }
     }
     public ImageView getPhotoView(BookerObj obj){
         ImageView img=new ImageView(this.ctx);
@@ -103,12 +176,12 @@ public class BookListLoadView implements View.OnClickListener {
 
         TextView txtOrderTime=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams titleparam=ToolsUtil.getLayoutParam();
-        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.62f,true);
+        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
         titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.13f,true);
         txtOrderTime.setTextSize(15);
         //txtTitle.setGravity(Gravity.CENTER_VERTICAL);
         txtOrderTime.setLayoutParams(titleparam);
-        txtOrderTime.setText(booker.getOrderdate()+" "+booker.getOrdertime());
+        txtOrderTime.setText("预约时间： "+booker.getOrderdate()+" "+booker.getOrdertime());
         TextPaint tp= txtOrderTime.getPaint();
         tp.setFakeBoldText(true);
         Log.i("video_chatTime", booker.getOrderdate()+" "+booker.getOrdertime());
@@ -119,7 +192,7 @@ public class BookListLoadView implements View.OnClickListener {
         txtName.setGravity(Gravity.CENTER_VERTICAL);
         txtName.setLayoutParams(custnameparam);
         txtName.setTextColor(Color.GRAY);
-        txtName.setText(booker.getCustname());
+        txtName.setText("名称： "+booker.getCustname());
         txtName.setTextSize(15);
         TextPaint tnp= txtName.getPaint();
         tnp.setFakeBoldText(true);
@@ -128,8 +201,9 @@ public class BookListLoadView implements View.OnClickListener {
 
         PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParam();
-        buttonparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.67f,true);
+        buttonparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
         buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.17f,true);
+
         tipsLayout.setLayoutParams(buttonparam);
         tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -137,16 +211,19 @@ public class BookListLoadView implements View.OnClickListener {
 
         TextView txtBeginChart=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
-        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
+        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
+        upvoteparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.65f,true);
         txtBeginChart.setLayoutParams(upvoteparam);
         txtBeginChart.setClickable(true);
 
 
         txtBeginChart.setBackgroundColor(Color.parseColor("#37A4D4"));
         txtBeginChart.setTextColor(Color.parseColor("#ffffff"));
-        txtBeginChart.setGravity(Gravity.RIGHT);
+        txtBeginChart.setGravity(Gravity.CENTER);
         txtBeginChart.setText("开始视频");
         txtBeginChart.setTextSize(15);
+        txtBeginChart.setTag(booker);
+        txtBeginChart.setOnClickListener(this);
         tipsLayout.addView(txtBeginChart);
 
         layout.addView(txtOrderTime);
@@ -164,6 +241,8 @@ public class BookListLoadView implements View.OnClickListener {
                 return "#F7CB20";
             case 3:
                 return "#B9E5C3";
+            case 4:
+                return "#ffffff";
             default:
                 return "#37A4D4";
         }
@@ -171,10 +250,62 @@ public class BookListLoadView implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        BookerObj obj=(BookerObj)v.getTag();
+        //UserItem item=new UserItem(Integer.parseInt(obj.getCustid()),obj.getCustname(),"192.168.1.1");
+        /*BussinessCenter.sessionItem = new SessionItem(0, item.getUserId(),
+                obj.getDoctorid());
+        Dialog dialog = DialogFactory.getDialog(DialogFactory.DIALOGID_CALLRESUME,
+                item, mActivity);
+        dialog.show();*/
+        Intent intent = new Intent();
+        try {
+            intent.setClass(mActivity, VideoActivity.class);
+            // intent.putExtra("Id", obj.getId());
+            mActivity.startActivity(intent);
+        }
+        catch (Exception ex)
+        {
 
-       // DoctorObj obj=(DoctorObj)v.getTag();
-       // Intent intent = new Intent(this.ctx, DoctorDetailActivity.class);
-        //intent.putExtra("Id", obj.getId());
-       // this.ctx.startActivity(intent);
+            throw ex;
+        }
+
+
+
+    }
+
+    @Override
+    public void CallBack(ArrayList<AbstractObj> lstObjs) {
+
+        BookerDao dao=new BookerDao(this.ctx);
+
+        ArrayList<AbstractObj> lstObj=dao.getBookerList();
+
+        for(AbstractObj obj:lstObj) {
+            lstBooker.add((BookerObj)obj);
+        }
+
+        if(lstObj.size()>0) {
+            onloadAllHandler.sendEmptyMessage(0);
+        }
+        if(IsFristRun)
+        {
+            new Thread(){
+                public void run()
+                {
+                    try {
+                        while(true) {
+                            sleep(100000);
+                            LoadList();
+
+                        }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+        }
+
+        IsFristRun =false;
     }
 }
