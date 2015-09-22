@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Handler;
@@ -24,9 +25,11 @@ import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelpe
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
+import com.helpfooter.steve.amklovebaby.OrderDetailActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
+import com.helpfooter.steve.amklovebaby.VedioOrderSubmitActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +71,9 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
     @Override
     public void onClick(View v) {
         OrderObj obj=(OrderObj)v.getTag();
-
-        
-
-
+        Intent intent = new Intent(ctx, OrderDetailActivity.class);
+        intent.putExtra("Id", obj.getId());
+        ctx.startActivity(intent);
     }
 
     private Handler onloadAllHandler = new Handler(){
@@ -191,24 +193,15 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
 
 
         mainLayout.addView(titleLayout);
-        mainLayout.addView(genPLine());
+        mainLayout.addView(ToolsUtil.GenPLine(ctx));
         mainLayout.addView(detailLayout);
-        mainLayout.addView(genPLine());
+        mainLayout.addView(ToolsUtil.GenPLine(ctx));
 
 
 
         return mainLayout;
     }
 
-    private LinearLayout genPLine(){
-
-        LinearLayout pLine=new LinearLayout(this.ctx);
-        LinearLayout.LayoutParams pLineLayout=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1);
-        pLine.setLayoutParams(pLineLayout);
-        pLine.setBackgroundColor(Color.parseColor("#cccccc"));
-
-        return pLine;
-    }
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {

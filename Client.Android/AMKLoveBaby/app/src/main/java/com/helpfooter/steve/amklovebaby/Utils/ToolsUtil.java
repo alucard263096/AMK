@@ -1,5 +1,9 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.widget.LinearLayout;
+
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 
@@ -47,6 +51,15 @@ public class ToolsUtil {
         layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
         return param;
+    }
+    public static  LinearLayout GenPLine(Context ctx){
+
+        LinearLayout pLine=new LinearLayout(ctx);
+        LinearLayout.LayoutParams pLineLayout=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1);
+        pLine.setLayoutParams(pLineLayout);
+        pLine.setBackgroundColor(Color.parseColor("#cccccc"));
+
+        return pLine;
     }
     public static  String FormatString(String str){
         String notice = "";

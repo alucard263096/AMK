@@ -53,8 +53,6 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
 
         orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),(ImageView)findViewById(R.id.imgNoOrder),(TextView)findViewById(R.id.txtNoOrder),"P");
         orderListLoadView.LoadList();
-
-
     }
 
 

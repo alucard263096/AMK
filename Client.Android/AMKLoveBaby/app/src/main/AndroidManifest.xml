@@ -71,6 +71,11 @@
             android:label="@string/title_activity_order_list"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".OrderDetailActivity"
+            android:label="@string/title_activity_order_detail"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
