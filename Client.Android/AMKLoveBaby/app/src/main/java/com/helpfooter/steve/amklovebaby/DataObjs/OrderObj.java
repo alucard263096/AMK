@@ -242,7 +242,7 @@ public class OrderObj extends AbstractObj {
         if(status.equals("T")){
             return "立即付款";
         }else if(status.equals("P")) {
-            return "开始预约";
+            return "开始视频会诊";
         }else if (status.equals("F")){
             return "立即评价";
         }

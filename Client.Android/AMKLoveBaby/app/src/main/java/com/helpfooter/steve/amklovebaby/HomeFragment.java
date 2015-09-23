@@ -19,7 +19,6 @@ import com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;

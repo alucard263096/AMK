@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.google.android.gms.maps.model.UrlTileProvider;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
@@ -19,6 +18,7 @@ import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayou
 import com.helpfooter.steve.amklovebaby.OrderPaymentActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
+import com.helpfooter.steve.amklovebaby.VideoChatActivity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -52,8 +52,10 @@ public class OrderDetailLoadView implements View.OnClickListener {
         Button btnSubmit=(Button)ctx.findViewById(R.id.btnSubmit);
         btnSubmit.setText(order.getStatusAction());
         if(order.getStatus().equals("P")&&order.getAct().equals("VC")){
-            SetGoVideoChat st=new SetGoVideoChat(order,btnSubmit);
-            st.start();
+            //SetGoVideoChat st=new SetGoVideoChat(order,btnSubmit);
+            //st.start();
+
+            btnSubmit.setOnClickListener(this);
         }else  if(order.getStatus().equals("T")&&order.getAct().equals("VC")){
             DateFormat format=new SimpleDateFormat("yyyy-MM-dd hh:mm");
             try {
@@ -132,8 +134,11 @@ public class OrderDetailLoadView implements View.OnClickListener {
             Intent intent = new Intent(ctx, OrderPaymentActivity.class);
             intent.putExtra("Id", order.getId());
             ctx.startActivity(intent);
-        }else {
+        }else if(order.getStatus().equals("P")&&order.getAct().equals("VC")) {
             //
+            Intent intent = new Intent(ctx, VideoChatActivity.class);
+            intent.putExtra("Id", order.getId());
+            ctx.startActivity(intent);
         }
     }
 
