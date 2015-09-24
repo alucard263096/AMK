@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Handler;
@@ -24,9 +25,11 @@ import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelpe
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
+import com.helpfooter.steve.amklovebaby.OrderDetailActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
+import com.helpfooter.steve.amklovebaby.VedioOrderSubmitActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +41,19 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
 
     Activity ctx;
     PercentLinearLayout layout;
+    ImageView imgNoOrder;
+    TextView txtNoOrder;
     ArrayList<OrderObj> lstOrder;
     String filterstatus="";
 
     ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
 
-    public OrderListLoadView(Activity ctx,PercentLinearLayout layout,String status){
+    public OrderListLoadView(Activity ctx,PercentLinearLayout layout,ImageView imgNoOrder,TextView txtNoOrder,String status){
         this.ctx=ctx;
         this.layout=layout;
         filterstatus=status;
+        this.imgNoOrder=imgNoOrder;
+        this.txtNoOrder=txtNoOrder;
     }
 
     public void setfilterstatus(String status) {
@@ -63,7 +70,10 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
 
     @Override
     public void onClick(View v) {
-
+        OrderObj obj=(OrderObj)v.getTag();
+        Intent intent = new Intent(ctx, OrderDetailActivity.class);
+        intent.putExtra("Id", obj.getId());
+        ctx.startActivity(intent);
     }
 
     private Handler onloadAllHandler = new Handler(){
@@ -78,20 +88,18 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
     private void OnloadOrder() {
 
         for(OrderObj obj:lstOrder){
-
             LinearLayout sublayout=null;
-
             if(obj.getAct().equals("VC")){
                 sublayout=gerVideoChatLayout(obj);
             }
             if(sublayout!=null){
                 sublayout.setTag(obj);
-                layout.addView(sublayout);
+                sublayout.setOnClickListener(this);
+                //layout.addView(sublayout);
                 lstLayout.add(sublayout);
+
             }
-
         }
-
     }
 
     private LinearLayout gerVideoChatLayout(OrderObj obj) {
@@ -110,6 +118,8 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         PercentLinearLayout titleLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams titleparam= ToolsUtil.getLayoutParam();
         titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,false);
+        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);;
+        titleparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         titleLayout.setLayoutParams(titleparam);
         titleLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -117,12 +127,12 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         txtDoctorName.setText(doctor.getName());
         TextPaint tp= txtDoctorName.getPaint();
         tp.setFakeBoldText(true);
-        txtDoctorName.setTextSize(14);
+        txtDoctorName.setTextSize(17);
 
 
         MyTextView txtAct = new MyTextView(this.ctx);
         txtAct.setText("/视频咨询");
-        txtAct.setTextSize(14);
+        txtAct.setTextSize(17);
 
         MyTextView txtOrderNo = new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams txtOrderNoparam= ToolsUtil.getLayoutParam();
@@ -142,6 +152,8 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         detailparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,false);
         detailparam.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,false);
         detailparam.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,false);
+        detailparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);;
+        detailparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         detailLayout.setLayoutParams(detailparam);
         detailLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -162,42 +174,34 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         dcLayout.setOrientation(LinearLayout.VERTICAL);
         MyTextView txtOrderTime=new MyTextView(this.ctx);
         txtOrderTime.setText("预约通话时间:" + obj.getOrder_date() + " " + obj.getOrder_time());
-        txtOrderTime.setTextSize(15);
+        txtOrderTime.setTextSize(17);
         dcLayout.addView(txtOrderTime);
 
         MyTextView txtPrice=new MyTextView(this.ctx);
         txtPrice.setText(String.valueOf(obj.getPrice()) + "元/20分钟");
-        txtPrice.setTextSize(14);
+        txtPrice.setTextSize(16);
         txtPrice.setTextColor(this.ctx.getResources().getColor(R.color.mydeepblue));
         dcLayout.addView(txtPrice);
 
         MyTextView txtOrderCreatedTime=new MyTextView(this.ctx);
         txtOrderCreatedTime.setText("订单时间:" + obj.getCreated_time());
         txtOrderCreatedTime.setTextColor(Color.GRAY);
+        txtOrderCreatedTime.setTextSize(12);
         dcLayout.addView(txtOrderCreatedTime);
 
         detailLayout.addView(dcLayout);
 
 
         mainLayout.addView(titleLayout);
-        mainLayout.addView(genPLine());
+        mainLayout.addView(ToolsUtil.GenPLine(ctx));
         mainLayout.addView(detailLayout);
-        mainLayout.addView(genPLine());
+        mainLayout.addView(ToolsUtil.GenPLine(ctx));
 
 
 
         return mainLayout;
     }
 
-    private LinearLayout genPLine(){
-
-        LinearLayout pLine=new LinearLayout(this.ctx);
-        LinearLayout.LayoutParams pLineLayout=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1);
-        pLine.setLayoutParams(pLineLayout);
-        pLine.setBackgroundColor(Color.parseColor("#cccccc"));
-
-        return pLine;
-    }
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
@@ -208,25 +212,20 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
 
     public void Filter(String filter) {
         boolean haveone=false;
+        layout.removeAllViews();
 
-        for(LinearLayout layout:lstLayout){
-            OrderObj obj=(OrderObj)layout.getTag();
-            PercentLinearLayout.LayoutParams param= (PercentLinearLayout.LayoutParams)layout.getLayoutParams();
+
+        for(LinearLayout lt:lstLayout){
+            OrderObj obj=(OrderObj)lt.getTag();
+
             if(filter.isEmpty()||filter.equals(obj.getStatus())){
-             layout.setVisibility(View.VISIBLE);
-             param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,false);
+                layout.addView(lt);
                 haveone=true;
-            }else{
-                layout.setVisibility(View.INVISIBLE);
-                param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0f,false);
             }
         }
         if(haveone==false){
-            ((ImageView)this.ctx.findViewById(R.id.imgNoOrder)).setVisibility(View.VISIBLE);
-            ((TextView)this.ctx.findViewById(R.id.txtNoOrder)).setVisibility(View.VISIBLE);
-        }else {
-            ((ImageView)this.ctx.findViewById(R.id.imgNoOrder)).setVisibility(View.INVISIBLE);
-            ((TextView)this.ctx.findViewById(R.id.txtNoOrder)).setVisibility(View.INVISIBLE);
+            layout.addView(imgNoOrder);
+            layout.addView(txtNoOrder);
         }
         //((ScrollView)this.ctx.findViewById(R.id.scrollView)).setTop(0);
     }

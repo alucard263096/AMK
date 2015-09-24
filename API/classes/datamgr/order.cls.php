@@ -221,7 +221,10 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		}
 		$order_id=parameter_filter($order_id);
 		$member_id=parameter_filter($member_id);
-		$sql="select * from v_order where status<>'D' and id=$order_id and member_id=$member_id  ";
+		$sql="select * from (
+( select v.*,v1.doctor_id tag from v_order v
+inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
+) v where status<>'D' and id=$order_id and member_id=$member_id  ";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 

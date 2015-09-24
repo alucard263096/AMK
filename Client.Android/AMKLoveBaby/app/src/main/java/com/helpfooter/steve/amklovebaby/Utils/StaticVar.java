@@ -44,6 +44,9 @@ public final class StaticVar {
 		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
 	}
 
+	public static String VideoChatServerIp="www.myhkdoc.com";
+	public static int VideoChatServerPort=8906;
+
 	public static String GetSystemTimeString(){
 		SimpleDateFormat formatter    =   new    SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date curDate    =   new    Date(System.currentTimeMillis());

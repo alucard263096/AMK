@@ -23,7 +23,6 @@ import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayou
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
  * Created by Steve on 2015/9/7.
  */
 public class OrderObj extends AbstractObj {
+
     @Override
     public void parseCursor(Cursor cursor) {
         this.id=cursor.getInt(cursor.getColumnIndex("id"));
@@ -218,5 +219,33 @@ public class OrderObj extends AbstractObj {
 
     public void setPayment_time(String payment_time) {
         this.payment_time = payment_time;
+    }
+
+    public String getActName() {
+        if(act.equals("VC")){
+            return "视频会诊";
+        }
+        return "未知类型";
+    }
+    public String getStatusName(){
+        if(status.equals("T")){
+            return "未付款";
+        }else if(status.equals("P")) {
+            return "已付款";
+        }else if (status.equals("F")){
+            return "已完成";
+        }
+        return "未知状态";
+    }
+
+    public String getStatusAction() {
+        if(status.equals("T")){
+            return "立即付款";
+        }else if(status.equals("P")) {
+            return "开始视频会诊";
+        }else if (status.equals("F")){
+            return "立即评价";
+        }
+        return "未知状态";
     }
 }
