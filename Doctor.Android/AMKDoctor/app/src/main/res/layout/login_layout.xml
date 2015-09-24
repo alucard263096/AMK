@@ -1,116 +1,153 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cloud" >
+    tools:context="com.helpfooter.steve.amklovebaby.LoginActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
 
-    <LinearLayout
-        android:id="@+id/layout_login"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
-
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="30dip"
-            android:layout_marginRight="30dip"
-             >
-
-            <EditText
-                android:id="@+id/edit_account"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/chat_edit"
-                android:drawableLeft="@drawable/account_i"
-                android:inputType="none" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="30dip"
-            android:layout_marginRight="30dip"
-            >
-
-            <EditText
-                android:id="@+id/edit_pasword"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/chat_edit"
-                android:drawableLeft="@drawable/password_i"
-
-                android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
-                android:imeOptions="actionUnspecified"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true" />
-        </FrameLayout>
-
-
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="30dip"
-            android:layout_marginRight="30dip"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/btn_login"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/str_login" />
-        </LinearLayout>
-
-        <RelativeLayout
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_widthPercent="100%"
+        android:background="@color/myblue">
+        <ImageView
+            android:id="@+id/btnBack"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dip"
-            android:layout_marginLeft="30dip"
-            android:layout_marginRight="30dip"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            android:focusable="false"
 
-            <CheckBox
-                android:id="@+id/check_issavepass"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:textSize="14sp"
-                android:text="@string/str_isSavepass" />
-
-            <Button
-                android:id="@+id/btn_setting"
-                android:layout_width="80dip"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:text="@string/str_setting" />
-        </RelativeLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="快捷登录"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
 
-            android:drawablePadding="10dip"
-            android:textColor="@color/txt_general_bg"
-            android:text="@string/app_name"
-            android:textSize="24sp" />
-    </LinearLayout>
+
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:orientation="vertical"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginRightPercent="5%"
+        android:background="@color/myblue">
+
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="#ffffff">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="20%"
+                android:gravity="center"
+                android:text="用户"/>
+            <EditText android:id="@+id/edit_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="手机号"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:maxLength="11"
+                android:focusable="true"
+                android:textSize="14dp"
+                android:textColorHint="#aaaaaa"
+                app:layout_widthPercent="70%"
+                android:singleLine="true"
+                android:phoneNumber="true"
+                android:editable="true" />
 
 
-</RelativeLayout>
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="20%"
+                android:gravity="center"
+                android:text="密码"/>
+            <EditText android:id="@+id/edit_pasword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入密码"
+                android:textColorHint="#aaaaaa"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:focusable="true"
+                android:textSize="14dp"
+                app:layout_widthPercent="70%"
+                android:singleLine="true"
+                android:phoneNumber="true"
+                android:editable="true" />
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/myblue"
+        app:layout_marginTopPercent="3%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginRightPercent="5%"
+        app:layout_widthPercent="90%"
+        android:gravity="center"
+        android:text="登录"
+        android:textSize="16dp"
+        android:textColor="#ffffff"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        app:layout_marginLeftPercent="5%"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <CheckBox
+            android:id="@+id/check_issavepass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textSize="14sp"
+            android:text="@string/str_isSavepass" />
+
+    </RelativeLayout>
+
+</com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+

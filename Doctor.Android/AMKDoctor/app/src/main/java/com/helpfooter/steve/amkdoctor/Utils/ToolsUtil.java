@@ -1,5 +1,9 @@
 package com.helpfooter.steve.amkdoctor.Utils;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.widget.LinearLayout;
+
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
 
@@ -69,5 +73,14 @@ public class ToolsUtil {
 
         return m.matches();
 
+    }
+    public static  LinearLayout GenPLine(Context ctx){
+
+        LinearLayout pLine=new LinearLayout(ctx);
+        LinearLayout.LayoutParams pLineLayout=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1);
+        pLine.setLayoutParams(pLineLayout);
+        pLine.setBackgroundColor(Color.parseColor("#cccccc"));
+
+        return pLine;
     }
 }

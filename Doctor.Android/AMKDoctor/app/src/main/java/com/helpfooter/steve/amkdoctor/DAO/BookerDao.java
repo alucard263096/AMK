@@ -9,6 +9,7 @@ import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,15 @@ public class BookerDao extends AbstractDao {
       return   super.getList(" status='P' order by orderdate desc,ordertime desc");
     }
 
+    public BookerObj getObj(int bookId){
+        ArrayList<AbstractObj> lst=  super.getList("  id= "+bookId);
+           for(AbstractObj abobj:lst){
+            return (BookerObj)abobj;
+        }
+        return null;
+
+    }
+
     @Override
     void gotoCreateTableSql() {
         util.open();
@@ -41,8 +51,8 @@ public class BookerDao extends AbstractDao {
                 "status varchar," +
                 "precessstatus varchar," +
                 "payment varchar," +
-                "orderdate varchar," +
-                "ordertime varchar," +
+                "orderdate TEXT," +
+                "ordertime TEXT," +
                 "doctorid int," +
                 "chattime varchar," +
                 "description varchar)");

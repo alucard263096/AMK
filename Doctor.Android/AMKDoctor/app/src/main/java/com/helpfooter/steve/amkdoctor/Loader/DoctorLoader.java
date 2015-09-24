@@ -44,6 +44,7 @@ public class DoctorLoader extends WebXmlLoader {
 		}
 
 			DoctorDao dao=new DoctorDao(ctx);
+		    dao.deleteTable();
 			dao.batchUpdate(lsObj);
 			if(callBack!=null){
 				callBack.CallBack(lsObj);

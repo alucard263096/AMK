@@ -2,24 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_head"
     android:orientation="vertical" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="5dip" >
-
-        <TextView
-            android:id="@+id/txt_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@color/txt_general_bg"
-            android:textSize="18sp" />
-    </RelativeLayout>
 
     <include
         android:layout_width="match_parent"
@@ -29,32 +12,58 @@
         android:gravity="center_vertical" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_gravity="bottom|right"
+        android:background="#7f7f7f"
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn_endsession"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/endCall"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:layout_weight="1"
-            android:background="@drawable/end_session_bg"
-            android:gravity="center"
-            android:padding="10dip"
-            android:text="@string/end_session"
-            android:textColor="@color/dancen"
-            android:textSize="18sp" />
+            android:background="@drawable/button_background"
+            android:onClick="onEndCall"
+            android:text="@string/endCall1"
+            android:textColor="#ffffff" />
 
-        <ImageView
-            android:id="@+id/img_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="8dip"
-            android:layout_weight="1"
-            android:background="@drawable/btn_switchvideo_background"
-            android:src="@drawable/switchvideo"
-            android:visibility="invisible" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/btn_speakControl"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/speak_on"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/btn_cameraControl"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/camera_on"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/ImgSwichVideo"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/switchvideo" />
+
     </LinearLayout>
 
 </LinearLayout>

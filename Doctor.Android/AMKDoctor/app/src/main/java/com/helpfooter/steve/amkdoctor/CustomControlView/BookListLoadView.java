@@ -1,52 +1,33 @@
 package com.helpfooter.steve.amkdoctor.CustomControlView;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bairuitech.callcenter.VideoActivity;
+
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.Common.UrlImageLoader;
-import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
-import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
 import com.helpfooter.steve.amkdoctor.R;
-import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 import com.helpfooter.steve.amkdoctor.Utils.ToolsUtil;
-import com.helpfooter.steve.amkdoctor.MainActivity;
-import com.bairuitech.bussinesscenter.BussinessCenter;
-import com.bairuitech.bussinesscenter.UserItem;
-import com.bairuitech.bussinesscenter.SessionItem;
-import com.bairuitech.util.DialogFactory;
+import com.helpfooter.steve.amkdoctor.VideoChatActivity;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
-import java.io.File;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -144,7 +125,9 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
             LinearLayout infolayout=getInfoLayout(obj);
             layout.addView(infolayout);
         toplayout.addView(layout);
-            return toplayout;
+        LinearLayout line =ToolsUtil.GenPLine(this.ctx);
+        toplayout.addView(line);
+        return toplayout;
             //layout.setTag(obj);
             //layout.setOnClickListener(this);
             //this.mainlayout.addView(layout);
@@ -251,25 +234,21 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
     @Override
     public void onClick(View v) {
         BookerObj obj=(BookerObj)v.getTag();
-        //UserItem item=new UserItem(Integer.parseInt(obj.getCustid()),obj.getCustname(),"192.168.1.1");
-        /*BussinessCenter.sessionItem = new SessionItem(0, item.getUserId(),
-                obj.getDoctorid());
-        Dialog dialog = DialogFactory.getDialog(DialogFactory.DIALOGID_CALLRESUME,
+       /* UserItem item=new UserItem(Integer.parseInt(obj.getCustid()),obj.getCustname(),"192.168.1.1");
+       *//* BussinessCenter.sessionItem = new SessionItem(0, item.getUserId(),
+                obj.getDoctorid());*//*
+        *//*Dialog dialog = DialogFactory.getDialog(DialogFactory.DIALOGID_CALLRESUME,
                 item, mActivity);
-        dialog.show();*/
-        Intent intent = new Intent();
-        try {
-            intent.setClass(mActivity, VideoActivity.class);
-            // intent.putExtra("Id", obj.getId());
-            mActivity.startActivity(intent);
-        }
-        catch (Exception ex)
-        {
-
-            throw ex;
-        }
-
-
+        dialog.show();*//*
+        BussinessCenter.mContext=this.mActivity;
+        BussinessCenter.getBussinessCenter().onVideoCallStart(
+                0, item.getUserId(),
+                obj.getDoctorid(), "Test");*/
+        Intent intent = new Intent(this.ctx, VideoChatActivity.class);
+        intent.putExtra("docId", String.valueOf(obj.getDoctorid()));
+        intent.putExtra("custId", String.valueOf(obj.getCustid()));
+        intent.putExtra("orderId", String.valueOf(obj.getId()));
+        this.ctx.startActivity(intent);
 
     }
 
@@ -294,7 +273,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
                 {
                     try {
                         while(true) {
-                            sleep(100000);
+                            sleep(1000000);
                             LoadList();
 
                         }

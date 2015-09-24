@@ -18,6 +18,9 @@
     <color name="mylightblue">#81CAE6</color>
 
     //chatAny
+    <color name="trans_white">#20ffffff</color>
+    <color name="trans">#00000000</color>
+    <color name="blue">#cc33b5e5</color>
     <color name="txt_general_bg">#333333</color>
     <color name="bg1">#CCCCCC</color>
     <color name="t_bg1">#333333</color>

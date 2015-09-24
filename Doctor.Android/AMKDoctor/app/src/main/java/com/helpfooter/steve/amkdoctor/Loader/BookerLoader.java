@@ -86,8 +86,13 @@ public class BookerLoader extends WebXmlLoader {
 	@Override
 	public String getCallUrl() {
 		// TODO Auto-generated method stub
-		String url="http://myhkdoc.com/AMK/API/Order/videochat.php?doctor_id=1&last_time=2015-9-5";
-		Log.i("callurl", url);
+		String url=StaticVar.dictHashMap.get("booker");
+		int doc_id=0;
+		if(StaticVar.Doctor!=null){
+			doc_id=StaticVar.Doctor.getId();
+		}
+		url+="?doctor_id="+String.valueOf(doc_id);
+	    Log.i("callurl", url);
 		return url;
 	}
 //

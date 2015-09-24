@@ -26,6 +26,16 @@ public class DoctorDao extends AbstractDao {
       return   super.getList(" status='A' order by general_score desc");
     }
 
+    public DoctorObj getObj(int docId){
+        ArrayList<AbstractObj> lst=  super.getList("  userid= "+docId);
+
+        for(AbstractObj abobj:lst){
+            return (DoctorObj)abobj;
+        }
+        return null;
+
+    }
+
     @Override
     void gotoCreateTableSql() {
         util.open();
