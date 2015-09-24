@@ -224,6 +224,8 @@ public class OrderObj extends AbstractObj {
     public String getActName() {
         if(act.equals("VC")){
             return "视频会诊";
+        }else if(act.equals("CQ")) {
+            return "图文咨询";
         }
         return "未知类型";
     }
@@ -247,5 +249,14 @@ public class OrderObj extends AbstractObj {
             return "立即评价";
         }
         return "未知状态";
+    }
+
+    public String getActDescription() {
+        if(act.equals("VC")){
+            return "用于在指定时间与医生启动视频对话咨询";
+        }else if(act.equals("CQ")) {
+            return "用于在利用文字和图片与医生进行咨询";
+        }
+        return "未知类型";
     }
 }

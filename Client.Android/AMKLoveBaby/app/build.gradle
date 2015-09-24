@@ -24,4 +24,5 @@ dependencies {
     compile files('src/androidTest/java/libs/universal-image-loader-1.9.2-SNAPSHOT-with-sources.jar')
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.google.android.gms:play-services:7.5.0'
+    compile files('libs/alipaySDK-20150818.jar')
 }

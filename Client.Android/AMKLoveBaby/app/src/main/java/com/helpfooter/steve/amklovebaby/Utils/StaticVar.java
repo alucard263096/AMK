@@ -53,4 +53,10 @@ public final class StaticVar {
 		String    str    =    formatter.format(curDate);
 		return str;
 	}
+
+	//ALIPAY
+	public static String AlipayPartnerId="2088911829797670";
+	public static String AlipaySellerId="3188577198@qq.com";
+	public static String AlipayToken="70yr74ztz7uwjtjdxmxrqrlmwuvql63i";
+
 }

@@ -55,6 +55,11 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
         InitUI();
     }
 
+    @Override
+    protected void onResume() {
+        UpdateWorkTable();
+    }
+
     private void InitUI() {
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);

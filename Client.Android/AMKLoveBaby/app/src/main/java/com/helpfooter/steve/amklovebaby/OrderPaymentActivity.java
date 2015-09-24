@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.AlipayMgr;
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -83,35 +84,12 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                 this.finish();
                 return;
             case R.id.btnSubmit:
-                action="PAYMENT";
-                PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.Member.getId(),"ALIPAY");
-                loader.setCallBack(this);
-                loader.start();
+                AlipayMgr mgr=new AlipayMgr(this,order);
+                mgr.pay(v);
                 return;
         }
     }
 
-    private android.os.Handler paymentHandler = new android.os.Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if(res==null){
-                Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
-            }else {
-                switch (res.getId()){
-                    case -103:
-                        Toast.makeText(OrderPaymentActivity.this, "订单已经支付", Toast.LENGTH_LONG).show();
-                        return;
-                    case 0:
-                        Intent intent = new Intent(OrderPaymentActivity.this, PaymentSuccActivity.class);
-                        startActivity(intent);
-                        return;
-                    default:
-                        Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
-                        return;
-                }
-            }
-        }
-    };
 
 
     private android.os.Handler uiInitHandler = new android.os.Handler() {
@@ -125,19 +103,11 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
         }
     };
 
-    String action="LOADORDER";
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
-        if(action.equals("LOADORDER")) {
             if (lstObjs.size() > 0) {
                 order = (OrderObj) lstObjs.get(0);
             }
             uiInitHandler.sendEmptyMessage(0);
-        }else if(action.equals("PAYMENT")){
-            if (lstObjs.size() > 0) {
-                res = (ResultObj) lstObjs.get(0);
-            }
-            paymentHandler.sendEmptyMessage(0);
-        }
     }
 }
