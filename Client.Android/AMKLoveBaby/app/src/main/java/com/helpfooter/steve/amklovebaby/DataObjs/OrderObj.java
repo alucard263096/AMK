@@ -224,7 +224,7 @@ public class OrderObj extends AbstractObj {
     public String getActName() {
         if(act.equals("VC")){
             return "视频会诊";
-        }else if(act.equals("CQ")) {
+        }else if(act.equals("CC")) {
             return "图文咨询";
         }
         return "未知类型";

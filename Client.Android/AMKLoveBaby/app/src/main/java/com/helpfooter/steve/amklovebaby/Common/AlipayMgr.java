@@ -35,13 +35,9 @@ public class AlipayMgr {
         this.order=order;
     }
 
-    // ÉÌ»§PID
     public static final String PARTNER = StaticVar.AlipayPartnerId;
-    // ÉÌ»§ÊÕ¿îÕËºÅ
     public static final String SELLER = StaticVar.AlipaySellerId;
-    // ÉÌ»§Ë½Ô¿£¬pkcs8¸ñÊ½
-    public static final String RSA_PRIVATE = "";
-    // Ö§¸¶±¦¹«Ô¿
+    public static final String RSA_PRIVATE = StaticVar.AlipayRSA;
     public static final String RSA_PUBLIC = "";
     private static final int SDK_PAY_FLAG = 1;
 
@@ -53,33 +49,28 @@ public class AlipayMgr {
                 case SDK_PAY_FLAG: {
                     PayResult payResult = new PayResult((String) msg.obj);
 
-                    // Ö§¸¶±¦·µ»Ø´Ë´ÎÖ§¸¶½á¹û¼°¼ÓÇ©£¬½¨Òé¶ÔÖ§¸¶±¦Ç©ÃûĞÅÏ¢ÄÃÇ©Ô¼Ê±Ö§¸¶±¦Ìá¹©µÄ¹«Ô¿×öÑéÇ©
                     String resultInfo = payResult.getResult();
 
                     String resultStatus = payResult.getResultStatus();
 
-                    // ÅĞ¶ÏresultStatus Îª¡°9000¡±Ôò´ú±íÖ§¸¶³É¹¦£¬¾ßÌå×´Ì¬Âë´ú±íº¬Òå¿É²Î¿¼½Ó¿ÚÎÄµµ
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Intent intent = new Intent(ctx, PaymentSuccActivity.class);
                         ctx.startActivity(intent);
                     } else {
-                        // ÅĞ¶ÏresultStatus Îª·Ç¡°9000¡±Ôò´ú±í¿ÉÄÜÖ§¸¶Ê§°Ü
-                        // ¡°8000¡±´ú±íÖ§¸¶½á¹ûÒòÎªÖ§¸¶ÇşµÀÔ­Òò»òÕßÏµÍ³Ô­Òò»¹ÔÚµÈ´ıÖ§¸¶½á¹ûÈ·ÈÏ£¬×îÖÕ½»Ò×ÊÇ·ñ³É¹¦ÒÔ·şÎñ¶ËÒì²½Í¨ÖªÎª×¼£¨Ğ¡¸ÅÂÊ×´Ì¬£©
+
                         if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(ctx, "Ö§¸¶½á¹ûÈ·ÈÏÖĞ",
+                            Toast.makeText(ctx, "æ”¯ä»˜ç»“æœç¡®è®¤ä¸­",
                                     Toast.LENGTH_SHORT).show();
 
                         } else {
-                            // ÆäËûÖµ¾Í¿ÉÒÔÅĞ¶ÏÎªÖ§¸¶Ê§°Ü£¬°üÀ¨ÓÃ»§Ö÷¶¯È¡ÏûÖ§¸¶£¬»òÕßÏµÍ³·µ»ØµÄ´íÎó
-                            Toast.makeText(ctx, "Ö§¸¶Ê§°Ü",
-                                    Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(ctx, "æ”¯ä»˜å¤±è´¥,è¯·æ£€æŸ¥æ”¯ä»˜å®çŠ¶æ€å’Œç½‘ç»œ",
+                                    Toast.LENGTH_LONG).show();
                         }
                     }
                     break;
                 }
                 case SDK_CHECK_FLAG: {
-                    Toast.makeText(ctx, "¼ì²é½á¹ûÎª£º" + msg.obj,
+                    Toast.makeText(ctx, "æ£€æŸ¥ç»“æœä¸ºï¼š" + msg.obj,
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -88,17 +79,13 @@ public class AlipayMgr {
             }
         };
     };
-    /**
-     * call alipay sdk pay. µ÷ÓÃSDKÖ§¸¶
-     *
-     */
     public void pay(View v) {
         if (TextUtils.isEmpty(PARTNER) || TextUtils.isEmpty(RSA_PRIVATE)
                 || TextUtils.isEmpty(SELLER)) {
             new AlertDialog.Builder(this.ctx)
-                    .setTitle("¾¯¸æ")
-                    .setMessage("Need to deploy")
-                    .setPositiveButton("È·¶¨",
+                    .setTitle("è­¦å‘Š")
+                    .setMessage("éœ€è¦é…ç½®")
+                    .setPositiveButton("ç¡®å®š",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(
                                         DialogInterface dialoginterface, int i) {
@@ -108,19 +95,16 @@ public class AlipayMgr {
                             }).show();
             return;
         }
-        // ¶©µ¥
+
         String orderInfo = getOrderInfo();
 
-        // ¶Ô¶©µ¥×öRSA Ç©Ãû
         String sign = sign(orderInfo);
         try {
-            // ½öĞè¶Ôsign ×öURL±àÂë
             sign = URLEncoder.encode(sign, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        // ÍêÕûµÄ·ûºÏÖ§¸¶±¦²ÎÊı¹æ·¶µÄ¶©µ¥ĞÅÏ¢
         final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
                 + getSignType();
 
@@ -128,36 +112,29 @@ public class AlipayMgr {
 
             @Override
             public void run() {
-                // ¹¹ÔìPayTask ¶ÔÏó
-                PayTask alipay = new PayTask(ctx);
-                // µ÷ÓÃÖ§¸¶½Ó¿Ú£¬»ñÈ¡Ö§¸¶½á¹û
-                String result = alipay.pay(payInfo);
+                try{
+                    PayTask alipay = new PayTask(ctx);
+                    String result = alipay.pay(payInfo);
 
-                Message msg = new Message();
-                msg.what = SDK_PAY_FLAG;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
+                    Message msg = new Message();
+                    msg.what = SDK_PAY_FLAG;
+                    msg.obj = result;
+                    mHandler.sendMessage(msg);
+                }catch (Exception ex){
+                 ex.printStackTrace();
+                }
             }
         };
 
-        // ±ØĞëÒì²½µ÷ÓÃ
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
-
-    /**
-     * check whether the device has authentication alipay account.
-     * ²éÑ¯ÖÕ¶ËÉè±¸ÊÇ·ñ´æÔÚÖ§¸¶±¦ÈÏÖ¤ÕË»§
-     *
-     */
     public void check(View v) {
         Runnable checkRunnable = new Runnable() {
 
             @Override
             public void run() {
-                // ¹¹ÔìPayTask ¶ÔÏó
                 PayTask payTask = new PayTask(ctx);
-                // µ÷ÓÃ²éÑ¯½Ó¿Ú£¬»ñÈ¡²éÑ¯½á¹û
                 boolean isExist = payTask.checkAccountIfExist();
 
                 Message msg = new Message();
@@ -172,76 +149,46 @@ public class AlipayMgr {
 
     }
 
-    /**
-     * get the sdk version. »ñÈ¡SDK°æ±¾ºÅ
-     *
-     */
     public void getSDKVersion() {
         PayTask payTask = new PayTask(ctx);
         String version = payTask.getVersion();
         Toast.makeText(ctx, version, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * create the order info. ´´½¨¶©µ¥ĞÅÏ¢
-     *
-     */
     public String getOrderInfo() {
 
-        // Ç©Ô¼ºÏ×÷ÕßÉí·İID
         String orderInfo = "partner=" + "\"" + PARTNER + "\"";
 
-        // Ç©Ô¼Âô¼ÒÖ§¸¶±¦ÕËºÅ
         orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
 
-        // ÉÌ»§ÍøÕ¾Î¨Ò»¶©µ¥ºÅ
         orderInfo += "&out_trade_no=" + "\"" + order.getOrder_no() + "\"";
 
-        // ÉÌÆ·Ãû³Æ
         orderInfo += "&subject=" + "\"" + order.getActName() + "\"";
 
-        // ÉÌÆ·ÏêÇé
         orderInfo += "&body=" + "\"" + order.getActDescription() + "\"";
 
-        // ÉÌÆ·½ğ¶î
         orderInfo += "&total_fee=" + "\"" + "0.01" + "\"";
 
-        // ·şÎñÆ÷Òì²½Í¨ÖªÒ³ÃæÂ·¾¶
         orderInfo += "&notify_url=" + "\"" + "http://notify.msp.hk/notify.htm"
                 + "\"";
 
-        // ·şÎñ½Ó¿ÚÃû³Æ£¬ ¹Ì¶¨Öµ
         orderInfo += "&service=\"mobile.securitypay.pay\"";
 
-        // Ö§¸¶ÀàĞÍ£¬ ¹Ì¶¨Öµ
         orderInfo += "&payment_type=\"1\"";
 
-        // ²ÎÊı±àÂë£¬ ¹Ì¶¨Öµ
         orderInfo += "&_input_charset=\"utf-8\"";
 
-        // ÉèÖÃÎ´¸¶¿î½»Ò×µÄ³¬Ê±Ê±¼ä
-        // Ä¬ÈÏ30·ÖÖÓ£¬Ò»µ©³¬Ê±£¬¸Ã±Ê½»Ò×¾Í»á×Ô¶¯±»¹Ø±Õ¡£
-        // È¡Öµ·¶Î§£º1m¡«15d¡£
-        // m-·ÖÖÓ£¬h-Ğ¡Ê±£¬d-Ìì£¬1c-µ±Ìì£¨ÎŞÂÛ½»Ò×ºÎÊ±´´½¨£¬¶¼ÔÚ0µã¹Ø±Õ£©¡£
-        // ¸Ã²ÎÊıÊıÖµ²»½ÓÊÜĞ¡Êıµã£¬Èç1.5h£¬¿É×ª»»Îª90m¡£
+
         orderInfo += "&it_b_pay=\"30m\"";
 
-        // extern_tokenÎª¾­¹ı¿ìµÇÊÚÈ¨»ñÈ¡µ½µÄalipay_open_id,´øÉÏ´Ë²ÎÊıÓÃ»§½«Ê¹ÓÃÊÚÈ¨µÄÕË»§½øĞĞÖ§¸¶
         // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
 
-        // Ö§¸¶±¦´¦ÀíÍêÇëÇóºó£¬µ±Ç°Ò³ÃæÌø×ªµ½ÉÌ»§Ö¸¶¨Ò³ÃæµÄÂ·¾¶£¬¿É¿Õ
         //orderInfo += "&return_url=\"m.alipay.com\"";
 
-        // µ÷ÓÃÒøĞĞ¿¨Ö§¸¶£¬ĞèÅäÖÃ´Ë²ÎÊı£¬²ÎÓëÇ©Ãû£¬ ¹Ì¶¨Öµ £¨ĞèÒªÇ©Ô¼¡¶ÎŞÏßÒøĞĞ¿¨¿ì½İÖ§¸¶¡·²ÅÄÜÊ¹ÓÃ£©
         // orderInfo += "&paymethod=\"expressGateway\"";
 
         return orderInfo;
     }
-
-    /**
-     * get the out_trade_no for an order. Éú³ÉÉÌ»§¶©µ¥ºÅ£¬¸ÃÖµÔÚÉÌ»§¶ËÓ¦±£³ÖÎ¨Ò»£¨¿É×Ô¶¨Òå¸ñÊ½¹æ·¶£©
-     *
-     */
     public String getOutTradeNo() {
         SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss",
                 Locale.getDefault());
@@ -254,20 +201,10 @@ public class AlipayMgr {
         return key;
     }
 
-    /**
-     * sign the order info. ¶Ô¶©µ¥ĞÅÏ¢½øĞĞÇ©Ãû
-     *
-     * @param content
-     *            ´ıÇ©Ãû¶©µ¥ĞÅÏ¢
-     */
     public String sign(String content) {
         return SignUtils.sign(content, RSA_PRIVATE);
     }
 
-    /**
-     * get the sign type we use. »ñÈ¡Ç©Ãû·½Ê½
-     *
-     */
     public String getSignType() {
         return "sign_type=\"RSA\"";
     }
