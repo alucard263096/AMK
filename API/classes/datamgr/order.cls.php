@@ -155,7 +155,7 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		$sql="insert into tb_order_payment (order_id,payment) values ($id ,'N')";
 		$query = $this->dbmgr->query($sql);
 
-		return true;
+		return $id;
 	}
 
 	public function createCharchatOrder($doctor_id,$member_id,$name,$mobile,$description){
@@ -194,10 +194,10 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		
 		
 		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"CC",$price);
-		if($rs!=true){
+		if(is_array($rs)){
 			return $rs;
 		}
-		
+		$id=$rs;
 		$sql="insert into tb_order_charchat (order_id,doctor_id) values ($id ,$doctor_id )";
 		$query = $this->dbmgr->query($sql);
 
@@ -249,9 +249,10 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		}
 		
 		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"VC",$price);
-		if($rs!=true){
+		if(is_array($rs)){
 			return $rs;
 		}
+		$id=$rs;
 		
 		$sql="insert into tb_order_videochat (order_id,doctor_id) values ($id ,$doctor_id )";
 		$query = $this->dbmgr->query($sql);
