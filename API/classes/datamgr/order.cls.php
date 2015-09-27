@@ -267,7 +267,7 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		$this->dbmgr->begin_trans();
 		
 		
-		$sql="update tb_order_charchat set content=ifnull(content,'')+'{|}$str',last_one='$str' where order_id=$order_id and doctor_id=$doctor_id   ";
+		$sql="update tb_order_charchat set content=isnull(content,'')+'{|}$str',last_one='$str' where order_id=$order_id and doctor_id=$doctor_id   ";
 		$query = $this->dbmgr->query($sql);
 		
 		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id   ";
