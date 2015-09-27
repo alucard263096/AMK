@@ -253,12 +253,13 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		return	outResult(0,"success",$id);
 	}
 	///$type=txt,img,doc
-	public function addContentToCharchat($order,$doctor_id,$sendside,$type,$content){
+	public function addContentToCharchat($order_id,$doctor_id,$sendside,$type,$content){
 		
-		$order=parameter_filter($order);
+		$order_id=parameter_filter($order_id);
 		$sendside=parameter_filter($sendside);
 		$type=parameter_filter($type);
 		$content=parameter_filter($content);
+		$doctor_id=parameter_filter($doctor_id);
 		
 		$str="$sendside:$type:$content";
 		
