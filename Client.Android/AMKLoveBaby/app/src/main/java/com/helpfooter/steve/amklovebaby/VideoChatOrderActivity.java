@@ -44,7 +44,7 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
     private int mDay;
 
     static final int DATE_DIALOG_ID=0;
-
+    boolean firstrun=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +53,7 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
 
         InitData();
         InitUI();
-    }
 
-    @Override
-    protected void onResume() {
-        UpdateWorkTable();
     }
 
     private void InitUI() {

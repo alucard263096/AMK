@@ -115,6 +115,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "API", "http://localhost:150
 		SlnRelativePath = "API\"
 	EndProjectSection
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PaymentGateway", "http://localhost:53179", "{B4618E3C-2344-4838-90F8-09A85146E5C0}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53179"
+		Debug.AspNetCompiler.PhysicalPath = "PaymentGateway\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53179\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53179"
+		Release.AspNetCompiler.PhysicalPath = "PaymentGateway\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53179\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "PaymentGateway\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +162,10 @@ Global
 		{6A32011E-35FD-4847-A7CF-CE1FC9ADF8FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A32011E-35FD-4847-A7CF-CE1FC9ADF8FC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A32011E-35FD-4847-A7CF-CE1FC9ADF8FC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B4618E3C-2344-4838-90F8-09A85146E5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4618E3C-2344-4838-90F8-09A85146E5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4618E3C-2344-4838-90F8-09A85146E5C0}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4618E3C-2344-4838-90F8-09A85146E5C0}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

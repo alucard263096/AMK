@@ -84,8 +84,16 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                 this.finish();
                 return;
             case R.id.btnSubmit:
-                AlipayMgr mgr=new AlipayMgr(this,order);
-                mgr.pay(v);
+                //AlipayMgr mgr=new AlipayMgr(this,order);
+                //mgr.pay(v);
+
+                action="PAYMENT";
+                PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.Member.getId(),"ALIPAY");
+                loader.setCallBack(this);
+                loader.start();
+
+
+
                 return;
         }
     }
@@ -103,11 +111,41 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
         }
     };
 
+    private android.os.Handler paymentHandler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if(res==null){
+                Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
+            }else {
+                switch (res.getId()){
+                    case -103:
+                        Toast.makeText(OrderPaymentActivity.this, "订单已经支付", Toast.LENGTH_LONG).show();
+                        return;
+                    case 0:
+                        Intent intent = new Intent(OrderPaymentActivity.this, PaymentSuccActivity.class);
+                        startActivity(intent);
+                        return;
+                    default:
+                        Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
+                        return;
+                }
+            }
+        }
+    };
+
+    String action="LOADORDER";
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
+        if(action.equals("LOADORDER")) {
             if (lstObjs.size() > 0) {
                 order = (OrderObj) lstObjs.get(0);
             }
             uiInitHandler.sendEmptyMessage(0);
+        }else if(action.equals("PAYMENT")){
+            if (lstObjs.size() > 0) {
+                res = (ResultObj) lstObjs.get(0);
+            }
+            paymentHandler.sendEmptyMessage(0);
+        }
     }
 }

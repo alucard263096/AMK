@@ -64,6 +64,8 @@ public class OrderDetailLoadView implements View.OnClickListener {
                 if(withouttime<3600*1000){
                     btnSubmit.setText("已超过预约时间");
                     btnSubmit.setBackgroundColor(Color.parseColor("#cccccc"));
+                }else {
+                    btnSubmit.setOnClickListener(this);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
