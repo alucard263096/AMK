@@ -234,7 +234,7 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		if($doctor["enable_videochat"]!='Y'){
 			return	outResult(-106,"doctor did not enable videochat");
 		}
-		$price=doctor["videochat_price"];
+		$price=$doctor["videochat_price"];
 		//enable_videochat
 
 		$order_date=parameter_filter($order_date);
