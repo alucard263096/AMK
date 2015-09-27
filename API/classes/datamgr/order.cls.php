@@ -54,7 +54,7 @@
 		}
 		$doctor_id=parameter_filter($doctor_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,doctor_id,content,last_one
+		$sql="select id,doctor_id,member_id,content,last_one
 		from v_order                 
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
 		where doctor_id=$doctor_id and id=$order_id ";
