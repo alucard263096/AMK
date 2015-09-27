@@ -49,12 +49,15 @@
 		if($doctor_id==""){
 			return	outResult(-1,"doctor_id can not be null");
 		}
+		if($order_id==""){
+			return	outResult(-2,"order_id can not be null");
+		}
 		$doctor_id=parameter_filter($doctor_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select id,doctor_id,content,last_one
 		from v_order                 
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
-		where doctor_id=$doctor_id ";
+		where doctor_id=$doctor_id and id=$order_id ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time' ";
 		}
@@ -64,25 +67,6 @@
 		return $result;
 	}
 
-	public function getVideochatOrderList($doctor_id,$lastupdate_time)
-	{
-		if($doctor_id==""){
-			return	outResult(-1,"doctor_id can not be null");
-		}
-		$doctor_id=parameter_filter($doctor_id);
-		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,chat_time ,description
-		from v_order                 
-		inner join dbo.tb_order_videochat AS ov ON act = 'VC' AND id = ov.order_id
-		where doctor_id=$doctor_id ";
-		if($lastupdate_time!=""){
-		$sql.=" and updated_date>'$lastupdate_time'  ";
-		}
-		//echo $sql;
-		$query = $this->dbmgr->query($sql);
-		$result = $this->dbmgr->fetch_array_all($query); 
-		return $result;
-	}
 	
 	public function getVideochatOrderList($doctor_id,$lastupdate_time)
 	{
@@ -174,6 +158,54 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		return true;
 	}
 
+	public function createCharchatOrder($doctor_id,$member_id,$name,$mobile,$description){
+		
+		//read to create 
+		$this->dbmgr->begin_trans();
+		
+		if($doctor_id==""){
+			return	outResult(-1,"doctor_id can not be null");
+		}
+
+		$doctor_id=parameter_filter($doctor_id);
+		$sql="select * from tb_doctor where id=$doctor_id and status='A'";
+		$query = $this->dbmgr->query($sql);
+		$doctorlist = $this->dbmgr->fetch_array_all($query); 
+		if(count($doctorlist)==0){
+			return	outResult(-101,"doctor is inactived");
+		}
+		$doctor=$doctorlist[0];
+
+		if($doctor["enable_charchat"]!='Y'){
+			return	outResult(-106,"doctor did not enable charchat");
+		}
+		$price=doctor["charchat_price"];
+		//enable_videochat
+
+		$sql="select count(1) from tb_order o
+		inner join tb_order_videochat ov on o.id=ov.order_id
+		where ov.doctor_id=$doctor_id and o.order_date='$order_date'  and o.order_time='$order_time'  and o.status not in ('F','C','D')  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		if($result[0]>0){
+			return	outResult(-103,"order date have been used");
+		}
+		
+		
+		
+		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"CC",$price);
+		if($rs!=true){
+			return $rs;
+		}
+		
+		$sql="insert into tb_order_charchat (order_id,doctor_id) values ($id ,$doctor_id )";
+		$query = $this->dbmgr->query($sql);
+
+
+		$this->dbmgr->commit_trans();
+		return	outResult(0,"success",$id);
+	}
+
 	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description){
 		
 		//read to create 
@@ -202,7 +234,7 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		if($doctor["enable_videochat"]!='Y'){
 			return	outResult(-106,"doctor did not enable videochat");
 		}
-
+		$price=doctor["videochat_price"];
 		//enable_videochat
 
 		$order_date=parameter_filter($order_date);
@@ -216,7 +248,10 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 			return	outResult(-103,"order date have been used");
 		}
 		
-
+		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"VC",$price);
+		if($rs!=true){
+			return $rs;
+		}
 		
 		$sql="insert into tb_order_videochat (order_id,doctor_id) values ($id ,$doctor_id )";
 		$query = $this->dbmgr->query($sql);
@@ -224,6 +259,30 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 
 		$this->dbmgr->commit_trans();
 		return	outResult(0,"success",$id);
+	}
+	///$type=txt,img,doc
+	public function addContentToCharchat($order,$doctor_id,$sendside,$type,$content){
+		
+		$order=parameter_filter($order);
+		$sendside=parameter_filter($sendside);
+		$type=parameter_filter($type);
+		$content=parameter_filter($content);
+		
+		$str="$sendside:$type:$content";
+		
+		//read to create 
+		$this->dbmgr->begin_trans();
+		
+		
+		$sql="update tb_order_charchat set content=content+'{|}$str',last_one='$str' where order_id=$order_id and doctor_id=$doctor_id   ";
+		$query = $this->dbmgr->query($sql);
+		
+		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id   ";
+		$query = $this->dbmgr->query($sql);
+		
+		$this->dbmgr->commit_trans();
+		return	outResult(0,"success",$id);
+		
 	}
 
 	
