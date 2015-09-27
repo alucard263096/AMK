@@ -179,7 +179,7 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		if($doctor["enable_charchat"]!='Y'){
 			return	outResult(-106,"doctor did not enable charchat");
 		}
-		$price=doctor["charchat_price"];
+		$price=$doctor["charchat_price"];
 		//enable_videochat
 
 		$sql="select count(1) from tb_order o
