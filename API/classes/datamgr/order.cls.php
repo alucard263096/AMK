@@ -182,15 +182,6 @@ inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
 		$price=$doctor["charchat_price"];
 		//enable_videochat
 
-		$sql="select count(1) from tb_order o
-		inner join tb_order_videochat ov on o.id=ov.order_id
-		where ov.doctor_id=$doctor_id and o.order_date='$order_date'  and o.order_time='$order_time'  and o.status not in ('F','C','D')  ";
-		$query = $this->dbmgr->query($sql);
-		$result = $this->dbmgr->fetch_array($query); 
-		if($result[0]>0){
-			return	outResult(-103,"order date have been used");
-		}
-		
 		
 		
 		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"CC",$price);
