@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
@@ -85,27 +86,39 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         }
     };
 
+    int i=0;
     private void OnloadOrder() {
-
+        i=0;
         for(OrderObj obj:lstOrder){
-            LinearLayout sublayout=null;
-            if(obj.getAct().equals("VC")){
-                sublayout=gerVideoChatLayout(obj);
+            try {
+                i++;
+                LinearLayout sublayout = null;
+                if (obj.getAct().equals("VC")) {
+                    DoctorDao doctorDao=new DoctorDao(this.ctx);
+                    DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
+                    sublayout = getDoctorIntoLayout(obj, "预约通话时间:" + obj.getOrder_date() + " " + obj.getOrder_time(), String.valueOf(obj.getPrice()) + "元/20分钟");
+                }else if (obj.getAct().equals("CC")){
+                    DoctorDao doctorDao=new DoctorDao(this.ctx);
+                    DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
+                    sublayout = getDoctorIntoLayout(obj, obj.getDescription(), String.valueOf(obj.getPrice()) + "元/次");
+                }
+                if (sublayout != null) {
+                    sublayout.setTag(obj);
+                    sublayout.setOnClickListener(this);
+                    //layout.addView(sublayout);
+                    lstLayout.add(sublayout);
+                }
             }
-            if(sublayout!=null){
-                sublayout.setTag(obj);
-                sublayout.setOnClickListener(this);
-                //layout.addView(sublayout);
-                lstLayout.add(sublayout);
-
+            catch (Exception ex){
+                ex.printStackTrace();
             }
         }
     }
 
-    private LinearLayout gerVideoChatLayout(OrderObj obj) {
+    private LinearLayout getDoctorIntoLayout(OrderObj obj,String orderTitle,String orderPrice) {
+
         DoctorDao doctorDao=new DoctorDao(this.ctx);
         DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
-
 
         PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParam();
@@ -131,7 +144,7 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
 
 
         MyTextView txtAct = new MyTextView(this.ctx);
-        txtAct.setText("/视频咨询");
+        txtAct.setText("/"+obj.getActName());
         txtAct.setTextSize(17);
 
         MyTextView txtOrderNo = new MyTextView(this.ctx);
@@ -173,12 +186,12 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         dcLayout.setLayoutParams(dcparam);
         dcLayout.setOrientation(LinearLayout.VERTICAL);
         MyTextView txtOrderTime=new MyTextView(this.ctx);
-        txtOrderTime.setText("预约通话时间:" + obj.getOrder_date() + " " + obj.getOrder_time());
+        txtOrderTime.setText(orderTitle);
         txtOrderTime.setTextSize(17);
         dcLayout.addView(txtOrderTime);
 
         MyTextView txtPrice=new MyTextView(this.ctx);
-        txtPrice.setText(String.valueOf(obj.getPrice()) + "元/20分钟");
+        txtPrice.setText(orderPrice);
         txtPrice.setTextSize(16);
         txtPrice.setTextColor(this.ctx.getResources().getColor(R.color.mydeepblue));
         dcLayout.addView(txtPrice);

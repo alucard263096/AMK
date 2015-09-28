@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -44,6 +45,14 @@ public class OrderDetailLoadView implements View.OnClickListener {
             sv.addView(GenDetailField("医生信息",doctor.getName()));
             sv.addView(ToolsUtil.GenPLine(ctx));
             sv.addView(GenDetailField("预约时间",order.getOrder_date()+" "+order.getOrder_time()));
+            sv.addView(ToolsUtil.GenPLine(ctx));
+        }
+        if(order.getAct().equals("CC")){
+            DoctorDao doctorDao=new DoctorDao(ctx);
+            DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.parseInt(order.getTag()));
+            sv.addView(GenDetailField("医生信息",doctor.getName()));
+            sv.addView(ToolsUtil.GenPLine(ctx));
+            sv.addView(GenDetailField("病情描述",order.getDescription()));
             sv.addView(ToolsUtil.GenPLine(ctx));
         }
     }
@@ -141,6 +150,9 @@ public class OrderDetailLoadView implements View.OnClickListener {
             Intent intent = new Intent(ctx, VideoChatActivity.class);
             intent.putExtra("Id", order.getId());
             ctx.startActivity(intent);
+        }else if(order.getStatus().equals("P")&&order.getAct().equals("CC")) {
+            //
+            Toast.makeText(this.ctx, "Coming Soon", Toast.LENGTH_LONG).show();
         }
     }
 

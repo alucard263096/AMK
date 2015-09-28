@@ -243,8 +243,10 @@ public class OrderObj extends AbstractObj {
     public String getStatusAction() {
         if(status.equals("T")){
             return "立即付款";
-        }else if(status.equals("P")) {
+        }else if(status.equals("P")&&act.equals("VC")) {
             return "开始视频会诊";
+        }else if(status.equals("P")&&act.equals("CC")) {
+            return "开始图文咨询";
         }else if (status.equals("F")){
             return "立即评价";
         }
