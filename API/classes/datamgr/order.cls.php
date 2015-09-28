@@ -97,6 +97,8 @@
 		$sql="select * from (
 ( select v.*,v1.doctor_id tag from v_order v
 inner join tb_order_videochat v1 on v.id=v1.order_id and v.act='VC')
+  union ( select v.*,v1.doctor_id tag from v_order v
+inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 ) v
 		where member_id=$member_id ";
 		if($lastupdate_time!=""){
