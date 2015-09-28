@@ -43,6 +43,7 @@
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/layoutMainInfo"
         android:orientation="vertical"
         app:layout_widthPercent="90%"
         app:layout_marginTopPercent="2%"
@@ -64,82 +65,6 @@
             android:layout_height="1px"
             android:background="#37A4D4"
             app:layout_widthPercent="100%" />
-
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            app:layout_marginTopPercent="3%">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
-                android:gravity="center"
-                android:background="@color/mylightblue"
-                android:text="预约医生"
-                android:textColor="#ffffff"/>
-            <TextView
-                android:id="@+id/txtDoctorName"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="75%"
-                android:gravity="center"
-                android:background="#cccccc"
-                android:text="陈有为"
-                android:textColor="#ffffff"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
-
-
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            app:layout_marginTopPercent="3%">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
-                android:gravity="center"
-                android:background="@color/mylightblue"
-                android:text="预约费用"
-                android:textColor="#ffffff"/>
-            <TextView
-                android:id="@+id/txtPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="75%"
-                android:gravity="center"
-                android:background="#cccccc"
-                android:text="100元/20分钟"
-                android:textColor="#ffffff"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
-
-
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            app:layout_marginTopPercent="3%">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
-                android:gravity="center"
-                android:background="@color/mylightblue"
-                android:text="预约时间"
-                android:textColor="#ffffff"/>
-            <TextView
-                android:id="@+id/txtOrderDatetime"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="75%"
-                android:gravity="center"
-                android:background="#cccccc"
-                android:text="2015-9-18 5:30"
-                android:textColor="#ffffff"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
         <TextView
             android:layout_width="wrap_content"

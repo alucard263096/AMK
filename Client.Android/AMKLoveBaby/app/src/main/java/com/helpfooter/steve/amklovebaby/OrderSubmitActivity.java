@@ -8,16 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
-import com.helpfooter.steve.amklovebaby.Loader.VideochatOrderCreateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import java.util.ArrayList;
@@ -26,14 +22,13 @@ import java.util.ArrayList;
 public abstract class OrderSubmitActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
 
     ImageView btnBack;
-
     EditText txtName,txtMobile,txtDescription;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vedio_order_submit);
+        setContentView(R.layout.activity_order_submit);
 
         if(MemberMgr.CheckIsLogin(this)) {
             InitData();
@@ -52,11 +47,7 @@ public abstract class OrderSubmitActivity extends Activity implements View.OnCli
         InitUI();
     }
 
-    protected void InitData() {
-        Intent intent = getIntent();
-        int id = intent.getIntExtra("Id", 0);
-        DoctorDao dao=new DoctorDao(this);
-    }
+    abstract void InitData();
 
     protected void InitUI() {
         btnBack = (ImageView) findViewById(R.id.btnBack);

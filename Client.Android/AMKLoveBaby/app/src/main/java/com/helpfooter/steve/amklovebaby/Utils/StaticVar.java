@@ -18,6 +18,7 @@ public final class StaticVar {
 	public static String NewsContentApi="newscontent";
 	public static String WorktimeApi="worktime";
 	public static String VideochatOrderCreateApi="videochatordercreate";
+	public static String CharchatOrderCreateApi="charchatordercreate";
 	public static String OrderGetApi="orderget";
 	public static String PaymentApi="payment";
 	public static String LoginSendApi="loginsend";
@@ -34,7 +35,8 @@ public final class StaticVar {
 		dictHashMap.put(WorktimeApi,APIURL+"doctor/doctor_worktime.php");
 		dictHashMap.put(NewsApi,APIURL+"news.php");
 		dictHashMap.put(NewsContentApi,APIURL+"news/news_get.php?news_id=");
-		dictHashMap.put(VideochatOrderCreateApi,APIURL+"Order/videochat_create.php");//?doctor_id=1&order_date=2015-9-7&order_time=9:30&member_id=1&description=verygood");
+		dictHashMap.put(VideochatOrderCreateApi,APIURL+"Order/videochat_create.php");
+		dictHashMap.put(CharchatOrderCreateApi,APIURL+"Order/charchat_create.php");//?doctor_id=1&order_date=2015-9-7&order_time=9:30&member_id=1&description=verygood");
 		dictHashMap.put(OrderGetApi,APIURL+"Order/order_get.php");
 		dictHashMap.put(PaymentApi,APIURL+"Order/order_payment.php");
 		dictHashMap.put(LoginSendApi,APIURL+"Member/login_send.php");
