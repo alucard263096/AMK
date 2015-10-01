@@ -4,7 +4,8 @@
 
   $doctor_id=$_REQUEST["doctor_id"];
   $last_time=$_REQUEST["last_time"];
-  $result=$orderMgr->getCharchatOrderList($doctor_id,$last_time);
+  $status=$_REQUEST["status"];
+  $result=$orderMgr->getCharchatOrderList($doctor_id,$last_time,$status);
 
   outputXml($result);
 

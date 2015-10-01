@@ -23,12 +23,13 @@
 		
 	}
 	
-	public function getCharchatOrderList($doctor_id,$lastupdate_time)
+	public function getCharchatOrderList($doctor_id,$lastupdate_time,$status)
 	{
 		if($doctor_id==""){
 			return	outResult(-1,"doctor_id can not be null");
 		}
 		$doctor_id=parameter_filter($doctor_id);
+		$status=parameter_filter($status);
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,last_one ,description
 		from v_order                 
@@ -36,6 +37,9 @@
 		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
+		}
+		if($status!=""){
+		$sql.=" and status='$status'  ";
 		}
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
@@ -61,6 +65,7 @@
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time' ";
 		}
+		$sql.=" order by updated_date desc ";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -68,7 +73,7 @@
 	}
 
 	
-	public function getVideochatOrderList($doctor_id,$lastupdate_time)
+	public function getVideochatOrderList($doctor_id,$lastupdate_time,$onlyactive)
 	{
 		if($doctor_id==""){
 			return	outResult(-1,"doctor_id can not be null");
@@ -82,6 +87,10 @@
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time'  ";
 		}
+		if($onlyactive=="Y"){
+		$sql.=" and status='P' and (order_date+' '+order_time)>GETDATE()  ";
+		}
+		$sql.=" order by order_date ,order_time ";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
