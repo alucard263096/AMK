@@ -65,7 +65,7 @@
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time' ";
 		}
-		$sql.=" order by updated_date desc ";
+		$sql.=" order by  ";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -127,7 +127,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		if($member_id==""){
 			return	outResult(-4,"member_id can not be null");
 		}
-		
+		$order_date=$this->formatOrderDate($order_date);
+		$order_time=$this->formatOrderTime($order_time);
 
 		
 		$member_id=parameter_filter($member_id);
@@ -167,6 +168,29 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$query = $this->dbmgr->query($sql);
 
 		return $id;
+	}
+
+	public function formatOrderDate($order_date){
+		if($order_date!=""){
+			$arr=explode("-",$order_date);
+			$year=intval($arr[0]);
+			$month=intval($arr[1]);
+			$day=intval($arr[2]);
+			$str=$year."-".($month<10?"0".$month:$month)."-".($day<10?"0".$day:$day);
+			return $str;
+		}
+		return $order_date;
+	}
+	public function formatOrderTime($order_time){
+		if($order_time!=""){
+			$arr=explode(":",$order_time);
+			$hour=intval($arr[0]);
+			$minute=intval($arr[1]);
+			$second=intval($arr[2]);
+			$str=($hour<10?"0".$hour:$hour).":".($minute<10?"0".$minute:$minute).":".($second<10?"0".$second:$second);
+			return $str;
+		}
+		return $order_time;
 	}
 
 	public function createCharchatOrder($doctor_id,$member_id,$name,$mobile,$description){
