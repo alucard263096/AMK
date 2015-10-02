@@ -16,7 +16,7 @@
                     <ul class="nav navbar-nav">
                         {{foreach from=$SystemMenu.mainmenus.mainmenu item=rs}}
                         <li class="dropdown">
-                            <a id="mnu{{$rs.module}}" href="{{if $rs.url=="" || $rs.opennew=="1"}}#{{else}}{{$rs.url}}{{/if}}" class="{{if $rs.opennew=="1"}}opennewwindow{{/if}} dropdown-toggle {{if $rs.module==$MyModule}}active{{/if}}" data-hover="dropdown">{{$rs.name}} {{if $rs.submenus!=""}}<b class="caret"></b>{{/if}}</a>
+                            <a id="mnu{{$rs.module}}" href="{{if $rs.url=="" || $rs.opennew=="1"}}#{{else}}{{$rs.url}}{{/if}}" class="{{if $rs.opennew=="1"}}opennewwindow{{/if}} dropdown-toggle {{if $rs.module==$MyModule}}active{{/if}}" data-hover="dropdown" url="{{$rs.url}}">{{$rs.name}} {{if $rs.submenus!=""}}<b class="caret"></b>{{/if}}</a>
                             {{if $rs.submenus!=""}}
                             <ul class="dropdown-menu">
                                 {{foreach from=$rs.submenus.submenu item=sub}}
@@ -40,9 +40,18 @@
 
         $(".opennewwindow").click(function () {
 
-            var url = "http://www.baidu.com";// $(this).attr("url");
-            var winName = $(this).attr("id");
-
+            var url = $(this).attr("url");
+            var name = $(this).attr("id");
+            var feature = "height=600,width=800";
+            feature += ",directories=no";
+            feature += ",scrollbars=no";
+            feature += ",resizable=no";
+            feature += ",location=no";
+            feature += ",menubar=no";
+            feature += ",titlebar=no";
+            feature += ",toolbar=no";
+            //feature = "";
+            window.open("{{$rootpath}}/" + url, name, feature, true);
 
         });
     });

@@ -187,12 +187,12 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         dcLayout.setOrientation(LinearLayout.VERTICAL);
         MyTextView txtOrderTime=new MyTextView(this.ctx);
         txtOrderTime.setText(orderTitle);
-        txtOrderTime.setTextSize(17);
+        txtOrderTime.setTextSize(16);
         dcLayout.addView(txtOrderTime);
 
         MyTextView txtPrice=new MyTextView(this.ctx);
         txtPrice.setText(orderPrice);
-        txtPrice.setTextSize(16);
+        txtPrice.setTextSize(15);
         txtPrice.setTextColor(this.ctx.getResources().getColor(R.color.mydeepblue));
         dcLayout.addView(txtPrice);
 

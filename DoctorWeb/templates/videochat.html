@@ -1,0 +1,302 @@
+{{include  file="$smarty_root/header.html" }}
+<!-- 加载AnyChat for Web SDK库  -->
+<script language="javascript" type="text/javascript" src="{{$rootpath}}/vendors/anychat/anychatsdk.js"></script>
+<script language="javascript" type="text/javascript" src="{{$rootpath}}/vendors/anychat/anychatevent.js"></script>
+<script language="javascript" type="text/javascript" src="{{$rootpath}}/vendors/anychat/anychatobject.js"></script>
+                <!-- content -->
+<!-- content -->
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-xs-5" style="height: 500px;">
+            <div class="col-xs-12" style="height:100%;" id="remotevideodiv">
+
+            </div>
+        </div>
+        <div class="col-xs-3" style="height: 500px; ">
+            <div class="col-xs-12" style="height: 30%;padding-left:0px;padding-right:0px; " id="myvideodiv">
+
+            </div>
+            <div class="col-xs-12" style="height: 70%; padding-left: 0px; padding-right: 0px;">
+                <div class="panel panel-default" style="height: 100%;">
+                    <div class="panel-heading">
+                        <div class="text-muted bootstrap-admin-box-title">实时文字</div>
+                    </div>
+                    <div class="bootstrap-admin-panel-content" style="padding:0px; ">
+                        <textarea id="chat_content" style="width: 100%;height:150px;" disabled="disabled"></textarea>
+                        <textarea id="chat_mysend" style="width: 100%;height:120px;" placeholder="填写内容，立即发送"></textarea>
+                        <div style="text-align:right;padding-top:10px;">
+                            <button class="btn btn-xs btn-success">发送</button>
+                            <button class="btn btn-xs btn-warning">图片</button>
+                            <button class="btn btn-xs btn-danger">文件</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4" id="order_list" style="">
+           
+        </div>
+        <style>
+            #order_list {
+                height: 500px;
+                overflow-y: scroll;
+            }
+        </style>
+    </div>
+</div>
+
+    <script>
+         i=0;
+        lastupdatetime = "";
+        function refreshOrderList() {
+            url = "{{$apipath}}Order/videochat.php?doctor_id={{$doctor_id}}&onlyactive=Y";
+            if (lastupdatetime != "") {
+                url += "&last_time=" + lastupdatetime;
+            } else {
+                url += "&onlyactive=Y" ;
+            }
+            //alert(i++);
+            $.get(url,null, function (data) {
+                $("#order_list").html("");
+                $(data).find('table').find('row').each(function (index, ele) {
+                    updateOrder($(ele));
+                });
+                reorderOrderList();
+                checkIfTimecome();
+                //lastupdatetime = getDatetimeStr();
+                //alert(lastupdatetime);
+            });
+        }
+        function checkIfTimecome() {
+            $(".orderobj").each(function (index, domEle) {
+                var order_id = $(this).attr("order_id");
+                var order_datetime = $(this).attr("order_datetime");
+                var diff = ((Date.parse(order_datetime.replace(/\-/g, "\/")) - Date.parse(getDatetimeStr().replace(/\-/g, "\/"))) / 60 / 1000);
+                if (diff <= 15) {
+                    if (order_id != roomId) {
+                        infoDialog("您有一个视频会诊预约将于" + order_datetime + "开始，请注意");
+                        window.focus();
+                        return;
+                    }
+                }
+            });
+        }
+        function updateOrder(dataobj) {
+
+            var order_id = dataobj.find('id').text();
+            var order_no = dataobj.find('order_no').text();
+            var name = dataobj.find('name').text();
+            var mobile = dataobj.find('mobile').text();
+            var order_date = dataobj.find('order_date').text();
+            var order_time = dataobj.find('order_time').text();
+            var description = dataobj.find('description').text();
+            var status = dataobj.find('status').text();
+
+            if (status != "P") {
+                if ($("#order_"+order_id).length > 0) {
+                    $("#order_" + order_id).remove();
+                }
+            } else {
+                if ($("#order_" + order_id).length > 0) {
+                    $("#order_" + order_id).attr("order_datetime", order_date + " " + order_time);
+                    $("#order_" + order_id + "_" + "order_no").text(order_no);
+                    $("#order_" + order_id + "_" + "name").text(name);
+                    $("#order_" + order_id + "_" + "mobile").text(mobile);
+                    $("#order_" + order_id + "_" + "order_datetime").text(order_date+" "+order_time);
+                    $("#order_" + order_id + "_" + "description").text(description);
+                } else {
+                    var str = "<div class=\"panel orderobj panel-default\" id='order_" + order_id + "' order_datetime='" + order_date + " " + order_time + "' order_id='" + order_id + "'>";
+                    str+="<div class=\"panel-heading\">";
+                    str+="<div id='order_"+order_id+"_order_no' class=\"text-muted bootstrap-admin-box-title\">"+order_no+"</div>";
+                    str+="</div>";
+                    str+="<div class=\"bootstrap-admin-panel-content\">";
+                    str += "<div>姓名：<span id='order_" + order_id + "_name'>" + name + "</span></div>";
+                    str += "<div>电话：<span id='order_" + order_id + "_mobile'>" + mobile + "</span></div>";
+                    str += "<div>预约时间：<span id='order_" + order_id + "_order_datetime'>" + order_date + " " + order_time + "</span></div>";
+                    str += "<div>病情描述：<span id='order_" + order_id + "_description'>" + description + "</span></div>";
+                    str += "<div style='text-align:right;padding-top:5px;'><button class=\"btnStartOrder btn btn-sm btn-primary\" onclick='startchat("+order_id+");'>开始会诊</button></div>";
+                    str+="</div>";
+                    str+="</div>";
+                    str += "";
+
+                    $("#order_list").append(str);
+                }
+            }
+        }
+        function reorderOrderList() {
+            $(".orderobj").each(function (index, domEle) {
+                var str = $(this).attr("order_datetime");
+                var diff = ((Date.parse(str.replace(/\-/g, "\/")) - Date.parse(getDatetimeStr().replace(/\-/g, "\/"))) );
+                //alert(diff);
+                if (diff < 0) {
+                    $(this).remove();
+                }
+            });
+            //var div = $('.orderobj').toArray().sort(function (a, b) {
+            //    var diff = Date.parse($(a).attr("order_datetime").replace(/\-/g, "\/")) - Date.parse($(b).attr("order_datetime").replace(/\-/g, "\/"));
+                //alert(diff>0);
+            //    return diff > 0;
+            //});
+            
+            //$(div).appendTo("#order_list");
+
+        }
+
+        function getDatetimeStr() {
+            var d = new Date()
+            var vYear = d.getFullYear()
+            var vMon = d.getMonth() + 1
+            var vDay = d.getDate()
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var se = d.getSeconds();
+             return vYear + "-" + vMon + "-" + vDay + " " + h + ":" + m + ":" + se;
+        }
+
+        function str2date(str) {
+            str = str.replace(/-/g, "/");
+            var date = new Date(str);
+        }
+        function confirmExit() {
+            return "您是否要刷新或者关闭当前会话窗口？";
+        }
+        mSelfUserId = -1;
+        roomId = 0;
+        mTargetUserId = -1;
+        function startchat(order_id) {
+            //
+            $(".btnStartOrder").prop("disabled", "disabled");
+            $(".btnStartOrder").text("开始会诊");
+            $(".btnStartOrder").removeClass("btn-warning");
+            onloadevent();
+            errorcode = BRAC_Connect("{{$VideoCharServer}}", parseInt("{{$VideoCharServerPort}}"));
+            //alert(errorcode);
+            //errorcode = 
+            //errorcode = BRAC_EnterRoom(1, "", 0); //进入房间
+            //alert(errorcode);
+            roomId = order_id;
+        }
+
+        // 客户端连接服务器，bSuccess表示是否连接成功，errorcode表示出错代码
+        function OnAnyChatConnect(bSuccess, errorcode) {
+            //AddLog("OnAnyChatConnect(errorcode=" + errorcode + ")", LOG_TYPE_EVENT);
+
+            $(".btnStartOrder").prop("disabled", "");
+            $("#order_" + roomId + " .btnStartOrder").text("会诊中").addClass("btn-warning");
+            if (errorcode == 0) {
+                BRAC_Login("{{$doctor_id}}", "{{$doctor_name}}", 0);
+            }
+            else {
+                warningDialog("视频服务器连接失败");
+            }
+        }
+        // 客户端登录系统，dwUserId表示自己的用户ID号，errorcode表示登录结果：0 成功，否则为出错代码，参考出错代码定义
+        function OnAnyChatLoginSystem(dwUserId, errorcode) {
+            if (errorcode == 0) {
+                //ConfigAnyChatParameter();
+                mSelfUserId = dwUserId;
+                BRAC_EnterRoom(roomId, "", 0); //进入房间
+            } else {
+                warningDialog("登录视频服务器失败");
+            }
+        }
+        // 客户端进入房间，dwRoomId表示所进入房间的ID号，errorcode表示是否进入房间：0成功进入，否则为出错代码
+        function OnAnyChatEnterRoom(dwRoomId, errorcode) {
+            if (errorcode == 0) {
+                //warningDialog("进入视频服务器房间成功");
+                //RoomUserListControl(mSelfUserId, true);		// 将自己插入用户列表
+                BRAC_UserCameraControl(mSelfUserId, 1); 	// 打开本地视频
+                BRAC_UserSpeakControl(mSelfUserId, 1); 		// 打开本地语音
+
+                //ShowNotifyMessage("Welcome use AnyChat, successfully enter the room:" + dwRoomId, NOTIFY_TYPE_SYSTEM);
+                //// 设置本地视频显示位置
+                BRAC_SetVideoPos(mSelfUserId, GetID("myvideodiv"), "ANYCHAT_VIDEO_LOCAL");
+                //// 设置远程视频显示位置（没有关联到用户，只是占位置）
+                BRAC_SetVideoPos(0, GetID("remotevideodiv"), "ANYCHAT_VIDEO_REMOTE");
+
+                //mRefreshVolumeTimer = setInterval(function () {
+                //    GetID("LocalAudioVolume").style.width = GetID("AnyChatLocalVideoDiv").offsetHeight * BRAC_QueryUserStateInt(mSelfUserId, BRAC_USERSTATE_SPEAKVOLUME) / 100 + "px";
+                //    if (mTargetUserId != -1)
+                //        GetID("RemoteAudioVolume").style.width = GetID("AnyChatRemoteVideoDiv").offsetHeight * BRAC_QueryUserStateInt(mTargetUserId, BRAC_USERSTATE_SPEAKVOLUME) / 100 + "px";
+                //    else
+                //        GetID("RemoteAudioVolume").style.width = "0px";
+                //}, 100);
+            } else {
+
+                warningDialog("进入视频服务器房间失败");
+            }
+        }
+        // 收到当前房间的在线用户信息，进入房间后触发一次，dwUserCount表示在线用户数（包含自己），dwRoomId表示房间ID
+        function OnAnyChatRoomOnlineUser(dwUserCount, dwRoomId) {
+            var useridlist = BRAC_GetOnlineUser();
+            // 请求其中一个用户的音视频
+            for (var k = 0; k < useridlist.length; k++) {
+                if (useridlist[k] == mSelfUserId)
+                    continue;
+                RequestOtherUserVideo(useridlist[k]);
+                break;
+            }
+        }
+        // 用户进入（离开）房间，dwUserId表示用户ID号，bEnterRoom表示该用户是进入（1）或离开（0）房间
+        function OnAnyChatUserAtRoom(dwUserId, bEnterRoom) {
+            if (bEnterRoom == 1) {
+                if (mTargetUserId == -1)						// 默认打开一个用户的音视频
+                    RequestOtherUserVideo(dwUserId);
+            }
+            else {
+                //ShowNotifyMessage(BRAC_GetUserName(dwUserId) + "&nbspleave room!", NOTIFY_TYPE_NORMAL);
+                if (dwUserId == mTargetUserId) {			// 当前被请求的用户离开房间，默认请求房间中其它用户的音视频
+                    mTargetUserId = -1;
+                  BRAC_SetVideoPos(0, GetID("remotevideodiv"), "ANYCHAT_VIDEO_REMOTE");
+                }
+            }
+        }
+        // 打开指定用户的音视频
+        function RequestOtherUserVideo(userid) {
+            // 判断是否需要关闭之前已请求的用户音视频数据
+            if (mTargetUserId != -1) {
+                //reVideoDivSize();
+                BRAC_UserCameraControl(mTargetUserId, 0);
+                BRAC_UserSpeakControl(mTargetUserId, 0);
+            }
+            mTargetUserId = userid; 					//设置被点用户ID为全局变量
+            BRAC_UserCameraControl(userid, 1); 		// 请求对方视频
+            BRAC_UserSpeakControl(userid, 1); 		// 请求对方语音
+            // 设置远程视频显示位置
+            BRAC_SetVideoPos(userid, GetID("remotevideodiv"), "ANYCHAT_VIDEO_REMOTE");
+            alert("open request");
+            //MicrophoneOnclick(userid); // 为当前视频会话用户话筒按钮添加点击事件
+        }
+        function GetID(id) {
+            if (document.getElementById) {
+                return document.getElementById(id);
+            } else if (window[id]) {
+                return window[id];
+            }
+            return null;
+        }
+        function onloadevent() {
+            try{
+                BRAC_Logout();
+            } catch (e) {
+
+            }
+        }
+        $(document).ready(function () {
+            $("#navbar").hide();
+            $("#mainmenu").hide();
+            $("body").css("padding-top", "10px");
+            window.onbeforeunload = confirmExit;
+            window.onunload = onloadevent;
+            refreshOrderList();
+            window.setInterval(refreshOrderList, 1000 * 60 * 10);
+
+            var NEED_ANYCHAT_APILEVEL = "0"; 						// 定义业务层需要的AnyChat API Level
+            var errorcode = BRAC_InitSDK(NEED_ANYCHAT_APILEVEL); 	// 初始化插件
+            if (errorcode != 0) {
+                infoDialog("请先点击<a href='http://anychat.oss-cn-hangzhou.aliyuncs.com/AnyChatWebSetup.exe'>下载</a>安装视频会诊组件然后重启浏览器");
+            }
+
+        });
+    </script>
+    {{include  file="$smarty_root/footer.html" }}
