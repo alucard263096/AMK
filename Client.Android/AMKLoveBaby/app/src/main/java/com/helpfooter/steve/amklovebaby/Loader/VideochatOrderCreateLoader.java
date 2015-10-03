@@ -9,6 +9,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.WorktimeObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,13 +42,17 @@ public class VideochatOrderCreateLoader extends WebXmlLoader {
     public String getCallUrl() {
         // TODO Auto-generated method stub
         String url=StaticVar.dictHashMap.get(callApi);
-        url= (url+"?doctor_id="+String.valueOf(doctor_id)
-                +"&order_date="+order_date
-                +"&order_time="+order_time
-                +"&member_id="+String.valueOf(member_id)
-                +"&name="+name
-                +"&mobile="+mobile
-                +"&description="+description).replace(" ", "%20").replace("\n","%20");
+        try {
+            url= (url+"?doctor_id="+String.valueOf(doctor_id)
+                    +"&order_date="+order_date
+                    +"&order_time="+order_time
+                    +"&member_id="+String.valueOf(member_id)
+                    +"&name="+java.net.URLEncoder.encode(name,"utf-8")
+                    +"&mobile="+mobile
+                    +"&description="+java.net.URLEncoder.encode(description,"utf-8")).replace(" ", "%20").replace("\n","%20");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         Log.i("ordercreate_url",url);
 
         return url;
