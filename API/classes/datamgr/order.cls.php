@@ -31,7 +31,8 @@
 		$doctor_id=parameter_filter($doctor_id);
 		$status=parameter_filter($status);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,last_one ,description
+		$sql="select id,order_no,member_id,name,mobile,price,created_time,updated_date,status,process_status,payment,order_date,order_time,
+		doctor_id,last_one ,description,SUBSTRING(last_one,1,1) sendside
 		from v_order                 
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
 		where doctor_id=$doctor_id ";
@@ -41,6 +42,7 @@
 		if($status!=""){
 		$sql.=" and status='$status'  ";
 		}
+		$sql.=" order by sendside,updated_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -58,14 +60,13 @@
 		}
 		$doctor_id=parameter_filter($doctor_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,doctor_id,member_id,content,last_one
+		$sql="select id,doctor_id,member_id,content,last_one,updated_date
 		from v_order                 
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
 		where doctor_id=$doctor_id and id=$order_id ";
 		if($lastupdate_time!=""){
 		$sql.=" and updated_date>'$lastupdate_time' ";
 		}
-		$sql.=" order by  ";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -224,11 +225,20 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 			return $rs;
 		}
 		$id=$rs;
-		$sql="insert into tb_order_charchat (order_id,doctor_id) values ($id ,$doctor_id )";
+		$sql="insert into tb_order_charchat (order_id,doctor_id,content,last_one) values ($id ,$doctor_id,
+		'{|}C:TXT:$description','C:TXT:$description' )";
 		$query = $this->dbmgr->query($sql);
 
 
 		$this->dbmgr->commit_trans();
+		return	outResult(0,"success",$id);
+	}
+
+	public function finishOrder($order_id){
+		
+		$order_id=parameter_filter($order_id);
+		$sql="update tb_order set status='F' where  id=$order_id  ";
+		$query = $this->dbmgr->query($sql);
 		return	outResult(0,"success",$id);
 	}
 
