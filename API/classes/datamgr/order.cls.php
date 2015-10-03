@@ -123,12 +123,12 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 	public function createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,$act,$price){
 	
 		
+		$order_date=$this->formatOrderDate($order_date);
+		$order_time=$this->formatOrderTime($order_time);
 		
 		if($member_id==""){
 			return	outResult(-4,"member_id can not be null");
 		}
-		$order_date=$this->formatOrderDate($order_date);
-		$order_time=$this->formatOrderTime($order_time);
 
 		
 		$member_id=parameter_filter($member_id);
@@ -234,6 +234,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description){
 		
+		$order_date=$this->formatOrderDate($order_date);
+		$order_time=$this->formatOrderTime($order_time);
 		//read to create 
 		$this->dbmgr->begin_trans();
 		
