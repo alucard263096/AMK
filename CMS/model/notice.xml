@@ -2,7 +2,7 @@
 <root>
   <name>消息中心</name>
   <tablename>tb_notice</tablename>
-  <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
+  <searchcondition>r_main.status&lt;&gt;'D' and r_main.sent_type in ('M','D')</searchcondition>
   <fields>
     <field>
       <name>标题</name>

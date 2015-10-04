@@ -3,8 +3,8 @@
 
 class XmlModel
 {
-  private $XmlData;
-  private $PageName;
+  public $XmlData;
+  public $PageName;
 
   public function __construct($name,$pagename){
       $xmlstr=$this->loadXmlFile($name);
