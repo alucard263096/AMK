@@ -235,7 +235,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 	public function finishOrder($order_id){
 		
 		$order_id=parameter_filter($order_id);
-		$sql="update tb_order set status='F' where  id=$order_id  ";
+		$sql="update tb_order set status='F',finished_time=getdate() where  id=$order_id  ";
 		$query = $this->dbmgr->query($sql);
 		return	outResult(0,"success",$id);
 	}

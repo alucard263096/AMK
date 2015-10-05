@@ -49,18 +49,39 @@
       </submenus>
     </mainmenu>
     <mainmenu>
-      <module>report</module>
+      <module>order</module>
+      <name>订单管理</name>
+      <submenus>
+        <submenu>
+          <id>videoorder_list</id>
+          <name>视频会诊订单查询</name>
+          <url>/Order/videoorder.php</url>
+        </submenu>
+        <submenu>
+          <id>charorder_list</id>
+          <name>图文咨询订单查询</name>
+          <url>/Order/charorder.php</url>
+        </submenu>
+      </submenus>
+    </mainmenu>
+    <mainmenu>
+      <module>statistics</module>
       <name>数据统计</name>
       <submenus>
         <submenu>
-          <id>report_1</id>
-          <name>报表1</name>
-          <url>#</url>
+          <id>videostatistics_list</id>
+          <name>视频会诊收入统计</name>
+          <url>/Statistics/videostatistics.php</url>
         </submenu>
         <submenu>
-          <id>report_1</id>
-          <name>报表1</name>
-          <url>#</url>
+          <id>chatstatistics_list</id>
+          <name>图文咨询收入统计</name>
+          <url>/Statistics/chatstatistics.php</url>
+        </submenu>
+        <submenu>
+          <id>statistics_list</id>
+          <name>收入统计</name>
+          <url>/Statistics/statistics.php</url>
         </submenu>
       </submenus>
     </mainmenu>

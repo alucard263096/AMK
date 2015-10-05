@@ -32,7 +32,7 @@
 			$doctor["user_name"]=$doctor["name"];
 			$_SESSION[SESSIONNAME]["SysUser"]=$doctor;
 			
-			WindowRedirect($CONFIG['smarty']['rootpath']."/Admin/about.php");
+			WindowRedirect($CONFIG['smarty']['rootpath']."/Admin/dashboard.php");
 			exit();
 		}
 	}
