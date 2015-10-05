@@ -7,7 +7,7 @@ class OrderXmlModel extends XmlModel{
 	}
 
 	public function Save($dbMgr,$request,$sysuser){
-		$remark=$request["remark"];
+		$remark=parameter_filter($request["remark"]);
 		$id=$request["primary_id"];
 		$sql="update tb_order set remark='$remark'  where id=$id ";
 		$query = $dbMgr->query($sql);
