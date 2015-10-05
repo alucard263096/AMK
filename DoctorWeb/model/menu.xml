@@ -69,19 +69,14 @@
       <name>数据统计</name>
       <submenus>
         <submenu>
-          <id>videostatistics_list</id>
-          <name>视频会诊收入统计</name>
-          <url>/Statistics/videostatistics.php</url>
+          <id>orderstatistics_list</id>
+          <name>订单数据统计</name>
+          <url>/Statistics/orderstatistics.php</url>
         </submenu>
         <submenu>
-          <id>chatstatistics_list</id>
-          <name>图文咨询收入统计</name>
-          <url>/Statistics/chatstatistics.php</url>
-        </submenu>
-        <submenu>
-          <id>statistics_list</id>
-          <name>收入统计</name>
-          <url>/Statistics/statistics.php</url>
+          <id>other</id>
+          <name>其它统计</name>
+          <url>#</url>
         </submenu>
       </submenus>
     </mainmenu>
