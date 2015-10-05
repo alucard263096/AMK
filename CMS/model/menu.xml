@@ -101,5 +101,21 @@
         </submenu>
       </submenus>
     </mainmenu>
+      <mainmenu>
+      <module>order</module>
+      <name>订单管理</name>
+      <submenus>
+        <submenu>
+          <id>order_list</id>
+          <name>订单查询</name>
+          <url>/Order/order.php</url>
+        </submenu>
+        <submenu>
+          <id>doctorcalendar</id>
+          <name>Comming Soon</name>
+          <url>#</url>
+        </submenu>
+      </submenus>
+    </mainmenu>
   </mainmenus>
 </root>

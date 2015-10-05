@@ -72,7 +72,7 @@
     </field>
     <field>
       <name>备注</name>
-      <key>remarks</key>
+      <key>remark</key>
       <type>longtext</type>
     </field>
     <field>
