@@ -36,34 +36,26 @@
         </div>
     </div>
     -->
+    {{if $StatisticsItemCount>0}}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default bootstrap-admin-no-table-panel">
                 <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Statistics</div>
-                    <div class="pull-right"><span class="badge">View More</span></div>
+                    <div class="text-muted bootstrap-admin-box-title">日常统计</div>
                 </div>
                 <div class="bootstrap-admin-panel-content bootstrap-admin-no-table-panel-content collapse in">
+                    {{foreach from=$StatisticsItem item=rs}}
                     <div class="col-md-3">
-                        <div class="easyPieChart" style="width: 110px; height: 110px; line-height: 110px;" data-percent="73">73%<canvas width="110" height="110"></canvas><canvas width="110" height="110"></canvas></div>
-                        <div class="chart-bottom-heading"><span class="label label-info">Visitors</span></div>
+                        <div class="easyPieChart" style="width: 110px; height: 110px; line-height: 110px;" data-percent="{{$rs.percent}}">{{$rs.percent}}%<canvas width="110" height="110"></canvas><canvas width="110" height="110"></canvas></div>
+                        <div class="chart-bottom-heading"><a href='{{$rs.link}}'><span class="label label-info">{{$rs.name}}</span></a></div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="easyPieChart" style="width: 110px; height: 110px; line-height: 110px;" data-percent="53">53%<canvas width="110" height="110"></canvas><canvas width="110" height="110"></canvas></div>
-                        <div class="chart-bottom-heading"><span class="label label-info">Page Views</span></div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="easyPieChart" style="width: 110px; height: 110px; line-height: 110px;" data-percent="83">83%<canvas width="110" height="110"></canvas><canvas width="110" height="110"></canvas></div>
-                        <div class="chart-bottom-heading"><span class="label label-info">Users</span></div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="easyPieChart" style="width: 110px; height: 110px; line-height: 110px;" data-percent="13">13%<canvas width="110" height="110"></canvas><canvas width="110" height="110"></canvas></div>
-                        <div class="chart-bottom-heading"><span class="label label-info">Orders</span></div>
-                    </div>
+                    {{/foreach}}
                 </div>
             </div>
         </div>
     </div>
+    {{/if}}
+    {{if $ReminderList>0}}
     <div class="row">
         {{foreach from=$ReminderList item=rs}}
         {{if $rs.count>0}}
@@ -97,6 +89,8 @@
         {{/if}}
         {{/foreach}}
     </div>
+    {{/if}}
+    {{if $GalleryCount>0}}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -160,21 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="text-muted bootstrap-admin-box-title">Panel without data</div>
-                    <div class="pull-right"><span class="badge">0</span></div>
-                </div>
-                <div class="panel-body">
-                    <div class="no-data">
-                        Sorry, no data to display
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{/if}}
 </div>
 
 <script type="text/javascript" src="{{$rootpath}}/vendors/easypiechart/jquery.easy-pie-chart.js"></script>
