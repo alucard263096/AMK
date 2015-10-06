@@ -23,6 +23,22 @@
       <search>1</search>
     </field>
     <field>
+      <name>图表类型</name>
+      <key>chart_type</key>
+      <type>select</type>
+      <options>
+        <option>
+          <name>收入走势</name>
+          <value>P</value>
+        </option>
+        <option>
+          <name>订单数量</name>
+          <value>C</value>
+        </option>
+      </options>
+      <search>1</search>
+    </field>
+    <field>
       <name>日期</name>
       <key>dateranger</key>
       <type>datetime</type>
@@ -51,6 +67,10 @@
   <javascripts>
     <javascript>
       <filename>orderstatistics.js</filename>
+      <search>1</search>
+    </javascript>
+    <javascript>
+      <filename>../../vendors/Highcharts/js/highcharts.src.js</filename>
       <search>1</search>
     </javascript>
     <javascript>
