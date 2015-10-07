@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
+import com.helpfooter.steve.amklovebaby.Common.VersionUpdateMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
@@ -45,6 +46,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     private MemberMainFragment memberMainFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
+    VersionUpdateMgr versionUpdateMgr;
 
     private BottomBarButton homeBarButton,newsBarButton,doctorBarButton,memberMainBarButton;
 
@@ -81,6 +83,8 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         Log.i("screen_info_Dpi", String.valueOf(densityDpi));
 
         MemberMgr.GetMemberInfoFromDb(this);
+        versionUpdateMgr=new VersionUpdateMgr(this);
+        versionUpdateMgr.startCheckVersion();
 
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
