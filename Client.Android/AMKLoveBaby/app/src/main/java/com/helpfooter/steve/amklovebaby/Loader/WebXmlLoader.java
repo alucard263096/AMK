@@ -79,13 +79,13 @@ public abstract class WebXmlLoader extends Thread{
 		InputStream is=null;
 		URL url;
 		try {
+			//path = java.net.URLEncoder.encode(path,"utf-8");
 			url = new URL(path);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
 	        conn.setConnectTimeout(5000);  
 	        conn.setRequestMethod("GET");  
 	        conn.setDoInput(true);  
-	        if (conn.getResponseCode() == 200) {  
-	
+	        if (conn.getResponseCode() == 200) {
 	             is = conn.getInputStream();
 	            return is;
 	        }

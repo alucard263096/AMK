@@ -135,7 +135,7 @@
 		$rh=$from_h;
 		$rm=$from_m;
 		for($i<0;$i<$intvaltime;$i++){
-			$str=$rh.":".($rm<10?"0".$rm:$rm);
+			$str=($rh<10?"0".$rh:$rh).":".($rm<10?"0".$rm:$rm);
 			$used="N";
 			if($this->inResultArray($ordertime,$str)){
 				$used= "Y";

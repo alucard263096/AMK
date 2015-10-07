@@ -224,6 +224,8 @@ public class OrderObj extends AbstractObj {
     public String getActName() {
         if(act.equals("VC")){
             return "视频会诊";
+        }else if(act.equals("CC")) {
+            return "图文咨询";
         }
         return "未知类型";
     }
@@ -241,11 +243,22 @@ public class OrderObj extends AbstractObj {
     public String getStatusAction() {
         if(status.equals("T")){
             return "立即付款";
-        }else if(status.equals("P")) {
+        }else if(status.equals("P")&&act.equals("VC")) {
             return "开始视频会诊";
+        }else if(status.equals("P")&&act.equals("CC")) {
+            return "开始图文咨询";
         }else if (status.equals("F")){
             return "立即评价";
         }
         return "未知状态";
+    }
+
+    public String getActDescription() {
+        if(act.equals("VC")){
+            return "用于在指定时间与医生启动视频对话咨询";
+        }else if(act.equals("CQ")) {
+            return "用于在利用文字和图片与医生进行咨询";
+        }
+        return "未知类型";
     }
 }

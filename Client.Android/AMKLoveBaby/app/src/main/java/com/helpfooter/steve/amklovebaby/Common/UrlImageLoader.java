@@ -36,7 +36,11 @@ public class UrlImageLoader extends Thread {
         String name = ToolsUtil.Encryption(this.url) + this.url.substring(this.url.lastIndexOf("."));
         File file = new File(f, name);
         if (file.exists()) {
-            imgView.setImageURI(Uri.fromFile(file));
+            try{
+                imgView.setImageURI(Uri.fromFile(file));
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
 	}
 	public void run(){

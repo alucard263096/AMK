@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.AlipayMgr;
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -83,13 +84,32 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                 this.finish();
                 return;
             case R.id.btnSubmit:
+                //AlipayMgr mgr=new AlipayMgr(this,order);
+                //mgr.pay(v);
+
                 action="PAYMENT";
                 PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.Member.getId(),"ALIPAY");
                 loader.setCallBack(this);
                 loader.start();
+
+
+
                 return;
         }
     }
+
+
+
+    private android.os.Handler uiInitHandler = new android.os.Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if(order==null){
+                Toast.makeText(OrderPaymentActivity.this, "订单加载失败，请检查网络", Toast.LENGTH_LONG).show();
+            }else {
+                InitUI();
+            }
+        }
+    };
 
     private android.os.Handler paymentHandler = new android.os.Handler() {
         @Override
@@ -109,18 +129,6 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                         Toast.makeText(OrderPaymentActivity.this, "订单支付失败", Toast.LENGTH_LONG).show();
                         return;
                 }
-            }
-        }
-    };
-
-
-    private android.os.Handler uiInitHandler = new android.os.Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            if(order==null){
-                Toast.makeText(OrderPaymentActivity.this, "订单加载失败，请检查网络", Toast.LENGTH_LONG).show();
-            }else {
-                InitUI();
             }
         }
     };

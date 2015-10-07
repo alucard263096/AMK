@@ -18,6 +18,7 @@ public final class StaticVar {
 	public static String NewsContentApi="newscontent";
 	public static String WorktimeApi="worktime";
 	public static String VideochatOrderCreateApi="videochatordercreate";
+	public static String CharchatOrderCreateApi="charchatordercreate";
 	public static String OrderGetApi="orderget";
 	public static String PaymentApi="payment";
 	public static String LoginSendApi="loginsend";
@@ -34,7 +35,8 @@ public final class StaticVar {
 		dictHashMap.put(WorktimeApi,APIURL+"doctor/doctor_worktime.php");
 		dictHashMap.put(NewsApi,APIURL+"news.php");
 		dictHashMap.put(NewsContentApi,APIURL+"news/news_get.php?news_id=");
-		dictHashMap.put(VideochatOrderCreateApi,APIURL+"Order/videochat_create.php");//?doctor_id=1&order_date=2015-9-7&order_time=9:30&member_id=1&description=verygood");
+		dictHashMap.put(VideochatOrderCreateApi,APIURL+"Order/videochat_create.php");
+		dictHashMap.put(CharchatOrderCreateApi,APIURL+"Order/charchat_create.php");//?doctor_id=1&order_date=2015-9-7&order_time=9:30&member_id=1&description=verygood");
 		dictHashMap.put(OrderGetApi,APIURL+"Order/order_get.php");
 		dictHashMap.put(PaymentApi,APIURL+"Order/order_payment.php");
 		dictHashMap.put(LoginSendApi,APIURL+"Member/login_send.php");
@@ -53,4 +55,23 @@ public final class StaticVar {
 		String    str    =    formatter.format(curDate);
 		return str;
 	}
+
+	//ALIPAY
+	public static String AlipayPartnerId="2088911829797670";
+	public static String AlipaySellerId="3188577198@qq.com";
+	public static String AlipayToken="70yr74ztz7uwjtjdxmxrqrlmwuvql63i";
+	public static String AlipayRSA="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAL/Rx6qA1AWYQtm7" +
+			"2tjKbzosKsdbUZQWD3/Xh2sK87gbi5ox2tMdPZqWPIIcSsFDnfBFPbyYtXqebiwR" +
+			"Y75o//qwS4VxdRUfY0HLnShFvgu0K4Ml+qe0FHbwayXrzV9Ik3HHzeah57y37Bd4" +
+			"PMNyQRNBDo1zbqBERwspGkilCVExAgMBAAECgYBa7TwyjKL0i/qUb8ILpdoXvzwA" +
+			"CD+hbNuoBCjDCwwAp74DN8K89E1xa+n+2x5sgnrpnEjpj5HnMBaVeSDI78j23zVm" +
+			"8yraVA+bpwYIfjGR0SrxUuXCk6b7NV0IvuS+kBraAIS8J9SFealuawS3mgN/XKJv" +
+			"IN/qq0MepnlESV2vYQJBAPaQ75BX6DUrro2X06AIT61Q4oAcl8X8+7wa6zd0g+6c" +
+			"+CMdv0Vzn7M3ACzbIhSHbCOCNmMh0f21AFo2Sp0/to0CQQDHKJyQ4smLDlvDCrlT" +
+			"/xM0lSfovRJO43XDRJfBzMGI/O9SuMjFlJ6j6CHSd5P2BHcjVbDf4vfhbZY9ue0q" +
+			"RB41AkAnGORj5wyTIdIT8bdE8QxxVxoTZnVKl8rzEPGrYXZqJ8nRB66EvMjeCiKk" +
+			"+jp1NuQW3VbycTJzIHhl1aYPOUMhAkEAwTVh5qFNOw0b8nTF5HoRzLJi/EPorgW2" +
+			"6k/yFb4ph1cyagMAK8YJvSNnJIKDVWlxlyL7q8fKCLVCyvFD5vwcfQJBAOSi5swX" +
+			"q6eBjtBPA7DnWi/+VOgV69hWfcrIZzxIVbfdzvUXWD9NBFe6G2eZRx50pWab1iTd" +
+			"Ju5b8IIkuhvYb1I=";
 }

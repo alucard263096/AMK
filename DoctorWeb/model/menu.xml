@@ -49,17 +49,33 @@
       </submenus>
     </mainmenu>
     <mainmenu>
-      <module>report</module>
+      <module>order</module>
+      <name>订单管理</name>
+      <submenus>
+        <submenu>
+          <id>videoorder_list</id>
+          <name>视频会诊订单查询</name>
+          <url>/Order/videoorder.php</url>
+        </submenu>
+        <submenu>
+          <id>charorder_list</id>
+          <name>图文咨询订单查询</name>
+          <url>/Order/charorder.php</url>
+        </submenu>
+      </submenus>
+    </mainmenu>
+    <mainmenu>
+      <module>statistics</module>
       <name>数据统计</name>
       <submenus>
         <submenu>
-          <id>report_1</id>
-          <name>报表1</name>
-          <url>#</url>
+          <id>orderstatistics_list</id>
+          <name>订单数据统计</name>
+          <url>/Statistics/orderstatistics.php</url>
         </submenu>
         <submenu>
-          <id>report_1</id>
-          <name>报表1</name>
+          <id>other</id>
+          <name>其它统计</name>
           <url>#</url>
         </submenu>
       </submenus>
@@ -67,13 +83,13 @@
     <mainmenu>
       <module>vediochat_center</module>
       <name>视频会诊中心</name>
-      <url>http://www.baidu.com</url>
+      <url>/videochat.php</url>
       <opennew>1</opennew>
     </mainmenu>
     <mainmenu>
       <module>chat_center</module>
       <name>图文咨询中心</name>
-      <url>#</url>
+      <url>/charchat.php</url>
       <opennew>1</opennew>
     </mainmenu>
   </mainmenus>

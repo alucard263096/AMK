@@ -73,6 +73,7 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
             }
             if(doctor.getEnableCharchat().equals("Y")){
                 btnCharChat.setText("图文咨询/" + String.valueOf(doctor.getCharchatPrice()) + "元");
+                btnCharChat.setOnClickListener(this);
             }else{
                 btnCharChat.setVisibility(LinearLayout.GONE);
             }
@@ -97,6 +98,7 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        ;
         switch (v.getId()){
             case R.id.btnBack:
                 this.finish();
@@ -105,6 +107,12 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
                 Intent intent = new Intent(this, VideoChatOrderActivity.class);
                 intent.putExtra("Id", doctor.getId());
                 startActivity(intent);
+                break;
+            case R.id.btnCharChat:
+                Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
+                intent2.putExtra("Id", doctor.getId());
+                startActivity(intent2);
+                break;
         }
     }
 }

@@ -7,6 +7,7 @@ $CONFIG['Title']             = '阿米卡-医生版';
 $CONFIG['URL']="http://www.myhkdoc.com/AMK/DoctorWeb";
 $CONFIG['lang']="zh-cn";//en-us
 $CONFIG["frontendurl"]="http://www.myhkdoc.com/DoctorWeb/";
+$CONFIG["APIPath"]="http://www.myhkdoc.com/AMK/API/";
 $CONFIG["SessionName"]="AMKDoctorWeb";
 
 $CONFIG['smarty']['rootpath']		= '/AMK/DoctorWeb'; 
@@ -49,5 +50,9 @@ $CONFIG['fileupload']['try_interval']		= "1";//second
 #[Excel]
 $CONFIG['excel']['version']	= "Excel2007";//2003:Excel5,2007:Excel2007
 
+
+#[Anychat]
+$CONFIG['anychat']['VideoCharServer']	= "www.myhkdoc.com";
+$CONFIG['anychat']['VideoCharServerPort']	= "8906";
 
 ?>

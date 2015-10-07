@@ -26,13 +26,40 @@
 	public function getReminderCount($user_id)
 	{
 		$sum=0;
-		
+		$sql="
+		select count(1) count,'v_notice_doctor' name 
+from v_notice_doctor where doctor_id=$user_id and haveread='N'
+";
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		//print_r($result);
+		for($i=0;$i<count($result);$i++){
+			$sum=$sum+$result[$i]["count"];
+		}
 		return $sum;
 	}
 
 	public function getReminderAll($user_id){
 		Global $CONFIG;
 		$Array=Array();
+
+		$arr=Array();
+		$arr["name"]="未读通知";
+		$user_id=parameter_filter($user_id);
+		$sql="select top 3 id,title as first,
+ case notice_type when 'I' then '重要' else  '一般' end as second,publish_date  as third 
+ from v_notice_doctor where doctor_id=$user_id and haveread='N'
+order by publish_date desc ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		$arr["result"]=$result;
+		$arr["first"]="标题";
+		$arr["second"]="重要性";
+		$arr["third"]="发布日期";
+		$arr["count"]=count($result);
+		$arr["link"]=$CONFIG['rootpath']."/Info/notice.php#";
+		$Array[]=$arr;
 
 		return $Array;
 

@@ -10,7 +10,7 @@
 </thead>
 <tbody>
     {{foreach from=$result item=row}}
-    <tr>
+    <tr oid="{{$row.id}}">
         <td><input type="checkbox" class="RowSelect result_id" value="{{$row.id}}" /></td>
         {{foreach from=$row item=col key=key}}
             {{if $key!="id"}}

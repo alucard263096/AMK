@@ -16,6 +16,7 @@ $smarty->right_delimiter="}}";
 
 
  $smarty->assign('rootpath',$CONFIG['smarty']['rootpath']);
+ $smarty->assign('apipath',$CONFIG['APIPath']);
  $smarty->assign('smarty_root',ROOT."/templates");
  $smarty->assign('file_url',$_SERVER["PHP_SELF"]);
  $smarty->assign('file_url_parameter',strtr($_SERVER["QUERY_STRING"],$rep));

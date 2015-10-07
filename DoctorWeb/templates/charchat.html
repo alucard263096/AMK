@@ -1,0 +1,384 @@
+{{include  file="$smarty_root/header.html" }}
+<!-- content -->
+<div class="col-md-10">
+    <div class="row">
+        <div class="col-xs-7" style="height: 500px;">
+            <div class="row">
+                <div class="col-lg-12" id="order_content"></div>
+            </div>
+            <div class="row form-horizontal" style="padding-top:7px;">
+                <div class="form-group col-xs-8">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <textarea id="txtSendMsg" rows="5" class="form-control" placeholder="填写内容，立即发送"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="row control-label">
+                            <button class="btn btn-xs btn-success SendBtn" id="btnSendMsg">发送</button>
+                            <button class="btn btn-xs btn-primary SendBtn" id="btnSendImg">图片</button>
+                            <button class="btn btn-xs btn-info SendBtn" id="btnSendDoc">文件</button>
+                            <button class="btn btn-xs btn-danger SendBtn" id="btnFinish">完成会诊</button>
+                            <input id="file_IMG" name="file_IMG" type="file" onchange="upload('IMG')" />
+                            <input id="file_DOC" name="file_DOC" type="file" onchange="upload('DOC')" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 right" style="padding-left:0px;padding-right:0px;">
+                        <div class="panel panel-default" style="height: 100%;">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">会诊者信息</div>
+                            </div>
+                            <div class="bootstrap-admin-panel-content small">
+                                <p>姓名：<span id="order_name"></span></p>
+                                <p>电话：<span id="order_mobile"></span></p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5" style="">
+            <div class="panel panel-default" style="height: 100%;">
+                <div class="panel-heading">
+                    <div class="text-muted bootstrap-admin-box-title">会诊者列表</div>
+                </div>
+                <div class="bootstrap-admin-panel-content" id="order_list">
+                </div>
+            </div>
+        </div>
+        <style>
+            #order_content {
+                height: 359px;
+                border:1px solid #808080;
+                overflow-y: scroll;
+            }
+            #order_list {
+                height: 450px;
+                overflow-y: scroll;
+            }
+            .mouseover{
+                background-color:#eeeeee;
+            }
+            .selected {
+                background-color: #cccccc;
+            }
+        </style>
+    </div>
+</div>
+
+    <script>
+        i = 0;
+        static_order_id = 0;
+        lastupdatetime = "";
+        function refreshOrderList() {
+            url = "{{$apipath}}Order/charchat.php?doctor_id={{$doctor_id}}&status=P";
+            if (lastupdatetime != "") {
+                url += "&last_time=" + lastupdatetime;
+            }
+            //alert(i++);
+            $.get(url, null, function (data) {
+                var needRefresh = checkNeedRefresh(data);
+                if (needRefresh == false) {
+                    return;
+                }
+                arrUpdateCache = Array();
+                $("#order_list").html("");
+                $(data).find('table').find('row').each(function (index, ele) {
+                    updateOrder($(ele));
+                });
+                $(".charorder").mouseover(function () {
+                    $(".charorder").removeClass("mouseover");
+                    if (!$(this).hasClass("selected")) {
+                        $(this).addClass("mouseover");
+                    }
+                });
+                $(".charorder").mouseout(function () {
+                    $(".charorder").removeClass("mouseover");
+                });
+                $(".charorder").dblclick(function () {
+                    $(".charorder").removeClass("mouseover");
+                    $(".charorder").removeClass("selected");
+                    $(this).addClass("selected");
+
+                    var tagid = $(this).attr("order_id");
+                    static_order_id = tagid;
+                    loadOrderDetail(tagid);
+
+                });
+                //reorderOrderList();
+                //lastupdatetime = getDatetimeStr();
+                //alert(lastupdatetime);
+            });
+        }
+        arrUpdateCache = Array();
+        function checkNeedRefresh(data) {
+            var ret = false;
+            var count = 0;
+            $(data).find('table').find('row').each(function (index, ele) {
+                var order_id = $(ele).find('id').text();
+                var updated_date = $(ele).find('updated_date').text();
+                count++;
+                if (arrUpdateCache[order_id] != updated_date) {
+                    ret = true;
+                }
+            });
+            if (arrUpdateCache.length != count) {
+                ret = true;
+            }
+            return ret;
+        }
+        function loadOrderDetail(tagid) {
+            try{
+                window.clearInterval(ajaxLoadContent);
+            } catch (e) {
+
+            }
+            var name = $("#order_" + tagid + "_name").val();
+            $("#order_name").text(name);
+            var mobile = $("#order_" + tagid + "_mobile").val();
+            $("#order_mobile").text(mobile);
+
+            $(".SendBtn").prop("disabled", "");
+            contentlastupdatetime = "";
+            ajaxLoadOrderDetail();
+            window.setInterval(ajaxLoadOrderDetail, 1000 * 5);
+        }
+        function ajaxLoadOrderDetail() {
+            url = "{{$apipath}}Order/charchat_one.php?doctor_id={{$doctor_id}}&order_id=" + static_order_id;
+            //alert(i++);
+            $.get(url, null, function (data) {
+                $(data).find('table').find('row').each(function (index, ele) {
+                    updateOrderContent($(ele));
+                });
+            });
+        }
+        contentlastupdatetime = "";
+        function updateOrderContent(dataobj) {
+            var order_id = dataobj.find('id').text();
+            var content = dataobj.find('content').text();
+            var last_one = dataobj.find('last_one').text();
+            var updated_date = dataobj.find('updated_date').text();
+            if (contentlastupdatetime == updated_date) {
+                return;
+            }
+            $("#order_content").html("");
+            contentlastupdatetime = updated_date;
+            loadContentData(content);
+        }
+        function loadContentData(content) {
+            arr = content.split("{|}");
+            count = arr.length;
+            for (i = 0; i < count; i++) {
+                line = arr[i];
+                if (line != "") {
+                    var side = line.substr(0, 1);
+                    var type = line.substr(2, 3);
+                    var msg = line.substr(6, line.length - 6);
+                    var str = "<div class=\"row \" style='padding-top:10px;' >";
+                    if (side == "C") {
+                        str += "    <div class=\"col-xs-2\">";
+                        str += "        <div class=\"row\">";
+                        str += "            <img class=\"img-responsive\" src=\"{{$rootpath}}/images/mypic.png\" />";
+                        str += "        </div>";
+                        str += "    </div>";
+                    } else {
+                        str += "    <div class=\"col-xs-4\">";
+                        str += "    </div>";
+                    }
+                    str += "    <div class=\"col-xs-6\">";
+                    str += "        <div class=\"alert alert-" + (side == "D" ? "success" : "warning") + " bootstrap-admin-alert\" style='padding-top:10px;'>";
+                    if (type == "TXT") {
+                        str += msg;
+                    } else if (type == "IMG") {
+                        str += "            <img class=\"img-responsive\" src=\"{{$uploadpath}}/charchat/"+msg+"\" />";
+                    } else if (type == "DOC") {
+                        str += "            <a  href=\"{{$uploadpath}}/charchat/" + msg + "\" target='_blank'>查看文件</a>";
+                    }
+                    str += "        </div>";
+                    str += "    </div>";
+                    if (side == "D") {
+                        str += "    <div class=\"col-xs-2\">";
+                        str += "        <div class=\"row\">";
+                        str += "            <img class=\"img-responsive\" src=\"{{$uploadpath}}/doctor/{{$doctor_photo}}\" />";
+                        str += "        </div>";
+                        str += "    </div>";
+                    }
+                    str += "</div>";
+                    $("#order_content").append(str);
+                    $('#order_content').scrollTop($('#order_content')[0].scrollHeight);
+                }
+            }
+        }
+        function sendMsg() {
+            content = $("#txtSendMsg").val();
+            if ($.trim(content) == "") {
+                return;
+            }
+            $(".SendBtn").prop("disabled", "disabled");
+            $("#txtSendMsg").val("");
+            sendToClient("TXT", content);
+        }
+        function sendFinished() {
+            $(".SendBtn").prop("disabled", "disabled");
+            if (static_order_id == 0) {
+                return;
+            }
+            url = "{{$apipath}}Order/order_finish.php?order_id=" + static_order_id;
+            $.get(url, null, function (data) {
+                $(data).find('table').find('row').each(function (index, ele) {
+                    var ret = $(ele).find('id').text();
+                    if (ret != "0") {
+                        errorDialog("会诊结束失败，请联系管理员");
+                        $(".SendBtn").prop("disabled", "");
+                    } else {
+                        static_order_id = 0;
+                        refreshOrderList();
+                    }
+                });
+            });
+        }
+        function sendImg() {
+            $("#file_IMG").click();
+        }
+        function sendDoc() {
+            $("#file_DOC").click();
+        }
+
+        function upload(type) {
+
+            $(".SendBtn").prop("disabled", "disabled");
+            $.ajaxFileUpload
+            (
+                {
+                    "url": '{{$rootpath}}/fileupload.php?module=charchat&field=file_'+type ,
+                    "secureuri": false,
+                    "fileElementId": "file_" + type,
+                    "dataType": 'text',
+                    "success": function (data, status) {
+                        if (data.substring(0, 7) == "success") {
+                            str = data.substring(7, data.length);
+                            filename = str.split('|~~|')[1];
+                            sendToClient(type, filename);
+                        } else {
+                            errorDialog("{{$SysLang.model.uploaderror}}");
+                        }
+                        $(".SendBtn").prop("disabled", "");
+                    },
+                    "error": function (data, status, e) {
+                        errorDialog("{{$SysLang.model.uploaderror}}");
+                    }
+                }
+            );
+        }
+
+        function sendToClient(type, content) {
+            if (static_order_id == 0) {
+                return;
+            }
+            url = "{{$apipath}}Order/charchat_update.php?order_id=" + static_order_id + "&doctor_id={{$doctor_id}}&sendside=D&type=" + type + "&content=" + content;
+            url = encodeURI(url);
+            $.get(url, null, function (data) {
+                $(data).find('table').find('row').each(function (index, ele) {
+                    var ret = $(ele).find('id').text();
+                    if (ret != "0") {
+                        errorDialog("消息发送失败，请联系管理员");
+                    }
+                    $(".SendBtn").prop("disabled", "");
+                });
+            });
+        }
+
+        function updateOrder(dataobj) {
+            var order_id = dataobj.find('id').text();
+            var order_no = dataobj.find('order_no').text();
+            var name = dataobj.find('name').text();
+            var mobile = dataobj.find('mobile').text();
+            var last_one = dataobj.find('last_one').text();
+            var sendside = dataobj.find('sendside').text();
+            var description = dataobj.find('description').text();
+            var updated_date = dataobj.find('updated_date').text();
+            var status = dataobj.find('status').text();
+
+            arrUpdateCache[order_id] != updated_date;
+        
+            var str = "";//"<div class=\"col-xs-12 \"  >";
+            str += "<div class=\"row charorder " + (static_order_id==order_id?"selected":"") + "\" id='order_" + order_id + "'style='padding-top:10px;padding-bottom:10px;' order_id=" + order_id + ">";
+            str += "    <div class=\"col-xs-3\">";
+            str += "        <div class=\"row\">";
+            str += "            <img class=\"img-responsive\" src=\"{{$rootpath}}/images/mypic.png\" />";
+            str += "        </div>";
+            str += "    </div>";
+            str += "    <div class=\"col-xs-7\">";
+            str += "        <div class=\"row small\" style=\"min-height:35px;\">";
+            str += (sendside=="C"?"客户":"我")+ parseLastOne(last_one);
+            str += "        </div>";
+            str += "        <div class=\"row small\" style=\"color:gray\">";
+            //str += "            <div class=\"small col-xs-4 \">";
+            //str += "                <div class=\" row\">"+order_no+"</div>";
+            //str += "            </div>";
+            str += "            <div class=\"small col-xs-12\">";
+            str += "                <div class=\"row right\" style=\"\">"+updated_date+"</div>";
+            str += "            </div>";
+            str += "        </div>";
+            str += "    </div>";
+            str += "    <div class=\"col-xs-1\" style=\"color:red\" >";
+            str += "        <div class=\"row right\">";
+            if(sendside=="C"){
+                str += "            <i class=\"glyphicon glyphicon-exclamation-sign\"></i>";
+            }
+            str += "        </div>";
+            str += "    </div>";
+            str += "</div>";
+            str += "<input type='hidden' value='" + name + "' id='order_" + order_id + "_name'>";
+            str += "<input type='hidden' value='" + mobile + "' id='order_" + order_id + "_mobile'>";
+            //str += "</div>";
+            str += "<hr style='margin:0px;' />";
+            $("#order_list").append(str);
+
+        }
+        function parseLastOne(str) {
+            var type = str.substr(2, 3);
+            if(type=="TXT"){
+                return "说"+str.substr(6, str.length - 6);
+            } else if (type == "IMG") {
+                return "发送了一个图片";
+            } else if (type == "DOC") {
+                return "发送了一个文件";
+            }
+        }
+
+        function getDatetimeStr() {
+            var d = new Date()
+            var vYear = d.getFullYear()
+            var vMon = d.getMonth() + 1
+            var vDay = d.getDate()
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var se = d.getSeconds();
+             return vYear + "-" + vMon + "-" + vDay + " " + h + ":" + m + ":" + se;
+        }
+
+        function str2date(str) {
+            str = str.replace(/-/g, "/");
+            var date = new Date(str);
+        }
+        function confirmExit() {
+            return "您是否要刷新或者关闭当前会话窗口？";
+        }
+        $(document).ready(function () {
+            $("#navbar").hide();
+            $("#mainmenu").hide();
+            $("body").css("padding-top", "10px");
+            window.onbeforeunload = confirmExit;
+            refreshOrderList();
+            window.setInterval(refreshOrderList, 1000 * 6);
+            $("#btnSendMsg").click(sendMsg);
+            $("#btnSendImg").click(sendImg);
+            $("#btnSendDoc").click(sendDoc);
+            $("#file_IMG").hide();
+            $("#file_DOC").hide();
+            $("#btnFinish").click(sendFinished);
+            $(".SendBtn").prop("disabled", "disabled");
+        });
+    </script>
+    {{include  file="$smarty_root/footer.html" }}

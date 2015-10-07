@@ -121,17 +121,17 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 
 
         // 如果是采用Java视频显示，则需要设置Surface的CallBack
-        if (AnyChatCoreSDK
-                .GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
-            int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
-                    .getHolder());
-            anychatSDK.mVideoHelper.SetVideoUser(index, userID);
-        }
+//        if (AnyChatCoreSDK
+//                .GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
+//            int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
+//                    .getHolder());
+//            anychatSDK.mVideoHelper.SetVideoUser(index, userID);
+//        }
 
         mMyView.setZOrderOnTop(true);
 
-        anychatSDK.UserCameraControl(userID, 1);
-        anychatSDK.UserSpeakControl(userID, 1);
+//        anychatSDK.UserCameraControl(userID, 1);
+//        anychatSDK.UserSpeakControl(userID, 1);
 
         // 判断是否显示本地摄像头切换图标
         if (AnyChatCoreSDK

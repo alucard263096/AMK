@@ -3,6 +3,8 @@ package com.helpfooter.steve.amklovebaby.Loader;
 import android.content.Context;
 import android.util.Log;
 
+import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
+import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
@@ -45,6 +47,10 @@ public class OrderLoader extends WebXmlLoader {
             OrderObj obj=new OrderObj();
             obj.parseXmlDataTable(cols);
             lsObj.add(obj);
+        }
+        if(lsObj.size()>0){
+            OrderDao dao=new OrderDao(ctx);
+            dao.batchUpdate(lsObj);
         }
 
         if(callBack!=null){
