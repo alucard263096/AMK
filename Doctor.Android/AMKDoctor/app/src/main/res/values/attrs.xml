@@ -24,4 +24,5 @@
         <attr name="layout_paddingLeftPercent" format="string"/>
         <attr name="layout_paddingRightPercent" format="string"/>
     </declare-styleable>
+
 </resources>

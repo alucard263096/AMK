@@ -16,11 +16,14 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
          android:theme="@style/AppTheme"
+
         >
         <activity
             android:name=".LoginActivity"
@@ -40,6 +43,19 @@
             android:name="VideoChatActivity">
 
         </activity>
+
+        <activity
+
+            android:name="ChatActivity">
+
+        </activity>
+        <activity
+
+            android:name="ImageShower">
+
+        </activity>
+
     </application>
+
 
 </manifest>

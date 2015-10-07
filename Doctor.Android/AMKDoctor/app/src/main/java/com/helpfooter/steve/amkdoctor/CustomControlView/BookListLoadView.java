@@ -3,6 +3,8 @@ package com.helpfooter.steve.amkdoctor.CustomControlView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -133,20 +135,10 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
             //this.mainlayout.addView(layout);
 
     }
-    public ImageView getPhotoView(BookerObj obj){
-        ImageView img=new ImageView(this.ctx);
-        img.setScaleType(ImageView.ScaleType.FIT_XY);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        String url= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
-        Log.i("doctor_photo", url);
-        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
-        imgLoad.start();
 
-        img.setLayoutParams(param);
 
-        return img;
-    }
+
+
 
     public LinearLayout getInfoLayout(BookerObj booker){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
@@ -213,6 +205,21 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         layout.addView(txtName);
         layout.addView(tipsLayout);
         return  layout;
+    }
+
+    public ImageView getPhotoView(BookerObj obj){
+        ImageView img=new ImageView(this.ctx);
+        img.setScaleType(ImageView.ScaleType.FIT_XY);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
+        String url= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
+        Log.i("doctor_photo", url);
+        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();
+
+        img.setLayoutParams(param);
+
+        return img;
     }
 
 

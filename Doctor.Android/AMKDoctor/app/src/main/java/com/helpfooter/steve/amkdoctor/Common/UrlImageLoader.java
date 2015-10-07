@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amkdoctor.Common;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.widget.ImageView;
@@ -12,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 
 public class UrlImageLoader extends Thread {
 	
@@ -34,11 +37,14 @@ public class UrlImageLoader extends Thread {
 		try{
 			uri= GetImageURI(this.url,f);
             imgView.setImageURI(uri);
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
-	
+
+
+
 	public Uri GetImageURI(String path, File cache) throws Exception {
         String name = ToolsUtil.Encryption(path) + path.substring(path.lastIndexOf("."));
         File file = new File(cache, name);

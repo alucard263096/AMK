@@ -4,7 +4,25 @@
     tools:context="com.helpfooter.steve.amkdoctor.NormalChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="在这里完成图文咨询的功能，实现方式类似QQ，不间断刷API，然后更新列表" />
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/normal_chat_list"
+            >
+
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+    </ScrollView>
+
+
+
 
 </FrameLayout>

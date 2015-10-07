@@ -10,7 +10,7 @@ import android.util.Log;
 public  class DBUtil {
 
 	private static final String TAG = "DBUtil";
-	private static final String DATABASE_NAME = "AMKNEWSDoctor.DB";
+	private static final String DATABASE_NAME = "AMK12Doctor.DB";
 	private static final int DATABASE_VERSION = 1;
 	private static  Context mCtx;
 	private DatabaseHelper mDbHelper;

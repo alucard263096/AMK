@@ -7,7 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.helpfooter.steve.amkdoctor.CustomControlView.BookListLoadView;
+import com.helpfooter.steve.amkdoctor.CustomControlView.MessageListLoadView;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
 
 
@@ -28,9 +31,11 @@ public class NormalChatFragment extends Fragment implements IMyFragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private View view;
     private OnFragmentInteractionListener mListener;
+    private Activity mActivity;
 
+    private static Bundle margs;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -41,16 +46,20 @@ public class NormalChatFragment extends Fragment implements IMyFragment {
      */
     // TODO: Rename and change types and number of parameters
     public static NormalChatFragment newInstance(String param1, String param2) {
-        NormalChatFragment fragment = new NormalChatFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        NormalChatFragment fragment = new NormalChatFragment(margs);
+
+        margs.putString(ARG_PARAM1, param1);
+        margs.putString(ARG_PARAM2, param2);
+        fragment.setArguments(margs);
         return fragment;
     }
 
-    public NormalChatFragment() {
-        // Required empty public constructor
+    public NormalChatFragment(Bundle args){
+        this.margs=args;
+    };
+    public NormalChatFragment(Activity activ){
+
+        this.mActivity=activ;
     }
 
     @Override
@@ -66,7 +75,10 @@ public class NormalChatFragment extends Fragment implements IMyFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_normal_chat, container, false);
+        view= inflater.inflate(R.layout.fragment_normal_chat, container, false);
+        final MessageListLoadView lstLoad=new MessageListLoadView(this.mActivity,view.getContext(),(LinearLayout)view.findViewById(R.id.normal_chat_list));
+        lstLoad.LoadList();
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -110,6 +122,6 @@ public class NormalChatFragment extends Fragment implements IMyFragment {
 
     @Override
     public String getTitle() {
-        return "Normal Chat";
+        return "消息列表";
     }
 }

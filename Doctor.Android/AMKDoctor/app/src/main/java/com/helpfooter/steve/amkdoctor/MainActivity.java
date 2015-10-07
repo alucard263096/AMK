@@ -17,6 +17,7 @@ import com.helpfooter.steve.amkdoctor.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
 import com.helpfooter.steve.amkdoctor.Loader.BannerLoader;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
 import com.helpfooter.steve.amkdoctor.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
@@ -65,6 +66,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         BookerLoader bkLoader = new BookerLoader(this);
         bkLoader.start();
 
+        MessageLoader messageLoader = new MessageLoader(this);
+        messageLoader.start();
+
     }
 
 
@@ -78,7 +82,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         contentLayout=(LinearLayout)findViewById(R.id.content_layout);
 
         VedioChatListBarButton=new BottomBarButton(this.getApplicationContext(), "chatVideo", 0, 0, "视频会诊", new VedioChatListFragment(this) );
-        NormalChatButton=new BottomBarButton(this.getApplicationContext(), "chatNormal", 0, 0, "图文咨询", new NormalChatFragment());
+        NormalChatButton=new BottomBarButton(this.getApplicationContext(), "chatNormal", 0, 0, "图文咨询", new NormalChatFragment(this));
     }
 
 

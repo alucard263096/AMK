@@ -78,6 +78,7 @@ public class ToolsUtil {
 
         LinearLayout pLine=new LinearLayout(ctx);
         LinearLayout.LayoutParams pLineLayout=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,1);
+        pLineLayout.topMargin=1;
         pLine.setLayoutParams(pLineLayout);
         pLine.setBackgroundColor(Color.parseColor("#cccccc"));
 
