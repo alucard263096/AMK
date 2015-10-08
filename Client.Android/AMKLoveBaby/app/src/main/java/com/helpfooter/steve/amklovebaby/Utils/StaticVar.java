@@ -26,8 +26,11 @@ public final class StaticVar {
 	public static String RegisterSendApi="registersend";
 	public static String MemberApi="member";
 	public static String OrderListApi="orderlist";
+	public static String VersionApi="version";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
+	public static String CurrentVersion="1.0.0.0";
+
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");
@@ -44,6 +47,7 @@ public final class StaticVar {
 		dictHashMap.put(RegisterSendApi,APIURL+"Member/reg_send.php");
 		dictHashMap.put(MemberApi,APIURL+"Member/member_get.php");
 		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
+		dictHashMap.put(VersionApi,APIURL+"/version.xml");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";
