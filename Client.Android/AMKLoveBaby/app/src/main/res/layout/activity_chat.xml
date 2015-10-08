@@ -1,0 +1,131 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ChatActivity">
+
+   <ProgressBar android:id="@+id/progressBar"
+       android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleSmallTitle">
+    </ProgressBar>
+
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:layout_widthPercent="100%"
+        android:id="@+id/rl_layout"
+        android:background="@color/myblue">
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_btn_back"
+            android:paddingLeft="10dp"
+            android:text="返回"
+            android:gravity="right"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/txt_Receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20.0sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/btn_back"
+            android:layout_toEndOf="@+id/btn_back" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/chatScroll"
+        android:layout_above="@+id/rl_bottom"
+        android:layout_below="@+id/rl_layout">
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/message_chat_list"
+            >
+
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    </ScrollView>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_alignParentBottom="true"
+    >
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_marginBottomPercent="1%"
+        android:focusableInTouchMode="true"
+        android:id="@+id/buto_chat_list"
+        >
+
+        <EditText
+
+            android:id="@+id/et_sendmessage"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/edittext1"
+            app:layout_widthPercent="60%"
+            app:layout_marginLeftPercent="1%"
+            android:textSize="18sp"
+            />
+        <Button
+            android:id="@+id/btn_sendTxt"
+            android:layout_width="wrap_content"
+            app:layout_widthPercent="12%"
+            android:layout_height="35dp"
+            android:background="@color/mygreen"
+            android:textColor="@color/white"
+            app:layout_marginLeftPercent="1%"
+            android:gravity="center"
+            android:text="发送" />
+        <Button
+            android:id="@+id/btn_sendPic"
+            android:layout_width="wrap_content"
+            app:layout_widthPercent="12%"
+            android:layout_height="35dp"
+            app:layout_marginLeftPercent="1%"
+            android:background="@color/myblue"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="图片" />
+        <Button
+            android:id="@+id/btn_sendFile"
+            android:layout_width="wrap_content"
+            app:layout_widthPercent="12%"
+            android:layout_height="35dp"
+            app:layout_marginLeftPercent="1%"
+            android:background="@color/mylightblue"
+            android:textColor="@color/white"
+
+            android:gravity="center"
+            android:text="文件" />
+
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+</RelativeLayout>
+
+
+
+</RelativeLayout>
