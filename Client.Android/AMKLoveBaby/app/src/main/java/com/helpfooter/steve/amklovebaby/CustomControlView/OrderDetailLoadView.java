@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.ChatActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
@@ -151,8 +152,10 @@ public class OrderDetailLoadView implements View.OnClickListener {
             intent.putExtra("Id", order.getId());
             ctx.startActivity(intent);
         }else if(order.getStatus().equals("P")&&order.getAct().equals("CC")) {
-            //
-            Toast.makeText(this.ctx, "Coming Soon", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this.ctx, ChatActivity.class);
+            intent.putExtra("orderId", String.valueOf(order.getId()));
+            intent.putExtra("tag", String.valueOf(order.getTag()));
+            this.ctx.startActivity(intent);
         }
     }
 

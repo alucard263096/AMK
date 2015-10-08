@@ -10,7 +10,8 @@ public final class StaticVar {
 	public static String ProjectName="AMKLoveBaby";
 	public static String ImageFolderURL="http://www.myhkdoc.com/AMK/FilesServer/";
 	public static String APIURL="http://www.myhkdoc.com/AMK/API/";
-
+	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
+	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
 	public static String IndexBannerApi="index_banner";
 	public static String BannerApi="banner";
 	public static String DoctorApi="doctor";
@@ -27,9 +28,14 @@ public final class StaticVar {
 	public static String MemberApi="member";
 	public static String OrderListApi="orderlist";
 	public static String VersionApi="version";
+	public static String ChatApi="Chat";
+	public static String ChatUpdateApi="ChatUpdate";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
 	public static String CurrentVersion="1.0.0.0";
+	public static String TxtType="TXT";
+	public static String IMGType="IMG";
+	public static String DOCType="DOC";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -45,8 +51,10 @@ public final class StaticVar {
 		dictHashMap.put(LoginSendApi,APIURL+"Member/login_send.php");
 		dictHashMap.put(RegisterApi,APIURL+"Member/reg.php");
 		dictHashMap.put(RegisterSendApi,APIURL+"Member/reg_send.php");
+		dictHashMap.put(ChatApi,APIURL+"Order/charchat_one.php");
 		dictHashMap.put(MemberApi,APIURL+"Member/member_get.php");
 		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
+		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
 		dictHashMap.put(VersionApi,APIURL+"/version.xml");
 	}
 
