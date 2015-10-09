@@ -48,10 +48,13 @@
 		$field=parameter_filter($field);
 		$value=parameter_filter($value);
 
-		$sql="select * from tb_member where id=$member_id ";
+		$sql="select 1 from tb_member where id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
 		if(count($result)==0){
 			return	outResult(-2,"no this member ");
 		}
+
 		$sql="update tb_member set $field='$value' where id=$member_id ";
 		$query = $this->dbmgr->query($sql);
 
