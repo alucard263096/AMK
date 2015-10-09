@@ -68,12 +68,12 @@
       <options>
         <option>
           <name>男</name>
-          <value>A</value>
+          <value>M</value>
           <default>1</default>
         </option>
         <option>
           <name>女</name>
-          <value>I</value>
+          <value>F</value>
         </option>
       </options>
       <notnull>1</notnull>
