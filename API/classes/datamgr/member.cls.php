@@ -63,16 +63,15 @@
 
 	
 	public function getMemberInfo($mobile,$member_id){
-		if($mobile==""&&$member_id==""){
-			return	outResult(-1,"mobile and member_id can not be null");
+		if($mobile==""){
+			return	outResult(-1,"mobile  can not be null");
 		}
 		$mobile=parameter_filter($mobile);
-		$member_id=parameter_filter($member_id);
-		$sql="select * from tb_member where mobile='$mobile' or id=$member_id ";
+		$sql="select * from tb_member where mobile='$mobile'  ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		if(count($result)==0){
-			return	outResult(-2,"no this mobile no or member id");
+			return	outResult(-2,"no this mobile no ");
 		}
 
 		Global $smsMgr;

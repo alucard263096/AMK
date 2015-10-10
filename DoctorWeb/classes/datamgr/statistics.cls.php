@@ -41,6 +41,7 @@ where doctor_id=$user_id and status='F') as finish_count";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 		$arr["percent"]=$result["finish_count"]/$result["total_count"]*100;;
+		$arr["percent"]=round($arr["percent"],2);
 		$arr["link"]=$CONFIG['rootpath']."/Statistics/orderstatistics.php";
 		$Array[]=$arr;
 
@@ -54,6 +55,7 @@ where doctor_id=$user_id and status='F' and act='VC') as finish_count";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 		$arr["percent"]=$result["finish_count"]/$result["total_count"]*100;;
+		$arr["percent"]=round($arr["percent"],2);
 		$arr["link"]=$CONFIG['rootpath']."/Order/videoorder.php";
 		$Array[]=$arr;
 
@@ -67,6 +69,7 @@ where doctor_id=$user_id and status='F' and act='CC') as finish_count";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array($query); 
 		$arr["percent"]=$result["finish_count"]/$result["total_count"]*100;;
+		$arr["percent"]=round($arr["percent"],0,2);
 		$arr["link"]=$CONFIG['rootpath']."/Order/charorder.php";
 		$Array[]=$arr;
 
