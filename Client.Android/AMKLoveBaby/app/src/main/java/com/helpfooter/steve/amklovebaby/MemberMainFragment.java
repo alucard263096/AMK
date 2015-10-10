@@ -112,7 +112,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     }
     private void initUI(View view) {
         ((LinearLayout) view.findViewById(R.id.btnMyInfo)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMyNotice)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnCharlist)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyOrder)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyDoctor)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
@@ -161,7 +161,9 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                  intent = new Intent(this.getActivity(), MemberInfoActivity.class);
                 startActivity(intent);
                 return;
-            case R.id.btnMyNotice:
+            case R.id.btnCharlist:
+                intent = new Intent(this.getActivity(), CharListActivity.class);
+                startActivity(intent);
                 return;
             case R.id.btnMyOrder:
                  intent = new Intent(this.getActivity(), OrderListActivity.class);

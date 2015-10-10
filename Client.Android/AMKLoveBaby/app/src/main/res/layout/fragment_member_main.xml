@@ -86,7 +86,7 @@
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/btnMyNotice"
+        android:id="@+id/btnCharlist"
         >
         <ImageView
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="10%"
-            android:text="消息通知"
+            android:text="图文咨询"
             android:textSize="20dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -198,32 +198,6 @@
 
 
 
-
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnMyFeedback"
-        >
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_widthPercent="10%"
-            app:layout_marginLeftPercent="10%"
-            android:src="@drawable/mycon"
-            />
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            app:layout_marginLeftPercent="10%"
-            android:text="意见反馈"
-            android:textSize="20dp" />
-    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#cccccc"
-        ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
 
