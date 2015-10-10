@@ -50,7 +50,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     private String mParam1;
     private String mParam2;
 
-    CircleImageView imgMyPhoto;
+    ImageView imgMyPhoto;
 
     private OnFragmentInteractionListener mListener;
 
@@ -118,7 +118,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
 
-        imgMyPhoto= ((CircleImageView) view.findViewById(R.id.imgMyPhoto));
+        imgMyPhoto= ((ImageView) view.findViewById(R.id.imgMyPhoto));
         imgMyPhoto.setOnClickListener(this);
 
         if(StaticVar.Member!=null){
@@ -131,8 +131,9 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     }
 
     public void setMemberPhoto(String filename,String filepath){
-        Bitmap bitmap= ToolsUtil.GetLocalOrNetBitmap(filepath);
-        imgMyPhoto.setImageBitmap(bitmap);
+        //Bitmap bitmap= ToolsUtil.GetLocalOrNetBitmap(filepath);
+        //imgMyPhoto.setImageBitmap(bitmap);
+        imgMyPhoto.setImageURI(Uri.parse(filepath));
 
         StaticVar.Member.setPhoto(filename);
         MemberDao dao=new MemberDao(this.getActivity());
