@@ -178,6 +178,21 @@
         android:textColor="#ffffff"
         />
 
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="#ffffff">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/myblue"
+            android:id="@+id/btnRegPP"
+            android:gravity="center"
+            android:text="&lt;&lt;服务条款及协议&gt;&gt;"/>
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 

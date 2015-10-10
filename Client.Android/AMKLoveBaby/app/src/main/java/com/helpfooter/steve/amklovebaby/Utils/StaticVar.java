@@ -40,6 +40,7 @@ public final class StaticVar {
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
+	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");

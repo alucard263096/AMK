@@ -110,6 +110,10 @@
             android:label="@string/title_activity_char_list"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".GeneralTextActivity"
+            android:label="@string/title_activity_general_text" >
+        </activity>
     </application>
 
 </manifest>

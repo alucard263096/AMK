@@ -140,25 +140,52 @@
 
 
 
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/btnMyDoctor"
+                >
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="10%"
+                    app:layout_marginLeftPercent="10%"
+                    android:src="@drawable/mypay"
+                    />
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    app:layout_marginLeftPercent="10%"
+                    android:text="关注的医生"
+                    android:textSize="20dp" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc"
+                ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/btnMyDoctor"
+        android:id="@+id/btnHelpDocument"
         >
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_widthPercent="10%"
             app:layout_marginLeftPercent="10%"
-            android:src="@drawable/mypay"
+            android:src="@drawable/mycon"
             />
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="10%"
-            android:text="关注的医生"
+            android:text="帮助"
             android:textSize="20dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -170,10 +197,13 @@
 
 
 
+
+
+
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/btnMySetting"
+        android:id="@+id/btnPP"
         >
         <ImageView
             android:layout_width="match_parent"
@@ -187,7 +217,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             app:layout_marginLeftPercent="10%"
-            android:text="设置"
+            android:text="隐私与政策"
             android:textSize="20dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout

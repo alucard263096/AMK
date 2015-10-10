@@ -116,8 +116,9 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         ((LinearLayout) view.findViewById(R.id.btnCharlist)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyOrder)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyDoctor)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnPP)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnHelpDocument)).setOnClickListener(this);
 
         imgMyPhoto= ((ImageView) view.findViewById(R.id.imgMyPhoto));
         imgMyPhoto.setOnClickListener(this);
@@ -172,9 +173,25 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 return;
             case R.id.btnMyDoctor:
                 return;
-            case R.id.btnMySetting:
+            case R.id.btnPP:
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","privacypolicy");
+                intent.putExtra("title","隐私与政策");
+                startActivity(intent);
                 return;
             case R.id.btnAboutus:
+
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","aboutus");
+                intent.putExtra("title","关于我们");
+                startActivity(intent);
+                return;
+            case R.id.btnHelpDocument:
+
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","helpus");
+                intent.putExtra("title","帮助");
+                startActivity(intent);
                 return;
         }
     }
