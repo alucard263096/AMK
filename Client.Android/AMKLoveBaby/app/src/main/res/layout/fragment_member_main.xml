@@ -12,8 +12,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="30%"
+        android:layout_height="140dp"
         android:gravity="center"
         android:orientation="vertical">
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -21,12 +20,12 @@
             android:layout_height="match_parent"
             app:layout_heightPercent="60%"
             app:layout_marginTopPercent="10%"
-            android:id="@+id/imgMyPhoto"
             android:gravity="center">
             <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:border_width="2dp"
+                android:id="@+id/imgMyPhoto"
                 app:border_color="#cccccc"
                 android:src="@drawable/logo1" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -60,8 +59,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMyInfo"
         >
         <ImageView
@@ -89,8 +87,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMyNotice"
         >
         <ImageView
@@ -119,8 +116,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMyOrder"
         >
         <ImageView
@@ -149,8 +145,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMyDoctor"
         >
         <ImageView
@@ -179,8 +174,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMySetting"
         >
         <ImageView
@@ -209,8 +203,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnMyFeedback"
         >
         <ImageView
@@ -239,8 +232,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="12%"
+        android:layout_height="50dp"
         android:id="@+id/btnAboutus"
         >
         <ImageView

@@ -1,0 +1,227 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.helpfooter.steve.amklovebaby.MemberInfoActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_widthPercent="100%"
+        android:background="@color/topbar_bg">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/back"
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="个人资料"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_marginTopPercent="3%" >
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="20%"
+                    app:layout_marginLeftPercent="5%"
+                    android:gravity="center_vertical"
+                    android:text="姓名" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    app:layout_marginLeftPercent="5%"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:hint="输入你的姓名"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:id="@+id/txtName"
+                    android:tag="name"
+                    android:background="@null" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_marginTopPercent="3%" >
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="20%"
+                    app:layout_marginLeftPercent="5%"
+                    android:gravity="center_vertical"
+                    android:text="手机号码" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    app:layout_marginLeftPercent="5%"
+                    android:textSize="15dp"
+                    android:id="@+id/txtMobile"
+                    android:singleLine="true"
+                    android:text=""
+                    android:hint="输入你的手机号码"
+                    android:enabled="false"
+                    android:background="@null" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_marginTopPercent="3%" >
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="20%"
+                    app:layout_marginLeftPercent="5%"
+                    android:gravity="center_vertical"
+                    android:text="性别" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_marginLeftPercent="5%"
+                    app:layout_marginTopPercent="20%"
+                    app:layout_marginBottomPercent="20%"
+                    app:layout_widthPercent="15%"
+                    android:textSize="15dp"
+                    android:id="@+id/btnMale"
+                    android:text="男"
+                    android:tag="M" />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_marginLeftPercent="10%"
+                    app:layout_marginTopPercent="20%"
+                    app:layout_marginBottomPercent="20%"
+                    app:layout_widthPercent="15%"
+                    android:textSize="15dp"
+                    android:text="女"
+                    android:id="@+id/btnFemale"
+                    android:tag="F" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_marginTopPercent="3%" >
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="20%"
+                    app:layout_marginLeftPercent="5%"
+                    android:gravity="center_vertical"
+                    android:text="出生日期" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    app:layout_marginLeftPercent="5%"
+                    android:textSize="15dp"
+                    android:inputType="date"
+                    android:text=""
+                    android:hint="输入你的出生日期"
+                    android:singleLine="true"
+                    android:id="@+id/txtBirth"
+                    android:tag="birth"
+                    android:background="@null" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:layout_marginTopPercent="3%" >
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="20%"
+                    app:layout_marginLeftPercent="5%"
+                    android:text="个人疾病史" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_marginLeftPercent="5%"
+                    android:gravity="top"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:hint="输入你的个人疾病史"
+                    android:id="@+id/txtHistory"
+                    android:tag="history"
+                    android:maxLines="5"
+                    android:background="@null" />
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#cccccc" ></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/mylightblue"
+                app:layout_marginLeftPercent="5%"
+                app:layout_widthPercent="90%"
+                app:layout_marginTopPercent="10%"
+                app:layout_marginBottomPercent="3%"
+                android:textColor="#ffffff"
+                android:textSize="16dp"
+                android:text="退出登录"
+                />
+
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+</LinearLayout>

@@ -6,6 +6,15 @@
 
     android:gravity="center" >
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1" />
+
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

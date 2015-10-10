@@ -55,11 +55,53 @@ public class MemberObj extends AbstractObj {
     String verifycode;
     String status;
 
+    String sex;
+    String birth;
+    String photo;
+    String history;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
     @Override
     public void parseCursor(Cursor cursor) {
         setId(cursor.getInt(cursor.getColumnIndex("id")));
         setMobile(cursor.getString(cursor.getColumnIndex("mobile")));
         setName(cursor.getString(cursor.getColumnIndex("name")));
+
+        setSex(cursor.getString(cursor.getColumnIndex("sex")));
+        setBirth(cursor.getString(cursor.getColumnIndex("birth")));
+        setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+        setHistory(cursor.getString(cursor.getColumnIndex("history")));
     }
 
     @Override
@@ -70,5 +112,10 @@ public class MemberObj extends AbstractObj {
         this.verifycode=lstRowValue.get("verifycode");
         this.status=lstRowValue.get("status");
         this.name=lstRowValue.get("name");
+
+        this.sex=lstRowValue.get("sex");
+        this.birth=lstRowValue.get("birth");
+        this.photo=lstRowValue.get("photo");
+        this.history=lstRowValue.get("history");
     }
 }

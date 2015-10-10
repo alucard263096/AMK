@@ -22,10 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderListLoadView;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +41,23 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
 
-        InitData();
-        InitUI();
-    }
+
+            if(MemberMgr.CheckIsLogin(this)) {
+                InitData();
+                InitUI();
+            }
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
+            if (StaticVar.Member == null) {
+                this.finish();
+                return;
+            }
+            InitData();
+            InitUI();
+        }
 
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
