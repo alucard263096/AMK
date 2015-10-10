@@ -14,7 +14,7 @@
  }
  $filearr=explode(".",$file["name"]);
  $fileext=$filearr[count($filearr)-1];
- $filename=md5(date('ymdHIs').$file["name"]).$fileext;
+ $filename=md5(date('ymdHIs').$file["name"]).".".$fileext;
  $folder=ROOT."/".$CONFIG['fileupload']['upload_path']."/$module/";
  if(!file_exists($folder)){
 	mkdir($folder,0777);
