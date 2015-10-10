@@ -116,7 +116,6 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         ((LinearLayout) view.findViewById(R.id.btnMyOrder)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyDoctor)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMyFeedback)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
 
         imgMyPhoto= ((CircleImageView) view.findViewById(R.id.imgMyPhoto));
@@ -172,8 +171,6 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
             case R.id.btnMyDoctor:
                 return;
             case R.id.btnMySetting:
-                return;
-            case R.id.btnMyFeedback:
                 return;
             case R.id.btnAboutus:
                 return;
