@@ -8,8 +8,6 @@
     android:orientation="vertical"
     android:background="#ffffff">
 
-
-
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"

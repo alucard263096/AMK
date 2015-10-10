@@ -105,6 +105,11 @@
             android:label="@string/title_activity_member_info"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".CharListActivity"
+            android:label="@string/title_activity_char_list"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

@@ -29,5 +29,6 @@
     <string name="title_activity_order_list">OrderListActivity</string>
     <string name="title_activity_order_detail">OrderDetailActivity</string>
     <string name="title_activity_video_chat">VideoChatActivity</string>
-    <string name="title_activity_member_info">MemberInfoActivity</string>>
+    <string name="title_activity_member_info">MemberInfoActivity</string>
+    <string name="title_activity_char_list">CharListActivity</string>>
 </resources>

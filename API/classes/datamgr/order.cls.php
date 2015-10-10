@@ -22,6 +22,33 @@
 	{
 		
 	}
+
+	
+	public function getMemberCharchatOrderList($member_id,$lastupdate_time,$status)
+	{
+		if($member_id==""){
+			return	outResult(-1,"member_id can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$status=parameter_filter($status);
+		$lastupdate_time=parameter_filter($lastupdate_time);
+		$sql="select id,order_no,member_id,name,mobile,price,created_time,updated_date,status,process_status,payment,order_date,order_time,
+		doctor_id,last_one ,description,SUBSTRING(last_one,1,1) sendside
+		from v_order                 
+		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
+		where member_id=$member_id ";
+		if($lastupdate_time!=""){
+		$sql.=" and updated_date>'$lastupdate_time'  ";
+		}
+		if($status!=""){
+		$sql.=" and status='$status'  ";
+		}
+		$sql.=" order by sendside desc,updated_date desc";
+		//echo $sql;
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
 	
 	public function getCharchatOrderList($doctor_id,$lastupdate_time,$status)
 	{
