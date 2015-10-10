@@ -6,6 +6,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -131,7 +132,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     }
 
     public void setMemberPhoto(String filename,String filepath){
-        //Bitmap bitmap= ToolsUtil.GetLocalOrNetBitmap(filepath);
+        //Bitmap bitmap= BitmapFactory.decodeFile(filepath);
         //imgMyPhoto.setImageBitmap(bitmap);
         imgMyPhoto.setImageURI(Uri.parse(filepath));
 

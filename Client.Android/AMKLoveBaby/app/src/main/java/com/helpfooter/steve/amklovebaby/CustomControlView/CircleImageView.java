@@ -136,6 +136,14 @@ public class CircleImageView extends ImageView {
     }
 
     @Override
+    public void setImageURI(Uri uri) {
+        super.setImageURI(uri);
+        mBitmap = getBitmapFromDrawable(getDrawable());
+        System.out.println("setImageURI -- setup");
+        setup();
+    }
+
+    @Override
     public void setImageBitmap(Bitmap bm) {
         super.setImageBitmap(bm);
         mBitmap = bm;
