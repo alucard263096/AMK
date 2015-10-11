@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="false"
-            android:text="支付成功"
+            android:text="支付结果"
             android:contentDescription="@null"
             android:textColor="#ffffff"
             app:layout_widthPercent="100%"
@@ -31,6 +31,20 @@
             android:gravity="center"
             android:textSize="24dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="20%"
+        app:layout_marginTopPercent="5%"
+        app:layout_marginBottomPercent="5%"
+        android:src="@drawable/success"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="7%"
+        android:gravity="center"
+        android:text="你已经支付成功"/>
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -56,6 +70,17 @@
         android:layout_height="1px"
         android:background="#37A4D4"
         app:layout_widthPercent="100%" />
+
+     <WebView
+            android:id="@+id/txtContext"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="96%"
+         app:layout_heightPercent="60%"
+            app:layout_marginLeftPercent="2%"
+            app:layout_marginTopPercent="5%"></WebView>
+
+
     <Button
         android:id="@+id/btnBack"
         android:layout_width="match_parent"
@@ -68,8 +93,7 @@
         app:layout_marginBottomPercent="3%"
         android:textColor="#ffffff"
         android:textSize="16dp"
-        android:text="回到主页"
-        />
+        android:text="回到主页" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
@@ -19,11 +21,12 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public abstract class OrderSubmitActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
+public abstract class OrderSubmitActivity extends Activity implements
+        View.OnClickListener,
+        IWebLoaderCallBack {
 
     ImageView btnBack;
     EditText txtName,txtMobile,txtDescription;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,8 @@ public abstract class OrderSubmitActivity extends Activity implements View.OnCli
             txtMobile.setText(StaticVar.Member.getMobile());
         }
 
+
     }
-
-
 
     @Override
     public void onClick(View v) {

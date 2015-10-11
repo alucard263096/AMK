@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
     int order_id=0;
     OrderObj order;
     ResultObj res;
+
+    RadioButton rbAlipay,rbWexin,rbTest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,12 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
 
         ((TextView)findViewById(R.id.txtPrice)).setText(String.valueOf(order.getPrice()) + "元");
 
+        rbAlipay= ((RadioButton)findViewById(R.id.rbAlipay));
+        rbAlipay.setOnClickListener(this);
+        rbWexin= ((RadioButton)findViewById(R.id.rbWexin));
+        rbWexin.setOnClickListener(this);
+        rbTest= ((RadioButton)findViewById(R.id.rbTest));
+        rbTest.setOnClickListener(this);;
 
     }
 
@@ -87,17 +96,43 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                 //AlipayMgr mgr=new AlipayMgr(this,order);
                 //mgr.pay(v);
 
-                action="PAYMENT";
-                PaymentLoader loader=new PaymentLoader(this,order_id, StaticVar.Member.getId(),"ALIPAY");
-                loader.setCallBack(this);
-                loader.start();
-
-
-
+                String payment_type=GetSelectedPaymentType();
+                if(payment_type.equals("TEST")) {
+                    action = "PAYMENT";
+                    PaymentLoader loader = new PaymentLoader(this, order_id, StaticVar.Member.getId(), "ALIPAY");
+                    loader.setCallBack(this);
+                    loader.start();
+                }else {
+                    Toast.makeText(this,"此支付方式暂未开通",Toast.LENGTH_LONG).show();
+                }
+                return;
+            case R.id.rbAlipay:
+            case R.id.rbWexin:
+            case R.id.rbTest:
+                SetSelectedPaymentType((RadioButton) v);
                 return;
         }
     }
 
+    private String GetSelectedPaymentType() {
+        if(rbAlipay.isChecked()){
+            return String.valueOf(rbAlipay.getTag());
+        }else if(rbWexin.isChecked()){
+            return String.valueOf(rbWexin.getTag());
+        }else if(rbTest.isChecked()){
+            return String.valueOf(rbTest.getTag());
+        }
+        return "";
+    }
+
+    private void SetSelectedPaymentType(RadioButton rb) {
+        rbAlipay.setChecked(false);
+        rbWexin.setChecked(false);
+        rbTest.setChecked(false);
+
+        rb.setChecked(true);
+
+    }
 
 
     private android.os.Handler uiInitHandler = new android.os.Handler() {
