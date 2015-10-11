@@ -131,7 +131,8 @@
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
                 android:background="#37A4D4"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/order">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -142,7 +143,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="最新优惠"
+                    android:text="我的预约"
                     app:layout_heightPercent="20%"
                     android:textSize="17dp"
                     android:textColor="#ffffff"

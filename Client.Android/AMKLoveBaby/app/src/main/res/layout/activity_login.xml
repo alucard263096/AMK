@@ -92,7 +92,8 @@
                 app:layout_widthPercent="50%"
             android:singleLine="true"
                 android:phoneNumber="true"
-                android:editable="true" />
+                android:editable="true"
+                android:background="@null" />
             <Button
                 android:id="@+id/btnSendVerifyCode"
                 android:layout_width="match_parent"
@@ -139,7 +140,8 @@
                 app:layout_widthPercent="70%"
                 android:singleLine="true"
                 android:phoneNumber="true"
-                android:editable="true" />
+                android:editable="true"
+                android:background="@null" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

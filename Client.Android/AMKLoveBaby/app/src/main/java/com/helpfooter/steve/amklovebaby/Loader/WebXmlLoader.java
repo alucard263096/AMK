@@ -13,10 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.OrderPaymentActivity;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.XmlDataTableReader;
 
@@ -92,18 +96,43 @@ public abstract class WebXmlLoader extends Thread{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			getResultFailHandler.sendEmptyMessage(0);
 		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			getResultFailHandler.sendEmptyMessage(1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			getResultFailHandler.sendEmptyMessage(2);
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			getResultFailHandler.sendEmptyMessage(3);
 		}
         return is;
 	}
+	private android.os.Handler getResultFailHandler = new android.os.Handler(){
+		@Override
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what){
+				case 0:
+					Toast.makeText(ctx,"网络错误，请检查链接",Toast.LENGTH_LONG).show();
+					return;
+				case 1:
+					Toast.makeText(ctx,"网络错误，请检查协议",Toast.LENGTH_LONG).show();
+					return;
+				case 2:
+					Toast.makeText(ctx,"网络错误，请检查读写",Toast.LENGTH_LONG).show();
+					return;
+				case  3:
+				default:
+					Toast.makeText(ctx,"无法连接到网络，请稍后再试",Toast.LENGTH_LONG).show();
+					return;
+			}
+		}
+	};
 	//把工作流转换为字符串
 	public String convertStreamToString(InputStream is) {   
 		   BufferedReader reader = new BufferedReader(new InputStreamReader(is));

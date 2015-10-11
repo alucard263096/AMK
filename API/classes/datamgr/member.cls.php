@@ -42,17 +42,36 @@
 
 	}
 
-	
-	public function getMemberLoginInfo($mobile){
-		if($mobile==""){
-			return	outResult(-1,"mobile can not be null");
-		}
-		$mobile=parameter_filter($mobile);
-		$sql="select * from tb_member where mobile='$mobile' ";
+	public function updateMemberInfo($member_id,$field,$value){
+		
+		$member_id=parameter_filter($member_id);
+		$field=parameter_filter($field);
+		$value=parameter_filter($value);
+
+		$sql="select 1 from tb_member where id=$member_id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		if(count($result)==0){
-			return	outResult(-2,"no this mobile no");
+			return	outResult(-2,"no this member ");
+		}
+
+		$sql="update tb_member set $field='$value' where id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+
+		return	outResult(0,"update success",$id);
+	}
+
+	
+	public function getMemberInfo($mobile,$member_id){
+		if($mobile==""){
+			return	outResult(-1,"mobile  can not be null");
+		}
+		$mobile=parameter_filter($mobile);
+		$sql="select * from tb_member where mobile='$mobile'  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		if(count($result)==0){
+			return	outResult(-2,"no this mobile no ");
 		}
 
 		Global $smsMgr;
@@ -112,8 +131,8 @@
 		}
 
 		$id=$this->dbmgr->getNewId("tb_member");
-		$sql="insert into tb_member (id,mobile,password,name,status,created_date) values
-		($id,'$mobile','$password','$name','A',".$this->dbmgr->getDate().")";
+		$sql="insert into tb_member (id,mobile,password,name,status,created_date,created_user,updated_date,updated_user) values
+		($id,'$mobile','$password','$name','A',".$this->dbmgr->getDate().",-1,".$this->dbmgr->getDate().",-1)";
 
 		$query = $this->dbmgr->query($sql);
 

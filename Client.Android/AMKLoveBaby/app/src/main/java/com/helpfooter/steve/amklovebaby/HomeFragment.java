@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment implements IMyFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private LinearLayout mDoctor,mNews,mMember;
+    private LinearLayout mDoctor,mNews,mMember,mOrde;
 
     private IndexBannerSilderView mImageSilder;
 
@@ -88,6 +88,9 @@ public class HomeFragment extends Fragment implements IMyFragment {
 
         mMember=(LinearLayout)view.findViewById(R.id.member);
         mMember.setOnClickListener(((MainActivity)this.getActivity()));
+
+        mOrde=(LinearLayout)view.findViewById(R.id.order);
+        mOrde.setOnClickListener(((MainActivity)this.getActivity()));
     }
 
     public void initBanner(View view)  {

@@ -62,6 +62,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener,I
         txtMobile=((EditText)findViewById(R.id.txtMobile));
         txtVerifyCode=((EditText)findViewById(R.id.txtVerifyCode));
         txtPassword=(EditText)findViewById(R.id.txtPassword);
+
+        ((TextView) findViewById(R.id.btnRegPP)).setOnClickListener(this);
+
     }
 
 
@@ -71,6 +74,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener,I
         switch (v.getId()){
             case R.id.btnBack:
                 this.finish();
+                return;
+            case R.id.btnRegPP:
+
+                Intent intent = new Intent(this, GeneralTextActivity.class);
+                intent.putExtra("code","registerpolicy");
+                intent.putExtra("title","服务于协议");
+                startActivity(intent);
                 return;
             case R.id.btnSendVerifyCode:
                 mobile=txtMobile.getText().toString();

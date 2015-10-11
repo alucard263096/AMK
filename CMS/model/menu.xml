@@ -117,5 +117,21 @@
         </submenu>
       </submenus>
     </mainmenu>
+    <mainmenu>
+      <module>member</module>
+      <name>会员管理</name>
+      <submenus>
+        <submenu>
+          <id>member_list</id>
+          <name>会员列表</name>
+          <url>/Member/member.php</url>
+        </submenu>
+        <submenu>
+          <id>doctorcalendar</id>
+          <name>Comming Soon</name>
+          <url>#</url>
+        </submenu>
+      </submenus>
+    </mainmenu>
   </mainmenus>
 </root>

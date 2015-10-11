@@ -3,14 +3,19 @@ package com.helpfooter.steve.amklovebaby;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.VersionUpdateMgr;
@@ -18,7 +23,9 @@ import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
@@ -28,7 +35,11 @@ import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -85,7 +96,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         MemberMgr.GetMemberInfoFromDb(this);
         versionUpdateMgr=new VersionUpdateMgr(this);
         versionUpdateMgr.startCheckVersion();
-
+        StaticVar.MainForm=this;
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
     }
@@ -140,6 +151,11 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(view.getId()==R.id.member){
             buttonBarClick(memberMainBarButton);
         }
+        if(view.getId()==R.id.order){
+            Intent intent = new Intent(this, OrderListActivity.class);
+            startActivity(intent);
+            return;
+        }
         for(BottomBarButton barButton:lstBottomBar){
             if(view==barButton.GetEnteryLayout()){
                 buttonBarClick(barButton);
@@ -158,8 +174,6 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
             addOrShowFragment(getFragmentManager().beginTransaction(), barButton.GetFragment());
         }
     }
-
-
     public void InitBottomBar(){
         lstBottomBar=new ArrayList<BottomBarButton>();
         lstBottomBar.add(homeBarButton);
@@ -217,4 +231,84 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     public void SetToHome() {
         buttonBarClick(homeBarButton);
     }
+
+
+
+
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        ContentResolver resolver = getContentResolver();
+        String picturePath;
+        // 拍照
+        if (resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+            Cursor cursor = resolver.query(selectedImage, filePathColumn, null, null, null);
+            int colunm_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            picturePath = cursor.getString(colunm_index);
+            cursor.close();
+            if(picturePath!=null && !picturePath.isEmpty()) {
+                uploadFile(picturePath,requestCode);
+            }
+        }
+    }
+
+    private void uploadFile(final String path,int fileType)
+    {
+        //获取上传文件的路径
+
+        //判断上次路径是否为空
+        if (path.isEmpty()) {
+
+        } else {
+            //异步的客户端对象
+            AsyncHttpClient client = new AsyncHttpClient();
+            //指定url路径
+            String url = StaticVar.UPLOADFILEURL4Member;
+            //封装文件上传的参数
+            RequestParams params = new RequestParams();
+            //根据路径创建文件
+            File file = new File(path);
+            try {
+                //放入文件
+                params.put("uploadfile", file);
+            } catch (Exception e) {
+                // TODO: handle exception
+                System.out.println("文件不存在----------");
+            }
+            //图片上传
+            if(fileType==1) {
+                //执行post请求
+                client.post(url, params, new TextHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int i, cz.msebera.android.httpclient.Header[] headers, String result) {
+                        if (i == 200) {
+                            String[] arrResult = result.split("\\|");
+                            if (arrResult != null && arrResult.length == 3) {
+                                String filename = arrResult[2];
+                                memberMainFragment.setMemberPhoto(filename,path);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, String result, Throwable throwable) {
+
+                    }
+
+                });
+            }
+        }
+
+    }
+
+
+
+
 }

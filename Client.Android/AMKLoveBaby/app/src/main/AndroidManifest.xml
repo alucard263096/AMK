@@ -5,14 +5,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -21,7 +19,7 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:allowBackup="true"
@@ -98,11 +96,23 @@
             android:label="@string/title_activity_video_chat"
             android:screenOrientation="portrait" >
         </activity>
-        <activity
-            android:name="ChatActivity">
+        <activity android:name=".ChatActivity" >
+        </activity>
+        <activity android:name=".ImageShower" >
         </activity>
         <activity
-            android:name="ImageShower">
+            android:name=".MemberInfoActivity"
+            android:label="@string/title_activity_member_info"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".CharListActivity"
+            android:label="@string/title_activity_char_list"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".GeneralTextActivity"
+            android:label="@string/title_activity_general_text" >
         </activity>
     </application>
 

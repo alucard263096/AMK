@@ -1,19 +1,36 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView;
+import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
+import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import java.io.File;
 
 
 /**
@@ -33,6 +50,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ImageView imgMyPhoto;
 
     private OnFragmentInteractionListener mListener;
 
@@ -76,7 +95,6 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         super.onResume();
         if(StaticVar.Member==null){
            MainActivity main= (MainActivity)this.getActivity();
-
             main.SetToHome();
 
         }else {
@@ -89,43 +107,91 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-
         View view= inflater.inflate(R.layout.fragment_member_main, container, false);
         initUI(view);
         return  view;
     }
     private void initUI(View view) {
         ((LinearLayout) view.findViewById(R.id.btnMyInfo)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMyNotice)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnCharlist)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyOrder)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnMyDoctor)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMySetting)).setOnClickListener(this);
-        ((LinearLayout) view.findViewById(R.id.btnMyFeedback)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnPP)).setOnClickListener(this);
         ((LinearLayout) view.findViewById(R.id.btnAboutus)).setOnClickListener(this);
+        ((LinearLayout) view.findViewById(R.id.btnHelpDocument)).setOnClickListener(this);
+
+        imgMyPhoto= ((ImageView) view.findViewById(R.id.imgMyPhoto));
+        imgMyPhoto.setOnClickListener(this);
 
         if(StaticVar.Member!=null){
-            ((TextView) view.findViewById(R.id.txtMyName)).setText("你好,"+StaticVar.Member.getName());
+            ((TextView) view.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+            if(StaticVar.Member.getPhoto().length()>0) {
+                UrlImageLoader loader = new UrlImageLoader(imgMyPhoto, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
+                loader.start();
+            }
         }
     }
+
+    public void setMemberPhoto(String filename,String filepath){
+        //Bitmap bitmap= BitmapFactory.decodeFile(filepath);
+        //imgMyPhoto.setImageBitmap(bitmap);
+        imgMyPhoto.setImageURI(Uri.parse(filepath));
+
+        StaticVar.Member.setPhoto(filename);
+        MemberDao dao=new MemberDao(this.getActivity());
+        dao.updateObj(StaticVar.Member);
+
+        MemberUpdateLoader loader=new MemberUpdateLoader(this.getActivity(),StaticVar.Member.id,"photo",filename);
+        loader.start();
+    }
+
     @Override
     public void onClick(View v) {
+        Intent intent=null;
         switch (v.getId()){
-            case R.id.btnMyInfo:
+            case R.id.imgMyPhoto:
+                try
+                {
+                    intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    this.getActivity().startActivityForResult(intent, 1);
+                } catch (ActivityNotFoundException e) {
+
+                }
                 return;
-            case R.id.btnMyNotice:
+            case R.id.btnMyInfo:
+                 intent = new Intent(this.getActivity(), MemberInfoActivity.class);
+                startActivity(intent);
+                return;
+            case R.id.btnCharlist:
+                intent = new Intent(this.getActivity(), CharListActivity.class);
+                startActivity(intent);
                 return;
             case R.id.btnMyOrder:
-                Intent intent = new Intent(this.getActivity(), OrderListActivity.class);
+                 intent = new Intent(this.getActivity(), OrderListActivity.class);
                 startActivity(intent);
                 return;
             case R.id.btnMyDoctor:
                 return;
-            case R.id.btnMySetting:
-                return;
-            case R.id.btnMyFeedback:
+            case R.id.btnPP:
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","privacypolicy");
+                intent.putExtra("title","隐私与政策");
+                startActivity(intent);
                 return;
             case R.id.btnAboutus:
+
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","aboutus");
+                intent.putExtra("title","关于我们");
+                startActivity(intent);
+                return;
+            case R.id.btnHelpDocument:
+
+                intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+                intent.putExtra("code","helpus");
+                intent.putExtra("title","帮助");
+                startActivity(intent);
                 return;
         }
     }

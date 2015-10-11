@@ -18,12 +18,14 @@ public class MemberDao extends AbstractDao {
     void gotoCreateTableSql() {
         util.open();
         StringBuffer sql = new StringBuffer();
+
         sql.append("create table IF NOT EXISTS  tb_member " +
-                "(id int,name varchar ,mobile varchar )");
+                "(id int,name varchar ,mobile varchar,photo varchar,sex varchar,birth varchar,history varchar )");
         util.execSQL(sql.toString(), new Object[]{});
     }
 
-    static boolean hascheckcreate=false;
+    static boolean hascheckcreate = false;
+
     public void createTable(){
         if(hascheckcreate==false){
             gotoCreateTableSql();
@@ -32,28 +34,28 @@ public class MemberDao extends AbstractDao {
     }
 
     @Override
-    void insertObj(AbstractObj abobj) {
+    public void insertObj(AbstractObj abobj) {
         util.open();
 
         MemberObj obj=(MemberObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_member (id,mobile  ,name ) values (?,?,?)");
-        Object[] bindArgs = {obj.getId(),obj.getMobile(),obj.getName()};
+        sql.append("insert into tb_member (id,mobile  ,name,photo,sex,birth,history ) values (?,?,?,?,?,?,?)");
+        Object[] bindArgs = {obj.getId(),obj.getMobile(),obj.getName(),obj.getPhoto(),obj.getSex(),obj.getBirth(),obj.getHistory()};
         util.execSQL(sql.toString(), bindArgs);
 
         util.close();
     }
 
     @Override
-    void updateObj(AbstractObj abobj) {
+    public void updateObj(AbstractObj abobj) {
         util.open();
 
         MemberObj obj=(MemberObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_member set mobile=?  ,name=? where id=? ");
-        Object[] bindArgs = {obj.getMobile(),obj.getName(),obj.getId()};
+        sql.append("update tb_member set mobile=?,name=?,photo=?,sex=?,birth=?,history=? where id=? ");
+        Object[] bindArgs = {obj.getMobile(),obj.getName(),obj.getPhoto(),obj.getSex(), obj.getBirth(),obj.getHistory(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -71,6 +73,17 @@ public class MemberDao extends AbstractDao {
         orderDao.deleteTable();
 
         insertObj(memberObj);
+
+    }
+
+
+    public void deleteMember() {
+        super.deleteTable();
+
+        OrderDao orderDao=new OrderDao(ctx);
+        orderDao.deleteTable();
+
+        super.deleteTable();
 
     }
 }
