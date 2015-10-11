@@ -71,7 +71,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     public int mDoctorid;
     public String mCurrUserType;
     private ArrayList<ChatMsgEntity> lstMsgEntity;
-    private IWebLoaderCallBack valCallBack;
+    private ChatLoader loader;
     private ArrayList<ChatMsgEntity> lstOldList;
     private String fileName;
     private ProgressBar progressBar;
@@ -90,13 +90,12 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     public void LoadList() {
         lstOldList=new ArrayList<ChatMsgEntity>();
         progressBar=(ProgressBar)mActivity.findViewById(R.id.progressBar);
-        valCallBack = this;
+         loader = new ChatLoader(mActivity.getApplicationContext(), mOrderid,mDoctorid);
+        loader.setCallBack(this);
         new Thread() {
             public void run() {
                 try {
                     while (true) {
-                        ChatLoader loader = new ChatLoader(mActivity, mOrderid,mDoctorid);
-                        loader.setCallBack(valCallBack);
                         loader.run();
                         sleep(3000);
                     }

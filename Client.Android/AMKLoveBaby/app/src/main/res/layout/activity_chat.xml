@@ -16,19 +16,16 @@
         android:layout_height="45dp"
         app:layout_widthPercent="100%"
         android:id="@+id/rl_layout"
-        android:background="@color/myblue">
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="72dp"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/selector_btn_back"
-            android:paddingLeft="10dp"
-            android:text="返回"
-            android:gravity="right"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+        android:background="@color/myred">
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:src="@drawable/back"
+        app:layout_widthPercent="10%"
+        app:layout_marginTopPercent="20%"
+        app:layout_marginBottomPercent="20%"/>
         <TextView
             android:id="@+id/txt_Receiver"
             android:layout_width="wrap_content"

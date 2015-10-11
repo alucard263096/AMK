@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private Button mBtnSendtxt;// 发送文本
     private Button mBtnSendpic;// 发送图片
     private Button mBtnSendfile;// 发送文件
-    private Button mBtnBack;// 返回btn
+    private ImageView mBtnBack;// 返回btn
     private EditText mEditTextContent;
     private TextView mTextViewRecevier; //聊天对象
     private ScrollView mScrollView;
@@ -91,7 +92,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         mBtnSendtxt =(Button)findViewById(R.id.btn_sendTxt);
         mBtnSendpic =(Button)findViewById(R.id.btn_sendPic);
         mBtnSendfile =(Button)findViewById(R.id.btn_sendFile);
-        mBtnBack =(Button)findViewById(R.id.btn_back);
+        mBtnBack =(ImageView)findViewById(R.id.btnBack);
         mBtnSendtxt.setOnClickListener(this);
         mBtnSendpic.setOnClickListener(this);
         mBtnSendfile.setOnClickListener(this);
@@ -110,7 +111,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         String mobile;
         switch (v.getId()) {
-            case R.id.btn_back:
+            case R.id.btnBack:
                 this.finish();
                 return;
             case R.id.btn_sendTxt:
