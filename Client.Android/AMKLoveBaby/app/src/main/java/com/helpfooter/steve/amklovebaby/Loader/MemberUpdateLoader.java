@@ -16,7 +16,7 @@ import java.util.HashMap;
 /**
  * Created by Steve on 2015/9/9.
  */
-public class MemberUpdateLoader extends WebXmlLoader {
+public class MemberUpdateLoader extends ResultLoader {
      int member_id;
     String field;
     String value;
@@ -43,22 +43,4 @@ public class MemberUpdateLoader extends WebXmlLoader {
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
-
-    @Override
-    public void doXml(ArrayList<HashMap<String, String>> lstRow) {
-        ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
-        for(HashMap<String,String> cols:lstRow){
-            ResultObj obj=new ResultObj();
-            obj.parseXmlDataTable(cols);
-            lsObj.add(obj);
-        }
-
-        if(callBack!=null){
-            callBack.CallBack(lsObj);
-        }
-    }
 }

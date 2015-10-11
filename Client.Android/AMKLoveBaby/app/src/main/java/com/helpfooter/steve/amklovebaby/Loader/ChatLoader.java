@@ -31,10 +31,6 @@ public class ChatLoader extends WebXmlLoader {
 		DoctorId=doctorid;
 
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 	/*//不存数据库，直接取
 	public void GetChatData() {

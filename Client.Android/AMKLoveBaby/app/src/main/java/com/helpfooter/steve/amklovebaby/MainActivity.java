@@ -28,9 +28,11 @@ import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
@@ -112,10 +114,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         NewsLoader newsLoader=new NewsLoader(this);
         newsLoader.start();
 
-        if(StaticVar.Member!=null){
-            OrderListLoader orderListLoader=new OrderListLoader(this);
-            orderListLoader.start();
-        }
+        MemberMgr.InitMemberData(this);
     }
 
 

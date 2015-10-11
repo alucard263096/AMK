@@ -20,10 +20,6 @@ public class VersionLoader extends  WebXmlLoader {
         super(ctx, StaticVar.VersionApi);
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
 
     @Override
     public void doXml(ArrayList<HashMap<String, String>> lstRow) {

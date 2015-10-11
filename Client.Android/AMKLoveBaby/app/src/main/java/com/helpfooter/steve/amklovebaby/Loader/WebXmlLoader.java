@@ -20,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.OrderPaymentActivity;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.XmlDataTableReader;
@@ -51,6 +52,11 @@ public abstract class WebXmlLoader extends Thread{
 		String update_date=dao.getParam(callApi, "1991-1-1");
 		url= (url+"?last_time="+update_date).replace(" ", "%20");
 		return url;
+	}
+
+	IWebLoaderCallBack callBack;
+	public void setCallBack(IWebLoaderCallBack val){
+		callBack=val;
 	}
 
 	//需要重写的doXml方法，对返回的业务数据进行交互操作

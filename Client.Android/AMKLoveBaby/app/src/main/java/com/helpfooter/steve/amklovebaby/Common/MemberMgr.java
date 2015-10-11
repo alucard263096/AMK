@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
+import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.LoginActivity;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
@@ -34,6 +36,16 @@ public class MemberMgr {
         if(lstMember.size()>0){
             MemberObj member=(MemberObj)lstMember.get(0);
             StaticVar.Member=member;
+        }
+    }
+
+    public static void InitMemberData(Context ctx){
+        if(StaticVar.Member!=null){
+            OrderListLoader orderListLoader=new OrderListLoader(ctx);
+            orderListLoader.start();
+
+            MemberFollowDoctorLoader memberFollowDoctorLoader=new MemberFollowDoctorLoader(ctx,StaticVar.Member.getId());
+            memberFollowDoctorLoader.start();
         }
     }
 

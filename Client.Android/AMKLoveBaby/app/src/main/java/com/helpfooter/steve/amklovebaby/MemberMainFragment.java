@@ -172,6 +172,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 startActivity(intent);
                 return;
             case R.id.btnMyDoctor:
+                intent = new Intent(this.getActivity(), FollowDoctorActivity.class);
+                startActivity(intent);
                 return;
             case R.id.btnPP:
                 intent = new Intent(this.getActivity(), GeneralTextActivity.class);

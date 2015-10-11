@@ -24,10 +24,6 @@ public class WorktimeLoader extends WebXmlLoader {
     }
 
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
 
     @Override
     public String getCallUrl() {

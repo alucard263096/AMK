@@ -74,7 +74,7 @@
                     app:layout_textSizePercent="50%"
                     app:layout_widthPercent="60%"/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:id="@+id/txtFocus"
+                    android:id="@+id/btnFollow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="+关注"

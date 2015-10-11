@@ -112,7 +112,13 @@
         </activity>
         <activity
             android:name=".GeneralTextActivity"
-            android:label="@string/title_activity_general_text" >
+            android:label="@string/title_activity_general_text"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".FollowDoctorActivity"
+            android:label="@string/title_activity_follow_doctor"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

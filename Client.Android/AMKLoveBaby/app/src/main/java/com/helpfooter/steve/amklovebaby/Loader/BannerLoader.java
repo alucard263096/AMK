@@ -23,10 +23,6 @@ public class BannerLoader extends WebXmlLoader {
 		super(ctx, "");
 	}
 
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 
 	@Override

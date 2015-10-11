@@ -9,9 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
+import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import org.w3c.dom.Text;
@@ -20,9 +25,11 @@ import org.w3c.dom.Text;
 public class DoctorDetailActivity extends Activity implements View.OnClickListener {
     DoctorObj doctor;
     ImageView btnBack,imgPhoto;
-    TextView txtName,txtFocus,txtOfficeTitle,txtWorktime,txtVideoQuerycount,txtCharQuerycount,txtGeneralScore,btnVedioChat,btnCharChat;
-    TextView txtIntroduce,txtCredentials,txtExpert;
+    TextView txtName,txtOfficeTitle,txtWorktime,txtVideoQuerycount,txtCharQuerycount,txtGeneralScore,btnVedioChat,btnCharChat;
+    TextView txtIntroduce,txtCredentials,txtExpert,btnFollow;
     LinearLayout layoutBusiness;
+
+    boolean hasFollow=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,14 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
             }
         }
 
+        btnFollow=(TextView)findViewById(R.id.btnFollow);
+        btnFollow.setOnClickListener(this);
+        if(StaticVar.Member!=null){
+            MemberFollowDoctorDao followdao=new MemberFollowDoctorDao(this);
+            hasFollow=followdao.hasFollow(doctor.getId());
+            setFollow();
+        }
+
         txtIntroduce=(TextView)findViewById(R.id.txtIntroduce);
         txtIntroduce.setText(doctor.getIntroduce());
 
@@ -88,6 +103,17 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         txtExpert=(TextView)findViewById(R.id.txtExpert);
         txtExpert.setText(doctor.getExpert());
     }
+
+    private void setFollow() {
+        if(hasFollow){
+            btnFollow.setBackgroundColor(getResources().getColor(R.color.myyello));
+            btnFollow.setText("已关注");
+        }else {
+            btnFollow.setBackgroundColor(getResources().getColor(R.color.myblue));
+            btnFollow.setText("+关注");
+        }
+    }
+
 
     private void InitData() {
         Intent intent = getIntent();
@@ -112,6 +138,25 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
                 Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
                 intent2.putExtra("Id", doctor.getId());
                 startActivity(intent2);
+                break;
+            case R.id.btnFollow:
+                if(MemberMgr.CheckIsLogin(this)){
+                    hasFollow=!hasFollow;
+                    setFollow();
+
+                    MemberFollowDoctorDao dao=new MemberFollowDoctorDao(this);
+                    if(hasFollow) {
+                        MemberFollowDoctorObj obj = new MemberFollowDoctorObj();
+                        obj.setDoctor_id(doctor.getId());
+                        obj.setMember_id(StaticVar.Member.getId());
+                        dao.insertObj(obj);
+                    }else {
+                        dao.removeFollow(doctor.getId());
+                    }
+                    UpdateFollowDoctorLoader loader=
+                            new UpdateFollowDoctorLoader(this,StaticVar.Member.getId(),doctor.getId(),hasFollow?"Y":"N");
+                    loader.start();
+                }
                 break;
         }
     }

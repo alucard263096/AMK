@@ -22,10 +22,6 @@ public class NewsLoader extends WebXmlLoader {
 		super(ctx, StaticVar.NewsApi);
 	}
 
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 	int newsId;
 	public void  setGetNewsContext(int newsId){

@@ -41,6 +41,8 @@ public final class StaticVar {
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
+	public static String DoctorFollowAPI="doctorfollow";
+	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -61,7 +63,9 @@ public final class StaticVar {
 		dictHashMap.put(MemberUpdateApi,APIURL+"Member/member_update.php");
 		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
-		dictHashMap.put(VersionApi,APIURL+"/version.xml");
+		dictHashMap.put(VersionApi,APIURL+"version.xml");
+		dictHashMap.put(DoctorFollowAPI,APIURL+"Member/member_doctor.php");
+		dictHashMap.put(UploadDoctorFollowAPI,APIURL+"Member/follow_doctor.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";
