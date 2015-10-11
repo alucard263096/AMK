@@ -22,6 +22,44 @@
 	{
 		
 	}
+
+	public function getFollowDoctor($member_id){
+	
+		if($member_id==""){
+			return	outResult(-1,"member_id can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$sql="select * from tb_member_follow_doctor where member_id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		return $result;
+	}
+
+	public function followDoctor($member_id,$doctor_id,$is_follow){
+	
+		if($member_id==""){
+			return	outResult(-1,"member_id can not be null");
+		}
+		if($doctor_id==""){
+			return	outResult(-2,"doctor_id can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$doctor_id=parameter_filter($doctor_id);
+
+
+		if($is_follow=='N'){
+			$sql="delete from tb_member_follow_doctor where member_id=$member_id and doctor_id=$doctor_id ";
+		}else{
+		
+
+			$sql="insert into tb_member_follow_doctor (member_id,doctor_id) values ( $member_id ,$doctor_id )";
+		}
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query);
+		
+		return outResult(0,"follow success");
+	}
 	
 	public function sendLoginVerifyCode($mobile){
 		if($mobile==""){
