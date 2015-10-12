@@ -16,7 +16,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
 public class CharListActivity extends Activity implements View.OnClickListener {
-
+    ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +29,15 @@ public class CharListActivity extends Activity implements View.OnClickListener {
     private void InitData() {
 
     }
-
+    MessageListLoadView lstLoad;
+    boolean hasNewView=false;
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
-        final MessageListLoadView lstLoad=new MessageListLoadView(this,this.getApplicationContext(),(LinearLayout)findViewById(R.id.normal_chat_list));
-        lstLoad.LoadList();
+        if(hasNewView==false){
+            lstLoad = new MessageListLoadView(this, this.getApplicationContext(), (LinearLayout) findViewById(R.id.normal_chat_list));
+            lstLoad.LoadList();
+            hasNewView=true;
+        }
     }
 
     @Override
@@ -41,6 +45,7 @@ public class CharListActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnBack:
                 this.finish();
+                lstLoad.UnloadList();
                 return;
         }
     }

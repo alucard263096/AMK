@@ -45,6 +45,11 @@ public final class StaticVar {
 	public static String DoctorFollowAPI="doctorfollow";
 	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
 
+	public static int width ;     // 屏幕宽度（像素）
+	public static int height ;   // 屏幕高度（像素）
+	public static float density ;      // 屏幕密度（0.75 / 1.0 / 1.5）
+	public static int densityDpi ;  // 屏幕密度DPI（120 / 160 / 240）
+
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");

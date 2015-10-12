@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.ChatListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
@@ -58,12 +59,13 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private ScrollView mScrollView;
     private String context; //聊天内容
     private int order_id;
-    private int doctor_id;
+    private DoctorObj doctor;
     public Activity mActivity;
     private static int IMAGE_CODE = 1;
     private static int FILE_CODE = 2;
     private static String SENDERTYPE = "C"; //消息发送方
     private ChatUpdateLoader loader=null;
+    ChatListLoadView chatListLoadView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,11 +73,10 @@ public class ChatActivity extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.activity_chat);
         mActivity=this;
-        Intent intent = getIntent();
-        order_id = Integer.parseInt(intent.getStringExtra("orderId"));
-        doctor_id = Integer.parseInt(intent.getStringExtra("tag"));
-       initUI();
+
+
         InitData();
+       initUI();
     }
 
 
@@ -83,11 +84,19 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private void InitData() {
 
 
+        Intent intent = getIntent();
+        order_id = Integer.parseInt(intent.getStringExtra("orderId"));
+        int doctor_id = Integer.parseInt(intent.getStringExtra("tag"));
+        DoctorDao doctorDao=new DoctorDao(this);
+        doctor=(DoctorObj)doctorDao.getObj(doctor_id);
 
     }
     /**
      * 初始化UI
      */
+
+    boolean hasNewView=false;
+
     private void initUI() {
         mBtnSendtxt =(Button)findViewById(R.id.btn_sendTxt);
         mBtnSendpic =(Button)findViewById(R.id.btn_sendPic);
@@ -101,9 +110,10 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         mTextViewRecevier=(TextView)findViewById(R.id.txt_Receiver);
         MemberObj member = StaticVar.Member;
         mTextViewRecevier.setText(member.getName());
-
-        ChatListLoadView chatListLoadView=new ChatListLoadView(this,(PercentLinearLayout)findViewById(R.id.message_chat_list),order_id,doctor_id,"C");
-        chatListLoadView.LoadList();
+        if(hasNewView==false) {
+            chatListLoadView = new ChatListLoadView(this, (PercentLinearLayout) findViewById(R.id.message_chat_list), order_id, doctor.getId(), "C");
+            chatListLoadView.LoadContent();
+        }
     }
 
 
@@ -112,6 +122,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         String mobile;
         switch (v.getId()) {
             case R.id.btnBack:
+                chatListLoadView.UnloadContent();
                 this.finish();
                 return;
             case R.id.btn_sendTxt:
@@ -146,7 +157,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     }
 
     private void SendMessage(String txtType, String strContent) {
-        loader=new ChatUpdateLoader(mActivity,order_id,doctor_id,SENDERTYPE,txtType,strContent);
+        loader=new ChatUpdateLoader(mActivity,order_id,doctor.getId(),SENDERTYPE,txtType,strContent);
         if(strContent.isEmpty())
         {
             return;

@@ -86,14 +86,14 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;     // 屏幕宽度（像素）
-        int height = metric.heightPixels;   // 屏幕高度（像素）
-        float density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
-        int densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
-        Log.i("screen_info_width",String.valueOf(width));
-        Log.i("screen_info_height",String.valueOf(height));
-        Log.i("screen_info_density",String.valueOf(density));
-        Log.i("screen_info_Dpi", String.valueOf(densityDpi));
+        StaticVar.width = metric.widthPixels;     // 屏幕宽度（像素）
+        StaticVar.height = metric.heightPixels;   // 屏幕高度（像素）
+        StaticVar.density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
+        StaticVar.densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
+        Log.i("screen_info_width",String.valueOf(StaticVar.width));
+        Log.i("screen_info_height",String.valueOf(StaticVar.height));
+        Log.i("screen_info_density",String.valueOf(StaticVar.density));
+        Log.i("screen_info_Dpi", String.valueOf(StaticVar.densityDpi));
 
         MemberMgr.GetMemberInfoFromDb(this);
         versionUpdateMgr=new VersionUpdateMgr(this);

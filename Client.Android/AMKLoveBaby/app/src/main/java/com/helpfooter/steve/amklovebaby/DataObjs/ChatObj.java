@@ -59,15 +59,20 @@ public class ChatObj extends AbstractObj {
     String content;
     String last_one;
 
+    public String getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
+    }
+
+    String updated_date;
+
 
     @Override
     public void parseCursor(Cursor cursor) {
 
-        setId(cursor.getInt(cursor.getColumnIndex("id")));
-        setMember_id(cursor.getString(cursor.getColumnIndex("member_id")));
-        setDoctor_id(cursor.getInt(cursor.getColumnIndex("doctor_id")));
-        setLast_one(cursor.getString(cursor.getColumnIndex("last_one")));
-        setContent(cursor.getString(cursor.getColumnIndex("content")));
     }
 
     @Override
@@ -78,6 +83,7 @@ public class ChatObj extends AbstractObj {
         this.doctor_id=Integer.parseInt(lstRowValue.get("doctor_id"));
         this.last_one = lstRowValue.get("last_one");
         this.content = lstRowValue.get("content");
+        this.updated_date = lstRowValue.get("updated_date");
     }
 
 }

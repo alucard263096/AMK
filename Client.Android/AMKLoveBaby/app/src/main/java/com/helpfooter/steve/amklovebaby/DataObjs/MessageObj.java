@@ -80,7 +80,7 @@ public class MessageObj extends AbstractObj {
         setId(cursor.getInt(cursor.getColumnIndex("id")));
         setMember_id(cursor.getString(cursor.getColumnIndex("member_id")));
         setName(cursor.getString(cursor.getColumnIndex("name")));
-        setCreated_time(cursor.getString(cursor.getColumnIndex("created_time")));
+        setCreated_time(cursor.getString(cursor.getColumnIndex("updated_time")));
         setLast_one(cursor.getString(cursor.getColumnIndex("last_one")));
         setDescription(cursor.getString(cursor.getColumnIndex("description")));
     }
