@@ -24,6 +24,11 @@ public final class StaticVar {
 	public static String VideoChatServerIp="www.myhkdoc.com";
 	public static int VideoChatServerPort=8906;
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
+
+
+	public static String CurrentVersion="1.0.0.1";
+	public static String VersionApi="version";
+
 	public static DoctorObj Doctor=null;
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -32,6 +37,7 @@ public final class StaticVar {
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat.php");
 		dictHashMap.put(ChatApi,APIURL+"Order/charchat_one.php");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
+		dictHashMap.put(VersionApi,APIURL+"versiondoctor.xml");
 	}
 
 	public static String GetSystemTimeString(){

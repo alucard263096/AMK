@@ -277,7 +277,7 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 //    //图片
     public ImageView getIMGView(ChatMsgEntity obj) {
         ImageView img = new ImageView(this.mActivity);
-        img.setBackgroundColor(Color.parseColor("#ccaacc"));
+        //img.setBackgroundColor(Color.parseColor("#ccaacc"));
         LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.3),LinearLayout.LayoutParams.WRAP_CONTENT);
 
         if (obj.getMsgType()) {
