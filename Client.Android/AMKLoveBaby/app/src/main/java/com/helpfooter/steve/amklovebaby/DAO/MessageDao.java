@@ -2,11 +2,13 @@ package com.helpfooter.steve.amklovebaby.DAO;
 
 
 import android.content.Context;
+import android.text.format.DateFormat;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MessageObj;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Steve on 2015/8/31.
@@ -16,6 +18,13 @@ public class MessageDao extends AbstractDao {
 
     public MessageDao(Context ctx) {
         super(ctx, "tb_message");
+    }
+
+
+
+    public ArrayList<AbstractObj> getNoticeOrder(){
+        return   super.getList("sendside=D ");
+
     }
 
 
@@ -43,7 +52,8 @@ public class MessageDao extends AbstractDao {
                 "name varchar," +
                 "created_time varchar," +
                 "last_one varchar," +
-                "description varchar)");
+                 "sendside varchar," +
+               "description varchar)");
         util.execSQL(sql.toString(), new Object[]{});
 
 
@@ -64,9 +74,9 @@ public class MessageDao extends AbstractDao {
         MessageObj obj=(MessageObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_message (id,member_id,name,created_time,doctor_id,last_one,description" +
-                ") values (?,?,?,?,?,?,?)");
-        Object[] bindArgs = {obj.getId(),obj.getMember_id(),obj.getName(),obj.getCreated_time(),obj.getDoctor_id(),obj.getLast_one(),obj.getDescription()};
+        sql.append("insert into tb_message (id,member_id,name,created_time,doctor_id,last_one,description,sendside" +
+                ") values (?,?,?,?,?,?,?,?)");
+        Object[] bindArgs = {obj.getId(),obj.getMember_id(),obj.getName(),obj.getCreated_time(),obj.getDoctor_id(),obj.getLast_one(),obj.getDescription(),obj.getSendside()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -75,20 +85,18 @@ public class MessageDao extends AbstractDao {
     @Override
     public void updateObj(AbstractObj abobj) {
         // TODO Auto-generated method stub
-       /*
+
         util.open();
 
-        DoctorObj obj=(DoctorObj)abobj;
+        MessageObj obj=(MessageObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_booker set license=?, name=?,photo=?,title=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
-                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?,general_score=?,querycount=? where id=? ");
-        Object[] bindArgs = {obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getQuerycount(),obj.getId()};
+        sql.append("update tb_message set last_one=?  ,sendside=? where id=? ");
+        Object[] bindArgs = {obj.getLast_one(),obj.getSendside(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
-        */
+
     }
 
 

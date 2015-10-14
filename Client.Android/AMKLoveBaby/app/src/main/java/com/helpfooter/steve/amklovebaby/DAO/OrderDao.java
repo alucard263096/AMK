@@ -96,6 +96,13 @@ public class OrderDao extends AbstractDao {
         return new OrderObj();
     }
 
+
+
+    public ArrayList<AbstractObj> getMessageNoticeList(){
+        return   super.getList(" ");
+        // +" and datetime(order_time,'-15 minute')<=datetime('"+ DateFormat.format("HH:MM:SS", new Date()).toString()+"','start of second')");
+    }
+
     public ArrayList<OrderObj> getOrderList(){
         ArrayList<AbstractObj> lst=  super.getList("  status<>'D' order by created_time desc ");
         ArrayList<OrderObj> lstr=new ArrayList<OrderObj>();

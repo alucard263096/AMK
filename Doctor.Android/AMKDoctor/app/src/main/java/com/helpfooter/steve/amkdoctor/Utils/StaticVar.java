@@ -14,12 +14,14 @@ public final class StaticVar {
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";
 	public static String IndexBannerApi="index_banner";
+	public static String VersionApi="version";
 	public static String BannerApi="banner";
 	public static String BookerApi="booker";
 	public static String MessageApi="Message";
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
 	public static String ChatApi="Chat";
 	public static String ChatUpdateApi="ChatUpdate";
+	public static String CurrentVersion="1.0.0.3";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static String VideoChatServerIp="www.myhkdoc.com";
 	public static int VideoChatServerPort=8906;
@@ -31,6 +33,7 @@ public final class StaticVar {
 		dictHashMap.put(BookerApi,APIURL+"Order/videochat.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat.php");
 		dictHashMap.put(ChatApi,APIURL+"Order/charchat_one.php");
+		dictHashMap.put(VersionApi,APIURL+"/version.xml");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
 	}
 

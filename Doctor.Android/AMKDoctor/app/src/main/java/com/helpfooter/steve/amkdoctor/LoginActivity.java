@@ -2,6 +2,7 @@ package com.helpfooter.steve.amkdoctor;
 
 import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.bairuitech.anychat.AnyChatCoreSDK;
+import com.helpfooter.steve.amkdoctor.Common.VersionUpdateMgr;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
@@ -53,7 +54,7 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 	private ProgressDialog mProgressLogin;
 	private String threadstatus;
 
-
+    private VersionUpdateMgr versionUpdateMgr;
 	private interface ProfileQuery {
 		String[] PROJECTION = {
 				ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -159,6 +160,8 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 		intParams();
 		initView();
 		initLoginProgress();
+		versionUpdateMgr=new VersionUpdateMgr(this);
+		versionUpdateMgr.startCheckVersion();
 
 	}
 

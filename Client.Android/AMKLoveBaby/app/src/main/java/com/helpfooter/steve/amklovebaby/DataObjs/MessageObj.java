@@ -74,6 +74,15 @@ public class MessageObj extends AbstractObj {
     String last_one;
     String description;
 
+    public String getSendside() {
+        return sendside;
+    }
+
+    public void setSendside(String sendside) {
+        this.sendside = sendside;
+    }
+
+    String sendside;
     @Override
     public void parseCursor(Cursor cursor) {
 
@@ -83,6 +92,7 @@ public class MessageObj extends AbstractObj {
         setCreated_time(cursor.getString(cursor.getColumnIndex("created_time")));
         setLast_one(cursor.getString(cursor.getColumnIndex("last_one")));
         setDescription(cursor.getString(cursor.getColumnIndex("description")));
+        setSendside(cursor.getString(cursor.getColumnIndex("sendside")));
     }
 
     @Override
@@ -95,6 +105,7 @@ public class MessageObj extends AbstractObj {
         this.doctor_id=Integer.parseInt(lstRowValue.get("doctor_id"));
         this.last_one = lstRowValue.get("last_one");
         this.description = lstRowValue.get("description");
+        this.sendside = lstRowValue.get("sendside");
     }
 
 }

@@ -81,7 +81,8 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 //        Log.i("indexbannercount",String.valueOf(lstDoctor.size()));
 
         WindowManager wm = this.getWindowManager();
-
+        Intent service = new Intent(this.getApplicationContext(),MessageService.class);
+        this.getApplicationContext().startService(service);
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         int width = metric.widthPixels;     // 屏幕宽度（像素）
@@ -99,6 +100,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         StaticVar.MainForm=this;
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
+
     }
 
     private void InitData() {
