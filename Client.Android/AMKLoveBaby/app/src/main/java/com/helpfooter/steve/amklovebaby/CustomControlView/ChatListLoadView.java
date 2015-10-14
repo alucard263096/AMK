@@ -23,19 +23,21 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.ChatActivity;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ChatObj;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.ImageShower;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.ChatLoader;
@@ -63,48 +65,57 @@ import java.util.List;
 /**
  * Created by scai on 2015/9/1.
  */
-public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack {
+public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBack {
     public LinearLayout mainlayout;
     public boolean IsFristRun = true;
     public Activity mActivity;
     public int mOrderid;
-    public int mDoctorid;
+    public DoctorObj doctor;
     public String mCurrUserType;
     private ArrayList<ChatMsgEntity> lstMsgEntity;
-    private ChatLoader loader;
-    private ArrayList<ChatMsgEntity> lstOldList;
     private String fileName;
     private ProgressBar progressBar;
     private int DownedFileLength;
     private int FileLength;
+
+    private Bitmap myphoto;
+    private Bitmap doctorphoto;
+
+    private String updated_date="";
 
 
     public ChatListLoadView(Activity activ, LinearLayout layout, int orderid,int doctorid, String currusertype) {
         this.mActivity = activ;
         this.mainlayout = layout;
         this.mOrderid = orderid;
-        this.mDoctorid=doctorid;
         this.mCurrUserType = currusertype;
+
+        DoctorDao doctorDao=new DoctorDao(mActivity);
+       doctor=(DoctorObj)doctorDao.getObj(doctorid);
+
+        String doctorphotourl=StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
+        doctorphoto=UrlImageLoader.GetBitmap(doctorphotourl);
+
+
+        String memberphotourl=StaticVar.ImageFolderURL+"member/"+StaticVar.Member.getPhoto();
+        myphoto=UrlImageLoader.GetBitmap(memberphotourl);
+
     }
 
-    public void LoadList() {
-        lstOldList=new ArrayList<ChatMsgEntity>();
-        progressBar=(ProgressBar)mActivity.findViewById(R.id.progressBar);
-         loader = new ChatLoader(mActivity.getApplicationContext(), mOrderid,mDoctorid);
+    ChatLoader loader;
+    public void LoadContent(){
+
+        loader = new ChatLoader(mActivity.getApplicationContext(), mOrderid,doctor.getId());
         loader.setCallBack(this);
-        new Thread() {
-            public void run() {
-                try {
-                    while (true) {
-                        loader.run();
-                        sleep(3000);
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        loader.setCircleSecond(3);
+        loader.setIsCircle(true);
+        loader.start();
+    }
+
+    public void UnloadContent(){
+
+        loader.setIsCircle(false);
+        loader.interrupt();
     }
 
 
@@ -148,19 +159,13 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
     private void OnloadMessage() {
 
-        if(lstMsgEntity.size()<=lstOldList.size())
-        {
-            return;
-        }
-        List<ChatMsgEntity> NewMstEntitys=lstMsgEntity.subList(lstOldList.size(),lstMsgEntity.size());
         //mainlayout.removeAllViewsInLayout();
-        for (ChatMsgEntity obj : NewMstEntitys) {
+        for (ChatMsgEntity obj : lstMsgEntity) {
 
             LinearLayout sublayout = null;
 
 
             sublayout = LoadChatListData(obj);
-
             if (sublayout != null) {
                 sublayout.setTag(obj);
                 try {
@@ -169,9 +174,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
                     Log.i("ERROR", ex.toString());
                 }
-                lstOldList.add(obj);
             }
-
         }
         onloadScrollHandler.sendEmptyMessage(0);
 
@@ -186,48 +189,55 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     };
 
     private LinearLayout LoadChatListData(ChatMsgEntity obj) {
-        PercentLinearLayout layout = new PercentLinearLayout(this.mActivity);
-        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
-
-        param.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.10f, false);
-        param.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f, false);
-        param.mPercentLayoutInfo.rightMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f, false);
+        LinearLayout layout = new LinearLayout(this.mActivity);
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         layout.setLayoutParams(param);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        //对方发送消息
-        if (obj.getMsgType()) {
-            //添加头像
-            ImageView headerView = getPhotoView(obj);
-            layout.addView(headerView);
-        }
+        param.topMargin=15;
+        param.leftMargin=(int)(StaticVar.width*0.02);
+        param.rightMargin=(int)(StaticVar.width*0.02);
+        param.bottomMargin=15;
 
-        //文本
+
+        ImageView doctorView = getPhotoView();
+        layout.addView(doctorView);
+
+
+
+        LinearLayout content = new LinearLayout(this.mActivity);
+        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.76),LinearLayout.LayoutParams.WRAP_CONTENT);
+        content.setLayoutParams(contentparam);
+        layout.addView(content);
         if (obj.getContextType().equals(StaticVar.TxtType)) {
             TextView contextView = getTextView(obj);
-            layout.addView(contextView);
-        }
-        //文件
-        if (obj.getContextType().equals(StaticVar.DOCType)) {
+            content.addView(contextView);
+        }else if (obj.getContextType().equals(StaticVar.DOCType)) {
+
             TextView contextView = getTextView(obj);
             contextView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
             contextView.setTag(obj);
+
+            contextView.setText("发送了一个文件");
+
             contextView.setOnClickListener(this);
-            layout.addView(contextView);
-        }
-        if (obj.getContextType().equals(StaticVar.IMGType)) {
+            content.addView(contextView);
+
+        }else if (obj.getContextType().equals(StaticVar.IMGType)) {
             ImageView IMGView = getIMGView(obj);
-            //图片重新设置父项高度
-            // PercentLinearLayout.LayoutParams topparam=(PercentLinearLayout.LayoutParams)layout.getLayoutParams();
-            //param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f,false);
-            layout.addView(IMGView);
-        }
-        //自己发送消息
-        if (!obj.getMsgType()) {
-            //添加头像
-            ImageView headerView = getPhotoView(obj);
-            layout.addView(headerView);
+            content.addView(IMGView);
         }
 
+        ImageView myView = getPhotoView();
+        layout.addView(myView);
+
+
+
+        if (obj.getMsgType()) {
+            doctorView.setImageBitmap(doctorphoto);
+            content.setGravity(Gravity.LEFT);
+        }else {
+           myView.setImageBitmap(myphoto);
+            content.setGravity(Gravity.RIGHT);
+        }
 
         return layout;
 
@@ -237,74 +247,51 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     //文本内容
     public TextView getTextView(ChatMsgEntity obj) {
         TextView txtContext = new MyTextView(this.mActivity);
-        PercentLinearLayout.LayoutParams contextparam = ToolsUtil.getLayoutParam();
-        contextparam.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.8f, true);
+        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.3),LinearLayout.LayoutParams.WRAP_CONTENT);
 
         if (obj.getMsgType()) {
-            contextparam.gravity = Gravity.LEFT;
             txtContext.setGravity(Gravity.LEFT);
-        } else {
-            contextparam.gravity = Gravity.RIGHT;
+            contentparam.leftMargin=(int)(StaticVar.width*0.05);
+        }else {
             txtContext.setGravity(Gravity.RIGHT);
+            contentparam.rightMargin=(int)(StaticVar.width*0.05);
         }
-
-
-        txtContext.setLayoutParams(contextparam);
+        txtContext.setLayoutParams(contentparam);
         txtContext.setText(obj.getMessage());
-        txtContext.setTextColor(Color.GRAY);
-        txtContext.setTextSize(13);
+        //txtContext.setTextSize(17);
         return txtContext;
     }
 
     //头像
-    public ImageView getPhotoView(ChatMsgEntity obj) {
+
+    public ImageView getPhotoView() {
         ImageView img = new ImageView(this.mActivity);
-
-        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f, true);
-
-
-        if (obj.getMsgType()) {
-            param.gravity = Gravity.LEFT;
-            img.setScaleType(ImageView.ScaleType.FIT_START);
-        } else {
-            param.gravity = Gravity.RIGHT;
-            img.setScaleType(ImageView.ScaleType.FIT_END);
-        }
-
-        String url = "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
-        Log.i("doctor_photo", url);
-        UrlImageLoader imgLoad = new UrlImageLoader(img, url);
-        imgLoad.start();
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        LinearLayout.LayoutParams param =new LinearLayout.LayoutParams((int)(StaticVar.width*0.1),LinearLayout.LayoutParams.WRAP_CONTENT);
+        img.setAdjustViewBounds(true);
 
         img.setLayoutParams(param);
-
-
         return img;
     }
-
-    //图片
+//
+//    //图片
     public ImageView getIMGView(ChatMsgEntity obj) {
         ImageView img = new ImageView(this.mActivity);
-
-        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.8f, true);
-        param.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f, true);
+        //img.setBackgroundColor(Color.parseColor("#ccaacc"));
+        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.3),LinearLayout.LayoutParams.WRAP_CONTENT);
 
         if (obj.getMsgType()) {
-            param.gravity = Gravity.LEFT;
-            img.setScaleType(ImageView.ScaleType.FIT_START);
-        } else {
-            param.gravity = Gravity.RIGHT;
-            img.setScaleType(ImageView.ScaleType.FIT_END);
+            contentparam.leftMargin=(int)(StaticVar.width*0.05);
+        }else {
+            contentparam.rightMargin=(int)(StaticVar.width*0.05);
         }
 
         String url = StaticVar.IMGCHATURL + obj.getMessage();
         Log.i("doctor_photo", url);
         UrlImageLoader imgLoad = new UrlImageLoader(img, url);
         imgLoad.start();
-
-        img.setLayoutParams(param);
+        //img.setScaleType(ImageView.ScaleType.FIT_START);
+        img.setLayoutParams(contentparam);
         img.setAdjustViewBounds(true);
         img.setTag(obj);
         img.setOnClickListener(this);
@@ -342,15 +329,17 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
-
-        for (AbstractObj obj : lstObjs) {
-
-            ChatObj chatobj = (ChatObj) obj;
-            initMsgEntity(chatobj.getContent());
-        }
-
-        if (this.lstMsgEntity != null && this.lstMsgEntity.size() > 0) {
-            onloadMessageHandler.sendEmptyMessage(0);
+        if(lstObjs.size()>0) {
+            for (AbstractObj obj : lstObjs) {
+                ChatObj chatobj = (ChatObj) obj;
+                if(!updated_date.equals(chatobj.getUpdated_date())){
+                    initMsgEntity(chatobj.getContent());
+                    if (this.lstMsgEntity != null && this.lstMsgEntity.size() > 0) {
+                        onloadMessageHandler.sendEmptyMessage(0);
+                    }
+                    updated_date=chatobj.getUpdated_date();
+                }
+            }
         }
 
     }

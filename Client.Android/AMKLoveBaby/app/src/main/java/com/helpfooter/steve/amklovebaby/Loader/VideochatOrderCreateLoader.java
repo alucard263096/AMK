@@ -58,11 +58,6 @@ public class VideochatOrderCreateLoader extends WebXmlLoader {
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
-
     @Override
     public void doXml(ArrayList<HashMap<String, String>> lstRow) {
         ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();

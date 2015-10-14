@@ -20,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
+import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.OrderPaymentActivity;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.XmlDataTableReader;
@@ -28,6 +29,27 @@ public abstract class WebXmlLoader extends Thread{
 
 	protected Context ctx;
 	protected String callApi="";
+
+	public boolean isCircle() {
+		return isCircle;
+	}
+
+	public void setIsCircle(boolean isCircle) {
+		this.isCircle = isCircle;
+	}
+
+	boolean isCircle=false;
+
+	public int getCircleSecond() {
+		return circleSecond;
+	}
+
+	public void setCircleSecond(int circleSecond) {
+		this.circleSecond = circleSecond;
+	}
+
+	int circleSecond=10;
+
 	public WebXmlLoader(Context ctx,String defaultCallApi){
 		this.ctx=ctx;
 		this.callApi=defaultCallApi;
@@ -53,11 +75,15 @@ public abstract class WebXmlLoader extends Thread{
 		return url;
 	}
 
+	IWebLoaderCallBack callBack;
+	public void setCallBack(IWebLoaderCallBack val){
+		callBack=val;
+	}
+
 	//需要重写的doXml方法，对返回的业务数据进行交互操作
 	abstract public void doXml(ArrayList<HashMap<String,String>> lstRow);
 
-	//多线程调用的线程方法
-	public void run(){
+	public void RealRun(){
 		String path=getCallUrl();
 		Log.i("webload_debugUrl", path);
 		InputStream is=getXml(path);
@@ -77,6 +103,24 @@ public abstract class WebXmlLoader extends Thread{
 			return;
 		}
 		status="F";
+	}
+
+	//多线程调用的线程方法
+	public void run(){
+
+		RealRun();
+		while (isCircle){
+			try {
+				Thread.sleep(circleSecond*1000);
+				Log.i("webload thread",this.getCallUrl());
+				RealRun();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 	//获取远端XML的工作流
 	protected InputStream getXml(String path){

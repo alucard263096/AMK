@@ -28,14 +28,9 @@ public class MemberLoader extends WebXmlLoader {
         String url= StaticVar.dictHashMap.get(callApi);
         url= (url+"?mobile="+mobile).replace(" ", "%20").replace("\n","%20");
         Log.i("ordercreate_url", url);
-
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
 
     @Override
     public void doXml(ArrayList<HashMap<String, String>> lstRow) {

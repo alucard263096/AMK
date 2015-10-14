@@ -11,6 +11,8 @@ import java.net.URL;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
@@ -43,6 +45,20 @@ public class UrlImageLoader extends Thread {
             }
         }
 	}
+
+    public static Bitmap GetBitmap(String _url){
+        File f=new File(ALBUM_PATH);
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        return  BitmapFactory.decodeFile(ALBUM_PATH+name);
+    }
+
+    public static void LoadImage(ImageView _imgView,String _url){
+        File f=new File(ALBUM_PATH);
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        File file = new File(f, name);
+        _imgView.setImageURI(Uri.fromFile(file));
+    }
+
 	public void run(){
 		File f=new File(ALBUM_PATH);
 		if(f.exists()==false){

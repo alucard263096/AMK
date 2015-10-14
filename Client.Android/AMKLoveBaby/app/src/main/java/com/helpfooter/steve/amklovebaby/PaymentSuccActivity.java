@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
 public class PaymentSuccActivity extends Activity implements View.OnClickListener {
@@ -20,6 +23,10 @@ public class PaymentSuccActivity extends Activity implements View.OnClickListene
 
 
         ((Button) findViewById(R.id.btnBack)).setOnClickListener(this);
+
+        ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl + "paymentsuccess");
+
+
     }
 
     @Override

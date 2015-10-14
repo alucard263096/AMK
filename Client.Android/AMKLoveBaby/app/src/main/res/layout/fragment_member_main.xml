@@ -157,7 +157,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     app:layout_marginLeftPercent="10%"
-                    android:text="关注的医生"
+                    android:text="我的私人医生"
                     android:textSize="20dp" />
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout

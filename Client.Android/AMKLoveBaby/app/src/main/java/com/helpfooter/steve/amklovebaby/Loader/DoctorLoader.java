@@ -22,10 +22,6 @@ public class DoctorLoader extends WebXmlLoader {
 		super(ctx, StaticVar.DoctorApi);
 	}
 
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 //	@Override
 //	public String getCallUrl() {

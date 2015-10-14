@@ -37,10 +37,6 @@ public class OrderLoader extends WebXmlLoader {
         return url;
     }
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
 
     @Override
     public void doXml(ArrayList<HashMap<String, String>> lstRow) {

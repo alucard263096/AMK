@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.helpfooter.steve.amkdoctor.Common;
+=======
+package com.helpfooter.steve.amklovebaby.Common;
+>>>>>>> 485f68885b01d957d28846c7dc10760c56958746
 
 import android.app.ProgressDialog;
 import android.os.Environment;

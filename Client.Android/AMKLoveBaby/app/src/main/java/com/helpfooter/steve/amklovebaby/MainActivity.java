@@ -28,9 +28,11 @@ import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
@@ -85,14 +87,14 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         this.getApplicationContext().startService(service);
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels;     // 屏幕宽度（像素）
-        int height = metric.heightPixels;   // 屏幕高度（像素）
-        float density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
-        int densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
-        Log.i("screen_info_width",String.valueOf(width));
-        Log.i("screen_info_height",String.valueOf(height));
-        Log.i("screen_info_density",String.valueOf(density));
-        Log.i("screen_info_Dpi", String.valueOf(densityDpi));
+        StaticVar.width = metric.widthPixels;     // 屏幕宽度（像素）
+        StaticVar.height = metric.heightPixels;   // 屏幕高度（像素）
+        StaticVar.density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
+        StaticVar.densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
+        Log.i("screen_info_width",String.valueOf(StaticVar.width));
+        Log.i("screen_info_height",String.valueOf(StaticVar.height));
+        Log.i("screen_info_density",String.valueOf(StaticVar.density));
+        Log.i("screen_info_Dpi", String.valueOf(StaticVar.densityDpi));
 
         MemberMgr.GetMemberInfoFromDb(this);
         versionUpdateMgr=new VersionUpdateMgr(this);
@@ -114,10 +116,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         NewsLoader newsLoader=new NewsLoader(this);
         newsLoader.start();
 
-        if(StaticVar.Member!=null){
-            OrderListLoader orderListLoader=new OrderListLoader(this);
-            orderListLoader.start();
-        }
+        MemberMgr.InitMemberData(this);
     }
 
 

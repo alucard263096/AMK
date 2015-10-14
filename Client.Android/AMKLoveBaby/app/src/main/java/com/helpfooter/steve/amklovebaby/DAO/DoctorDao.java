@@ -16,7 +16,6 @@ import java.util.HashMap;
  */
 public class DoctorDao extends AbstractDao {
 
-
     public DoctorDao(Context ctx) {
         super(ctx, "tb_doctor");
     }
@@ -105,4 +104,31 @@ public class DoctorDao extends AbstractDao {
         return new DoctorObj();
     }
 
+    public ArrayList<AbstractObj> getDoctorListWithFollow() {
+        ArrayList<AbstractObj> lst=new ArrayList<AbstractObj>();
+
+        Cursor cursor = null;
+        try {
+            util.open();
+            String sql="select * from tb_doctor a " +
+                    "inner join tb_member_follow_doctor b on a.id=b.doctor_id " +
+                    "where status='A' order by general_score desc ";
+
+            cursor = util.rawQuery(sql,new String[] {  });
+            while (cursor.moveToNext()) {
+                AbstractObj obj=newRealObj();
+                obj.parseCursor(cursor);
+                lst.add(obj);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            util.close();
+        }
+        return lst;
+    }
 }

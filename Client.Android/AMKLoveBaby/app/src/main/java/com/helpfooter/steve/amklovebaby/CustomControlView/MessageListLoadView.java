@@ -23,11 +23,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.ChatActivity;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MessageDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MessageObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
@@ -48,6 +51,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -61,34 +65,53 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
     public boolean IsFristRun=true;
     public Activity mActivity;
     ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
+    public HashMap<Integer,Bitmap> dictDoctorImage=new HashMap<Integer,Bitmap>();
+
     public MessageListLoadView(Activity activ, Context ctx, LinearLayout layout){
         this.mActivity=activ;
         this.ctx=ctx;
         this.mainlayout=layout;
-
+        Log.i("MessageListLoadView","Construct");
     }
-
+    MessageLoader loader;
     public void LoadList(){
-        MessageLoader loader=new MessageLoader(this.ctx);
+         loader=new MessageLoader(this.ctx);
         loader.setCallBack(this);
+        loader.setIsCircle(true);
+        loader.setCircleSecond(3);
         loader.start();
+        Log.i("MessageListLoadView", "LoadList");
     }
+    public void UnloadList(){
 
+        loader.setIsCircle(false);
+        loader.interrupt();
+    }
+    int count;
     private Handler onloadMessageHandler = new Handler(){
         @Override
         public void handleMessage(Message msg)
         {
-            OnloadMessage();
+            try {
+                count++;
+                if(inOnload==false) {
+                    OnloadMessage();
+                }
+                //Toast.makeText(ctx,"count+"+String.valueOf(count),Toast.LENGTH_SHORT).show();
+                Log.i("runcount", "count+" + String.valueOf(count));
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
     };
+    boolean inOnload=false;
     private void OnloadMessage() {
-
+        inOnload=true;
         if(this.mainlayout.getChildCount()>0) {
             this.mainlayout.removeViews(0, this.mainlayout.getChildCount() - 1);
         }
         //mainlayout.removeAllViewsInLayout();
         for(MessageObj obj:lstMessages){
-
             LinearLayout sublayout=null;
 
             sublayout=LoadMessageListData(obj);
@@ -97,6 +120,8 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
                 sublayout.setTag(obj);
                 try {
                     mainlayout.addView(sublayout);
+                    LinearLayout line =ToolsUtil.GenPLine(this.ctx);
+                    mainlayout.addView(line);
                 }
                 catch (Exception ex)
                 {
@@ -107,70 +132,57 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
             }
 
         }
-
+        inOnload=false;
     }
 
 
 
 
-    public ImageView getPhotoView(MessageObj obj)  {
+    public ImageView getPhotoView(MessageObj obj,DoctorObj doctor)  {
         ImageView img=new ImageView(this.ctx);
-        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        //img.setBackgroundColor(Color.parseColor("#ccaacc"));
+        img.setScaleType(ImageView.ScaleType.FIT_START);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        img.setLayoutParams(param);
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
 
-        String strurl= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
+        String strurl= StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
         Log.i("doctor_photo", strurl);
-        UrlImageLoader imgLoad=new UrlImageLoader(img,strurl);
-        imgLoad.start();
+
+        Bitmap bitmap=null;
+        if(dictDoctorImage.containsKey(doctor.getId())){
+            bitmap=dictDoctorImage.get(doctor.getId());
+        }else {
+             bitmap=UrlImageLoader.GetBitmap(strurl);
+            dictDoctorImage.put(doctor.getId(),bitmap);
+        }
+        img.setImageBitmap(bitmap);
+        //imgLoad.start();
+        //imgLoad.LoadImage();
        /* Drawable drawable = img.getDrawable();
         if (null != drawable) {
             Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
             img.setImageBitmap(toOvalBitmap(bitmap, 1f));
         }*/
-       img.setLayoutParams(param);
 
         return img;
     }
 
-
-
-    public  Bitmap toOvalBitmap(Bitmap bitmap,float ratio) {
-        Bitmap output=Bitmap.createBitmap(bitmap.getHeight(),bitmap.getWidth(), Bitmap.Config.ARGB_8888);
-        Canvas canvas=new Canvas(output);
-        Paint paint=new Paint();
-        Rect rect=new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
-        RectF rectF=new RectF(rect);
-
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        canvas.drawRoundRect(rectF, bitmap.getWidth() / ratio,
-                bitmap.getHeight() / ratio, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect,rectF, paint);
-        return output;
-    }
-
-
-
     public LinearLayout LoadMessageListData(MessageObj obj){
-        PercentLinearLayout toplayout=new PercentLinearLayout(ctx);
-        PercentLinearLayout.LayoutParams topparam=ToolsUtil.getLayoutParam();
-        topparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.10f,false);
-        topparam.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        topparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        topparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        topparam.mPercentLayoutInfo.bottomMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        toplayout.setLayoutParams(topparam);
-        toplayout.setOrientation(LinearLayout.VERTICAL);
+
+        DoctorDao doctorDao=new DoctorDao(this.ctx);
+        DoctorObj doctor=(DoctorObj)doctorDao.getObj(obj.getDoctor_id());
+
 
         PercentLinearLayout layout=new PercentLinearLayout(ctx);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.98f,false);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+        param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.94f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
+        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
+        param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
+        param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
 
 
 
@@ -180,16 +192,15 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.HORIZONTAL);
 
-        ImageView imgPhoto=getPhotoView(obj);
+        ImageView imgPhoto=getPhotoView(obj,doctor);
         layout.addView(imgPhoto);
-        LinearLayout infolayout=getInfoLayout(obj);
+
+        LinearLayout infolayout=getInfoLayout(obj,doctor);
         layout.addView(infolayout);
-        toplayout.addView(layout);
-        LinearLayout line =ToolsUtil.GenPLine(this.ctx);
-        toplayout.addView(line);
+        //toplayout.addView(layout);
         layout.setTag(obj);
         layout.setOnClickListener(this);
-        return toplayout;
+        return layout;
 
         //this.mainlayout.addView(layout);
 
@@ -199,19 +210,17 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
 
 
-    public LinearLayout getInfoLayout(MessageObj message){
+    public LinearLayout getInfoLayout(MessageObj message,DoctorObj doctor){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.8f,true);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,true);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.76f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
 
 
         TextView txtContent=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
-        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        upvoteparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
         upvoteparam.gravity=Gravity.BOTTOM;
         txtContent.setLayoutParams(upvoteparam);
         String strContent = "";
@@ -221,18 +230,22 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         }
         else
         {
-
             strContent="";
+            if(arrMessage[0].equals("C")){
+                strContent="我";
+            }else {
+                strContent="医生";
+            }
             if(arrMessage[1].equals(StaticVar.DOCType)) {
-                strContent = "[文件]";
+                strContent += "发送了一个文件";
             }
             else if(arrMessage[1].equals(StaticVar.IMGType))
             {
-                strContent = "[图片]";
+                strContent += "贴了一张图片";
             }
             else
             {
-                strContent=arrMessage[2];
+                strContent+="说"+arrMessage[2];
             }
         }
         txtContent.setText(strContent);
@@ -240,7 +253,6 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
          PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParam();
-        buttonparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
         buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
 
         tipsLayout.setLayoutParams(buttonparam);
@@ -259,10 +271,10 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         txtName.setTextSize(15);
         txtName.setGravity(Gravity.LEFT);
         txtName.setLayoutParams(nameparam);
-        txtName.setText(message.getName());
+        txtName.setText(doctor.getName());
         TextPaint tp= txtName.getPaint();
         tp.setFakeBoldText(true);
-        Log.i("member_name", message.getName());
+        Log.i("doctor name", doctor.getName());
         //设置最后一次聊天时间
         TextView lastchatTime=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams lastchatparam=ToolsUtil.getLayoutParam();
@@ -297,20 +309,6 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
     }
 
 
-    private String getBackgroundColor(int number) {
-        switch (number%4){
-            case 0:
-                return "#FD7CAD";
-            case 2:
-                return "#F7CB20";
-            case 3:
-                return "#B9E5C3";
-            case 4:
-                return "#ffffff";
-            default:
-                return "#37A4D4";
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -335,10 +333,10 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
 
-        MessageDao dao=new MessageDao(this.ctx);
+        //MessageDao dao=new MessageDao(this.ctx);
 
         //ArrayList<AbstractObj> lstObj=dao.getMessageList(StaticVar.Doctor.getId());
-
+        lstMessages.clear();
         for(AbstractObj obj:lstObjs) {
             lstMessages.add((MessageObj)obj);
         }
@@ -346,25 +344,5 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         if(lstMessages.size()>0) {
             onloadMessageHandler.sendEmptyMessage(0);
         }
-        if(IsFristRun)
-        {
-            new Thread(){
-                public void run()
-                {
-                    try {
-                        while(true) {
-                            sleep(1000000);
-                            LoadList();
-
-                        }
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
-        }
-
-        IsFristRun =false;
     }
 }

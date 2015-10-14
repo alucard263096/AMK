@@ -42,6 +42,13 @@ public final class StaticVar {
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
+	public static String DoctorFollowAPI="doctorfollow";
+	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
+
+	public static int width ;     // 屏幕宽度（像素）
+	public static int height ;   // 屏幕高度（像素）
+	public static float density ;      // 屏幕密度（0.75 / 1.0 / 1.5）
+	public static int densityDpi ;  // 屏幕密度DPI（120 / 160 / 240）
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -62,7 +69,9 @@ public final class StaticVar {
 		dictHashMap.put(MemberUpdateApi,APIURL+"Member/member_update.php");
 		dictHashMap.put(OrderListApi,APIURL+"Member/orderlist.php");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
-		dictHashMap.put(VersionApi,APIURL+"/version.xml");
+		dictHashMap.put(VersionApi,APIURL+"version.xml");
+		dictHashMap.put(DoctorFollowAPI,APIURL+"Member/member_doctor.php");
+		dictHashMap.put(UploadDoctorFollowAPI,APIURL+"Member/follow_doctor.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat_member.php");
 	}
 

@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.DAO;
 
 import android.content.Context;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.NewsObj;
@@ -68,20 +69,25 @@ public class MemberDao extends AbstractDao {
 
     public void refreshMember(MemberObj memberObj) {
         super.deleteTable();
+        initMemberData();
+        insertObj(memberObj);
+        MemberMgr.InitMemberData(ctx);
+    }
 
-       OrderDao orderDao=new OrderDao(ctx);
+    public void initMemberData(){
+        OrderDao orderDao=new OrderDao(ctx);
         orderDao.deleteTable();
 
-        insertObj(memberObj);
+        MemberFollowDoctorDao memberFollowDoctorDao=new MemberFollowDoctorDao(ctx);
+        memberFollowDoctorDao.deleteTable();
 
     }
 
 
     public void deleteMember() {
         super.deleteTable();
+        initMemberData();
 
-        OrderDao orderDao=new OrderDao(ctx);
-        orderDao.deleteTable();
 
         super.deleteTable();
 

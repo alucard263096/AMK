@@ -20,10 +20,6 @@ public abstract class ResultLoader extends WebXmlLoader {
     @Override
     abstract public String getCallUrl();
 
-    IWebLoaderCallBack callBack;
-    public void setCallBack(IWebLoaderCallBack val){
-        callBack=val;
-    }
 
     @Override
     public void doXml(ArrayList<HashMap<String, String>> lstRow) {
