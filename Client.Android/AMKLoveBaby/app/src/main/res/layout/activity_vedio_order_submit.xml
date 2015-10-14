@@ -1,0 +1,214 @@
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.helpfooter.steve.amklovebaby.VedioOrderSubmitActivity"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="7%"
+        app:layout_widthPercent="100%"
+        android:background="@color/topbar_bg">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/back"
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="确认提交"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="24dp" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_widthPercent="90%"
+        app:layout_marginTopPercent="2%"
+        app:layout_marginLeftPercent="5%">
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="确认信息"
+        android:textColor="#37A4D4"
+        app:layout_heightPercent="7%"
+        android:textSize="17dp"/>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="30%" />
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="100%" />
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="7%"
+            app:layout_marginTopPercent="3%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="25%"
+                android:gravity="center"
+                android:background="@color/mylightblue"
+                android:text="预约医生"
+                android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/txtDoctorName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="75%"
+                android:gravity="center"
+                android:background="#cccccc"
+                android:text="陈有为"
+                android:textColor="#ffffff"/>
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="7%"
+            app:layout_marginTopPercent="3%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="25%"
+                android:gravity="center"
+                android:background="@color/mylightblue"
+                android:text="预约费用"
+                android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="75%"
+                android:gravity="center"
+                android:background="#cccccc"
+                android:text="100元/20分钟"
+                android:textColor="#ffffff"/>
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="7%"
+            app:layout_marginTopPercent="3%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="25%"
+                android:gravity="center"
+                android:background="@color/mylightblue"
+                android:text="预约时间"
+                android:textColor="#ffffff"/>
+            <TextView
+                android:id="@+id/txtOrderDatetime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="75%"
+                android:gravity="center"
+                android:background="#cccccc"
+                android:text="2015-9-18 5:30"
+                android:textColor="#ffffff"/>
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请录入个人信息"
+            android:textColor="#37A4D4"
+            app:layout_heightPercent="7%"
+            app:layout_marginTopPercent="3%"
+            android:textSize="17dp"/>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="40%" />
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="100%" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtName"
+            app:layout_marginTopPercent="1%"
+            android:maxLines="1"
+            android:maxLength="11"
+            android:hint="请输入名称" />
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMobile"
+            app:layout_marginTopPercent="1%"
+            android:maxLength="11"
+            android:inputType="phone"
+            android:hint="请输入有效的手机号码" />
+
+        <EditText
+            android:inputType="textMultiLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDescription"
+            app:layout_marginTopPercent="1%"
+            android:maxLines="3"
+            android:hint="请尽可能详细的描述您的病情" />
+
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/myblue"
+            app:layout_marginLeftPercent="5%"
+            app:layout_widthPercent="90%"
+            app:layout_heightPercent="10%"
+            app:layout_marginTopPercent="10%"
+            app:layout_marginBottomPercent="3%"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:text="提交订单"
+            />
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+
+
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
