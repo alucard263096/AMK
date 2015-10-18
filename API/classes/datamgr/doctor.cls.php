@@ -53,7 +53,10 @@
 		,".$this->dbmgr->getIsNull("ms.videoquerycount",100)." as videoquerycount
 		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where doctor_id=$doctor_id  ";
-
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
 	}
 	
 	public function getDoctorList($lastupdate_time)
