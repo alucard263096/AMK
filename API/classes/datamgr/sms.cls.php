@@ -81,6 +81,14 @@ order by lastsent_time desc ";
 		$this->PerpareSendWithVerifyCode($mobile,"M",$templeteId);
 	}
 
+	
+	public function SendQueryConfirm($mobile,$doctor_name,$order_date){
+	Global $CONFIG;
+
+		$templeteId=$CONFIG["sms"]["templeteid"]["bookingsuccess"];
+		$arr=Array($doctor_name,$order_date);
+		$result=$this->Send($mobile,$arr,$templeteId);
+	}
 
 	private function PerpareSendWithVerifyCode($mobile,$type,$templeteId){
 		$lstrs=$this->getLastSent($mobile,$type);

@@ -11,7 +11,7 @@
 
 
   $result=$orderMgr->createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description);
-
+  $doctorMgr->updateVideoQueryCount($doctor_id);
   outputXml($result);
 
 ?>

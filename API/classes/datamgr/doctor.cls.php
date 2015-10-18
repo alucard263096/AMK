@@ -54,6 +54,74 @@
 		return $result;
 	}
 
+	
+
+	public function updateDoctorScore($doctor_id,$service,$ability){
+	
+		
+		$doctor_id=parameter_filter($doctor_id);
+		$service=parameter_filter($service);
+		$ability=parameter_filter($ability);
+
+		$general=($service+$ability)/2;
+
+		$this->createStatistic($doctor_id);
+
+		$sql="update tb_doctor_statistic set 
+		service=service+$service ,
+		ability=ability+$ability ,
+		general=general+$general 
+		where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+
+	}
+
+	public function updateChatTime($doctor_id,$minute){
+		
+		$doctor_id=parameter_filter($doctor_id);
+		$minute=parameter_filter($minute);
+
+		$this->createStatistic($doctor_id);
+
+		$sql="update tb_doctor_statistic set chat_time=chat_time+$minute where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+
+	}
+	
+
+	public function updateVideoQueryCount($doctor_id){
+		$doctor_id=parameter_filter($doctor_id);
+
+		$this->createStatistic($doctor_id);
+		$sql="update tb_doctor_statistic set videoquerycount=videoquerycount+1 where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+	}
+	
+
+	public function updateCharQueryCount($doctor_id){
+		$doctor_id=parameter_filter($doctor_id);
+
+		$this->createStatistic($doctor_id);
+		$sql="update tb_doctor_statistic set charquerycount=charquerycount+1 where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+	}
+
+	public function createStatistic($doctor_id){
+		$sql="select 1 from tb_doctor_statistic where doctor_id=$doctor_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		if(count($result)>0){
+			return;
+		}
+		
+		$sql="insert into tb_doctor_statistic (doctor_id,general,charquerycount,videoquerycount,
+		chat_time,service,ability) values
+		($doctor_id,1000,100,100,100*15,1000,1000 ) ";
+		$query = $this->dbmgr->query($sql);
+	}
+
+
 	public function getDoctorWorktime($doctor_id,$date){
 		
 		if($doctor_id==""){

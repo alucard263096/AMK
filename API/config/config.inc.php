@@ -60,6 +60,7 @@ $CONFIG["sms"]["SoftVersion"]="2013-12-26";
 $CONFIG["sms"]["timeout"]="30";//mins
 $CONFIG["sms"]["templeteid"]["reg"]="35123";
 $CONFIG["sms"]["templeteid"]["login"]="35123";
+$CONFIG["sms"]["templeteid"]["bookingsuccess"]="35125";
 
 
 ?>

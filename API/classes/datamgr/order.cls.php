@@ -193,6 +193,10 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$sql="insert into tb_order_payment (order_id,payment) values ($id ,'N')";
 		$query = $this->dbmgr->query($sql);
 
+		
+		$sql="insert into tb_order_comment (order_id,hascomment) values ($id ,'N')";
+		$query = $this->dbmgr->query($sql);
+
 		return $id;
 	}
 
@@ -261,9 +265,50 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 	public function finishOrder($order_id){
 		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+		
 		$order_id=parameter_filter($order_id);
 		$sql="update tb_order set status='F',finished_time=getdate() where  id=$order_id  ";
 		$query = $this->dbmgr->query($sql);
+		return	outResult(0,"success",$id);
+	}
+
+	public function updateVideoChatTime($order_id,$minute){
+		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+		$order_id=parameter_filter($order_id);
+		$minute=parameter_filter($minute);
+		$sql="update tb_order_videochat set chat_time=$minute where order_id=$order_id  ";
+		$query = $this->dbmgr->query($sql);
+
+
+		return	outResult(0,"success",$id);
+	}
+
+	
+	public function commentOrder($order_id,$service,$ability,$comment){
+		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+
+		$order_id=parameter_filter($order_id);
+		$service=parameter_filter($service);
+		$ability=parameter_filter($ability);
+		$comment=parameter_filter($comment);
+		$sql="update tb_order_comment set 
+		service=$service ,
+		ability=$ability ,
+		comment='$comment' ,
+		hascomment='Y' 
+		where order_id=$order_id and hascomment='N'  ";
+		$query = $this->dbmgr->query($sql);
+
+
 		return	outResult(0,"success",$id);
 	}
 
@@ -411,6 +456,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		return $prefix.$d.sprintf("%06d", $seq);
 
 	}
+
 
 	
 	public function getOrder($order_id,$member_id){
