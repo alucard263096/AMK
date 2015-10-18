@@ -58,7 +58,7 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
             InitData();
             InitUI();
         }
-
+    boolean hasloader=false;
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
 
@@ -66,9 +66,11 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         ((TextView) findViewById(R.id.btnShowOrdered)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowWaitpayment)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowAll)).setOnClickListener(this);
-
+        if(hasloader==false){
         orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),(ImageView)findViewById(R.id.imgNoOrder),(TextView)findViewById(R.id.txtNoOrder),"P");
         orderListLoadView.LoadList();
+            hasloader=true;
+        }
     }
 
 

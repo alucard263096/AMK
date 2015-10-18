@@ -39,13 +39,17 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
 
     }
 
+    boolean hasload=false;
+
     private void InitData() {
         Intent intent = getIntent();
         int order_id = intent.getIntExtra("Id", 0);
-
-        OrderLoader loader=new OrderLoader(this,order_id, StaticVar.Member.getId());
-        loader.setCallBack(this);
-        loader.start();
+        if(hasload==false) {
+            OrderLoader loader = new OrderLoader(this, order_id, StaticVar.Member.getId());
+            loader.setCallBack(this);
+            loader.start();
+            hasload=true;
+        }
     }
 
     private void InitUI() {

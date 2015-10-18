@@ -112,7 +112,9 @@
                     str += "<div>电话：<span id='order_" + order_id + "_mobile'>" + mobile + "</span></div>";
                     str += "<div>预约时间：<span id='order_" + order_id + "_order_datetime'>" + order_date + " " + order_time + "</span></div>";
                     str += "<div>病情描述：<span id='order_" + order_id + "_description'>" + description + "</span></div>";
-                    str += "<div style='text-align:right;padding-top:5px;'><button class=\"btnStartOrder btn btn-sm btn-primary\" onclick='startchat("+order_id+");'>开始会诊</button></div>";
+                    str += "<div style='text-align:right;padding-top:5px;'>";
+                    str += "<button class=\"btnStartOrder btn btn-sm btn-warning\" onclick='finishedOrder(" + order_id + ");'>完成会诊</button>";
+                    str += "<button class=\"btnStartOrder btn btn-sm btn-primary\" onclick='startchat(" + order_id + ");'>开始会诊</button></div>";
                     str+="</div>";
                     str+="</div>";
                     str += "";
@@ -120,6 +122,25 @@
                     $("#order_list").append(str);
                 }
             }
+        }
+
+        function finishedOrder(order_id) {
+            $(".btnStartOrder").prop("disabled", "disabled");
+            if (order_id == 0) {
+                return;
+            }
+            url = "{{$apipath}}Order/order_finish.php?order_id=" + order_id;
+            $.get(url, null, function (data) {
+                $(data).find('table').find('row').each(function (index, ele) {
+                    var ret = $(ele).find('id').text();
+                    if (ret != "0") {
+                        errorDialog("会诊结束失败，请联系管理员");
+                        $(".btnStartOrder").prop("disabled", "");
+                    } else {
+                        refreshOrderList();
+                    }
+                });
+            });
         }
         function reorderOrderList() {
             $(".orderobj").each(function (index, domEle) {

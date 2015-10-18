@@ -15,6 +15,7 @@ import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
@@ -120,6 +121,9 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         int id = intent.getIntExtra("Id", 0);
         DoctorDao dao=new DoctorDao(this);
         doctor=(DoctorObj)dao.getObj(id);
+
+        DoctorStatisticsLoader statisticsLoader=new DoctorStatisticsLoader(this,id);
+        statisticsLoader.start();
     }
 
     @Override

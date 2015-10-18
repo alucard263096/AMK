@@ -17,6 +17,7 @@ public final class StaticVar {
 	public static String IndexBannerApi="index_banner";
 	public static String BannerApi="banner";
 	public static String DoctorApi="doctor";
+	public static String DoctorStatisticsApi="doctorstatistics";
 	public static String NewsApi="news";
 	public static String NewsContentApi="newscontent";
 	public static String WorktimeApi="worktime";
@@ -73,6 +74,7 @@ public final class StaticVar {
 		dictHashMap.put(DoctorFollowAPI,APIURL+"Member/member_doctor.php");
 		dictHashMap.put(UploadDoctorFollowAPI,APIURL+"Member/follow_doctor.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat_member.php");
+		dictHashMap.put(DoctorStatisticsApi,APIURL+"Doctor/doctor_statistic.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";

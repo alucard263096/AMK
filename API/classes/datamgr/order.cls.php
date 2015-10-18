@@ -63,14 +63,14 @@
 		from v_order v                
 		inner join tb_member m on m.id=member_id
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND v.id = ov.order_id
-		where v.doctor_id=$doctor_id ";
+		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
 		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($status!=""){
 		$sql.=" and v.status='$status'  ";
 		}
-		$sql.=" order by v.sendside,v.updated_date desc";
+		$sql.=" order by sendside,v.updated_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
