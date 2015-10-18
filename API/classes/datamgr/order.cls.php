@@ -272,6 +272,10 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$order_id=parameter_filter($order_id);
 		$sql="update tb_order set status='F',finished_time=getdate() where  id=$order_id  ";
 		$query = $this->dbmgr->query($sql);
+
+		
+		$this->updateOrder($order_id);
+
 		return	outResult(0,"success",$id);
 	}
 
@@ -285,8 +289,16 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$sql="update tb_order_videochat set chat_time=$minute where order_id=$order_id  ";
 		$query = $this->dbmgr->query($sql);
 
+		$this->updateOrder($order_id);
+		
+
 
 		return	outResult(0,"success",$id);
+	}
+
+	public function updateOrder($order_id){
+		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id  ";
+		$query = $this->dbmgr->query($sql);
 	}
 
 	
@@ -307,7 +319,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		hascomment='Y' 
 		where order_id=$order_id and hascomment='N'  ";
 		$query = $this->dbmgr->query($sql);
-
+		
+		$this->updateOrder($order_id);
 
 		return	outResult(0,"success",$id);
 	}
@@ -387,8 +400,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$sql="update tb_order_charchat set content=isnull(content,'')+N'{|}$str',last_one=N'$str' where order_id=$order_id and doctor_id=$doctor_id   ";
 		$query = $this->dbmgr->query($sql);
 		
-		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id   ";
-		$query = $this->dbmgr->query($sql);
+		$this->updateOrder($order_id);
 		
 		$this->dbmgr->commit_trans();
 		return	outResult(0,"success",$id);
@@ -430,7 +442,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		
 		$sql="update tb_order_payment set payment='Y',payment_type='$payment_type',payment_time=".$this->dbmgr->getDate()." where order_id=$order_id ";
 		$query = $this->dbmgr->query($sql);
-
+		
+		$this->updateOrder($order_id);
 
 		$this->dbmgr->commit_trans();
 		return	outResult(0,"success");
