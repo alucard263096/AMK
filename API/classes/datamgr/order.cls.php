@@ -118,7 +118,7 @@
 		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($onlyactive=="Y"){
-		$sql.=" and v.status='P' and (order_date+' '+order_time)>GETDATE()  ";
+		$sql.=" and v.status='P'   ";
 		}
 		$sql.=" order by order_date ,order_time ";
 		//echo $sql;
