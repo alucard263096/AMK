@@ -59,7 +59,7 @@
 		$status=parameter_filter($status);
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select v.*,m.photo member_photo,
-		doctor_id,last_one ,description,SUBSTRING(last_one,1,1) sendside
+		doctor_id,last_one ,SUBSTRING(last_one,1,1) sendside
 		from v_order v                
 		inner join tb_member m on m.id=member_id
 		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND v.id = ov.order_id
