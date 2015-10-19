@@ -127,4 +127,18 @@ public class ToolsUtil {
             out.write(b, 0, read);
         }
     }
+
+    public static int  StrParseToInt(String str){
+        if(str.trim().length()==0){
+            return 0;
+        }else {
+            try{
+               return Integer.parseInt(str);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
 }

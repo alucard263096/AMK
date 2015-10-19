@@ -58,18 +58,19 @@
 		$doctor_id=parameter_filter($doctor_id);
 		$status=parameter_filter($status);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,updated_date,status,process_status,payment,order_date,order_time,
-		doctor_id,last_one ,description,SUBSTRING(last_one,1,1) sendside
-		from v_order                 
-		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
+		$sql="select v.*,m.photo member_photo,
+		doctor_id,last_one ,SUBSTRING(last_one,1,1) sendside
+		from v_order v                
+		inner join tb_member m on m.id=member_id
+		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND v.id = ov.order_id
 		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
-		$sql.=" and updated_date>'$lastupdate_time'  ";
+		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($status!=""){
-		$sql.=" and status='$status'  ";
+		$sql.=" and v.status='$status'  ";
 		}
-		$sql.=" order by sendside,updated_date desc";
+		$sql.=" order by sendside,v.updated_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -108,15 +109,16 @@
 		}
 		$doctor_id=parameter_filter($doctor_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,chat_time ,description
-		from v_order                 
-		inner join dbo.tb_order_videochat AS ov ON act = 'VC' AND id = ov.order_id
+		$sql="select v.*,m.photo member_photo,doctor_id,chat_time 
+		from v_order       v
+		inner join tb_member m on m.id=v.member_id
+		inner join dbo.tb_order_videochat AS ov ON act = 'VC' AND v.id = ov.order_id
 		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
-		$sql.=" and updated_date>'$lastupdate_time'  ";
+		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($onlyactive=="Y"){
-		$sql.=" and status='P' and (order_date+' '+order_time)>GETDATE()  ";
+		$sql.=" and v.status='P'   ";
 		}
 		$sql.=" order by order_date ,order_time ";
 		//echo $sql;

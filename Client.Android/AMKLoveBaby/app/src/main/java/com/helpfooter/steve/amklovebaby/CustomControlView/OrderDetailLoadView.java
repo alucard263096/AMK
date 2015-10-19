@@ -17,6 +17,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.OrderCommentActivity;
 import com.helpfooter.steve.amklovebaby.OrderPaymentActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
@@ -80,6 +81,13 @@ public class OrderDetailLoadView implements View.OnClickListener {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+        }else if(order.getStatus().equals("F")){
+            if(!order.getHascomment().equals("Y")){
+                btnSubmit.setText("立即评价");
+            }else {
+                btnSubmit.setText("查看评价");
+            }
+            btnSubmit.setOnClickListener(this);
         }
         else {
             btnSubmit.setOnClickListener(this);
@@ -155,6 +163,10 @@ public class OrderDetailLoadView implements View.OnClickListener {
             Intent intent = new Intent(this.ctx, ChatActivity.class);
             intent.putExtra("orderId", String.valueOf(order.getId()));
             intent.putExtra("tag", String.valueOf(order.getTag()));
+            this.ctx.startActivity(intent);
+        }else if(order.getStatus().equals("F")){
+            Intent intent = new Intent(this.ctx, OrderCommentActivity.class);
+            intent.putExtra("Id", order.getId());
             this.ctx.startActivity(intent);
         }
     }

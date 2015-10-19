@@ -51,9 +51,13 @@
 		,".$this->dbmgr->getIsNull("ms.service",1000)." as service_score
 		,".$this->dbmgr->getIsNull("ms.ability",1000)." as ability_score
 		,".$this->dbmgr->getIsNull("ms.videoquerycount",100)." as videoquerycount
-		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount from tb_doctor m
+		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount
+		,".$this->dbmgr->getIsNull("ms.chat_time",1500)." as chat_time from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where doctor_id=$doctor_id  ";
-
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
 	}
 	
 	public function getDoctorList($lastupdate_time)
@@ -66,6 +70,7 @@
 		,".$this->dbmgr->getIsNull("ms.ability",1000)." as ability_score
 		,".$this->dbmgr->getIsNull("ms.videoquerycount",100)." as videoquerycount
 		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount
+		,".$this->dbmgr->getIsNull("ms.chat_time",1500)." as chat_time
 		from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";
 		if($lastupdate_time!=""){

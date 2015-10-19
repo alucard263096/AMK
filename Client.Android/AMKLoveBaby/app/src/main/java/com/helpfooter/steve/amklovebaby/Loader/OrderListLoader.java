@@ -23,7 +23,8 @@ public class OrderListLoader extends WebXmlLoader {
     }
     @Override
     public String getCallUrl() {
-        String url=super.getCallUrl();
+        //String url=super.getCallUrl();
+        String url=StaticVar.dictHashMap.get(callApi)+"?a=1";
         int member_id=0;
         if(StaticVar.Member!=null){
             member_id=StaticVar.Member.getId();

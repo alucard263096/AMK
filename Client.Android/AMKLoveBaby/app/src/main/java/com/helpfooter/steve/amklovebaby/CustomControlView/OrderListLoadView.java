@@ -150,12 +150,15 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         MyTextView txtOrderNo = new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams txtOrderNoparam= ToolsUtil.getLayoutParam();
         txtOrderNo.setLayoutParams(txtOrderNoparam);
-        //txtOrderNo.setGravity(Gravity.);
-        txtOrderNo.setText("订单编号:" + obj.getOrder_no());
+        txtOrderNo.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+        txtOrderNo.setTextColor(Color.parseColor("#FD7CAD"));
+        txtOrderNo.setText("未评论");
 
         titleLayout.addView(txtDoctorName);
         titleLayout.addView(txtAct);
-        //titleLayout.addView(txtOrderNo);
+        if(obj.getStatus().equals("F")&&!obj.getHascomment().equals("Y")){
+            titleLayout.addView(txtOrderNo);
+        }
         titleLayout.setGravity(Gravity.CENTER_VERTICAL);
 
 
