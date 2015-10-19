@@ -318,7 +318,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		service=$service ,
 		ability=$ability ,
 		comment='$comment' ,
-		hascomment='Y' 
+		hascomment='Y',
+		comment_date=".$this->dbmgr->getDate()."
 		where order_id=$order_id and hascomment='N'  ";
 		$query = $this->dbmgr->query($sql);
 		
