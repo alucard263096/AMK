@@ -21,6 +21,7 @@ public final class StaticVar {
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
 	public static String ChatApi="Chat";
 	public static String ChatUpdateApi="ChatUpdate";
+	public static String ChatEndApi="ChatEnd";
 	public static String CurrentVersion="1.0.0.3";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static String VideoChatServerIp="www.myhkdoc.com";
@@ -28,8 +29,6 @@ public final class StaticVar {
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
 
 
-	public static String CurrentVersion="1.0.0.1";
-	public static String VersionApi="version";
 
 	public static DoctorObj Doctor=null;
 	static {
@@ -40,6 +39,7 @@ public final class StaticVar {
 		dictHashMap.put(ChatApi,APIURL+"Order/charchat_one.php");
 		dictHashMap.put(VersionApi,APIURL+"/version.xml");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
+		dictHashMap.put(ChatEndApi,APIURL+"/Order/order_finish.php");
 		dictHashMap.put(VersionApi,APIURL+"versiondoctor.xml");
 	}
 

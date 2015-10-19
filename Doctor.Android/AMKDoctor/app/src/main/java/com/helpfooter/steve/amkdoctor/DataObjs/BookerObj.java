@@ -17,6 +17,10 @@ public class BookerObj extends AbstractObj {
     String createtime;
 
 
+
+
+    String clicktype;
+    String member_photo;
     String status;
     String precessstatus;
     String payment;
@@ -33,6 +37,20 @@ public class BookerObj extends AbstractObj {
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+    public String getClicktype() {
+        return clicktype;
+    }
+
+    public void setClicktype(String clicktype) {
+        this.clicktype = clicktype;
+    }
+    public String getMember_photo() {
+        return member_photo;
+    }
+
+    public void setMember_photo(String member_photo) {
+        this.member_photo = member_photo;
     }
 
     public String getBookno() {
@@ -168,6 +186,7 @@ public class BookerObj extends AbstractObj {
         setDoctorid(cursor.getInt(cursor.getColumnIndex("doctorid")));
         setChattime(cursor.getString(cursor.getColumnIndex("chattime")));
         setDescription(cursor.getString(cursor.getColumnIndex("description")));
+        setMember_photo(cursor.getString(cursor.getColumnIndex("member_photo")));
 
     }
 
@@ -189,6 +208,7 @@ public class BookerObj extends AbstractObj {
         this.doctorid=Integer.parseInt(lstRowValue.get("doctor_id"));
         this.chattime = lstRowValue.get("chat_time");
         this.description = lstRowValue.get("description");
+        this.member_photo=lstRowValue.get("member_photo");
     }
 
 

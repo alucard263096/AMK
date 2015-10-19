@@ -22,7 +22,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bairuitech.anychat.AnyChatBaseEvent;
@@ -30,13 +32,18 @@ import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
 import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
+import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
+import com.helpfooter.steve.amkdoctor.Loader.ChatEndLoader;
 import com.helpfooter.steve.amkdoctor.R;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
+import java.util.ArrayList;
 
-public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
+
+public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWebLoaderCallBack {
 	private final int UPDATEVIDEOBITDELAYMILLIS = 200; //监听音频视频的码率的间隔刷新时间（毫秒）
 	private final int LOCALVIDEOAUTOROTATION = 1; // 本地视频自动旋转控制
 	int userID;
@@ -56,14 +63,18 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 	public AnyChatCoreSDK anychatSDK;
 	BookerObj booker;
 	DoctorObj doctor;
+	int order_id;
+	ChatEndLoader endloader;
 	int doctor_id;
+
+	private TextView mTextEnd;//结束聊天
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.video_activity);
 
 		Intent intent = getIntent();
-		int order_id = Integer.parseInt(intent.getStringExtra("orderId"));
+		 order_id = Integer.parseInt(intent.getStringExtra("orderId"));
 		BookerDao bookerDao=new BookerDao(this);
 		booker=(BookerObj)bookerDao.getObj(order_id);
 		 doctor_id=Integer.parseInt(intent.getStringExtra("docId"));
@@ -112,6 +123,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 		mBtnCameraCtrl.setOnClickListener(onClickListener);
 		mImgSwitchVideo.setOnClickListener(onClickListener);
 		mEndCallBtn.setOnClickListener(onClickListener);
+		mTextEnd=(TextView)findViewById(R.id.txt_videoEnd);
+		mTextEnd.setOnClickListener(onClickListener);
 		// 如果是采用Java视频采集，则需要设置Surface的CallBack
 		if (AnyChatCoreSDK
 				.GetSDKOptionInt(AnyChatDefine.BRAC_SO_LOCALVIDEO_CAPDRIVER) == AnyChatDefine.VIDEOCAP_DRIVER_JAVA) {
@@ -239,6 +252,10 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 				case (R.id.endCall): {
 					exitVideoDialog();
 				}
+				case R.id.txt_videoEnd:
+					EndChat();
+
+					break;
 				case R.id.btn_speakControl:
 					if ((anychatSDK.GetSpeakState(-1) == 1)) {
 						mBtnSpeakCtrl.setImageResource(R.drawable.speak_off);
@@ -295,6 +312,32 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 						dialog.cancel();
 					}
 				}).show();
+	}
+
+	private void EndChat() {
+		endloader=new ChatEndLoader(this,order_id);
+		endloader.setCallBack(this);
+		new Thread(){
+			public void run()
+			{
+				try {
+					endloader.run();
+				} catch (Exception e) {
+					Thread.currentThread().interrupt();
+					e.printStackTrace();
+				}
+			}
+		}.start();
+	}
+
+	@Override
+	public void CallBack(ArrayList<AbstractObj> lstObjs) {
+
+		destroyCurActivity();
+
+       /* if (lstObj.size() > 0) {
+            onloadAllHandler.sendEmptyMessage(0);
+        }*/
 	}
 
 	private void destroyCurActivity() {

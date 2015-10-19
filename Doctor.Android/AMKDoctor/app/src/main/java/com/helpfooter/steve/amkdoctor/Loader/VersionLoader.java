@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.helpfooter.steve.amkdoctor.Loader;
 
 import android.content.Context;
@@ -7,17 +7,7 @@ import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.VersionObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
-=======
-package com.helpfooter.steve.amklovebaby.Loader;
 
-import android.content.Context;
-
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.VersionObj;
-import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
-import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
->>>>>>> 485f68885b01d957d28846c7dc10760c56958746
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -54,6 +54,11 @@
             android:name="ImageShower">
 
         </activity>
+        <activity
+
+            android:name="MemberInfoActivity">
+
+        </activity>
 
     </application>
 
