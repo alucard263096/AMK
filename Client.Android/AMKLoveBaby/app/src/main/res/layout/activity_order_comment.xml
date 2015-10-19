@@ -154,4 +154,148 @@
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
+
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_widthPercent="90%"
+        app:layout_marginLeftPercent="5%"
+        app:layout_marginTopPercent="4%"
+        android:orientation="vertical">
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="12%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="46%"
+                android:textColor="@color/myblue"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:text="服务态度"
+                />
+
+
+            <RatingBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:layout_widthPercent="54%"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:numStars="5"
+                android:id="@+id/rbService"
+                android:isIndicator="false"
+                app:layout_marginTopPercent="7%"
+
+                android:stepSize="1" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="30%" />
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="100%" />
+
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="12%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="46%"
+                android:textColor="@color/myblue"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:text="医疗水平"
+                />
+
+            <RatingBar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:layout_widthPercent="54%"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:numStars="5"
+                app:layout_marginTopPercent="7%"
+                android:id="@+id/rbAbility"
+                android:isIndicator="false"
+                android:stepSize="1" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="30%" />
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="100%" />
+
+
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="12%">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="50%"
+                android:textColor="@color/myblue"
+                android:textSize="18dp"
+                android:gravity="center_vertical"
+                android:text="我的评价"
+                />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="30%" />
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#37A4D4"
+            app:layout_widthPercent="100%" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="写下您对医生的真是评价，有助于我们提高服务质量"
+            android:id="@+id/txtComment"
+            app:layout_heightPercent="40%"
+            android:gravity="top"
+            android:textSize="14dp"
+            android:background="@null"
+            app:layout_marginTopPercent="3%"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="14%"
+            app:layout_widthPercent="90%"
+            android:id="@+id/btnSubmit"
+            android:layout_gravity="center"
+            android:text="立即提交"
+            android:textColor="#ffffff"
+            android:background="@color/myyello"
+            android:textSize="18dp"
+            app:layout_marginTopPercent="3%" />
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

@@ -24,6 +24,7 @@ public final class StaticVar {
 	public static String VideochatOrderCreateApi="videochatordercreate";
 	public static String CharchatOrderCreateApi="charchatordercreate";
 	public static String OrderGetApi="orderget";
+	public static String OrderCommentApi="ordercomment";
 	public static String PaymentApi="payment";
 	public static String LoginSendApi="loginsend";
 	public static String RegisterApi="register";
@@ -75,6 +76,7 @@ public final class StaticVar {
 		dictHashMap.put(UploadDoctorFollowAPI,APIURL+"Member/follow_doctor.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat_member.php");
 		dictHashMap.put(DoctorStatisticsApi,APIURL+"Doctor/doctor_statistic.php");
+		dictHashMap.put(OrderCommentApi,APIURL+"Order/order_comment.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";
