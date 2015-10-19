@@ -13,7 +13,9 @@
   if(count($order)>0&&$order[0]["status"]=="P"){
 	$noticeMgr->sendOrderForDoctor($order[0]);
 	$noticeMgr->sendOrderForClient($order[0]);
-	$smsMgr->SendQueryConfirm($order[0]["mobile"],$order[0]["tag_name"],$order[0]["order_date"]." ".$order[0]["order_time"]);
+	if($order[0]["act"]=="VC"){
+		$smsMgr->SendQueryConfirm($order[0]["mobile"],$order[0]["tag_name"],$order[0]["order_date"]." ".$order[0]["order_time"]);
+	}
   }
   
   outputXml($result);
