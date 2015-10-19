@@ -23,6 +23,24 @@
 		
 	}
 
+	public function getDoctorComment($doctor_id,$lastcomment_date){
+		$doctor_id=parameter_filter($doctor_id);
+		$lastcomment_date=parameter_filter($lastcomment_date);
+		$sql="select top 10 m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
+inner join tb_member m on v.member_id=m.id
+where doctor_id=$doctor_id and hascomment='Y'
+";
+		if($lastcomment_date!=""){
+			$sql.=" and comment_date<'".$lastcomment_date."'";
+		}
+
+		$sql.=" order by comment_date desc";
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
+
 	
 	public function getDoctorInfoByLoginId($login_id)
 	{

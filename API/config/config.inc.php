@@ -10,7 +10,7 @@ $CONFIG["frontendurl"]="http://localhost/AMK/";
 $CONFIG["SessionName"]="AMKAPI";
 
 $CONFIG['smarty']['rootpath']		= '/AMK/API'; 
-$CONFIG['solution_configuration']='release';
+$CONFIG['solution_configuration']='debug';
 $CONFIG['server']		= 'windows';   //windows or linux
 
 #[Smarty config]

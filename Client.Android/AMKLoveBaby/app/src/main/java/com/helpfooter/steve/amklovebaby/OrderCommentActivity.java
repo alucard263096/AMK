@@ -77,7 +77,7 @@ public class OrderCommentActivity extends Activity implements View.OnClickListen
         txtCharQuerycount.setText(String.valueOf("图文咨询:"+doctor.getCharquerycount())+"次");
 
         TextView txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
-        txtGeneralScore.setText(String.valueOf(doctor.getGeneralScore()));
+        txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
 
 
         btnFollow=(TextView)findViewById(R.id.btnFollow);

@@ -65,7 +65,7 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         txtCharQuerycount.setText(String.valueOf("图文咨询:"+doctor.getCharquerycount())+"次");
 
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
-        txtGeneralScore.setText(String.valueOf(doctor.getGeneralScore()));
+        txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
 
         if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
             layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);

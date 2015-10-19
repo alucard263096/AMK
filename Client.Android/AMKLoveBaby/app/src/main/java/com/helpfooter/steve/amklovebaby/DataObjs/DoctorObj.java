@@ -2,6 +2,9 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
+import com.helpfooter.steve.amklovebaby.FollowDoctorActivity;
+
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 /**
@@ -231,4 +234,11 @@ public class DoctorObj extends AbstractObj {
         this.title=val;
     }
 
+
+    public String getRealGeneralScore(){
+        float gene=general_score*1.0f/(charquerycount+videoquerycount);
+        DecimalFormat fnum   =   new   DecimalFormat("##0.0");
+        String   dd=fnum.format(gene);
+        return dd;
+    }
 }
