@@ -140,12 +140,14 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 				}
 				StaticVar.Doctor=doj;
 				ConfigService.SaveConfig(LoginActivity.this, configEntity);
+
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, MainActivity.class);
 				LoginActivity.this.startActivity(intent);
-
 				loginBtn.setClickable(false);
 				mProgressLogin.show();
+
+
 			}
 
 

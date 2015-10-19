@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -29,12 +30,15 @@ import com.helpfooter.steve.amkdoctor.CustomControlView.ChatListLoadView;
 import com.helpfooter.steve.amkdoctor.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
 import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
+import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Loader.BannerLoader;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+import com.helpfooter.steve.amkdoctor.Loader.ChatEndLoader;
 import com.helpfooter.steve.amkdoctor.Loader.ChatLoader;
 import com.helpfooter.steve.amkdoctor.Loader.ChatUpdateLoader;
 import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
@@ -50,14 +54,15 @@ import java.io.File;
 import org.apache.http.Header;
 import java.util.ArrayList;
 
-public class ChatActivity extends Activity implements View.OnClickListener {
+public class ChatActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
 
     private Button mBtnSendtxt;// 发送文本
     private Button mBtnSendpic;// 发送图片
     private Button mBtnSendfile;// 发送文件
-    private Button mBtnBack;// 返回btn
+    private ImageView mBtnBack;// 返回btn
     private EditText mEditTextContent;
     private TextView mTextViewRecevier; //聊天对象
+    private TextView mTextEnd;//结束聊天
     private ScrollView mScrollView;
     private String context; //聊天内容
     private int order_id;
@@ -66,6 +71,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
     private static int FILE_CODE = 2;
     private static String SENDERTYPE = "D"; //消息发送方
     private ChatUpdateLoader loader=null;
+    private ChatEndLoader endloader=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +99,15 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         mBtnSendtxt =(Button)findViewById(R.id.btn_sendTxt);
         mBtnSendpic =(Button)findViewById(R.id.btn_sendPic);
         mBtnSendfile =(Button)findViewById(R.id.btn_sendFile);
-        mBtnBack =(Button)findViewById(R.id.btn_back);
+        mBtnBack =(ImageView)findViewById(R.id.btn_back);
         mBtnSendtxt.setOnClickListener(this);
         mBtnSendpic.setOnClickListener(this);
         mBtnSendfile.setOnClickListener(this);
         mBtnBack.setOnClickListener(this);
         mEditTextContent=(EditText)findViewById(R.id.et_sendmessage);
         mTextViewRecevier=(TextView)findViewById(R.id.txt_Receiver);
+        mTextEnd=(TextView)findViewById(R.id.txt_End);
+        mTextEnd.setOnClickListener(this);
         DoctorObj doc = StaticVar.Doctor;
         mTextViewRecevier.setText(doc.getName());
 
@@ -131,6 +139,11 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 SendFile("*/*",FILE_CODE);
                 mTextViewRecevier.setFocusableInTouchMode(true);
                 break;
+            case R.id.txt_End:
+                EndChat();
+
+                break;
+
 
         }
     }
@@ -163,6 +176,32 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                 }
             }
         }.start();
+    }
+
+    private void EndChat() {
+        endloader=new ChatEndLoader(mActivity,order_id);
+        endloader.setCallBack(this);
+        new Thread(){
+            public void run()
+            {
+                try {
+                    endloader.run();
+                } catch (Exception e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
+    @Override
+    public void CallBack(ArrayList<AbstractObj> lstObjs) {
+
+        this.finish();
+
+       /* if (lstObj.size() > 0) {
+            onloadAllHandler.sendEmptyMessage(0);
+        }*/
     }
 
     private void uploadFile(String path,int fileType)
