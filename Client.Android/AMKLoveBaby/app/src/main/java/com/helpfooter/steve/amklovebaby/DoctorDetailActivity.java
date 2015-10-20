@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -103,6 +105,9 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
 
         txtExpert=(TextView)findViewById(R.id.txtExpert);
         txtExpert.setText(doctor.getExpert());
+
+
+        ((Button)findViewById(R.id.btnOpenComment)).setOnClickListener(this);
     }
 
     private void setFollow() {
@@ -133,6 +138,11 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
             case R.id.btnBack:
                 this.finish();
                 return;
+            case R.id.btnOpenComment:
+                Intent intent3 = new Intent(this, DoctorCommentActivity.class);
+                intent3.putExtra("Id", doctor.getId());
+                startActivity(intent3);
+                break;
             case R.id.btnVedioChat:
                 Intent intent = new Intent(this, VideoChatOrderActivity.class);
                 intent.putExtra("Id", doctor.getId());

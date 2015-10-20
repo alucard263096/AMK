@@ -148,6 +148,10 @@
             android:label="@string/title_activity_order_comment"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".DoctorCommentActivity"
+            android:label="@string/title_activity_doctor_comment" >
+        </activity>
     </application>
 
 </manifest>

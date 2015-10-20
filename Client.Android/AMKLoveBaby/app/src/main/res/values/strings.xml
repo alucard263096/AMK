@@ -34,5 +34,6 @@
     <string name="title_activity_general_text">GeneralTextActivity</string>
     <string name="title_activity_follow_doctor">FollowDoctorActivity</string>
     <string name="title_activity_start">StartActivity</string>
-    <string name="title_activity_order_comment">OrderCommentActivity</string>>
+    <string name="title_activity_order_comment">OrderCommentActivity</string>
+    <string name="title_activity_doctor_comment">DoctorCommentActivity</string>>
 </resources>

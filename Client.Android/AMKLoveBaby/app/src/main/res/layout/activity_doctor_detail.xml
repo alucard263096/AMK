@@ -185,7 +185,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_widthPercent="90%"
-        app:layout_marginTopPercent="2%"
+        app:layout_heightPercent="50%"
+        app:layout_marginTopPercent="1%"
         app:layout_marginLeftPercent="5%">
         <TextView
             android:layout_width="wrap_content"
@@ -265,4 +266,10 @@
             app:layout_widthPercent="90%"
             android:textSize="15dp"/>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <Button
+        android:id="@+id/btnOpenComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="看评价"/>
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
