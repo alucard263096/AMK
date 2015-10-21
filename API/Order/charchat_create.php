@@ -7,8 +7,10 @@
   $name=$_REQUEST["name"];
   $mobile=$_REQUEST["mobile"];
   $description=$_REQUEST["description"];
+  $age=$_REQUEST["age"];
+  $sex=$_REQUEST["sex"];
   
-  $result=$orderMgr->createCharchatOrder($doctor_id,$member_id,$name,$mobile,$description);
+  $result=$orderMgr->createCharchatOrder($doctor_id,$member_id,$name,$mobile,$age,$sex,$description);
 
   outputXml($result);
 

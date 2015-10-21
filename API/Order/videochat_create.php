@@ -8,9 +8,11 @@
   $name=$_REQUEST["name"];
   $mobile=$_REQUEST["mobile"];
   $description=$_REQUEST["description"];
+  $age=$_REQUEST["age"];
+  $sex=$_REQUEST["sex"];
 
 
-  $result=$orderMgr->createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description);
+  $result=$orderMgr->createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$age,$sex,$description);
 
   outputXml($result);
 

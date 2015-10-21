@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <name>会员</name>
+  <tablename>tb_member_photo</tablename>
+  <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
+  <fields>
+    <field>
+      <name>会员</name>
+      <key>member_id</key>
+      <type>fkey</type>
+      <displayfield>name</displayfield>
+      <tablename>tb_member</tablename>
+      <ntbname>r_cate</ntbname>
+      <condition>r_cate.status='A'</condition>
+    </field>
+    <field>
+      <name>标题</name>
+      <key>title</key>
+      <type>text</type>
+      <displayinlist>1</displayinlist>
+    </field>
+    <field>
+      <name>描述</name>
+      <key>description</key>
+      <type>longtext</type>
+      <displayinlist>1</displayinlist>
+    </field>
+    <field>
+      <name>病例图片</name>
+      <key>photo</key>
+      <type>upload</type>
+      <uploadmodule>member</uploadmodule>
+      <filetype>image</filetype>
+    </field>
+  </fields>
+</root>
