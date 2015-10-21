@@ -23,6 +23,66 @@
 		
 	}
 
+	public function addMemberPhoto($member_id,$title,$description,$photo){
+		$member_id=parameter_filter($member_id);
+		$title=parameter_filter($title);
+		$description=parameter_filter($description);
+		$photo=parameter_filter($photo);
+
+		$sql="select 1 from tb_member where id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		if(count($result)==0){
+			return	outResult(-2,"no this member ");
+		}
+		
+		$id=$this->dbmgr->getNewId("tb_member_photo");
+		
+		$sql="insert into tb_member_photo (id,member_id,title,description,photo,status,created_date,created_user,updated_date,updated_user)
+		values ($id,$member_id,'$title','$description','$photo','A',".$this->dbmgr->getDate().",1,".$this->dbmgr->getDate().",1 )   ";
+		$query = $this->dbmgr->query($sql);
+		
+		return	outResult(0,"success",$id);
+	}
+
+	
+	public function deleteMemberPhoto($id,$member_id){
+		$member_id=parameter_filter($member_id);
+		$id=parameter_filter($id);
+
+		$sql="select 1 from tb_member where id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		if(count($result)==0){
+			return	outResult(-2,"no this member ");
+		}
+		
+		$sql="update tb_member_photo set status='D' where id=$id and member_id=$member_id   ";
+		$query = $this->dbmgr->query($sql);
+		
+		return	outResult(0,"success",0);
+	}
+
+	public function getMemberPhotoList($member_id){
+		$member_id=parameter_filter($member_id);
+		$id=parameter_filter($id);
+
+		$sql="select 1 from tb_member where id=$member_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		if(count($result)==0){
+			return	outResult(-2,"no this member ");
+		}
+
+		$sql="select id,title,description,photo from  tb_member_photo where status='A' ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		
+		return	$result;
+
+
+	}
+
 	public function getFollowDoctor($member_id){
 	
 		if($member_id==""){

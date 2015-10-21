@@ -2,7 +2,7 @@
 <root>
   <name>会员</name>
   <tablename>tb_member_photo</tablename>
-  <searchcondition>r_main.status&lt;&gt;'D'</searchcondition>
+  <searchcondition>r_main.status='A'</searchcondition>
   <fields>
     <field>
       <name>会员</name>
@@ -31,6 +31,23 @@
       <type>upload</type>
       <uploadmodule>member</uploadmodule>
       <filetype>image</filetype>
+    </field>
+    <field>
+      <name>状态</name>
+      <key>status</key>
+      <type>select</type>
+      <options>
+        <option>
+          <name>启用</name>
+          <value>A</value>
+          <default>1</default>
+        </option>
+        <option>
+          <name>禁用</name>
+          <value>I</value>
+        </option>
+      </options>
+      <notnull>1</notnull>
     </field>
   </fields>
 </root>
