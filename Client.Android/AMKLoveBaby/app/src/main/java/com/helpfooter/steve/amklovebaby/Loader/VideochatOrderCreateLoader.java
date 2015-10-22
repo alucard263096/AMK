@@ -16,24 +16,26 @@ import java.util.HashMap;
 /**
  * Created by Steve on 2015/9/7.
  */
-public class VideochatOrderCreateLoader extends WebXmlLoader {
+public class VideochatOrderCreateLoader extends ResultLoader {
 
     int doctor_id;
     String order_date;
     String order_time;
     int member_id;
+    String age;
+    String sex;
     String name;
-    String mobile;
     String description;
 
-    public VideochatOrderCreateLoader(Context ctx,int doctor_id,String order_date,String order_time,int member_id,String name,String mobile,String description) {
+    public VideochatOrderCreateLoader(Context ctx,int doctor_id,String order_date,String order_time,int member_id,String name,String age,String sex,String description) {
         super(ctx, StaticVar.VideochatOrderCreateApi);
         this.doctor_id=doctor_id;
         this.order_date=order_date;
         this.order_time=order_time;
         this.member_id=member_id;
         this.name=name;
-        this.mobile=mobile;
+        this.age=age;
+        this.sex=sex;
         this.description=description;
     }
 
@@ -48,7 +50,8 @@ public class VideochatOrderCreateLoader extends WebXmlLoader {
                     +"&order_time="+order_time
                     +"&member_id="+String.valueOf(member_id)
                     +"&name="+java.net.URLEncoder.encode(name,"utf-8")
-                    +"&mobile="+mobile
+                    +"&age="+age
+                    +"&sex="+sex
                     +"&description="+java.net.URLEncoder.encode(description,"utf-8")).replace(" ", "%20").replace("\n","%20");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -58,17 +61,4 @@ public class VideochatOrderCreateLoader extends WebXmlLoader {
         return url;
     }
 
-    @Override
-    public void doXml(ArrayList<HashMap<String, String>> lstRow) {
-        ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
-        for(HashMap<String,String> cols:lstRow){
-            ResultObj obj=new ResultObj();
-            obj.parseXmlDataTable(cols);
-            lsObj.add(obj);
-        }
-
-        if(callBack!=null){
-            callBack.CallBack(lsObj);
-        }
-    }
 }

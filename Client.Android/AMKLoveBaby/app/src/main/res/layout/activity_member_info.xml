@@ -165,7 +165,7 @@
                     android:textSize="15dp"
                     android:inputType="date"
                     android:text=""
-                    android:hint="输入你的出生日期"
+                    android:hint="输入你的出生日期(年-月-日)"
                     android:singleLine="true"
                     android:id="@+id/txtBirth"
                     android:tag="birth"

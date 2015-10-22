@@ -39,7 +39,7 @@ public class CharOrderSubmitActivity extends OrderSubmitActivity {
 
     @Override
     void ClickSubmit() {
-        CharchatOrderCreateLoader loader=new CharchatOrderCreateLoader(this,doctor.getId(), StaticVar.Member.getId(),txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
+        CharchatOrderCreateLoader loader=new CharchatOrderCreateLoader(this,doctor.getId(), StaticVar.Member.getId(),txtName.getText().toString(),txtAge.getText().toString(),getSex(),txtDescription.getText().toString());
         loader.setCallBack(this);
         loader.start();
     }

@@ -95,14 +95,50 @@
             android:hint="请输入名称" />
 
 
-        <EditText
+
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtMobile"
-            app:layout_marginTopPercent="1%"
-            android:maxLength="11"
-            android:inputType="phone"
-            android:hint="请输入有效的手机号码" />
+            android:layout_height="wrap_content" android:orientation="horizontal">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtAge"
+                app:layout_marginTopPercent="1%"
+                app:layout_widthPercent="30%"
+                android:maxLength="2"
+                android:inputType="number"
+                android:hint="年龄" />
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="25%"
+                android:text="性别："
+                android:gravity="center"
+                android:textSize="17dp"/>
+            <RadioGroup
+                android:id="@+id/rgSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/rbFemale"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20px"
+                    android:text="女"
+                    android:checked="true"
+                    android:tag="F"
+                    />
+                <RadioButton
+                    android:id="@+id/rbMale"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="男"
+                    android:layout_marginLeft="120px"
+                    android:layout_marginTop="-65px"
+                    android:tag="M"/>
+            </RadioGroup>
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
 
         <EditText
             android:inputType="textMultiLine"

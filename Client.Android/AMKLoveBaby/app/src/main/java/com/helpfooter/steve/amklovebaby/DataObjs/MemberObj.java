@@ -2,6 +2,8 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -74,6 +76,22 @@ public class MemberObj extends AbstractObj {
 
     public void setBirth(String birth) {
         this.birth = birth;
+    }
+
+    public String getAge(){
+        String age="";
+        try{
+            if(birth!=null&&birth.trim().length()>0){
+                SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date date=new Date();
+                java.util.Date mydate= myFormatter.parse(birth);
+                long day=(date.getTime()-mydate.getTime())/(24*60*60*1000) + 1;
+                age=new java.text.DecimalFormat("#.00").format(day/365f);
+            }
+        }catch (Exception ex){
+
+        }
+        return age;
     }
 
     public String getPhoto() {
