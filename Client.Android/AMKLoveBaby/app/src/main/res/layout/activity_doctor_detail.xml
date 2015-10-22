@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.helpfooter.steve.amklovebaby.DoctorDetailActivity"
-    android:orientation="vertical"
-    android:background="#ffffff">
+    android:orientation="vertical">
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -157,7 +156,7 @@
         app:layout_heightPercent="10%"
         app:layout_marginTopPercent="2%"
         android:id="@+id/layoutBusinee">
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_heightPercent="80%"
@@ -168,7 +167,7 @@
             android:background="#37A4D4"
             android:textColor="#ffffff"
             android:id="@+id/btnVedioChat"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_heightPercent="80%"
@@ -188,7 +187,7 @@
         app:layout_heightPercent="50%"
         app:layout_marginTopPercent="1%"
         app:layout_marginLeftPercent="5%">
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="介绍"
@@ -205,7 +204,7 @@
             android:layout_height="1px"
             android:background="#37A4D4"
             app:layout_widthPercent="100%" />
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/txtIntroduce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -213,7 +212,7 @@
             app:layout_marginTopPercent="5%"
             app:layout_widthPercent="90%"
             android:textSize="15dp"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="资质"
@@ -231,7 +230,7 @@
             android:layout_height="1px"
             android:background="#FD7CAD"
             app:layout_widthPercent="100%" />
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/txtCredentials"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -239,7 +238,7 @@
             app:layout_marginTopPercent="5%"
             app:layout_widthPercent="90%"
             android:textSize="15dp"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="擅长"
@@ -257,7 +256,7 @@
             android:layout_height="1px"
             android:background="#37A4D4"
             app:layout_widthPercent="100%" />
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/txtExpert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.helpfooter.steve.amklovebaby.PaymentSuccActivity"
-    android:orientation="vertical"
-    android:background="#ffffff">
+    android:orientation="vertical">
 
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -15,8 +14,8 @@
         app:layout_heightPercent="7%"
         app:layout_widthPercent="100%"
         android:background="@color/topbar_bg">
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:id="@+id/title"
+      <TextView
+          android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -39,7 +38,7 @@
         app:layout_marginTopPercent="5%"
         app:layout_marginBottomPercent="5%"
         android:src="@drawable/success"/>
-    <TextView
+    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_heightPercent="7%"
@@ -53,7 +52,7 @@
         app:layout_widthPercent="90%"
         app:layout_marginTopPercent="2%"
         app:layout_marginLeftPercent="5%">
-    <TextView
+    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请仔细阅读以下条款"

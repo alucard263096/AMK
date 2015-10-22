@@ -47,7 +47,7 @@
                     app:layout_marginLeftPercent="30%"
                     app:layout_marginTopPercent="10%"
                     android:src="@drawable/index_1" />
-                <TextView
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="医生咨询"
@@ -75,7 +75,7 @@
                     app:layout_marginLeftPercent="30%"
                     app:layout_marginTopPercent="10%"
                     android:src="@drawable/index_2" />
-                <TextView
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="健康资讯"
@@ -112,7 +112,7 @@
                     app:layout_marginLeftPercent="30%"
                     app:layout_marginTopPercent="10%"
                     android:src="@drawable/index_3" />
-                <TextView
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="我的"
@@ -140,7 +140,7 @@
                     app:layout_marginLeftPercent="50%"
                     app:layout_marginTopPercent="10%"
                     android:src="@drawable/index_4" />
-                <TextView
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="我的预约"

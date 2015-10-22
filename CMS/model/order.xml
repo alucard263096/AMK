@@ -42,6 +42,37 @@
       <disableindetail>1</disableindetail>
     </field>
     <field>
+      <name>预约人年龄</name>
+      <key>age</key>
+      <type>text</type>
+      <disableindetail>1</disableindetail>
+    </field>
+    <field>
+      <name>预约人手机</name>
+      <key>mobile</key>
+      <type>text</type>
+      <search>1</search>
+      <displayinlist>1</displayinlist>
+      <disableindetail>1</disableindetail>
+    </field>
+    <field>
+      <name>预约人性别</name>
+      <key>sex</key>
+      <type>select</type>
+      <options>
+        <option>
+          <name>女</name>
+          <value>F</value>
+        </option>
+        <option>
+          <name>男</name>
+          <value>M</value>
+        </option>
+      </options>
+      <displayinlist>1</displayinlist>
+      <disableindetail>1</disableindetail>
+    </field>
+    <field>
       <name>预约日期</name>
       <key>order_date</key>
       <type>datetime</type>

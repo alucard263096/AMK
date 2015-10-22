@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
     tools:context="com.helpfooter.steve.amklovebaby.OrderDetailActivity">
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -23,8 +22,8 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:id="@+id/title"
+      <TextView
+          android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -52,7 +51,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/svBody">
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="订单信息"
@@ -76,14 +75,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="订单编号:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -103,14 +102,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="预约姓名:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -130,14 +129,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="预约手机:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -157,14 +156,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="预约金额:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -184,14 +183,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="预约类型:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -210,14 +209,14 @@
             android:layout_height="match_parent"
             app:layout_marginTopPercent="2%"
             app:layout_heightPercent="6%">
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 app:layout_marginLeftPercent="3%"
                 app:layout_widthPercent="27%"
                 android:text="订单状态:"/>
-            <TextView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -232,7 +231,7 @@
         </LinearLayout>
 
 
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="预约详情"

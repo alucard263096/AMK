@@ -32,8 +32,8 @@
             android:src="@drawable/zhidao_logo"
             android:contentDescription="@null" />
 -->
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:id="@+id/title"
+      <TextView
+          android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
