@@ -25,12 +25,15 @@ import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+import com.helpfooter.steve.amkdoctor.MemberInfoActivity;
 import com.helpfooter.steve.amkdoctor.R;
+import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 import com.helpfooter.steve.amkdoctor.Utils.ToolsUtil;
 import com.helpfooter.steve.amkdoctor.VideoChatActivity;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by scai on 2015/9/1.
@@ -65,7 +68,8 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
     private void OnloadBooker() {
 
         if(this.mainlayout.getChildCount()>0) {
-            this.mainlayout.removeViews(0, this.mainlayout.getChildCount() - 1);
+            //this.mainlayout.removeViews(0, this.mainlayout.getChildCount() - 1);
+            this.mainlayout.removeAllViews();
         }
         //mainlayout.removeAllViewsInLayout();
         for(BookerObj obj:lstBooker){
@@ -77,9 +81,9 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
                 //如果订单编号相同，并且时间相同，continue
                 //if(oldObj.getBookno().equals(obj.getBookno()) && oldObj.getOrderdate().eq)
             //}
-            if(obj.getStatus().equals("P")){
+
                 sublayout=LoadBookerListData(obj);
-            }
+
             if(sublayout!=null){
                 sublayout.setTag(obj);
                 mainlayout.addView(sublayout);
@@ -197,6 +201,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         txtBeginChart.setGravity(Gravity.CENTER);
         txtBeginChart.setText("开始视频");
         txtBeginChart.setTextSize(15);
+        txtBeginChart.setContentDescription("BUTTON");
         txtBeginChart.setTag(booker);
         txtBeginChart.setOnClickListener(this);
         tipsLayout.addView(txtBeginChart);
@@ -212,13 +217,14 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         img.setScaleType(ImageView.ScaleType.FIT_XY);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        String url= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
+        String url=StaticVar.ImageFolderURL+"member/"+obj.getMember_photo();
         Log.i("doctor_photo", url);
         UrlImageLoader imgLoad=new UrlImageLoader(img,url);
         imgLoad.start();
-
+        img.setContentDescription("IMAGE");
         img.setLayoutParams(param);
-
+        img.setTag(obj);
+        img.setOnClickListener(this);
         return img;
     }
 
@@ -241,21 +247,21 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
     @Override
     public void onClick(View v) {
         BookerObj obj=(BookerObj)v.getTag();
-       /* UserItem item=new UserItem(Integer.parseInt(obj.getCustid()),obj.getCustname(),"192.168.1.1");
-       *//* BussinessCenter.sessionItem = new SessionItem(0, item.getUserId(),
-                obj.getDoctorid());*//*
-        *//*Dialog dialog = DialogFactory.getDialog(DialogFactory.DIALOGID_CALLRESUME,
-                item, mActivity);
-        dialog.show();*//*
-        BussinessCenter.mContext=this.mActivity;
-        BussinessCenter.getBussinessCenter().onVideoCallStart(
-                0, item.getUserId(),
-                obj.getDoctorid(), "Test");*/
-        Intent intent = new Intent(this.ctx, VideoChatActivity.class);
-        intent.putExtra("docId", String.valueOf(obj.getDoctorid()));
-        intent.putExtra("custId", String.valueOf(obj.getCustid()));
-        intent.putExtra("orderId", String.valueOf(obj.getId()));
-        this.ctx.startActivity(intent);
+        if(v.getContentDescription().equals("IMAGE")) {
+            Intent intent = new Intent(this.ctx, MemberInfoActivity.class);
+            intent.putExtra("id", String.valueOf(obj.getCustid()));
+            this.ctx.startActivity(intent);
+        }
+        else
+        {
+            Intent intent = new Intent(this.ctx, VideoChatActivity.class);
+            intent.putExtra("docId", String.valueOf(obj.getDoctorid()));
+            intent.putExtra("custId", String.valueOf(obj.getCustid()));
+            intent.putExtra("orderId", String.valueOf(obj.getId()));
+            this.ctx.startActivity(intent);
+        }
+
+
 
     }
 
@@ -265,7 +271,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         BookerDao dao=new BookerDao(this.ctx);
 
         ArrayList<AbstractObj> lstObj=dao.getBookerList();
-
+        lstBooker.clear();
         for(AbstractObj obj:lstObj) {
             lstBooker.add((BookerObj)obj);
         }
@@ -280,7 +286,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
                 {
                     try {
                         while(true) {
-                            sleep(1000000);
+                            sleep(30000);
                             LoadList();
 
                         }

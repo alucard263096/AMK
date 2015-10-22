@@ -29,6 +29,8 @@
 		$sql="
 		select count(1) count,'v_notice_doctor' name 
 from v_notice_doctor where doctor_id=$user_id and haveread='N'
+union select count(1) count, 'v_order_comment' name
+from v_order_full where doctor_id=$user_id and isnull(reply,'')='' and hascomment='Y' and status='F'
 ";
 
 		$query = $this->dbmgr->query($sql);
@@ -59,6 +61,26 @@ order by publish_date desc ";
 		$arr["third"]="发布日期";
 		$arr["count"]=count($result);
 		$arr["link"]=$CONFIG['rootpath']."/Info/notice.php#";
+		$Array[]=$arr;
+
+		
+
+		$arr=Array();
+		$arr["name"]="未回复评价";
+		$user_id=parameter_filter($user_id);
+		$sql="select top 3 id,order_no as first,
+ comment as second,comment_date  as third 
+ from v_order_full 
+ where doctor_id=$user_id and isnull(reply,'')='' and hascomment='Y' and status='F'
+order by comment_date desc ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		$arr["result"]=$result;
+		$arr["first"]="订单编号";
+		$arr["second"]="评价";
+		$arr["third"]="评价日期";
+		$arr["count"]=count($result);
+		$arr["link"]=$CONFIG['rootpath']."/Order/ordercomment.php#";
 		$Array[]=$arr;
 
 		return $Array;

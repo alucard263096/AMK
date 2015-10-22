@@ -19,4 +19,6 @@ public abstract class AbstractObj {
     public abstract void parseCursor(Cursor cursor);
     //该方法是用于解析从数据访问接口访问到某一行使加载数据的接口
     public abstract void parseXmlDataTable(HashMap<String, String> lstRowValue);
+
+
 }

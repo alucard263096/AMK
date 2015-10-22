@@ -52,7 +52,7 @@ $CONFIG['excel']['version']	= "Excel2007";//2003:Excel5,2007:Excel2007
 
 #[SMS]
 $CONFIG["sms"]["AccountSid"]="aaf98f894bfd8efd014c0c06c970099e";
-$CONFIG["sms"]["AccountToken"]="bcc5f1180d3ff9282b7af1a2e4a2a8f3";
+$CONFIG["sms"]["AccountToken"]="cdcb39a689d242f2af537b5ea4a86f61";
 $CONFIG["sms"]["AppId"]="8a48b5514fa577af014fa675e7840459";
 $CONFIG["sms"]["ServerIP"]="sandboxapp.cloopen.com";
 $CONFIG["sms"]["ServerPort"]="8883";
@@ -60,6 +60,7 @@ $CONFIG["sms"]["SoftVersion"]="2013-12-26";
 $CONFIG["sms"]["timeout"]="30";//mins
 $CONFIG["sms"]["templeteid"]["reg"]="35123";
 $CONFIG["sms"]["templeteid"]["login"]="35123";
+$CONFIG["sms"]["templeteid"]["bookingsuccess"]="35125";
 
 
 ?>

@@ -55,6 +55,7 @@ public class BookerDao extends AbstractDao {
                 "ordertime TEXT," +
                 "doctorid int," +
                 "chattime varchar," +
+                "member_photo varchar," +
                 "description varchar)");
         util.execSQL(sql.toString(), new Object[]{});
 
@@ -76,10 +77,10 @@ public class BookerDao extends AbstractDao {
         BookerObj obj=(BookerObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_booker (id,bookno,custid,custname,mobile,price,createtime,status,precessstatus,payment,orderdate,ordertime,doctorid,chattime,description" +
-                ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        sql.append("insert into tb_booker (id,bookno,custid,custname,mobile,price,createtime,status,precessstatus,payment,orderdate,ordertime,doctorid,chattime,description,member_photo" +
+                ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getBookno(),obj.getCustid(),obj.getCustname(),obj.getMobile(),obj.getPrice(),obj.getCreatetime(),obj.getStatus(),obj.getPrecessstatus(),obj.getPayment()
-        ,obj.getOrderdate(),obj.getOrdertime(),obj.getDoctorid(),obj.getChattime(),obj.getDescription()};
+        ,obj.getOrderdate(),obj.getOrdertime(),obj.getDoctorid(),obj.getChattime(),obj.getDescription(),obj.getMember_photo()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -87,21 +88,19 @@ public class BookerDao extends AbstractDao {
 
     @Override
     public void updateObj(AbstractObj abobj) {
-        // TODO Auto-generated method stub
-       /*
+        // TODO Auto /*
         util.open();
 
-        DoctorObj obj=(DoctorObj)abobj;
+        BookerObj obj=(BookerObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_booker set license=?, name=?,photo=?,title=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
-                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?,general_score=?,querycount=? where id=? ");
-        Object[] bindArgs = {obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getQuerycount(),obj.getId()};
+        sql.append("update tb_booker set status=?, precessstatus=?,orderdate=?,ordertime=?, doctorid=?, chattime=?, description=?, member_photo=?" +
+                " where id=? ");
+        Object[] bindArgs = {obj.getStatus(),obj.getPrecessstatus(),obj.getOrderdate(),obj.getOrdertime(),obj.getDoctorid(),obj.getChattime(),obj.getDescription(),obj.getMember_photo(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
-        */
+
     }
 
 

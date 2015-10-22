@@ -23,6 +23,20 @@
 		
 	}
 
+	public function getDoctorComment($doctor_id){
+		$doctor_id=parameter_filter($doctor_id);
+		$lastcomment_date=parameter_filter($lastcomment_date);
+		$sql="select top 100 m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
+inner join tb_member m on v.member_id=m.id
+where doctor_id=$doctor_id and hascomment='Y'
+";
+		$sql.=" order by comment_date desc";
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
+
 	
 	public function getDoctorInfoByLoginId($login_id)
 	{
@@ -35,14 +49,42 @@
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
 	}
+
+	public function getDoctorStatistic($doctor_id){
+
+		if($doctor_id==""){
+			return	outResult(-1,"doctor_id can not be null");
+		}
+
+
+		$doctor_id=parameter_filter($doctor_id);
+		$this->createStatistic($doctor_id);
+
+		$sql=" select $doctor_id id
+		,".$this->dbmgr->getIsNull("ms.general",1000)." as general_score
+		,".$this->dbmgr->getIsNull("ms.service",1000)." as service_score
+		,".$this->dbmgr->getIsNull("ms.ability",1000)." as ability_score
+		,".$this->dbmgr->getIsNull("ms.videoquerycount",100)." as videoquerycount
+		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount
+		,".$this->dbmgr->getIsNull("ms.chat_time",1500)." as chat_time from tb_doctor m
+		left join tb_doctor_statistic ms on m.id=ms.doctor_id where doctor_id=$doctor_id  ";
+		
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
 	
 	public function getDoctorList($lastupdate_time)
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select id, license,name,photo,office,title,bookingtime,introduce,credentials,expert
 		,enable_videochat,videochat_price,enable_charchat,charchat_price,status
-		,".$this->dbmgr->getIsNull("ms.general",5)." as general_score
-		,".$this->dbmgr->getIsNull("ms.videoquerycount",120)." as videoquerycount,".$this->dbmgr->getIsNull("ms.charquerycount",120)." as charquerycount
+		,".$this->dbmgr->getIsNull("ms.general",1000)." as general_score
+		,".$this->dbmgr->getIsNull("ms.service",1000)." as service_score
+		,".$this->dbmgr->getIsNull("ms.ability",1000)." as ability_score
+		,".$this->dbmgr->getIsNull("ms.videoquerycount",100)." as videoquerycount
+		,".$this->dbmgr->getIsNull("ms.charquerycount",100)." as charquerycount
+		,".$this->dbmgr->getIsNull("ms.chat_time",1500)." as chat_time
 		from tb_doctor m
 		left join tb_doctor_statistic ms on m.id=ms.doctor_id where 1=1  ";
 		if($lastupdate_time!=""){
@@ -53,6 +95,74 @@
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
 	}
+
+	
+
+	public function updateDoctorScore($doctor_id,$service,$ability){
+	
+		
+		$doctor_id=parameter_filter($doctor_id);
+		$service=parameter_filter($service);
+		$ability=parameter_filter($ability);
+
+		$general=($service+$ability)/2;
+
+		$this->createStatistic($doctor_id);
+
+		$sql="update tb_doctor_statistic set 
+		service=service+$service ,
+		ability=ability+$ability ,
+		general=general+$general 
+		where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+
+	}
+
+	public function updateChatTime($doctor_id,$minute){
+		
+		$doctor_id=parameter_filter($doctor_id);
+		$minute=parameter_filter($minute);
+
+		$this->createStatistic($doctor_id);
+
+		$sql="update tb_doctor_statistic set chat_time=chat_time+$minute where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+
+	}
+	
+
+	public function updateVideoQueryCount($doctor_id){
+		$doctor_id=parameter_filter($doctor_id);
+
+		$this->createStatistic($doctor_id);
+		$sql="update tb_doctor_statistic set videoquerycount=videoquerycount+1 where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+	}
+	
+
+	public function updateCharQueryCount($doctor_id){
+		$doctor_id=parameter_filter($doctor_id);
+
+		$this->createStatistic($doctor_id);
+		$sql="update tb_doctor_statistic set charquerycount=charquerycount+1 where doctor_id=$doctor_id";
+		$query = $this->dbmgr->query($sql);
+	}
+
+	public function createStatistic($doctor_id){
+		$sql="select 1 from tb_doctor_statistic where doctor_id=$doctor_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+
+		if(count($result)>0){
+			return;
+		}
+		
+		$sql="insert into tb_doctor_statistic (doctor_id,general,charquerycount,videoquerycount,
+		chat_time,service,ability) values
+		($doctor_id,1000,100,100,100*15,1000,1000 ) ";
+		$query = $this->dbmgr->query($sql);
+	}
+
 
 	public function getDoctorWorktime($doctor_id,$date){
 		

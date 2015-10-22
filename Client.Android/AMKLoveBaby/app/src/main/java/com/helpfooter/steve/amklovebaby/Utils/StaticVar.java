@@ -17,12 +17,14 @@ public final class StaticVar {
 	public static String IndexBannerApi="index_banner";
 	public static String BannerApi="banner";
 	public static String DoctorApi="doctor";
+	public static String DoctorStatisticsApi="doctorstatistics";
 	public static String NewsApi="news";
 	public static String NewsContentApi="newscontent";
 	public static String WorktimeApi="worktime";
 	public static String VideochatOrderCreateApi="videochatordercreate";
 	public static String CharchatOrderCreateApi="charchatordercreate";
 	public static String OrderGetApi="orderget";
+	public static String OrderCommentApi="ordercomment";
 	public static String PaymentApi="payment";
 	public static String LoginSendApi="loginsend";
 	public static String RegisterApi="register";
@@ -30,6 +32,7 @@ public final class StaticVar {
 	public static String MemberApi="member";
 	public static String MemberUpdateApi="memberupdate";
 	public static String OrderListApi="orderlist";
+	public static String DoctorCommentApi="doctorcomment";
 	public static String VersionApi="version";
 	public static String ChatApi="Chat";
 	public static String ChatUpdateApi="ChatUpdate";
@@ -73,6 +76,9 @@ public final class StaticVar {
 		dictHashMap.put(DoctorFollowAPI,APIURL+"Member/member_doctor.php");
 		dictHashMap.put(UploadDoctorFollowAPI,APIURL+"Member/follow_doctor.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat_member.php");
+		dictHashMap.put(DoctorStatisticsApi,APIURL+"Doctor/doctor_statistic.php");
+		dictHashMap.put(OrderCommentApi,APIURL+"Order/order_comment.php");
+		dictHashMap.put(DoctorCommentApi,APIURL+"Doctor/doctor_comment.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";

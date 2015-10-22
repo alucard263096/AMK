@@ -1,5 +1,6 @@
 <?php
   require '../include/common.inc.php';
+  include ROOT.'/classes/datamgr/doctor.cls.php';
   include ROOT.'/classes/datamgr/order.cls.php';
 
   $doctor_id=$_REQUEST["doctor_id"];
@@ -11,7 +12,7 @@
   $sex=$_REQUEST["sex"];
   
   $result=$orderMgr->createCharchatOrder($doctor_id,$member_id,$name,$mobile,$age,$sex,$description);
-
+  $doctorMgr->updateCharQueryCount($doctor_id);
   outputXml($result);
 
 ?>

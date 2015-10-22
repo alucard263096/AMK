@@ -5,16 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
@@ -64,7 +67,7 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         txtCharQuerycount.setText(String.valueOf("图文咨询:"+doctor.getCharquerycount())+"次");
 
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
-        txtGeneralScore.setText(String.valueOf(doctor.getGeneralScore()));
+        txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
 
         if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
             layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
@@ -102,6 +105,9 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
 
         txtExpert=(TextView)findViewById(R.id.txtExpert);
         txtExpert.setText(doctor.getExpert());
+
+
+        ((Button)findViewById(R.id.btnOpenComment)).setOnClickListener(this);
     }
 
     private void setFollow() {
@@ -120,6 +126,9 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         int id = intent.getIntExtra("Id", 0);
         DoctorDao dao=new DoctorDao(this);
         doctor=(DoctorObj)dao.getObj(id);
+
+        DoctorStatisticsLoader statisticsLoader=new DoctorStatisticsLoader(this,id);
+        statisticsLoader.start();
     }
 
     @Override
@@ -129,6 +138,11 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
             case R.id.btnBack:
                 this.finish();
                 return;
+            case R.id.btnOpenComment:
+                Intent intent3 = new Intent(this, DoctorCommentActivity.class);
+                intent3.putExtra("Id", doctor.getId());
+                startActivity(intent3);
+                break;
             case R.id.btnVedioChat:
                 Intent intent = new Intent(this, VideoChatOrderActivity.class);
                 intent.putExtra("Id", doctor.getId());

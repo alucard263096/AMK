@@ -78,7 +78,7 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
         txtVideoPrice.setText(String.valueOf(doctor.getVideochatPrice())+"元");
 
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
-        txtGeneralScore.setText("综合评分："+String.valueOf(doctor.getGeneralScore()));
+        txtGeneralScore.setText("综合评分："+String.valueOf(doctor.getRealGeneralScore()));
 
         pickDate=(TextView)findViewById(R.id.pickDate);
         pickDate.setOnClickListener(this);

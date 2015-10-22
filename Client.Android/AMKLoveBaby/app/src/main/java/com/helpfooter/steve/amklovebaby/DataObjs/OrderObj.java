@@ -2,6 +2,8 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
+
 import java.util.HashMap;
 
 /**
@@ -29,6 +31,11 @@ public class OrderObj extends AbstractObj {
         this.payment_type= cursor.getString(cursor.getColumnIndex("payment_type"));
         this.payment_time= cursor.getString(cursor.getColumnIndex("payment_time"));
         this.tag= cursor.getString(cursor.getColumnIndex("tag"));
+
+        this.hascomment= cursor.getString(cursor.getColumnIndex("hascomment"));
+        this.comment= cursor.getString(cursor.getColumnIndex("comment"));
+        this.service=cursor.getInt(cursor.getColumnIndex("service"));
+        this.ability=cursor.getInt(cursor.getColumnIndex("ability"));
     }
 
     String order_no;
@@ -60,6 +67,42 @@ public class OrderObj extends AbstractObj {
 
     String tag;
 
+    String hascomment;
+    int service;
+    int ability;
+    String comment;
+
+    public String getHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(String hascomment) {
+        this.hascomment = hascomment;
+    }
+
+    public int getService() {
+        return service;
+    }
+
+    public void setService(int service) {
+        this.service = service;
+    }
+
+    public int getAbility() {
+        return ability;
+    }
+
+    public void setAbility(int ability) {
+        this.ability = ability;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
     @Override
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
@@ -82,6 +125,11 @@ public class OrderObj extends AbstractObj {
         this.payment_type= lstRowValue.get("payment_type");
         this.payment_time= lstRowValue.get("payment_time");
         this.tag= lstRowValue.get("tag");
+
+        this.hascomment= lstRowValue.get("hascomment");
+        this.comment= lstRowValue.get("comment");
+        this.service= ToolsUtil.StrParseToInt(lstRowValue.get("service"));
+        this.ability=ToolsUtil.StrParseToInt(lstRowValue.get("ability"));
     }
 
     public String getOrder_no() {

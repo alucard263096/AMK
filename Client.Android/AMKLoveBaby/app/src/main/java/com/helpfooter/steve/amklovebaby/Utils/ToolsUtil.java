@@ -62,6 +62,13 @@ public class ToolsUtil {
         param.mPercentLayoutInfo = layoutinfo;
         return param;
     }
+    public static PercentLinearLayout.LayoutParams getLayoutParamHeightWrap() {
+        PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        param.mPercentLayoutInfo = layoutinfo;
+        return param;
+    }
 
     public static LinearLayout GenPLine(Context ctx) {
 
@@ -95,8 +102,16 @@ public class ToolsUtil {
         Matcher m = p.matcher(mobiles);
 
         return m.matches();
-
     }
+
+    public static String earseMobileNo(String name){
+        if(isMobileNO(name)){
+            return name.substring(0,4)+"****"+name.substring(8);
+        }
+        return name;
+    }
+
+
     static  int IO_BUFFER_SIZE=1024;
     public static Bitmap GetLocalOrNetBitmap(String url) {
         Bitmap bitmap = null;
@@ -127,4 +142,18 @@ public class ToolsUtil {
             out.write(b, 0, read);
         }
     }
+
+    public static int  StrParseToInt(String str){
+        if(str.trim().length()==0){
+            return 0;
+        }else {
+            try{
+               return Integer.parseInt(str);
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return 0;
+    }
+
 }

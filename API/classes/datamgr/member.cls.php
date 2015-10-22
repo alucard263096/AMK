@@ -160,7 +160,7 @@
 	}
 
 	
-	public function getMemberInfo($mobile,$member_id){
+	public function getMemberInfoByMobile($mobile){
 		if($mobile==""){
 			return	outResult(-1,"mobile  can not be null");
 		}
@@ -178,6 +178,22 @@
 
 		$result[0][count($result[0])/2]=$lastsent_verifycode;
 		$result[0]["verifycode"]=$lastsent_verifycode;
+
+		return	$result;
+
+	}
+	
+	public function getMemberInfoById($member_id){
+		if($member_id==""){
+			return	outResult(-1,"member_id  can not be null");
+		}
+		$member_id=parameter_filter($member_id);
+		$sql="select * from tb_member where id=$member_id  ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		if(count($result)==0){
+			return	outResult(-2,"no this member ");
+		}
 
 		return	$result;
 

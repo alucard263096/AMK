@@ -2,6 +2,9 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
+import com.helpfooter.steve.amklovebaby.FollowDoctorActivity;
+
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 /**
@@ -22,7 +25,36 @@ public class DoctorObj extends AbstractObj {
     String enable_charchat;
     int charchat_price;
     String status;
-    double general_score;
+    int general_score;
+
+    public int getChat_time() {
+        return chat_time;
+    }
+
+    public void setChat_time(int chat_time) {
+        this.chat_time = chat_time;
+    }
+
+    int chat_time;
+
+    public int getService_score() {
+        return service_score;
+    }
+
+    public void setService_score(int service_score) {
+        this.service_score = service_score;
+    }
+
+    public int getAbility_score() {
+        return ability_score;
+    }
+
+    public void setAbility_score(int ability_score) {
+        this.ability_score = ability_score;
+    }
+
+    int service_score;
+    int ability_score;
 
 
     public int getCharquerycount() {
@@ -142,9 +174,12 @@ public class DoctorObj extends AbstractObj {
         setVideochatPrice(cursor.getInt(cursor.getColumnIndex("videochat_price")));
         setCharchat_price(cursor.getInt(cursor.getColumnIndex("charchat_price")));
         setStatus(cursor.getString(cursor.getColumnIndex("status")));
-        setGeneralScore(cursor.getDouble(cursor.getColumnIndex("general_score")));
+        setGeneralScore(cursor.getInt(cursor.getColumnIndex("general_score")));
+        setService_score(cursor.getInt(cursor.getColumnIndex("service_score")));
+        setAbility_score(cursor.getInt(cursor.getColumnIndex("ability_score")));
         setVideoquerycount(cursor.getInt(cursor.getColumnIndex("videoquerycount")));
         setCharquerycount(cursor.getInt(cursor.getColumnIndex("charquerycount")));
+        setChat_time(cursor.getInt(cursor.getColumnIndex("chat_time")));
     }
 
     @Override
@@ -165,16 +200,30 @@ public class DoctorObj extends AbstractObj {
         this.enable_charchat = lstRowValue.get("enable_charchat");
         this.charchat_price=Integer.parseInt(lstRowValue.get("charchat_price"));
         this.status=lstRowValue.get("status");
-        this.general_score=Double.parseDouble(lstRowValue.get("general_score"));
+        this.general_score=Integer.parseInt(lstRowValue.get("general_score"));
+        this.service_score=Integer.parseInt(lstRowValue.get("service_score"));
+        this.ability_score=Integer.parseInt(lstRowValue.get("ability_score"));
         this.videoquerycount=Integer.parseInt(lstRowValue.get("videoquerycount"));
         this.charquerycount=Integer.parseInt(lstRowValue.get("charquerycount"));
+        this.chat_time=Integer.parseInt(lstRowValue.get("chat_time"));
 
     }
 
-    public double getGeneralScore() {
+    public void parseXmlDataTableForStatistics(HashMap<String, String> lstRowValue) {
+
+        this.id=Integer.parseInt(lstRowValue.get("id"));
+        this.general_score=Integer.parseInt(lstRowValue.get("general_score"));
+        this.service_score=Integer.parseInt(lstRowValue.get("service_score"));
+        this.ability_score=Integer.parseInt(lstRowValue.get("ability_score"));
+        this.videoquerycount=Integer.parseInt(lstRowValue.get("videoquerycount"));
+        this.charquerycount=Integer.parseInt(lstRowValue.get("charquerycount"));
+        this.chat_time=Integer.parseInt(lstRowValue.get("chat_time"));
+
+    }
+    public int getGeneralScore() {
         return general_score;
     }
-    public void  setGeneralScore(double val){
+    public void  setGeneralScore(int val){
         this.general_score=val;
     }
 
@@ -185,4 +234,11 @@ public class DoctorObj extends AbstractObj {
         this.title=val;
     }
 
+
+    public String getRealGeneralScore(){
+        float gene=general_score*1.0f/(charquerycount+videoquerycount);
+        DecimalFormat fnum   =   new   DecimalFormat("##0.0");
+        String   dd=fnum.format(gene);
+        return dd;
+    }
 }

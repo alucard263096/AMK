@@ -17,6 +17,7 @@ import com.helpfooter.steve.amkdoctor.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
 import com.helpfooter.steve.amkdoctor.Loader.BannerLoader;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+import com.helpfooter.steve.amkdoctor.Loader.MemberLoader;
 import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
 import com.helpfooter.steve.amkdoctor.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
@@ -66,8 +67,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         BookerLoader bkLoader = new BookerLoader(this);
         bkLoader.start();
 
-        MessageLoader messageLoader = new MessageLoader(this);
+       MessageLoader messageLoader = new MessageLoader(this);
         messageLoader.start();
+
+
 
     }
 

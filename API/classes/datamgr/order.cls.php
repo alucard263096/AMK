@@ -58,18 +58,19 @@
 		$doctor_id=parameter_filter($doctor_id);
 		$status=parameter_filter($status);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,updated_date,status,process_status,payment,order_date,order_time,
-		doctor_id,last_one ,description,SUBSTRING(last_one,1,1) sendside
-		from v_order                 
-		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND id = ov.order_id
+		$sql="select v.*,m.photo member_photo,
+		doctor_id,last_one ,SUBSTRING(last_one,1,1) sendside
+		from v_order v                
+		inner join tb_member m on m.id=member_id
+		inner join dbo.tb_order_charchat AS ov ON act = 'CC' AND v.id = ov.order_id
 		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
-		$sql.=" and updated_date>'$lastupdate_time'  ";
+		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($status!=""){
-		$sql.=" and status='$status'  ";
+		$sql.=" and v.status='$status'  ";
 		}
-		$sql.=" order by sendside,updated_date desc";
+		$sql.=" order by sendside,v.updated_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
@@ -108,15 +109,16 @@
 		}
 		$doctor_id=parameter_filter($doctor_id);
 		$lastupdate_time=parameter_filter($lastupdate_time);
-		$sql="select id,order_no,member_id,name,mobile,price,created_time,status,process_status,payment,order_date,order_time,doctor_id,chat_time ,description
-		from v_order                 
-		inner join dbo.tb_order_videochat AS ov ON act = 'VC' AND id = ov.order_id
+		$sql="select v.*,m.photo member_photo,doctor_id,chat_time 
+		from v_order       v
+		inner join tb_member m on m.id=v.member_id
+		inner join dbo.tb_order_videochat AS ov ON act = 'VC' AND v.id = ov.order_id
 		where doctor_id=$doctor_id ";
 		if($lastupdate_time!=""){
-		$sql.=" and updated_date>'$lastupdate_time'  ";
+		$sql.=" and v.updated_date>'$lastupdate_time'  ";
 		}
 		if($onlyactive=="Y"){
-		$sql.=" and status='P' and (order_date+' '+order_time)>GETDATE()  ";
+		$sql.=" and v.status='P'   ";
 		}
 		$sql.=" order by order_date ,order_time ";
 		//echo $sql;
@@ -195,6 +197,10 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$sql="insert into tb_order_payment (order_id,payment) values ($id ,'N')";
 		$query = $this->dbmgr->query($sql);
 
+		
+		$sql="insert into tb_order_comment (order_id,hascomment) values ($id ,'N')";
+		$query = $this->dbmgr->query($sql);
+
 		return $id;
 	}
 
@@ -263,9 +269,64 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 	public function finishOrder($order_id){
 		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+		
 		$order_id=parameter_filter($order_id);
 		$sql="update tb_order set status='F',finished_time=getdate() where  id=$order_id  ";
 		$query = $this->dbmgr->query($sql);
+
+		
+		$this->updateOrder($order_id);
+
+		return	outResult(0,"success",$id);
+	}
+
+	public function updateVideoChatTime($order_id,$minute){
+		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+		$order_id=parameter_filter($order_id);
+		$minute=parameter_filter($minute);
+		$sql="update tb_order_videochat set chat_time=$minute where order_id=$order_id  ";
+		$query = $this->dbmgr->query($sql);
+
+		$this->updateOrder($order_id);
+		
+
+
+		return	outResult(0,"success",$id);
+	}
+
+	public function updateOrder($order_id){
+		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id  ";
+		$query = $this->dbmgr->query($sql);
+	}
+
+	
+	public function commentOrder($order_id,$service,$ability,$comment){
+		
+		if($order_id==""){
+			return	outResult(-1,"order_id can not be null");
+		}
+
+		$order_id=parameter_filter($order_id);
+		$service=parameter_filter($service);
+		$ability=parameter_filter($ability);
+		$comment=parameter_filter($comment);
+		$sql="update tb_order_comment set 
+		service=$service ,
+		ability=$ability ,
+		comment='$comment' ,
+		hascomment='Y',
+		comment_date=".$this->dbmgr->getDate()."
+		where order_id=$order_id and hascomment='N'  ";
+		$query = $this->dbmgr->query($sql);
+		
+		$this->updateOrder($order_id);
+
 		return	outResult(0,"success",$id);
 	}
 
@@ -344,8 +405,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		$sql="update tb_order_charchat set content=isnull(content,'')+N'{|}$str',last_one=N'$str' where order_id=$order_id and doctor_id=$doctor_id   ";
 		$query = $this->dbmgr->query($sql);
 		
-		$sql="update tb_order set updated_date=".$this->dbmgr->getDate()." where id=$order_id   ";
-		$query = $this->dbmgr->query($sql);
+		$this->updateOrder($order_id);
 		
 		$this->dbmgr->commit_trans();
 		return	outResult(0,"success",$id);
@@ -387,7 +447,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		
 		$sql="update tb_order_payment set payment='Y',payment_type='$payment_type',payment_time=".$this->dbmgr->getDate()." where order_id=$order_id ";
 		$query = $this->dbmgr->query($sql);
-
+		
+		$this->updateOrder($order_id);
 
 		$this->dbmgr->commit_trans();
 		return	outResult(0,"success");
@@ -413,6 +474,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		return $prefix.$d.sprintf("%06d", $seq);
 
 	}
+
 
 	
 	public function getOrder($order_id,$member_id){
