@@ -1,77 +1,103 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.helpfooter.steve.amklovebaby.NewsListFragment">
+
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_heightPercent="8%" android:background="#ffffff"
+        >
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="20%"
+            android:text="健康食谱"
+            android:tag="H"
+            android:gravity="center"
+            android:id="@+id/btnCategoryH" />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="20%"
+            android:id="@+id/btnCategoryP"
+            android:text="孕产常识"
+            android:tag="P"
+            android:gravity="center"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="20%"
+            android:id="@+id/btnCategoryF"
+            android:text="生长指标"
+            android:tag="F"
+            android:gravity="center" />
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="20%"
+            android:id="@+id/btnCategoryE"
+            android:text="早教方法"
+            android:tag="E"
+            android:gravity="center"/>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_widthPercent="20%"
+            android:id="@+id/btnCategoryV"
+            android:text="营养及运动"
+            android:tag="V"
+            android:gravity="center"/>
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="4px">
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            android:orientation="horizontal"
-            android:layout_marginTop="1px">
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/btnCategoryH"
-                app:layout_widthPercent="20%"
-                android:text="健康食谱"
-                android:tag="H"
-                android:background="#FD7CAD"
-                android:textColor="#ffffff"
-                android:gravity="center"/>
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="20%"
-                android:id="@+id/btnCategoryP"
-                android:text="孕产常识"
-                android:tag="P"
-                android:background="#FD7CAD"
-                android:textColor="#ffffff"
-                android:gravity="center"/>
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="20%"
-                android:id="@+id/btnCategoryF"
-                android:text="生长指标"
-                android:tag="F"
-                android:background="#FD7CAD"
-                android:textColor="#ffffff"
-                android:gravity="center"/>
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="20%"
-                android:id="@+id/btnCategoryE"
-                android:text="早教方法"
-                android:tag="E"
-                android:background="#FD7CAD"
-                android:textColor="#ffffff"
-                android:gravity="center"/>
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="20%"
-                android:id="@+id/btnCategoryV"
-                android:text="营养及运动"
-                android:tag="V"
-                android:background="#FD7CAD"
-                android:textColor="#ffffff"
-                android:gravity="center"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            app:layout_widthPercent="20%"
+            android:id="@+id/udCategoryH"
+            android:background="@color/mydeepblue"></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_widthPercent="20%"
+            android:id="@+id/udCategoryP"
+            android:background="@color/mydeepblue"></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_widthPercent="20%"
+            android:id="@+id/udCategoryF"
+            android:background="@color/mydeepblue"></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_widthPercent="20%"
+            android:id="@+id/udCategoryE"
+            android:background="@color/mydeepblue"></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_widthPercent="20%"
+            android:id="@+id/udCategoryV"
+            android:background="@color/mydeepblue"></com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
         <ScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_marginLeftPercent="3%"
-            app:layout_widthPercent="90%">
+            android:layout_height="match_parent">
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -81,7 +107,7 @@
                 android:id="@+id/news_list">
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </ScrollView>
-    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
-</FrameLayout>
+
+</com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

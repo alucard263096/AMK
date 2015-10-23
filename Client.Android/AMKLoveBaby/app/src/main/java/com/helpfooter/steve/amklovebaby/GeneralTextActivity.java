@@ -40,8 +40,9 @@ public class GeneralTextActivity extends Activity implements View.OnClickListene
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         ((TextView) findViewById(R.id.title)).setText(title);
 
-        ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl+code);
+        ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl + code);
 
+        ((WebView) findViewById(R.id.txtContext)).setBackgroundColor(0);
     }
 
     @Override

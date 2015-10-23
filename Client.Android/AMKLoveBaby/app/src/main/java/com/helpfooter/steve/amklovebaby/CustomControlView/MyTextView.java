@@ -32,6 +32,11 @@ public class MyTextView  extends TextView {
         }catch (Exception ex){
             Log.e("LoadFontError",ex.getMessage());
         }
-
+        setPadding(0, -1 * 10, 0, -1 * 10);
+    }
+    public void setTextSize(float size){
+        super.setTextSize(size);
+        int z=(int)size;
+        setPadding(0, -1 * z, 0, -1 * z);
     }
 }

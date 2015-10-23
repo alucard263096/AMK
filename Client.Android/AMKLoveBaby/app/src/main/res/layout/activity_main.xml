@@ -6,8 +6,7 @@
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#ffffff">
+        android:orientation="vertical">
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -55,9 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_heightPercent="80%"
-        app:layout_marginBottomPercent="3%"
-        android:background="#ffffff">
+        app:layout_heightPercent="83%">
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ll_bottom_tab"

@@ -646,9 +646,9 @@ public class PercentLayoutHelper
 
     private static boolean shouldHandleMeasuredWidthTooSmall(View view, PercentLayoutInfo info)
     {
-        int state = ViewCompat.getMeasuredWidthAndState(view) & ViewCompat.MEASURED_STATE_MASK;
-        return state == ViewCompat.MEASURED_STATE_TOO_SMALL && info.widthPercent.percent >= 0 &&
-                info.mPreservedParams.width == ViewGroup.LayoutParams.WRAP_CONTENT;
+            int state = ViewCompat.getMeasuredWidthAndState(view) & ViewCompat.MEASURED_STATE_MASK;
+            return state == ViewCompat.MEASURED_STATE_TOO_SMALL && info.widthPercent.percent >= 0 &&
+                    info.mPreservedParams.width == ViewGroup.LayoutParams.WRAP_CONTENT;
     }
 
     private static boolean shouldHandleMeasuredHeightTooSmall(View view, PercentLayoutInfo info)
