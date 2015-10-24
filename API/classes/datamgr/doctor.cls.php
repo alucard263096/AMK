@@ -168,6 +168,103 @@ where doctor_id=$doctor_id and hascomment='Y'
 		$query = $this->dbmgr->query($sql);
 	}
 
+	public function getDoctorDay($doctor_id){
+		if($doctor_id==""){
+			return	outResult(-1,"doctor_id can not be null");
+		}
+
+		
+		$numberOfWeek=date('w',strtotime($date));
+		if($numberOfWeek==0){
+			$numberOfWeek=7;
+		}
+		$doctor_id=parameter_filter($doctor_id);
+		$sql="select worktime from tb_doctor where id=$doctor_id ";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+
+		$worktime_schedule=explode("\n",$result[0]);
+		
+		$workday_arr=Array();;
+
+		foreach($worktime_schedule as $value){
+			$value=trim(" ".$value);
+			$ret=array();
+			if($value!=""&&$value[0]=="#"){
+				if(is_int(intval($value[1]))&&($value[1]<=7&&$value[1]>=1)){
+					$acce=Array();
+					$acce[0]=0;
+					if($value[1]==0){
+						$value[1]=7;
+					}
+					$acce["day"]=$value[1];
+					$dayworktime_arr=explode("->",$value);
+					$dayworktime=$dayworktime_arr[1];
+					$invalworktime_arr=explode(",",$dayworktime);
+					
+					foreach($invalworktime_arr as $intval){
+							$intval=trim($intval);
+							$fromto=explode("-",$intval);
+							$from=$fromto[0];
+							$to=$fromto[1];
+							$arr=$this->getFromToArray($from,$to,$ordertime);
+							$ret=array_merge($ret,$arr);
+					}
+
+					$acce["worktime"]=$ret;
+					$workday_arr[$value[1]]=$acce;
+				}
+			}
+		}
+		$today=date("Y-m-d");
+		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+		$sql="select order_date, order_time from tb_order o
+			inner join tb_order_videochat ov on o.id=ov.order_id
+			 where doctor_id=$doctor_id and order_date>'$today' and order_date<='$lastday' and status<>'F' and status<>'D' and status<>'C' ";
+			$query = $this->dbmgr->query($sql);
+			$ordertime = $this->dbmgr->fetch_array_all($query); 
+		$today=date("Y-m-d");
+		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+
+		$ret=array();
+		for($i=0;$i<30;$i++){
+			$today=date("Y-m-d", strtotime("+1 days", strtotime($today)));
+			$s=array();
+			$s[0]=$today;
+			$s["date"]=$today;
+			$numberOfWeek=date('w',strtotime($today));
+			if($numberOfWeek==0){
+				$numberOfWeek=7;
+			}
+			$s[1]=$numberOfWeek;
+			$s["w"]=$numberOfWeek;
+			if($this->inResultArray($workday_arr,$numberOfWeek)){
+				$spworktime=$workday_arr[$numberOfWeek]["worktime"];
+				$worktimecount=count($spworktime);
+				$usedworktimecount=0;
+				foreach($spworktime as $val){
+					$date=$today;
+					$time=$val["time"];
+					$count=count($ordertime);
+					for($t=0;$t<$count;$t++){
+					//echo $ordertime[$t]["order_date"]."==".$date."&&".$ordertime[$t]["order_time"]."==".$time."<br />";
+						if($ordertime[$t]["order_date"]==$date
+							&&$ordertime[$t]["order_time"]==$time){
+							$usedworktimecount++;
+							//echo "here?";
+						}
+					}
+				}
+				$s[2]=$worktimecount;
+				$s["totalcount"]=$worktimecount;
+				$s[3]=$usedworktimecount;
+				$s["usedcount"]=$usedworktimecount;
+				$ret[]=$s;
+			}
+		}
+		return $ret;
+	}
+
 
 	public function getDoctorWorktime($doctor_id,$date){
 		

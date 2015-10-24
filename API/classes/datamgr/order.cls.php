@@ -220,8 +220,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 			$arr=explode(":",$order_time);
 			$hour=intval($arr[0]);
 			$minute=intval($arr[1]);
-			$second=intval($arr[2]);
-			$str=($hour<10?"0".$hour:$hour).":".($minute<10?"0".$minute:$minute).":".($second<10?"0".$second:$second);
+			$str=($hour<10?"0".$hour:$hour).":".($minute<10?"0".$minute:$minute);
 			return $str;
 		}
 		return $order_time;
