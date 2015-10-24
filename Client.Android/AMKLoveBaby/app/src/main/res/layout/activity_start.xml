@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="right|bottom"
-        android:text="北京阿米卡科技有限公司提供"
+        android:text="Copyright @2008-2015北京阿米卡科技有限公司提供"
         app:layout_marginBottomPercent="2%"
         app:layout_marginRightPercent="2%"
         android:textColor="#555555"/>

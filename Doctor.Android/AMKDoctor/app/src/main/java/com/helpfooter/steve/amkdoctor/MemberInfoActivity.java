@@ -35,6 +35,8 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
     TextView txtIntroduce,txtCredentials,txtExpert,btnFollow;
     LinearLayout layoutBusiness;
     int memberid;
+    String age;
+    String sex;
     boolean hasFollow=false;
     MemberLoader ml;
     public ArrayList<MemberObj> lstMembers=new ArrayList<MemberObj>() ;
@@ -63,7 +65,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         txtName.getPaint().setFakeBoldText(true);;
 
         txtSex=(TextView)findViewById(R.id.txtSex);
-        if(member.getSex().trim().equals("M"))
+        if(sex.trim().equals("M"))
         {
             txtSex.setText("男");
         }
@@ -74,7 +76,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
 
 
         txtAge=(TextView)findViewById(R.id.txtAge);
-        txtAge.setText("年龄:" + member.getAge());
+        txtAge.setText("年龄:" + age);
 
 
     }
@@ -109,7 +111,8 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         private void InitData() {
         Intent intent = getIntent();
         memberid = Integer.parseInt(intent.getStringExtra("id"));
-
+        age = intent.getStringExtra("age");
+         sex = intent.getStringExtra("sex");
         MemberDao dao=new MemberDao(this);
         member=(MemberObj)dao.getObj(memberid);
         if(member==null)

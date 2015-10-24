@@ -29,6 +29,25 @@ public class BookerObj extends AbstractObj {
     int doctorid;
     String chattime;
     String description;
+    String age;
+    String sex;
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+
     @Override
     public int getId() {
         return id;
@@ -187,7 +206,8 @@ public class BookerObj extends AbstractObj {
         setChattime(cursor.getString(cursor.getColumnIndex("chattime")));
         setDescription(cursor.getString(cursor.getColumnIndex("description")));
         setMember_photo(cursor.getString(cursor.getColumnIndex("member_photo")));
-
+        setAge(cursor.getString(cursor.getColumnIndex("age")));
+        setSex(cursor.getString(cursor.getColumnIndex("sex")));
     }
 
     @Override
@@ -209,6 +229,8 @@ public class BookerObj extends AbstractObj {
         this.chattime = lstRowValue.get("chat_time");
         this.description = lstRowValue.get("description");
         this.member_photo=lstRowValue.get("member_photo");
+        this.age = lstRowValue.get("age");
+        this.sex=lstRowValue.get("sex");
     }
 
 

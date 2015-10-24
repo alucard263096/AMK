@@ -121,17 +121,17 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 
 
         // 如果是采用Java视频显示，则需要设置Surface的CallBack
-//        if (AnyChatCoreSDK
-//                .GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
-//            int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
-//                    .getHolder());
-//            anychatSDK.mVideoHelper.SetVideoUser(index, userID);
-//        }
+       if (AnyChatCoreSDK
+               .GetSDKOptionInt(AnyChatDefine.BRAC_SO_VIDEOSHOW_DRIVERCTRL) == AnyChatDefine.VIDEOSHOW_DRIVER_JAVA) {
+           int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
+                    .getHolder());
+            anychatSDK.mVideoHelper.SetVideoUser(index, userID);
+       }
 
         mMyView.setZOrderOnTop(true);
 
-//        anychatSDK.UserCameraControl(userID, 1);
-//        anychatSDK.UserSpeakControl(userID, 1);
+      /* anychatSDK.UserCameraControl(userID, 1);
+       anychatSDK.UserSpeakControl(userID, 1);*/
 
         // 判断是否显示本地摄像头切换图标
         if (AnyChatCoreSDK
@@ -162,8 +162,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
             adjustLocalVideo(false);
         }
 
-        anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
-        anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
+
 
     }
 
@@ -417,6 +416,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
         if (dwErrorCode == 0) {
             myUserId=dwUserId;
             anychatSDK.EnterRoom(order.getId(), "");
+
+
         } else {
             Toast.makeText(this, "登录失败，errorCode：", Toast.LENGTH_LONG).show();
         }
@@ -426,7 +427,22 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
 
     @Override
     public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
+        int[] userIDArray = anychatSDK.GetOnlineUser();
+        if(userIDArray.length>0){
+            userID=userIDArray[0];
+            if(myUserId==userID){
+                Log.i("myUserId==userID", "yes");
+            }
 
+
+            int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
+                    .getHolder());
+            anychatSDK.mVideoHelper.SetVideoUser(index, userID);
+            anychatSDK.UserCameraControl(-1, 1);
+            anychatSDK.UserSpeakControl(-1, 1);
+            anychatSDK.UserCameraControl(userID, 1);
+            anychatSDK.UserSpeakControl(userID, 1);
+        }
     }
 
     @Override
@@ -442,6 +458,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
                     .getHolder());
             anychatSDK.mVideoHelper.SetVideoUser(index, userID);
 
+            anychatSDK.UserCameraControl(-1, 1);
+            anychatSDK.UserSpeakControl(-1, 1);
             anychatSDK.UserCameraControl(userID, 1);
             anychatSDK.UserSpeakControl(userID, 1);
         }
@@ -464,7 +482,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
             int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
                     .getHolder());
             anychatSDK.mVideoHelper.SetVideoUser(index, dwUserId);
-
+            anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
+            anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
             anychatSDK.UserCameraControl(dwUserId, 1);
             anychatSDK.UserSpeakControl(dwUserId, 1);
             userID = dwUserId;
