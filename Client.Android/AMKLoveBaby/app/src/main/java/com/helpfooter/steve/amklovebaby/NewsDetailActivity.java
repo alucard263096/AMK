@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
@@ -36,6 +38,7 @@ public class NewsDetailActivity extends Activity implements View.OnClickListener
     NewsObj news;
     DoctorObj doctor;
     ImageView btnBack;
+    ScrollView idBody;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,20 +51,25 @@ public class NewsDetailActivity extends Activity implements View.OnClickListener
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
 
+        idBody=(ScrollView)findViewById(R.id.idBody);
+
         WebView webView=(WebView)findViewById(R.id.txtContext);
         webView.setHorizontalScrollBarEnabled(false);
         webView.setHorizontalScrollbarOverlay(false);
         webView.setScrollbarFadingEnabled(false);
         webView.getSettings().setBuiltInZoomControls(false);
+        webView.setBackgroundColor(0);
 
         ((TextView)findViewById(R.id.txtTitle)).setText(news.getTitle());
+        TextPaint tp= ((TextView)findViewById(R.id.txtTitle)).getPaint();
+        tp.setFakeBoldText(true);
+        ((TextView)findViewById(R.id.publish_date)).setText(news.getPublish_date());
         ImageView imgPhoto=(ImageView)findViewById(R.id.imgPhoto);
         if(news.getPhoto().length()>3){
             UrlImageLoader imagePhotoLoad=new UrlImageLoader(imgPhoto, StaticVar.ImageFolderURL+"news/"+news.getPhoto());
             imagePhotoLoad.start();
         }else {
             imgPhoto.setVisibility(View.GONE);
-            addHeightForWebView(webView, 0.22f);
         }
         NewsLoader newsLoader=new NewsLoader(this);
         newsLoader.setGetNewsContext(news.getId());
@@ -73,7 +81,9 @@ public class NewsDetailActivity extends Activity implements View.OnClickListener
         LinearLayout layoutDoctor=(LinearLayout)findViewById(R.id.layoutDoctor);
         if(doctor==null){
             layoutDoctor.setVisibility(View.GONE);
-            addHeightForWebView(webView,0.15f);
+            //addHeightForWebView(0.15f);
+            PercentLinearLayout.LayoutParams vidt=ToolsUtil.getLayoutParam();
+            idBody.setLayoutParams(vidt);
         }else{
             layoutDoctor.setTag(doctor);
             layoutDoctor.setOnClickListener(this);
@@ -86,12 +96,12 @@ public class NewsDetailActivity extends Activity implements View.OnClickListener
 
     }
 
-    public  void addHeightForWebView(WebView webView,float h){
-        float orih=((PercentLinearLayout.LayoutParams)webView.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
-        ((PercentLinearLayout.LayoutParams)webView.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent+=h;
+    public  void addHeightForWebView(float h){
+        //float orih=((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
+        //((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent=100;
                 //new PercentLayoutHelper.PercentLayoutInfo.PercentVal(orih+0.9f,true);
 
-        float c =((PercentLinearLayout.LayoutParams)webView.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
+        //float c =((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
 
     }
 

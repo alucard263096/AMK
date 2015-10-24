@@ -150,7 +150,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 	}
 
-	public function createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,$act,$price){
+	public function createOrder($order_date,$order_time,$member_id,$name,$mobile,$age,$sex,$description,$act,$price){
 	
 		
 		$order_date=$this->formatOrderDate($order_date);
@@ -182,14 +182,16 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 		$name=parameter_filter($name);
 		$mobile=parameter_filter($mobile);
+		$age=parameter_filter($age);
+		$sex=parameter_filter($sex);
 		$description=parameter_filter($description);
 
 		$order_no=$this->genOrderNo($act);
 
 
 		$id=$this->dbmgr->getNewId("tb_order");
-		$sql="insert into tb_order (id,order_no,member_id,name,mobile,price,act,created_time,status,process_status,order_date,order_time,description,updated_user,updated_date)
-		values ($id,'$order_no',$member_id,'$name','$mobile',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description',-1, ".$this->dbmgr->getDate()." )   ";
+		$sql="insert into tb_order (id,order_no,member_id,name,mobile,age,sex,price,act,created_time,status,process_status,order_date,order_time,description,updated_user,updated_date)
+		values ($id,'$order_no',$member_id,'$name','$mobile','$age','$sex',$price,'$act',".$this->dbmgr->getDate().",'T','P','$order_date','$order_time','$description',-1, ".$this->dbmgr->getDate()." )   ";
 		$query = $this->dbmgr->query($sql);
 
 		$sql="insert into tb_order_payment (order_id,payment) values ($id ,'N')";
@@ -218,14 +220,13 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 			$arr=explode(":",$order_time);
 			$hour=intval($arr[0]);
 			$minute=intval($arr[1]);
-			$second=intval($arr[2]);
-			$str=($hour<10?"0".$hour:$hour).":".($minute<10?"0".$minute:$minute).":".($second<10?"0".$second:$second);
+			$str=($hour<10?"0".$hour:$hour).":".($minute<10?"0".$minute:$minute);
 			return $str;
 		}
 		return $order_time;
 	}
 
-	public function createCharchatOrder($doctor_id,$member_id,$name,$mobile,$description){
+	public function createCharchatOrder($doctor_id,$member_id,$name,$mobile,$age,$sex,$description){
 		
 		//read to create 
 		$this->dbmgr->begin_trans();
@@ -251,7 +252,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 
 		
 		
-		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"CC",$price);
+		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$age,$sex,$description,"CC",$price);
 		if(is_array($rs)){
 			return $rs;
 		}
@@ -318,7 +319,8 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		service=$service ,
 		ability=$ability ,
 		comment='$comment' ,
-		hascomment='Y' 
+		hascomment='Y',
+		comment_date=".$this->dbmgr->getDate()."
 		where order_id=$order_id and hascomment='N'  ";
 		$query = $this->dbmgr->query($sql);
 		
@@ -327,7 +329,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		return	outResult(0,"success",$id);
 	}
 
-	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$description){
+	public function createVideochatOrder($doctor_id,$order_date,$order_time,$member_id,$name,$mobile,$age,$sex,$description){
 		
 		$order_date=$this->formatOrderDate($order_date);
 		$order_time=$this->formatOrderTime($order_time);
@@ -371,7 +373,7 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 			return	outResult(-103,"order date have been used");
 		}
 		
-		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$description,"VC",$price);
+		$rs=$this->createOrder($order_date,$order_time,$member_id,$name,$mobile,$age,$sex,$description,"VC",$price);
 		if(is_array($rs)){
 			return $rs;
 		}

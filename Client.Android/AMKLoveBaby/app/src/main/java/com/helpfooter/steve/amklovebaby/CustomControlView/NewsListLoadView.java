@@ -46,9 +46,11 @@ public class NewsListLoadView implements View.OnClickListener {
         int i=1;
         for(NewsObj obj:lstNews){
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
-            PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-            param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.13f,false);
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,false);
+            PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
             layout.setLayoutParams(param);
             layout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -60,15 +62,22 @@ public class NewsListLoadView implements View.OnClickListener {
             layout.setTag(obj);
             layout.setOnClickListener(this);
             this.mainlayout.addView(layout);
+
+            LinearLayout line=ToolsUtil.GenPLine(this.ctx);
+            line.setTag(obj);
+            this.mainlayout.addView(line);
+
+
             i++;
         }
     }
     public ImageView getPhotoView(NewsObj news){
         ImageView img=new ImageView(this.ctx);
-        img.setScaleType(ImageView.ScaleType.FIT_XY);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.4f,true);
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
         String url= StaticVar.ImageFolderURL+"news/"+news.getThumbnail();
+        img.setAdjustViewBounds(true);
         Log.i("doctor_photo",url);
         UrlImageLoader imgLoad=new UrlImageLoader(img,url);
         imgLoad.start();;
@@ -79,17 +88,16 @@ public class NewsListLoadView implements View.OnClickListener {
 
     public LinearLayout getInfoLayout(NewsObj news){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.57f,true);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
         param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
 
 
         TextView txtTitle=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams titleparam=ToolsUtil.getLayoutParam();
-        titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.13f,true);
+        PercentLinearLayout.LayoutParams titleparam=ToolsUtil.getLayoutParamHeightWrap();
         txtTitle.setTextSize(15);
+        //txtTitle.setBackgroundColor(Color.parseColor("#ffccaa"));
         //txtTitle.setGravity(Gravity.CENTER_VERTICAL);
         txtTitle.setLayoutParams(titleparam);
         txtTitle.setText(news.getTitle());
@@ -98,8 +106,8 @@ public class NewsListLoadView implements View.OnClickListener {
         Log.i("news_title", news.getTitle());
 
         TextView txtSummary=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams summaryparam=ToolsUtil.getLayoutParam();
-        summaryparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        PercentLinearLayout.LayoutParams summaryparam=ToolsUtil.getLayoutParamHeightWrap();
+        //txtSummary.setBackgroundColor(Color.parseColor("#ffccee"));
         txtSummary.setGravity(Gravity.CENTER_VERTICAL);
         txtSummary.setLayoutParams(summaryparam);
         txtSummary.setTextColor(Color.GRAY);
@@ -109,14 +117,14 @@ public class NewsListLoadView implements View.OnClickListener {
 
 
         PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams tipsparam=ToolsUtil.getLayoutParam();
+        //tipsLayout.setBackgroundColor(Color.parseColor("#ffaaee"));
+        PercentLinearLayout.LayoutParams tipsparam=ToolsUtil.getLayoutParamHeightWrap();
         tipsparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        tipsparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.17f,true);
         tipsLayout.setLayoutParams(tipsparam);
         tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
 
         TextView txtPublishDate=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams publishdateparam= ToolsUtil.getLayoutParam();
+        PercentLinearLayout.LayoutParams publishdateparam= ToolsUtil.getLayoutParamHeightWrap();
         publishdateparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
         txtPublishDate.setLayoutParams(publishdateparam);
         txtPublishDate.setText(news.getPublish_date());
@@ -124,7 +132,7 @@ public class NewsListLoadView implements View.OnClickListener {
         tipsLayout.addView(txtPublishDate);
 
         TextView txtUpvote=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
+        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParamHeightWrap();
         upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
         txtUpvote.setLayoutParams(upvoteparam);
         txtUpvote.setGravity(Gravity.RIGHT);

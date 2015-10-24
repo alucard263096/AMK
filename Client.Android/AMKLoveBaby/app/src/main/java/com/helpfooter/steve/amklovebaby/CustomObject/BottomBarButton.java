@@ -118,7 +118,7 @@ public class BottomBarButton {
             return txtView;
         }
 
-        txtView=new MyTextView(ctx);
+        txtView=new TextView(ctx);
         txtView.setId(MyResourceIdUtil.GetMyResourceId("bottom_bar_txt_" + name));
         //LinearLayout.LayoutParams txtParam=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,20);
 

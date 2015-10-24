@@ -16,7 +16,7 @@
         app:layout_heightPercent="30%"
         app:layout_marginTopPercent="30%"/>
 
-    <TextView
+    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="right|bottom"

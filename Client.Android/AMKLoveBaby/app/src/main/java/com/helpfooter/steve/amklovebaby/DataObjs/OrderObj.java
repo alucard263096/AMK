@@ -34,8 +34,8 @@ public class OrderObj extends AbstractObj {
 
         this.hascomment= cursor.getString(cursor.getColumnIndex("hascomment"));
         this.comment= cursor.getString(cursor.getColumnIndex("comment"));
-        this.id=cursor.getInt(cursor.getColumnIndex("id"));
-        this.id=cursor.getInt(cursor.getColumnIndex("id"));
+        this.service=cursor.getInt(cursor.getColumnIndex("service"));
+        this.ability=cursor.getInt(cursor.getColumnIndex("ability"));
     }
 
     String order_no;

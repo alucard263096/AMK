@@ -75,15 +75,16 @@ where doctor_id=$user_id and status='F' and act='CC') as finish_count";
 
 		
 		$arr=Array();
-		$arr["name"]="待处理评价";
-		//$sql="select (select COUNT(1) from v_order_full
-//where doctor_id=$user_id and status in ('P','F') and act='CC') as total_count,
-//(select COUNT(1) from v_order_full
-//where doctor_id=$user_id and status='F' and act='CC') as finish_count";
-		//$query = $this->dbmgr->query($sql);
-		//$result = $this->dbmgr->fetch_array($query); 
-		$arr["percent"]=0;;
-		$arr["link"]="#";
+		$arr["name"]="已处理评价";
+		$sql="select (select COUNT(1) from v_order_full 
+ where doctor_id=$user_id  and hascomment='Y' and status='F') as total_count,
+(select COUNT(1) from v_order_full 
+ where doctor_id=$user_id and isnull(reply,'')<>'' and hascomment='Y' and status='F') as finish_count";
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array($query); 
+		$arr["percent"]=$result["finish_count"]/$result["total_count"]*100;;
+		$arr["percent"]=round($arr["percent"],0,2);
+		$arr["link"]=$CONFIG['rootpath']."/Order/ordercomment.php";
 		$Array[]=$arr;
 
 		//$arr=Array();

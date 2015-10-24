@@ -94,6 +94,13 @@
       <disableindetail>1</disableindetail>
     </field>
     <field>
+      <name>病例图片</name>
+      <key>memberphotolist</key>
+      <type>grid</type>
+      <api>Member/member_photo.php?action=getgrid&amp;member_id=</api>
+      <newitemurl>#</newitemurl>
+    </field>
+    <field>
       <name>备注</name>
       <key>remarks</key>
       <type>longtext</type>

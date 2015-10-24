@@ -63,7 +63,7 @@ public class VedioOrderSubmitActivity extends OrderSubmitActivity {
 
     @Override
     void ClickSubmit() {
-        VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time, StaticVar.Member.getId(),txtName.getText().toString(),txtMobile.getText().toString(),txtDescription.getText().toString());
+        VideochatOrderCreateLoader loader=new VideochatOrderCreateLoader(this,doctor.getId(),order_date,order_time, StaticVar.Member.getId(),txtName.getText().toString(),txtAge.getText().toString(),getSex(),txtDescription.getText().toString());
         loader.setCallBack(this);
         loader.start();
     }

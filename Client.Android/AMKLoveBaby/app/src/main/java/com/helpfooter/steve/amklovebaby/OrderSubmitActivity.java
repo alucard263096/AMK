@@ -26,7 +26,9 @@ public abstract class OrderSubmitActivity extends Activity implements
         IWebLoaderCallBack {
 
     ImageView btnBack;
-    EditText txtName,txtMobile,txtDescription;
+    EditText txtName,txtDescription,txtAge;
+    RadioButton rbFemale,rbMale;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +61,25 @@ public abstract class OrderSubmitActivity extends Activity implements
         ((Button)findViewById(R.id.btnSubmit)).setOnClickListener(this);
 
         txtName=(EditText)findViewById(R.id.txtName);
-        txtMobile=(EditText)findViewById(R.id.txtMobile);
+        txtAge=(EditText)findViewById(R.id.txtAge);
         txtDescription=(EditText)findViewById(R.id.txtDescription);
+        rbMale=(RadioButton)findViewById(R.id.rbMale);
+        rbFemale=(RadioButton)findViewById(R.id.rbFemale);
 
         if(StaticVar.Member!=null){
             txtName.setText(StaticVar.Member.getName());
-            txtMobile.setText(StaticVar.Member.getMobile());
+            txtAge.setText(StaticVar.Member.getAge());
+            if(StaticVar.Member.getSex()!=null||StaticVar.Member.getSex().equals("M")){
+                rbMale.setChecked(true);
+            }
         }
+    }
 
-
+    protected String getSex(){
+        if(rbMale.isChecked()){
+            return "M";
+        }
+        return "F";
     }
 
     @Override
@@ -78,8 +90,8 @@ public abstract class OrderSubmitActivity extends Activity implements
                 this.finish();
                 return;
             case R.id.btnSubmit:
-                if(txtName.getText().toString().length()<2||txtMobile.getText().toString().length()!=11){//||txtDescription.getText().toString().length()<10
-                    Toast.makeText(this, "请尽可能详细地完善你的个人资料", Toast.LENGTH_LONG).show();
+                if(txtDescription.getText().toString().length()<10){
+                    Toast.makeText(this, "请尽可能详细地完善你的描述", Toast.LENGTH_LONG).show();
                     return;
                 }else {
                     ClickSubmit();

@@ -62,6 +62,11 @@
           <name>图文咨询订单查询</name>
           <url>/Order/charorder.php</url>
         </submenu>
+        <submenu>
+          <id>ordercomment_list</id>
+          <name>客户订单评价回复</name>
+          <url>/Order/ordercomment.php</url>
+        </submenu>
       </submenus>
     </mainmenu>
     <mainmenu>

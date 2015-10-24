@@ -31,6 +31,7 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
     private static final String ARG_PARAM2 = "param2";
 
     private TextView btnCategoryH,btnCategoryP,btnCategoryF,btnCategoryE,btnCategoryV;
+    private LinearLayout udCategoryH,udCategoryP,udCategoryF,udCategoryE,udCategoryV;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -95,6 +96,13 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
         btnCategoryF =(TextView)view.findViewById(R.id.btnCategoryF);
         btnCategoryF.setOnClickListener(this);
 
+
+        udCategoryH =(LinearLayout)view.findViewById(R.id.udCategoryH);
+        udCategoryP =(LinearLayout)view.findViewById(R.id.udCategoryP);
+        udCategoryV =(LinearLayout)view.findViewById(R.id.udCategoryV);
+        udCategoryE =(LinearLayout)view.findViewById(R.id.udCategoryE);
+        udCategoryF =(LinearLayout)view.findViewById(R.id.udCategoryF);
+
         onClick(btnCategoryH);
 
     }
@@ -143,21 +151,36 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
     private void clickNewsFiler(View v) {
         String category=(String)v.getTag();
         lstLoad.FilterByCategory(category);
-        setFilterButtonWhite(btnCategoryE);
-        setFilterButtonWhite(btnCategoryF);
-        setFilterButtonWhite(btnCategoryV);
-        setFilterButtonWhite(btnCategoryH);
-        setFilterButtonWhite(btnCategoryP);
-
-        TextView btn=(TextView)v;
-        btn.setBackgroundColor(Color.parseColor("#FD7CAD"));
-        btn.setTextColor(Color.WHITE);
-
+        setFilterButtonWhite(v);
     }
 
-    private void setFilterButtonWhite(TextView btnCategory) {
-        btnCategory.setTextColor(Color.BLACK);
-        btnCategory.setBackgroundColor(Color.WHITE);
+    private void setFilterButtonWhite(View btnCategory) {
+
+
+        udCategoryH.setVisibility(View.INVISIBLE);
+        udCategoryF.setVisibility(View.INVISIBLE);
+        udCategoryV.setVisibility(View.INVISIBLE);
+        udCategoryE.setVisibility(View.INVISIBLE);
+        udCategoryP.setVisibility(View.INVISIBLE);
+
+
+        switch (btnCategory.getId()){
+            case R.id.btnCategoryE:
+                udCategoryE.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnCategoryF:
+                udCategoryF.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnCategoryV:
+                udCategoryV.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnCategoryH:
+                udCategoryH.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnCategoryP:
+                udCategoryP.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
 

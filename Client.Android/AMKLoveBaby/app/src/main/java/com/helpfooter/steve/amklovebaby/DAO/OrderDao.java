@@ -80,7 +80,7 @@ public class OrderDao extends AbstractDao {
     }
 
     @Override
-    void updateObj(AbstractObj abobj) {
+    public void updateObj(AbstractObj abobj) {
 
         util.open();
 
