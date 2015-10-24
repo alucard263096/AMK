@@ -141,8 +141,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 
 		mMyView.setZOrderOnTop(true);
 
-		anychatSDK.UserCameraControl(userID, 1);
-		anychatSDK.UserSpeakControl(userID, 1);
+		/*anychatSDK.UserCameraControl(userID, 1);
+		anychatSDK.UserSpeakControl(userID, 1);*/
 
 		// 判断是否显示本地摄像头切换图标
 		if (AnyChatCoreSDK
@@ -173,8 +173,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			adjustLocalVideo(false);
 		}
 
-		anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
-		anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
+
 
 	}
 
@@ -252,6 +251,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 				case (R.id.endCall): {
 					exitVideoDialog();
 				}
+				break;
 				case R.id.txt_videoEnd:
 					EndChat();
 
@@ -456,6 +456,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 		if (dwErrorCode == 0) {
 			myUserId=dwUserId;
 			anychatSDK.EnterRoom(booker.getId(), "");
+
 		} else {
 			Toast.makeText(this, "登录失败，errorCode：", Toast.LENGTH_LONG).show();
 		}
@@ -474,7 +475,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
 					.getHolder());
 			anychatSDK.mVideoHelper.SetVideoUser(index, userID);
-
+			anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
+			anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 			anychatSDK.UserCameraControl(userID, 1);
 			anychatSDK.UserSpeakControl(userID, 1);
 		}
@@ -493,7 +495,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
 					.getHolder());
 			anychatSDK.mVideoHelper.SetVideoUser(index, userID);
-
+			anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
+			anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 			anychatSDK.UserCameraControl(userID, 1);
 			anychatSDK.UserSpeakControl(userID, 1);
 		}
@@ -516,7 +519,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			int index = anychatSDK.mVideoHelper.bindVideo(mOtherView
 					.getHolder());
 			anychatSDK.mVideoHelper.SetVideoUser(index, dwUserId);
-
+			anychatSDK.UserCameraControl(-1, 1);// -1表示对本地视频进行控制，打开本地视频
+			anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 			anychatSDK.UserCameraControl(dwUserId, 1);
 			anychatSDK.UserSpeakControl(dwUserId, 1);
 			userID = dwUserId;

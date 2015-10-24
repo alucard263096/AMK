@@ -250,6 +250,8 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         if(v.getContentDescription().equals("IMAGE")) {
             Intent intent = new Intent(this.ctx, MemberInfoActivity.class);
             intent.putExtra("id", String.valueOf(obj.getCustid()));
+            intent.putExtra("age", String.valueOf(obj.getAge()));
+            intent.putExtra("sex", String.valueOf(obj.getSex()));
             this.ctx.startActivity(intent);
         }
         else
