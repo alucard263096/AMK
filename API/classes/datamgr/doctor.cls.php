@@ -23,10 +23,15 @@
 		
 	}
 
-	public function getDoctorComment($doctor_id){
+	public function getDoctorComment($doctor_id,$count){
 		$doctor_id=parameter_filter($doctor_id);
 		$lastcomment_date=parameter_filter($lastcomment_date);
-		$sql="select top 100 m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
+		
+		if($count==""){
+			$count=100;
+		}
+		
+		$sql="select top $count m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
 inner join tb_member m on v.member_id=m.id
 where doctor_id=$doctor_id and hascomment='Y'
 ";
