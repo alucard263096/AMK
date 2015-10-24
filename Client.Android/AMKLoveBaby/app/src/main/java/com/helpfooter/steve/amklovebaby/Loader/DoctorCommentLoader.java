@@ -17,10 +17,12 @@ import java.util.HashMap;
  */
 public class DoctorCommentLoader extends WebXmlLoader {
     int doctor_id;
-    public DoctorCommentLoader(Context ctx,int doctor_id) {
+    int count;
+    public DoctorCommentLoader(Context ctx,int doctor_id,int count) {
         super(ctx, StaticVar.DoctorCommentApi);
 
         this.doctor_id=doctor_id;
+        this.count=count;
 
 
     }
@@ -29,6 +31,7 @@ public class DoctorCommentLoader extends WebXmlLoader {
         //String url=super.getCallUrl();
         String url=StaticVar.dictHashMap.get(callApi);
         url+="?doctor_id="+String.valueOf(doctor_id);
+        url+="&count="+String.valueOf(count);
         url=url.replace("\n","%20");
         return url;
     }
@@ -44,10 +47,9 @@ public class DoctorCommentLoader extends WebXmlLoader {
             lsObj.add(obj);
         }
 
-        if(lsObj.size()>0){
+
             if(callBack!=null){
                 callBack.CallBack(lsObj);
             }
-        }
     }
 }

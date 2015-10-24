@@ -55,7 +55,7 @@ public class DoctorCommentActivity extends Activity implements View.OnClickListe
         if(hasload==false){
             PercentLinearLayout svBody=(PercentLinearLayout)findViewById(R.id.svBody);
              view=new DoctorCommentView(this,svBody);
-            DoctorCommentLoader loader=new DoctorCommentLoader(this,id);
+            DoctorCommentLoader loader=new DoctorCommentLoader(this,id,100);
             loader.setCallBack(this);
             loader.start();
             hasload=true;

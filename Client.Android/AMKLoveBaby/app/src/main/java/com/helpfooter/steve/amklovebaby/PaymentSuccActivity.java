@@ -25,6 +25,7 @@ public class PaymentSuccActivity extends Activity implements View.OnClickListene
         ((Button) findViewById(R.id.btnBack)).setOnClickListener(this);
 
         ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl + "paymentsuccess");
+        ((WebView) findViewById(R.id.txtContext)).setBackgroundColor(0);
 
 
     }

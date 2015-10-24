@@ -1,5 +1,6 @@
 package com.helpfooter.steve.amklovebaby.CustomControlView;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
@@ -44,15 +45,22 @@ public class DoctorCommentView {
     };
 
     private void realShowCommentAll(){
+        if(lstComment.size()==0){
+            MyTextView txtMemberName=new MyTextView(ctx);
+            PercentLinearLayout.LayoutParams txtMemberNameparam= ToolsUtil.getLayoutParamHeightWrap();
+            txtMemberName.setLayoutParams(txtMemberNameparam);
+            txtMemberName.setText("暂无用户评论");
+            sv.addView(txtMemberName);
+        }
         for(AbstractObj obj:lstComment){
             CommentObj comment=(CommentObj)obj;
 
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
-            param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,false);
-            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,false);
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);
+            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
+            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
             layout.setLayoutParams(param);
             layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -66,7 +74,7 @@ public class DoctorCommentView {
 
             PercentLinearLayout layoutld=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams layoutldparam= ToolsUtil.getLayoutParamHeightWrap();
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.06f,false);
+            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
             layoutld.setLayoutParams(layoutldparam);
             //layoutld.setBackgroundColor(Color.parseColor("#ccaaee"));
             layoutld.setOrientation(LinearLayout.HORIZONTAL);
@@ -76,7 +84,7 @@ public class DoctorCommentView {
             PercentLinearLayout.LayoutParams txtServiceNameparam= ToolsUtil.getLayoutParamHeightWrap();
             txtServiceNameparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
             txtService.setLayoutParams(txtServiceNameparam);
-            txtService.setText("服务态度："+String.valueOf(comment.getService()));
+            txtService.setText("服务态度:  "+String.valueOf(comment.getService()));
             txtService.setTextSize(12);
             layoutld.addView(txtService);
 
@@ -86,7 +94,7 @@ public class DoctorCommentView {
             txtAbility.setLayoutParams(txtAbilityparam);
             txtAbility.setText(ToolsUtil.earseMobileNo(comment.getMember_name()));
             txtAbility.setTextSize(12);
-            txtAbility.setText("医疗水平：" + String.valueOf(comment.getAbility()));
+            txtAbility.setText("医疗水平:  " + String.valueOf(comment.getAbility()));
             layoutld.addView(txtAbility);
 
             MyTextView txtCommentDate=new MyTextView(ctx);

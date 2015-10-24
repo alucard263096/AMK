@@ -48,7 +48,7 @@
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical" android:background="#ffffff">
 
     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
         android:layout_width="match_parent"

@@ -15,8 +15,12 @@ import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
+import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorCommentLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
@@ -24,8 +28,10 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 
-public class DoctorDetailActivity extends Activity implements View.OnClickListener {
+
+public class DoctorDetailActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
     DoctorObj doctor;
     ImageView btnBack,imgPhoto;
     TextView txtName,txtOfficeTitle,txtWorktime,txtVideoQuerycount,txtCharQuerycount,txtGeneralScore,btnVedioChat,btnCharChat;
@@ -107,7 +113,26 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
         txtExpert.setText(doctor.getExpert());
 
 
-        ((Button)findViewById(R.id.btnOpenComment)).setOnClickListener(this);
+        ((LinearLayout)findViewById(R.id.btnOpenComment)).setOnClickListener(this);
+
+        if(hasload==false){
+            PercentLinearLayout svBody=(PercentLinearLayout)findViewById(R.id.CommentList);
+            view=new DoctorCommentView(this,svBody);
+            DoctorCommentLoader loader=new DoctorCommentLoader(this,doctor.getId(),2);
+            loader.setCallBack(this);
+            loader.start();
+            hasload=true;
+        }
+
+
+    }
+    DoctorCommentView view;
+    boolean hasload=false;
+
+
+    @Override
+    public void CallBack(ArrayList<AbstractObj> lstObjs) {
+        view.showCommentAll(lstObjs);
     }
 
     private void setFollow() {

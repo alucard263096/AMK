@@ -46,7 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/svBody"
-            android:orientation="vertical">
+            android:orientation="vertical" android:background="#ffffff">
 
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     </ScrollView>

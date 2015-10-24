@@ -74,15 +74,25 @@ public class CommentObj extends AbstractObj {
     String comment_date;
     String reply;
     String reply_date;
+    String member_photo;
 
     @Override
     public void parseCursor(Cursor cursor) {
 
     }
 
+    public String getMember_photo() {
+        return member_photo;
+    }
+
+    public void setMember_photo(String member_photo) {
+        this.member_photo = member_photo;
+    }
+
     @Override
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
 
+        this.member_photo= lstRowValue.get("member_photo");
         this.member_name= lstRowValue.get("member_name");
         this.comment= lstRowValue.get("comment");
         this.comment_date= lstRowValue.get("comment_date");
