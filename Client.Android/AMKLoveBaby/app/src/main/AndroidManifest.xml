@@ -73,11 +73,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".VedioOrderSubmitActivity"
-            android:label="@string/title_activity_order"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".CharOrderSubmitActivity"
             android:label="@string/title_activity_order"
             android:screenOrientation="portrait" >
@@ -152,6 +147,26 @@
             android:name=".DoctorCommentActivity"
             android:label="@string/title_activity_doctor_comment"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".WorkDaySelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".WorkTimeSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".SexSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".PaymentTypeSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

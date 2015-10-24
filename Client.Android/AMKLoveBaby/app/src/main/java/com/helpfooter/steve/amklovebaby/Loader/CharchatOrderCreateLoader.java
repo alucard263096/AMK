@@ -31,6 +31,9 @@ public class CharchatOrderCreateLoader extends ResultLoader {
         this.name=name;
         this.age=age;
         this.sex=sex;
+        if(this.age==null||this.age.equals("")){
+            age="0";
+        }
         this.description=description;
     }
 

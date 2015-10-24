@@ -2,12 +2,14 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
+import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
+
 import java.util.HashMap;
 
 /**
  * Created by Steve on 2015/9/6.
  */
-public class WorktimeObj extends AbstractObj {
+public class WorktimeObj extends AbstractObj implements ISelectObj {
     @Override
     public void parseCursor(Cursor cursor) {
         //
@@ -37,5 +39,15 @@ public class WorktimeObj extends AbstractObj {
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {
         this.time=lstRowValue.get("time");
         this.used=lstRowValue.get("used");
+    }
+
+    @Override
+    public String DisplayName() {
+        return time;
+    }
+
+    @Override
+    public String SelectedValue() {
+        return time;
     }
 }

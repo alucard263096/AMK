@@ -35,6 +35,9 @@ public class VideochatOrderCreateLoader extends ResultLoader {
         this.member_id=member_id;
         this.name=name;
         this.age=age;
+        if(this.age==null||this.age.equals("")){
+            age="0";
+        }
         this.sex=sex;
         this.description=description;
     }
