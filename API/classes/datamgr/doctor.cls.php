@@ -31,7 +31,7 @@
 			$count=100;
 		}
 		
-		$sql="select top $count m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
+		$sql="select top $count m.photo member_photo,m.name member_name,v.service,v.ability,v.comment,v.comment_date,v.reply,v.reply_date from v_order_full v
 inner join tb_member m on v.member_id=m.id
 where doctor_id=$doctor_id and hascomment='Y'
 ";
