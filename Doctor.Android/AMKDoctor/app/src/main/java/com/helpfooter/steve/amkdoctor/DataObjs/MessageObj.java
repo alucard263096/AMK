@@ -127,7 +127,7 @@ public class MessageObj extends AbstractObj {
         this.description = lstRowValue.get("description");
         this.sendside = lstRowValue.get("sendside");
         this.member_photo = lstRowValue.get("member_photo");
-        this.sendmessage = lstRowValue.get("sendmessage");
+        //this.sendmessage = lstRowValue.get("sendmessage");
 
     }
 

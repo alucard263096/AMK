@@ -37,10 +37,13 @@ import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amkdoctor.Loader.ChatEndLoader;
+import com.helpfooter.steve.amkdoctor.Loader.ChatEndTimeLoader;
 import com.helpfooter.steve.amkdoctor.R;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWebLoaderCallBack {
@@ -89,6 +92,9 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 
 			// 如果视频流过来了，则把背景设置成透明的
 			handler.postDelayed(runnable, UPDATEVIDEOBITDELAYMILLIS);
+		//标记视频聊天开始时间
+		BookerDao newbookerDao=new BookerDao(this);
+		newbookerDao.updateBeginTime(order_id);
 
 	}
 
@@ -322,12 +328,43 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			{
 				try {
 					endloader.run();
+					BookerDao bd = new BookerDao(VideoChatActivity.this);
+					BookerObj bObj= bd.getObj(order_id);
+					int mini =getDateMins(bObj.getBegintime());
+					ChatEndTimeLoader endTimeloader=new ChatEndTimeLoader(VideoChatActivity.this,order_id,mini);
+					endTimeloader.run();
 				} catch (Exception e) {
 					Thread.currentThread().interrupt();
 					e.printStackTrace();
 				}
 			}
 		}.start();
+	}
+
+	public int getDateMins (String orderTime)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+		try {
+			Date date = sdf.parse(orderTime);// 通过日期格式的parse()方法将字符串转换成日期              Date dateBegin = sdf.parse(date2);
+			long betweenTime = System.currentTimeMillis()-date.getTime();
+			betweenTime  = betweenTime  / 1000 / 60;
+			int diffTime= (int)betweenTime;
+			if(diffTime<=0)
+			{
+				return 0;
+			}
+			else
+			{
+				return diffTime;
+
+			}
+
+		} catch(Exception e)
+		{
+		}
+		return 0;
+
 	}
 
 	@Override

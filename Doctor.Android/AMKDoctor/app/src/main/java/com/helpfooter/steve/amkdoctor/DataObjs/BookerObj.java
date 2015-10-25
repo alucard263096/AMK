@@ -31,6 +31,16 @@ public class BookerObj extends AbstractObj {
     String description;
     String age;
     String sex;
+
+    public String getBegintime() {
+        return begintime;
+    }
+
+    public void setBegintime(String begintime) {
+        this.begintime = begintime;
+    }
+
+    String begintime;
     public String getAge() {
         return age;
     }
@@ -214,6 +224,7 @@ public class BookerObj extends AbstractObj {
         setMember_photo(cursor.getString(cursor.getColumnIndex("member_photo")));
         setAge(cursor.getString(cursor.getColumnIndex("age")));
         setSex(cursor.getString(cursor.getColumnIndex("sex")));
+        setBegintime(cursor.getString(cursor.getColumnIndex("begintime")));
     }
 
     @Override
@@ -237,6 +248,7 @@ public class BookerObj extends AbstractObj {
         this.member_photo=lstRowValue.get("member_photo");
         this.age = lstRowValue.get("age");
         this.sex=lstRowValue.get("sex");
+        this.begintime=lstRowValue.get("begintime");
     }
 
 

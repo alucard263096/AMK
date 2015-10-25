@@ -22,6 +22,7 @@ public final class StaticVar {
 	public static String ChatApi="Chat";
 	public static String ChatUpdateApi="ChatUpdate";
 	public static String ChatEndApi="ChatEnd";
+	public static String ChatEndTimeApi="ChatEndTime";
 	public static String CurrentVersion="1.0.0.3";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static String VideoChatServerIp="www.myhkdoc.com";
@@ -40,6 +41,7 @@ public final class StaticVar {
 		dictHashMap.put(VersionApi,APIURL+"/version.xml");
 		dictHashMap.put(ChatUpdateApi,APIURL+"Order/charchat_update.php");
 		dictHashMap.put(ChatEndApi,APIURL+"/Order/order_finish.php");
+		dictHashMap.put(ChatEndTimeApi,APIURL+"/Order/videochat_chattime.php");
 		dictHashMap.put(VersionApi,APIURL+"versiondoctor.xml");
 	}
 

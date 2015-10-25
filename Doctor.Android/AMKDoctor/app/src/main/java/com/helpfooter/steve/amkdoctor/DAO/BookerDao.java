@@ -140,10 +140,17 @@ public class BookerDao extends AbstractDao {
 
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_booker set begintime=date('now') " +
-                " where id=? and beginttime<>'' ");
+        sql.append("update tb_booker set begintime=datetime('now', 'localtime') " +
+                " where id=? and begintime is null ");
         Object[] bindArgs = {order_Id};
-        util.execSQL(sql.toString(),bindArgs);
+
+        try {
+            util.execSQL(sql.toString(), bindArgs);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
 
         util.close();
 
