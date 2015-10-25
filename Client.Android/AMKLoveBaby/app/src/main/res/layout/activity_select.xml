@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:focusable="false"
             app:layout_widthPercent="10%"
-            android:text="选择"
+            android:text="确定"
             android:textColor="#ffffff"
             android:gravity="center"
             app:layout_marginTopPercent="20%"

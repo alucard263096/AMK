@@ -46,7 +46,7 @@ public class PaymentSuccActivity extends Activity implements View.OnClickListene
 
     private void InitData() {
         Intent intent = getIntent();
-        int order_id = 4;//intent.getIntExtra("Id", 0);
+        int order_id = intent.getIntExtra("Id", 0);
         OrderDao orderDao=new OrderDao(this);
         order=(OrderObj)orderDao.getObj(order_id);
     }

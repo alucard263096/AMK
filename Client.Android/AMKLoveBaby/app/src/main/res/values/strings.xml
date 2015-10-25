@@ -36,5 +36,6 @@
     <string name="title_activity_start">爱我宝贝</string>
     <string name="title_activity_order_comment">OrderCommentActivity</string>
     <string name="title_activity_doctor_comment">DoctorCommentActivity</string>
-    <string name="title_activity_select">SelectActivity</string>>
+    <string name="title_activity_select">SelectActivity</string>
+    <string name="title_activity_member_photo_upload">MemberPhotoUploadActivity</string>>
 </resources>

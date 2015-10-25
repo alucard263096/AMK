@@ -41,11 +41,6 @@
             android:name=".StartActivity"
             android:label="@string/title_activity_start"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -115,6 +110,11 @@
             android:name=".MemberInfoActivity"
             android:label="@string/title_activity_member_info"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CharListActivity"
@@ -151,22 +151,26 @@
         <activity
             android:name=".WorkDaySelectActivity"
             android:label="@string/title_activity_select"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".WorkTimeSelectActivity"
             android:label="@string/title_activity_select"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SexSelectActivity"
             android:label="@string/title_activity_select"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".PaymentTypeSelectActivity"
             android:label="@string/title_activity_select"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MemberPhotoUploadActivity"
+            android:label="@string/title_activity_member_photo_upload" >
         </activity>
     </application>
 

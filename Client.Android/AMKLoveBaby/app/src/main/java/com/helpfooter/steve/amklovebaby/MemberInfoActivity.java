@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
@@ -42,13 +43,17 @@ import java.util.logging.Handler;
 
 public class MemberInfoActivity extends Activity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
 
-    EditText txtName,txtMobile,txtBirth,txtHistory;
-    Button btnMale,btnFemale,btnLogout;
+    EditText txtName,txtBirth,txtHistory;
+    Button btnLogout;
+    TextView txtMobile,btnUploadPhotos;
+    TextView txtSex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_info);
+
+        MemberMgr.GetMemberInfoFromDb(this);
 
         InitUI();
         InitData();
@@ -61,7 +66,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         txtName=(EditText)findViewById(R.id.txtName);
         txtName.setOnFocusChangeListener(this);
 
-        txtMobile=(EditText)findViewById(R.id.txtMobile);
+        txtMobile=(TextView)findViewById(R.id.txtMobile);
         txtMobile.setOnFocusChangeListener(this);
 
         txtBirth=(EditText)findViewById(R.id.txtBirth);
@@ -70,15 +75,31 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         txtHistory=(EditText)findViewById(R.id.txtHistory);
         txtHistory.setOnFocusChangeListener(this);
 
-        btnMale=(Button)findViewById(R.id.btnMale);
-        btnMale.setOnClickListener(this);
-        btnFemale=(Button)findViewById(R.id.btnFemale);
-        btnFemale.setOnClickListener(this);
 
         btnLogout=(Button)findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
 
+
+        txtSex=(TextView)findViewById(R.id.txtSex);
+        txtSex.setOnClickListener(this);
+
+        btnUploadPhotos=(TextView)findViewById(R.id.btnUploadPhotos);
+        btnUploadPhotos.setOnClickListener(this);
+
+
         LoadMemberData();
+    }
+
+
+    private void setTxtSex(String value){
+        if(!value.equals("F")){
+            txtSex.setText("男");
+            txtSex.setTag("M");
+        }else {
+            txtSex.setText("女");
+            txtSex.setTag("F");
+        }
+        txtSex.setTextColor(Color.BLACK);
     }
 
     private void LoadMemberData(){
@@ -87,28 +108,19 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             txtBirth.setText(StaticVar.Member.getBirth());
             txtHistory.setText(StaticVar.Member.getHistory());
             txtMobile.setText(StaticVar.Member.getMobile());
-            setSexBtn(StaticVar.Member.getSex());
-        }
-    }
-    private void setSexBtn(String sex){
-        sex=sex.trim();
-        btnMale.setTextColor(Color.BLACK);
-        btnFemale.setTextColor(Color.BLACK);
-        btnMale.setBackgroundColor(Color.GRAY);
-        btnFemale.setBackgroundColor(Color.GRAY);
-        if(sex.equals("M")){
-            btnMale.setTextColor(Color.WHITE);
-            btnMale.setBackgroundColor(getResources().getColor(R.color.myblue));
-        }else {
-            btnFemale.setTextColor(Color.WHITE);
-            btnFemale.setBackgroundColor(getResources().getColor(R.color.myblue));
+            setTxtSex(StaticVar.Member.getSex());
         }
     }
 
+
     private void InitData() {
-        MemberLoader loader=new MemberLoader(this,StaticVar.Member.getMobile());
-        loader.setCallBack(this);
-        loader.start();
+        if(StaticVar.Member!=null){
+
+            MemberLoader loader=new MemberLoader(this,StaticVar.Member.getMobile());
+            loader.setCallBack(this);
+            loader.start();
+
+        }
     }
 
     @Override
@@ -116,21 +128,6 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.btnBack:
                 this.finish();
-                return;
-            case R.id.btnMale:
-            case R.id.btnFemale:
-                String field = "sex";
-                String value = String.valueOf(v.getTag());
-                setSexBtn(value);
-                StaticVar.Member.setSex(value);
-
-                MemberDao adao=new MemberDao(this);
-                adao.updateObj(StaticVar.Member);
-
-                MemberUpdateLoader loader=new MemberUpdateLoader(this,StaticVar.Member.id,field,value);
-                UpdateResultCallBack callBack=new UpdateResultCallBack();
-                loader.setCallBack(callBack);
-                loader.start();
                 return;
             case R.id.btnLogout:
                 MemberDao dao=new MemberDao(this);
@@ -144,6 +141,33 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
                 }
                 this.finish();
                 return;
+            case R.id.txtSex:
+                Intent intent = new Intent(this, SexSelectActivity.class);
+                startActivityForResult(intent, 2);
+                return;
+            case R.id.btnUploadPhotos:
+                Intent intenta = new Intent(this, MemberPhotoUploadActivity.class);
+                startActivityForResult(intenta, 2);
+                return;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode!=-1){
+            return;
+        }
+        String retstr=data.getStringExtra("return");
+        if(requestCode == 2){
+            setTxtSex(retstr);
+            MemberUpdateLoader loader = new MemberUpdateLoader(this, StaticVar.Member.id, "sex", retstr);
+            UpdateResultCallBack callBack = new UpdateResultCallBack();
+            loader.setCallBack(callBack);
+            loader.start();
+            StaticVar.Member.setSex(retstr);
         }
     }
 
