@@ -39,160 +39,99 @@
             android:textSize="24dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="#cccccc"></LinearLayout>
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_widthPercent="90%"
-        app:layout_marginTopPercent="2%"
-        app:layout_marginLeftPercent="5%">
-        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确认信息"
-            android:textColor="#37A4D4"
-            app:layout_heightPercent="7%"
-            android:textSize="17dp"/>
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="3px"
-            android:background="#37A4D4"
-            app:layout_widthPercent="30%" />
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#37A4D4"
-            app:layout_widthPercent="100%" />
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
 
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            app:layout_marginTopPercent="3%">
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
-                android:gravity="center"
-                android:background="@color/mylightblue"
-                android:text="支付金额"
-                android:textColor="#ffffff"/>
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:id="@+id/txtPrice"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="75%"
-                android:gravity="center"
-                android:background="#cccccc"
-                android:text=""
-                android:textColor="#ffffff"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="28%"
+            app:layout_marginLeftPercent="3%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:textSize="16dp"
+            android:text="支付金额"/>
 
 
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="支付方式"
-            android:textColor="#37A4D4"
-            app:layout_heightPercent="7%"
-            android:textSize="17dp"/>
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            app:layout_widthPercent="67%"
+            app:layout_marginRightPercent="3%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:id="@+id/txtPrice"
+            android:gravity="right"
+            android:textSize="16dp"
+            android:text="1380****000"
+            android:textColor="@color/mylightblue"
+            android:tag=""/>
+
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
-            android:layout_height="3px"
-            android:background="#37A4D4"
-            app:layout_widthPercent="30%" />
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="28%"
+            app:layout_marginLeftPercent="3%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:textSize="16dp"
+            android:text="支付方式"/>
+
+
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="#37A4D4"
-            app:layout_widthPercent="100%" />
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="67%"
+            app:layout_marginRightPercent="3%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:id="@+id/txtPaymentType"
+            android:gravity="right"
+            android:textSize="16dp"
+            android:text="请选择"
+            android:textColor="@color/mylightblue"
+            android:tag=""/>
+
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
 
 
 
-        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="7%"
-            app:layout_marginTopPercent="3%">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/alipay_logo"
-                android:scaleType="fitCenter"
-                app:layout_widthPercent="30%"
-                />
-            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                app:layout_widthPercent="60%"
-                android:text="支付宝快捷支付"/>
-            <RadioButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="left|center_vertical"
-                android:id="@+id/rbAlipay"
-                android:tag="ALIPAY"/>
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
-            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_heightPercent="7%"
-                app:layout_marginTopPercent="3%">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/weixin_logo"
-                    android:scaleType="fitCenter"
-                    app:layout_widthPercent="30%"
-                    />
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    app:layout_widthPercent="60%"
-                    android:text="微信支付"/>
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center_vertical"
-                    android:id="@+id/rbWexin"
-                    android:tag="WEIXIN"/>
-            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
-            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_heightPercent="7%"
-                app:layout_marginTopPercent="3%">
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    app:layout_widthPercent="30%"
-                    />
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    app:layout_widthPercent="60%"
-                    android:text="测试支付"/>
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left|center_vertical"
-                    android:checked="true"
-                    android:id="@+id/rbTest"
-                    android:tag="TEST"/>
-            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray"
+            android:background="@color/mylightblue"
             app:layout_marginLeftPercent="5%"
             app:layout_widthPercent="90%"
             app:layout_heightPercent="10%"
@@ -202,10 +141,6 @@
             android:textSize="16dp"
             android:text="确认支付"
             />
-
-    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
-
 
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

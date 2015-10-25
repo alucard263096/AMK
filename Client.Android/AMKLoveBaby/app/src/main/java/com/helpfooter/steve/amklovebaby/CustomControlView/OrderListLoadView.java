@@ -1,19 +1,15 @@
 package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextPaint;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
@@ -30,10 +26,8 @@ import com.helpfooter.steve.amklovebaby.OrderDetailActivity;
 import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
-import com.helpfooter.steve.amklovebaby.VedioOrderSubmitActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by scai on 2015/9/15.

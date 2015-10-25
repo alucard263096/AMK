@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="false"
-            android:text="支付结果"
+            android:text="支付成功"
             android:contentDescription="@null"
             android:textColor="#ffffff"
             app:layout_widthPercent="100%"
@@ -31,68 +31,124 @@
             android:textSize="24dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="20%"
-        app:layout_marginTopPercent="5%"
-        app:layout_marginBottomPercent="5%"
-        android:src="@drawable/success"/>
-    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="7%"
-        android:gravity="center"
-        android:text="你已经支付成功"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="#cccccc"></LinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_widthPercent="20%"
+            android:src="@drawable/success"/>
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical">
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtAct"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text="ACT"/>
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDescription"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:text="描述" />
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff">
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_marginLeftPercent="5%"
+            app:layout_marginRightPercent="5%"
+            app:layout_widthPercent="40%"
+            app:layout_marginTopPercent="2%"
+            android:background="@null"
+            android:textColor="@color/myblue"
+            android:text="立即开始" />
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_marginLeftPercent="5%"
+            app:layout_marginRightPercent="5%"
+            app:layout_widthPercent="40%"
+            app:layout_marginTopPercent="2%"
+            android:background="@null"
+            android:textColor="@color/myblue"
+            android:text="继续预约" />
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="10dp"
+        android:background="#cccccc"></LinearLayout>
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_widthPercent="90%"
-        app:layout_marginTopPercent="2%"
-        app:layout_marginLeftPercent="5%">
-    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="请仔细阅读以下条款"
-        android:textColor="#37A4D4"
-        app:layout_heightPercent="7%"
-        android:textSize="17dp"/>
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="3px"
-        android:background="#37A4D4"
-        app:layout_widthPercent="30%" />
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#37A4D4"
-        app:layout_widthPercent="100%" />
-
-     <WebView
+        android:background="#ffffff">
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginLeftPercent="2%"
+            app:layout_marginRightPercent="2%"
+            android:text="请仔细阅读预约条款"
+            android:textSize="15dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#cccccc"></LinearLayout>
+        <WebView
             android:id="@+id/txtContext"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_widthPercent="96%"
-         app:layout_heightPercent="60%"
+            app:layout_heightPercent="60%"
             app:layout_marginLeftPercent="2%"
             app:layout_marginTopPercent="5%"></WebView>
-
-
-    <Button
-        android:id="@+id/btnBack"
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/myblue"
-        app:layout_marginLeftPercent="5%"
-        app:layout_widthPercent="90%"
-        app:layout_heightPercent="10%"
-        app:layout_marginTopPercent="10%"
-        app:layout_marginBottomPercent="3%"
-        android:textColor="#ffffff"
-        android:textSize="16dp"
-        android:text="回到主页" />
-        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
+
+
+
+
+
+
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

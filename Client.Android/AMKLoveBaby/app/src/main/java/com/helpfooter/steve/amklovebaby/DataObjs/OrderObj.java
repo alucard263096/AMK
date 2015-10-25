@@ -289,6 +289,14 @@ public class OrderObj extends AbstractObj {
         }
         return "未知类型";
     }
+    public String getActPaymentSuccess() {
+        if(act.equals("VC")){
+            return "请您在指定的预约时间进入视频会诊室等待医生为你服务";
+        }else if(act.equals("CC")) {
+            return "请点击下方按钮立即开始跟医生进行图文咨询";
+        }
+        return "未知类型";
+    }
     public String getStatusName(){
         if(status.equals("T")){
             return "未付款";

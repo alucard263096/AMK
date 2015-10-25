@@ -41,11 +41,6 @@
             android:name=".StartActivity"
             android:label="@string/title_activity_start"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
@@ -70,11 +65,6 @@
         <activity
             android:name=".VideoChatOrderActivity"
             android:label="@string/title_activity_video_chat_order"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".VedioOrderSubmitActivity"
-            android:label="@string/title_activity_order"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -120,6 +110,11 @@
             android:name=".MemberInfoActivity"
             android:label="@string/title_activity_member_info"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CharListActivity"
@@ -152,6 +147,30 @@
             android:name=".DoctorCommentActivity"
             android:label="@string/title_activity_doctor_comment"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".WorkDaySelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".WorkTimeSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".SexSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".PaymentTypeSelectActivity"
+            android:label="@string/title_activity_select"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".MemberPhotoUploadActivity"
+            android:label="@string/title_activity_member_photo_upload" >
         </activity>
     </application>
 

@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.wifi.WifiConfiguration;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -36,7 +37,8 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
     OrderObj order;
     ResultObj res;
 
-    RadioButton rbAlipay,rbWexin,rbTest;
+    TextView txtPaymentType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +69,8 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
 
         ((TextView)findViewById(R.id.txtPrice)).setText(String.valueOf(order.getPrice()) + "元");
 
-        rbAlipay= ((RadioButton)findViewById(R.id.rbAlipay));
-        rbAlipay.setOnClickListener(this);
-        rbWexin= ((RadioButton)findViewById(R.id.rbWexin));
-        rbWexin.setOnClickListener(this);
-        rbTest= ((RadioButton)findViewById(R.id.rbTest));
-        rbTest.setOnClickListener(this);;
-
+        txtPaymentType=((TextView)findViewById(R.id.txtPaymentType));
+        txtPaymentType.setOnClickListener(this);
     }
 
     private void InitData() {
@@ -92,11 +89,19 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
             case R.id.btnBack:
                 this.finish();
                 return;
+            case R.id.txtPaymentType:
+                Intent intent = new Intent(this, PaymentTypeSelectActivity.class);
+                startActivityForResult(intent, 2);
+                return;
             case R.id.btnSubmit:
                 //AlipayMgr mgr=new AlipayMgr(this,order);
                 //mgr.pay(v);
 
-                String payment_type=GetSelectedPaymentType();
+                String payment_type=(String)txtPaymentType.getTag();
+                if(payment_type.length()<1){
+                    Toast.makeText(this,"请选择一种支付方式",Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(payment_type.equals("TEST")) {
                     action = "PAYMENT";
                     PaymentLoader loader = new PaymentLoader(this, order_id, StaticVar.Member.getId(), "ALIPAY");
@@ -106,32 +111,23 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                     Toast.makeText(this,"此支付方式暂未开通",Toast.LENGTH_LONG).show();
                 }
                 return;
-            case R.id.rbAlipay:
-            case R.id.rbWexin:
-            case R.id.rbTest:
-                SetSelectedPaymentType((RadioButton) v);
-                return;
         }
     }
 
-    private String GetSelectedPaymentType() {
-        if(rbAlipay.isChecked()){
-            return String.valueOf(rbAlipay.getTag());
-        }else if(rbWexin.isChecked()){
-            return String.valueOf(rbWexin.getTag());
-        }else if(rbTest.isChecked()){
-            return String.valueOf(rbTest.getTag());
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode!=-1){
+            return;
         }
-        return "";
-    }
-
-    private void SetSelectedPaymentType(RadioButton rb) {
-        rbAlipay.setChecked(false);
-        rbWexin.setChecked(false);
-        rbTest.setChecked(false);
-
-        rb.setChecked(true);
-
+        String retstr=data.getStringExtra("return");
+        String returnName=data.getStringExtra("returnName");
+        if(requestCode == 2){
+            txtPaymentType.setText(returnName);
+            txtPaymentType.setTag(retstr);
+        }
     }
 
 
@@ -158,6 +154,7 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                         return;
                     case 0:
                         Intent intent = new Intent(OrderPaymentActivity.this, PaymentSuccActivity.class);
+                        intent.putExtra("Id", order_id);
                         startActivity(intent);
                         return;
                     default:

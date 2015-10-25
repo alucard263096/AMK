@@ -20,6 +20,7 @@ public final class StaticVar {
 	public static String DoctorStatisticsApi="doctorstatistics";
 	public static String NewsApi="news";
 	public static String NewsContentApi="newscontent";
+	public static String WorkdayApi="workday";
 	public static String WorktimeApi="worktime";
 	public static String VideochatOrderCreateApi="videochatordercreate";
 	public static String CharchatOrderCreateApi="charchatordercreate";
@@ -57,6 +58,7 @@ public final class StaticVar {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");
 		dictHashMap.put(DoctorApi,APIURL+"doctor.php");
+		dictHashMap.put(WorkdayApi,APIURL+"doctor/doctor_day.php");
 		dictHashMap.put(WorktimeApi,APIURL+"doctor/doctor_worktime.php");
 		dictHashMap.put(NewsApi,APIURL+"news.php");
 		dictHashMap.put(NewsContentApi,APIURL+"news/news_get.php?news_id=");
