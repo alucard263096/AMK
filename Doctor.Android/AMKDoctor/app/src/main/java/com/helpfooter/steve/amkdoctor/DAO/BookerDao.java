@@ -24,8 +24,14 @@ public class BookerDao extends AbstractDao {
 
 
     public ArrayList<AbstractObj> getBookerList(){
-     /* return   super.getList(" status='T' order by orderdate desc,ordertime desc");*/
-        return   super.getList("");
+        return   super.getList(" status='P' order by orderdate desc,ordertime desc");
+
+    }
+
+    public ArrayList<AbstractObj> getMessageNoticeList(){
+        return   super.getList(" status='P' and sendmessage<>'1' ");
+
+        // +" and datetime(order_time,'-15 minute')<=datetime('"+ DateFormat.format("HH:MM:SS", new Date()).toString()+"','start of second')");
     }
 
     public BookerObj getObj(int bookId){
@@ -60,7 +66,8 @@ public class BookerDao extends AbstractDao {
                 "age varchar," +
                 "sex varchar," +
                 "begintime varchar," +
-                "description varchar)");
+                "description varchar,"+
+                "sendmessage varchar )");
         util.execSQL(sql.toString(), new Object[]{});
 
 
@@ -81,10 +88,10 @@ public class BookerDao extends AbstractDao {
         BookerObj obj=(BookerObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_booker (id,bookno,custid,custname,mobile,price,createtime,status,precessstatus,payment,orderdate,ordertime,doctorid,chattime,description,member_photo,sex,age" +
-                ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        sql.append("insert into tb_booker (id,bookno,custid,custname,mobile,price,createtime,status,precessstatus,payment,orderdate,ordertime,doctorid,chattime,description,member_photo,sex,age,sendmessage" +
+                ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getBookno(),obj.getCustid(), obj.getCustname(),obj.getMobile(),obj.getPrice(),obj.getCreatetime(),obj.getStatus(),obj.getPrecessstatus(),obj.getPayment()
-        , obj.getOrderdate(), obj.getOrdertime(), obj.getDoctorid(), obj.getChattime(),obj.getDescription(),obj.getMember_photo(),obj.getSex(),obj.getAge()};
+        , obj.getOrderdate(), obj.getOrdertime(), obj.getDoctorid(), obj.getChattime(),obj.getDescription(),obj.getMember_photo(),obj.getSex(),obj.getAge(),'0'};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -105,6 +112,24 @@ public class BookerDao extends AbstractDao {
 
         util.close();
 
+    }
+
+    public void updateSendMessage(BookerObj abobj) {
+
+        util.open();
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("update tb_order set sendmessage='1' where id=?");
+        Object[] bindArgs = {abobj.getId()};
+        try {
+            util.execSQL(sql.toString(), bindArgs);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+        util.close();
     }
 
     public void updateBeginTime(int order_Id)

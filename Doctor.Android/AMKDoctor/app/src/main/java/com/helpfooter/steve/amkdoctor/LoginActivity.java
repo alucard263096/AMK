@@ -162,6 +162,8 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 		intParams();
 		initView();
 		initLoginProgress();
+		Intent service = new Intent(this.getApplicationContext(),MessageService.class);
+		this.getApplicationContext().startService(service);
 		versionUpdateMgr=new VersionUpdateMgr(this);
 		versionUpdateMgr.startCheckVersion();
 

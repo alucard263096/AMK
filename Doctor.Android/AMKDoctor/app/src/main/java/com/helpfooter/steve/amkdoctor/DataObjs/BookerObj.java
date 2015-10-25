@@ -18,7 +18,7 @@ public class BookerObj extends AbstractObj {
 
 
 
-
+    String sendmessage;
     String clicktype;
     String member_photo;
     String status;
@@ -47,7 +47,13 @@ public class BookerObj extends AbstractObj {
         this.sex = sex;
     }
 
+    public String getSendmessage() {
+        return sendmessage;
+    }
 
+    public void setSendmessage(String sendmessage) {
+        this.sendmessage = sendmessage;
+    }
     @Override
     public int getId() {
         return id;

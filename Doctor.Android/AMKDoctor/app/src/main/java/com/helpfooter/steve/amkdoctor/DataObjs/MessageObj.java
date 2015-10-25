@@ -74,6 +74,33 @@ public class MessageObj extends AbstractObj {
     String last_one;
     String description;
 
+    public String getSendmessage() {
+        return sendmessage;
+    }
+
+    public void setSendmessage(String sendmessage) {
+        this.sendmessage = sendmessage;
+    }
+
+    String sendmessage;
+    public String getSendside() {
+        return sendside;
+    }
+
+    public void setSendside(String sendside) {
+        this.sendside = sendside;
+    }
+
+    public String getMember_photo() {
+        return member_photo;
+    }
+
+    public void setMember_photo(String member_photo) {
+        this.member_photo = member_photo;
+    }
+
+    String sendside;
+    String member_photo;
     @Override
     public void parseCursor(Cursor cursor) {
 
@@ -83,6 +110,9 @@ public class MessageObj extends AbstractObj {
         setCreated_time(cursor.getString(cursor.getColumnIndex("created_time")));
         setLast_one(cursor.getString(cursor.getColumnIndex("last_one")));
         setDescription(cursor.getString(cursor.getColumnIndex("description")));
+        setSendside(cursor.getString(cursor.getColumnIndex("sendside")));
+        setMember_photo(cursor.getString(cursor.getColumnIndex("member_photo")));
+        setSendmessage(cursor.getString(cursor.getColumnIndex("sendmessage")));
     }
 
     @Override
@@ -95,6 +125,10 @@ public class MessageObj extends AbstractObj {
         this.doctor_id=Integer.parseInt(lstRowValue.get("doctor_id"));
         this.last_one = lstRowValue.get("last_one");
         this.description = lstRowValue.get("description");
+        this.sendside = lstRowValue.get("sendside");
+        this.member_photo = lstRowValue.get("member_photo");
+        this.sendmessage = lstRowValue.get("sendmessage");
+
     }
 
 }
