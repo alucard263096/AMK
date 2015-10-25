@@ -154,6 +154,7 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
                         return;
                     case 0:
                         Intent intent = new Intent(OrderPaymentActivity.this, PaymentSuccActivity.class);
+                        intent.putExtra("Id", order_id);
                         startActivity(intent);
                         return;
                     default:

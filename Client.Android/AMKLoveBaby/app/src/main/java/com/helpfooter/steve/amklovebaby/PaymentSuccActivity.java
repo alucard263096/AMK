@@ -10,24 +10,45 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
+import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
 public class PaymentSuccActivity extends Activity implements View.OnClickListener {
+
+    OrderObj order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_succ);
 
-
+        InitData();
         ((Button) findViewById(R.id.btnBack)).setOnClickListener(this);
 
         ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl + "paymentsuccess");
         ((WebView) findViewById(R.id.txtContext)).setBackgroundColor(0);
 
+        ((TextView)findViewById(R.id.txtAct)).setText(order.getActName());
+        ((TextView)findViewById(R.id.txtDescription)).setText(order.getActPaymentSuccess());
 
+        if(order.getAct().equals("CC")){
+            ((Button)findViewById(R.id.btnStart)).setOnClickListener(this);
+        }else {
+            ((Button)findViewById(R.id.btnStart)).setVisibility(View.GONE);
+        }
+
+
+    }
+
+    private void InitData() {
+        Intent intent = getIntent();
+        int order_id = 4;//intent.getIntExtra("Id", 0);
+        OrderDao orderDao=new OrderDao(this);
+        order=(OrderObj)orderDao.getObj(order_id);
     }
 
     @Override
@@ -40,6 +61,15 @@ public class PaymentSuccActivity extends Activity implements View.OnClickListene
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//它可以关掉所要到的界面中间的activity
                 startActivity(intent);
                 this.finish();
+            case R.id.btnStart:
+                if(order.getAct().equals("CC")){
+                    Intent intenta = new Intent();
+                    intenta.setClass(this, ChatActivity.class);
+                    intenta.putExtra("orderId", order.getId());
+                    intenta.putExtra("tag", order.getTag());
+                    startActivity(intenta);
+                }
+                return;
         }
     }
 }
