@@ -30,9 +30,8 @@
 
 		$this->dbmgr->begin_trans();
 
-
-		$photoarr==explode(",",$photolist);
-
+		$photoarr=explode(",",$photolist);
+		//print_r($photoarr);
 		foreach($photoarr as $photo){
 			if(trim($photo)==""){
 				continue;
