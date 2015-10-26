@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.helpfooter.steve.amklovebaby.GeneralTextActivity">
+    tools:context="com.helpfooter.steve.amklovebaby.GeneralTextActivity"
+    android:background="#ffffff">
 
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
