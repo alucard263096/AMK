@@ -23,9 +23,9 @@ public class ImageShower extends Activity {
 		dialog.show();
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
-		ImageView image=(ImageView)findViewById(R.id.bigImage);
-		UrlImageLoader imgLoad = new UrlImageLoader(image, url);
-		imgLoad.start();
+//		ImageView image=(ImageView)findViewById(R.id.bigImage);
+//		UrlImageLoader imgLoad = new UrlImageLoader(image, url);
+//		imgLoad.start();
 
 		// �����رպ�dialog
 		new Handler().postDelayed(new Runnable() {

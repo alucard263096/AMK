@@ -111,7 +111,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" android:id="@+id/photolist">
+                android:background="#ffffff">
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
@@ -138,6 +138,21 @@
                     android:textColor="@color/mylightblue"
                     android:tag=""/>
 
+
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/photolist"
+                    android:columnCount="6">
+                </GridLayout>
 
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <LinearLayout

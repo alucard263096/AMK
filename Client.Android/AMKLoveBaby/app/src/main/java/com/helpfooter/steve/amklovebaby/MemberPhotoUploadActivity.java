@@ -5,6 +5,8 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -13,14 +15,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
+
+import java.util.ArrayList;
 
 
 public class MemberPhotoUploadActivity extends Activity implements View.OnClickListener {
-
+    GridLayout photolist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +37,14 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         ((TextView)findViewById(R.id.btnOK)).setOnClickListener(this);
         ((TextView)findViewById(R.id.btnCancel)).setOnClickListener(this);
         ((TextView)findViewById(R.id.txtPhotoSelect)).setOnClickListener(this);
+
+        photolist= ((GridLayout)findViewById(R.id.photolist));
+
+
+
     }
+
+    ArrayList<String> lst=new ArrayList<String>();
 
 
     @Override
@@ -78,7 +93,20 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
             cursor.close();
             if(picturePath!=null && !picturePath.isEmpty()) {
                 //this.uploadFile(picturePath,requestCode);
-                Toast.makeText(this,picturePath,Toast.LENGTH_LONG).show();
+
+                lst.add(picturePath);
+
+                ImageView imageView=new ImageView(this);
+                GridLayout.LayoutParams params=new GridLayout.LayoutParams();
+                imageView.setLayoutParams(params);
+                params.setMargins(20, 20, 20, 20);
+                params.width=100;
+                imageView.setScaleType(ImageView.ScaleType.FIT_START);
+                imageView.setAdjustViewBounds(true);
+                Bitmap bitmap= BitmapFactory.decodeFile(picturePath);
+                imageView.setImageBitmap(bitmap);
+
+                photolist.addView(imageView);
             }
         }
 
