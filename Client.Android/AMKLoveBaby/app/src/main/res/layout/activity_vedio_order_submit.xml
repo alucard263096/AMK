@@ -22,7 +22,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
             android:background="#37A4D4"
             app:layout_widthPercent="100%" />
 
-        <EditText
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtName"
@@ -171,7 +171,7 @@
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="horizontal">
-            <EditText
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtAge"
@@ -211,7 +211,7 @@
             </RadioGroup>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
-        <EditText
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
             android:inputType="textMultiLine"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.MemberPhotoLoadView;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -30,6 +31,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.MemberLoader;
+import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.loopj.android.http.AsyncHttpClient;
@@ -47,6 +49,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
     Button btnLogout;
     TextView txtMobile,btnUploadPhotos;
     TextView txtSex;
+    LinearLayout lstMemberPhotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +89,8 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         btnUploadPhotos=(TextView)findViewById(R.id.btnUploadPhotos);
         btnUploadPhotos.setOnClickListener(this);
 
+        lstMemberPhotos=(LinearLayout)findViewById(R.id.lstMemberPhotos);
+
 
         LoadMemberData();
     }
@@ -109,6 +114,10 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             txtHistory.setText(StaticVar.Member.getHistory());
             txtMobile.setText(StaticVar.Member.getMobile());
             setTxtSex(StaticVar.Member.getSex());
+
+            MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
+            loadView.LoadPhotoList();
+
         }
     }
 
@@ -119,6 +128,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             MemberLoader loader=new MemberLoader(this,StaticVar.Member.getMobile());
             loader.setCallBack(this);
             loader.start();
+
 
         }
     }
@@ -147,7 +157,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
                 return;
             case R.id.btnUploadPhotos:
                 Intent intenta = new Intent(this, MemberPhotoUploadActivity.class);
-                startActivityForResult(intenta, 2);
+                startActivityForResult(intenta, 3);
                 return;
         }
     }
@@ -168,6 +178,10 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             loader.setCallBack(callBack);
             loader.start();
             StaticVar.Member.setSex(retstr);
+        }
+        if(requestCode == 3){
+            MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
+            loadView.LoadPhotoList();
         }
     }
 

@@ -52,6 +52,12 @@ public class UrlImageLoader extends Thread {
         return  BitmapFactory.decodeFile(ALBUM_PATH+name);
     }
 
+    public static String GetImageCacheFileName(String _url){
+
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        return ALBUM_PATH+name;
+    }
+
     public static void LoadImage(ImageView _imgView,String _url){
         File f=new File(ALBUM_PATH);
         String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));

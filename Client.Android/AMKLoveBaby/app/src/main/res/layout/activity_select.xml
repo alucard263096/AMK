@@ -24,7 +24,7 @@
             android:gravity="center"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

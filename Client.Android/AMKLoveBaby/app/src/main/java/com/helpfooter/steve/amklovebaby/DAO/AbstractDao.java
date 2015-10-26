@@ -73,7 +73,14 @@ public abstract class AbstractDao {
 	}
 
 	public void deleteTable(){
-		util.execSQL("delete from "+TableName+"",new Object[]{});
+		util.execSQL("delete from " + TableName + "", new Object[]{});
+	}
+	public void deleteOne(AbstractObj obj){
+		util.execSQL("delete from "+TableName+" where id=? ",new Object[]{obj.getId()});
+	}
+
+	public void deleteOne(int id){
+		util.execSQL("delete from "+TableName+" where id=? ",new Object[]{id});
 	}
 
 	public ArrayList<AbstractObj> getList(String condition){

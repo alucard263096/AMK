@@ -15,20 +15,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberPhotoUploadMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMemberPhotoUploadCallBack;
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
+import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 import java.util.ArrayList;
 
 
-public class MemberPhotoUploadActivity extends Activity implements View.OnClickListener {
+public class MemberPhotoUploadActivity extends Activity implements View.OnClickListener,IMemberPhotoUploadCallBack {
     GridLayout photolist;
+    EditText txtTitle,txtDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,9 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         ((TextView)findViewById(R.id.btnOK)).setOnClickListener(this);
         ((TextView)findViewById(R.id.btnCancel)).setOnClickListener(this);
         ((TextView)findViewById(R.id.txtPhotoSelect)).setOnClickListener(this);
+
+        txtTitle=((EditText)findViewById(R.id.txtTitle));
+        txtDescription=((EditText)findViewById(R.id.txtDescription));
 
         photolist= ((GridLayout)findViewById(R.id.photolist));
 
@@ -53,11 +62,25 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         switch (v.getId()){
             case R.id.btnOK:
 
-                Intent intent = new Intent();
+                String title=txtTitle.getText().toString();
+                if(title.length()==0){
+                    Toast.makeText(this,"请输入病历标题",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(lst.size()==0){
+                    Toast.makeText(this,"请至少上传一张病历图片",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                MemberPhotoUploadMgr mgr=new MemberPhotoUploadMgr(this,lst);
+                mgr.setCallBack(this);
+                mgr.StartUpload();
+
+                //Intent intent = new Intent();
                 //intent.putExtra("return", currentSelect.SelectedValue());
                 //intent.putExtra("returnName", currentSelect.DisplayName());
-                setResult(RESULT_OK, intent);
-                this.finish();
+                //setResult(RESULT_OK, intent);
+                //this.finish();
                 return;
             case R.id.btnCancel:
                 this.finish();
@@ -114,4 +137,15 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
     }
 
 
+    @Override
+    public void CallBack(String ret) {
+        String title=txtTitle.getText().toString();
+        String description=txtDescription.getText().toString();
+        MemberPhotoAddLoader loader=new MemberPhotoAddLoader(this, StaticVar.Member.getId(),title,description,ret);
+        loader.start();
+
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        this.finish();
+    }
 }

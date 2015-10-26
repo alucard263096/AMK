@@ -14,7 +14,7 @@
         app:layout_heightPercent="7%"
         app:layout_widthPercent="100%"
         android:background="@color/topbar_bg">
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

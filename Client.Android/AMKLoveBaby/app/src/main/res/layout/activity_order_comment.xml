@@ -23,7 +23,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -271,7 +271,7 @@
             android:layout_height="1px"
             android:background="#37A4D4"
             app:layout_widthPercent="100%" />
-        <EditText
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="写下您对医生的真是评价，有助于我们提高服务质量"

@@ -81,6 +81,9 @@ public class MemberDao extends AbstractDao {
         MemberFollowDoctorDao memberFollowDoctorDao=new MemberFollowDoctorDao(ctx);
         memberFollowDoctorDao.deleteTable();
 
+        MemberPhotoDao memberPhotoDao=new MemberPhotoDao(ctx);
+        memberPhotoDao.deleteTable();
+
     }
 
 

@@ -25,7 +25,7 @@
             android:gravity="center"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     android:text="标题"/>
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
-                    android:id="@+id/txtName"
+                    android:id="@+id/txtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="填写病历标题"
@@ -177,7 +177,7 @@
 
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
-                    android:id="@+id/txtBirth"
+                    android:id="@+id/txtDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="请简单描述当前选择病历的说明"

@@ -21,7 +21,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 app:layout_widthPercent="20%"
                 android:gravity="center"
                 android:text="验证码"/>
-            <EditText android:id="@+id/txtVerifyCode"
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText android:id="@+id/txtVerifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入验证码或密码"
