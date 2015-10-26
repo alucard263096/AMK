@@ -56,7 +56,8 @@ public class OrderDao extends AbstractDao {
                 "service int," +
                 "ability int," +
                 "comment varchar," +
-                "tag varchar )");
+                "tag varchar,"+
+                "sendmessage varchar )");
         util.execSQL(sql.toString(), new Object[]{});
     }
 
@@ -68,12 +69,12 @@ public class OrderDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,price,act,created_time,status,process_status," +
-                "order_date,order_time,description,payment,payment_type,payment_time,tag" +
-                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                "order_date,order_time,description,payment,payment_type,payment_time,tag,sendmessage" +
+                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
                 obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
                 obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag(),
-                obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment()};
+                '0',obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment()};
         util.execSQL(sql.toString(), bindArgs);
 
         util.close();
@@ -99,6 +100,24 @@ public class OrderDao extends AbstractDao {
         util.close();
     }
 
+    public void updateSendMessage(OrderObj abobj) {
+
+        util.open();
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("update tb_order set sendmessage='1' where id=?");
+        Object[] bindArgs = {abobj.getId()};
+        try {
+            util.execSQL(sql.toString(), bindArgs);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+        util.close();
+    }
+
     @Override
     AbstractObj newRealObj() {
         return new OrderObj();
@@ -107,7 +126,8 @@ public class OrderDao extends AbstractDao {
 
 
     public ArrayList<AbstractObj> getMessageNoticeList(){
-        return   super.getList(" ");
+        return   super.getList(" status='P' and sendmessage<>'1' ");
+
         // +" and datetime(order_time,'-15 minute')<=datetime('"+ DateFormat.format("HH:MM:SS", new Date()).toString()+"','start of second')");
     }
 

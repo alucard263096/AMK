@@ -139,12 +139,17 @@ public class MessageService extends Service {
                     if(mWifi.isConnected()) {
                         MessageDao orderdao = new MessageDao(mService.getApplicationContext());
                         ArrayList<AbstractObj> arrObjs = orderdao.getNoticeOrder();
-                        String serverMessage = "";
+
                         if (arrObjs.size() > 0) {
                             for (AbstractObj arrobj : arrObjs) {
                                 MessageObj messageobj = (MessageObj) arrobj;
+                                if(messageobj.getLast_one().equals(messageobj.getSendmessage()))
+                                {
+                                    continue;
+                                }
                                 String[] arrMessage = messageobj.getLast_one().split(":");
                                 String strContent = "";
+                                String serverMessage = "";
                                 if (arrMessage.length == 3) {
                                     if (arrMessage[1].equals(StaticVar.DOCType)) {
                                         strContent = "[文件]";
@@ -155,15 +160,17 @@ public class MessageService extends Service {
                                     }
                                 }
                                 serverMessage += "医生发来消息：" + strContent;
-                                break;
+                                if (serverMessage != null && !"".equals(serverMessage)) {
+                                    //更新通知栏
+                                    messageNotification.setLatestEventInfo(MessageService.this, "新消息", serverMessage, messagePendingIntent);
+                                    messageNotificatioManager.notify(messageNotificationID, messageNotification);
+                                    //每次通知完，通知ID递增一下，避免消息覆盖掉
+                                    messageNotificationID++;
+                                    MessageDao neworderdao = new MessageDao(mService.getApplicationContext());
+                                    neworderdao.updateSendMessage(messageobj);
+                                }
                             }
-                            if (serverMessage != null && !"".equals(serverMessage)) {
-                                //更新通知栏
-                                messageNotification.setLatestEventInfo(MessageService.this, "新消息", serverMessage, messagePendingIntent);
-                                messageNotificatioManager.notify(messageNotificationID, messageNotification);
-                                //每次通知完，通知ID递增一下，避免消息覆盖掉
-                                messageNotificationID++;
-                            }
+
 
                         }
                     }
@@ -181,13 +188,23 @@ public class MessageService extends Service {
 
     public int getDateMins (String orderTime)
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date curDate    =   new    Date(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
         try {
             Date date = sdf.parse(orderTime);// 通过日期格式的parse()方法将字符串转换成日期              Date dateBegin = sdf.parse(date2);
-            long betweenTime = curDate.getTime() - date.getTime();
+            long betweenTime = date.getTime()-System.currentTimeMillis();
             betweenTime  = betweenTime  / 1000 / 60;
-            return (int)betweenTime;
+            int diffTime= (int)betweenTime;
+            if(diffTime<=0)
+            {
+                return 100;
+            }
+            else
+            {
+                return diffTime;
+
+            }
+
         } catch(Exception e)
         {
         }
@@ -218,17 +235,20 @@ public class MessageService extends Service {
 
                                 if(getDateMins(ordertime)<=15) {
                                     serverMessage += orderobj.getOrder_date() + " " + orderobj.getOrder_time();
-                                    break;
+                                    OrderDao neworderdao = new OrderDao(mService.getApplicationContext());
+                                    neworderdao.updateSendMessage(orderobj);
+                                    if (serverMessage != null && !"".equals(serverMessage)) {
+                                        //更新通知栏
+                                        messageNotification.setLatestEventInfo(MessageService.this, "新消息", "您有一个视频预约将于" + serverMessage + "开始", messagePendingIntent);
+                                        messageNotificatioManager.notify(messageNotificationID, messageNotification);
+                                        //每次通知完，通知ID递增一下，避免消息覆盖掉
+                                        messageNotificationID++;
+                                    }
+
                                 }
 
                             }
-                            if (serverMessage != null && !"".equals(serverMessage)) {
-                                //更新通知栏
-                                messageNotification.setLatestEventInfo(MessageService.this, "新消息", "您有一个视频预约将于" + serverMessage + "开始", messagePendingIntent);
-                                messageNotificatioManager.notify(messageNotificationID, messageNotification);
-                                //每次通知完，通知ID递增一下，避免消息覆盖掉
-                                messageNotificationID++;
-                            }
+
                         }
                     }
 

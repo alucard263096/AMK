@@ -36,6 +36,7 @@ public class OrderObj extends AbstractObj {
         this.comment= cursor.getString(cursor.getColumnIndex("comment"));
         this.service=cursor.getInt(cursor.getColumnIndex("service"));
         this.ability=cursor.getInt(cursor.getColumnIndex("ability"));
+
     }
 
     String order_no;
@@ -57,6 +58,9 @@ public class OrderObj extends AbstractObj {
     String payment_type;
     String payment_time;
 
+
+
+    String sendmessage;
     public String getTag() {
         return tag;
     }
@@ -72,6 +76,14 @@ public class OrderObj extends AbstractObj {
     int ability;
     String comment;
 
+
+    public String getSendmessage() {
+        return sendmessage;
+    }
+
+    public void setSendmessage(String sendmessage) {
+        this.sendmessage = sendmessage;
+    }
     public String getHascomment() {
         return hascomment;
     }

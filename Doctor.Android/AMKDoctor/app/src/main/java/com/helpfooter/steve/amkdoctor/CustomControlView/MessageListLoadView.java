@@ -122,8 +122,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-
-        String strurl= "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
+        String strurl=StaticVar.ImageFolderURL+"member/"+obj.getMember_photo();
         Log.i("doctor_photo", strurl);
         UrlImageLoader imgLoad=new UrlImageLoader(img,strurl);
         imgLoad.start();
