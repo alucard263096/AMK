@@ -106,6 +106,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         }
         txtSex.setTextColor(Color.BLACK);
     }
+    boolean hasload=false;
 
     private void LoadMemberData(){
         if(StaticVar.Member!=null){
@@ -114,9 +115,11 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             txtHistory.setText(StaticVar.Member.getHistory());
             txtMobile.setText(StaticVar.Member.getMobile());
             setTxtSex(StaticVar.Member.getSex());
-
-            MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
-            loadView.LoadPhotoList();
+            if(hasload==false){
+                MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
+                loadView.LoadPhotoList();
+                hasload=true;
+            }
 
         }
     }

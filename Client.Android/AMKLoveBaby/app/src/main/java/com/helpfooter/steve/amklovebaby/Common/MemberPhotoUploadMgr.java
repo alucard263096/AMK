@@ -91,7 +91,7 @@ public class MemberPhotoUploadMgr {
                     pd.setMax(lst.size());
                     int count=0;
                     for(String path:lst){
-                        UploadMgr mgr=new UploadMgr(ctx,path);
+                        UploadMgr mgr=new UploadMgr(ctx,path,"member");
                         mgr.StartUpload();
                         while (!mgr.IsCompleted()){
                             Thread.sleep(1000);

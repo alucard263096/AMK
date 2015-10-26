@@ -35,7 +35,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/btnReg"
             android:layout_width="wrap_content"

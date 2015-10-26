@@ -53,7 +53,15 @@ public abstract class WebXmlLoader extends Thread{
 	public WebXmlLoader(Context ctx,String defaultCallApi){
 		this.ctx=ctx;
 		this.callApi=defaultCallApi;
+		NewFailResult();
 	}
+
+	ResultFail resultFail;
+
+	public void NewFailResult(){
+		resultFail=new ResultFail();
+	}
+
 	public void setCallCode(String val){
 		callApi=val;
 	}
@@ -140,43 +148,73 @@ public abstract class WebXmlLoader extends Thread{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			getResultFailHandler.sendEmptyMessage(0);
+			if(resultFail==null){
+				ToastFail(0);
+			}else {
+				resultFail.show(0);
+			}
 		} catch (ProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			getResultFailHandler.sendEmptyMessage(1);
+			if(resultFail==null){
+				ToastFail(1);
+			}else {
+				resultFail.show(1);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			getResultFailHandler.sendEmptyMessage(2);
+			if(resultFail==null){
+				ToastFail(2);
+			}else {
+				resultFail.show(2);
+			}
 		}  catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			getResultFailHandler.sendEmptyMessage(3);
+			if(resultFail==null){
+				ToastFail(3);
+			}else {
+				resultFail.show(3);
+			}
 		}
         return is;
 	}
-	private android.os.Handler getResultFailHandler = new android.os.Handler(){
-		@Override
-		public void handleMessage(Message msg)
-		{
-			switch (msg.what){
-				case 0:
-					Toast.makeText(ctx,"网络错误，请检查链接",Toast.LENGTH_LONG).show();
-					return;
-				case 1:
-					Toast.makeText(ctx,"网络错误，请检查协议",Toast.LENGTH_LONG).show();
-					return;
-				case 2:
-					Toast.makeText(ctx,"网络错误，请检查读写",Toast.LENGTH_LONG).show();
-					return;
-				case  3:
-				default:
-					Toast.makeText(ctx,"无法连接到网络，请稍后再试",Toast.LENGTH_LONG).show();
-					return;
-			}
+	class ResultFail{
+		public void show(int error){
+				getResultFailHandler.sendEmptyMessage(error);
 		}
-	};
+
+		public android.os.Handler getResultFailHandler = new android.os.Handler(){
+			@Override
+			public void handleMessage(Message msg)
+			{
+				ToastFail(msg.what);
+			}
+		};
+
+	}
+
+	public void ToastFail(int what){
+		switch (what){
+			case 0:
+				Toast.makeText(ctx,"网络错误，请检查链接",Toast.LENGTH_LONG).show();
+				return;
+			case 1:
+				Toast.makeText(ctx,"网络错误，请检查协议",Toast.LENGTH_LONG).show();
+				return;
+			case 2:
+				Toast.makeText(ctx,"网络错误，请检查读写",Toast.LENGTH_LONG).show();
+				return;
+			case  3:
+			default:
+				Toast.makeText(ctx,"无法连接到网络，请稍后再试",Toast.LENGTH_LONG).show();
+				return;
+		}
+	}
+
+
+
 	//把工作流转换为字符串
 	public String convertStreamToString(InputStream is) {   
 		   BufferedReader reader = new BufferedReader(new InputStreamReader(is));

@@ -68,7 +68,7 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
 
         MemberPhotoDao dao=new MemberPhotoDao(ctx);
 
-        ArrayList<AbstractObj> readlist=dao.getList("");
+        ArrayList<AbstractObj> readlist=dao.getList("1=1");
 
         mainlayout.removeAllViews();
         for(AbstractObj obj:readlist){
@@ -76,6 +76,8 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
 
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+            param.topMargin=10;
+            param.bottomMargin=10;
             param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
             param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
             layout.setLayoutParams(param);

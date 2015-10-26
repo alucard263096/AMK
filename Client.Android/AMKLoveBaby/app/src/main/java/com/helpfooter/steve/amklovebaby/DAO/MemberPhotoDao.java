@@ -55,6 +55,6 @@ public class MemberPhotoDao extends AbstractDao {
 
     @Override
     AbstractObj newRealObj() {
-        return new MemberObj();
+        return new MemberPhotoObj();
     }
 }

@@ -7,6 +7,7 @@ import android.os.Environment;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.SyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.io.BufferedInputStream;
@@ -23,6 +24,7 @@ import java.net.URL;
 public class UploadMgr {
     Context ctx;
     String path;
+    String module;
 
     public String GetReturnFile() {
         return returnFile;
@@ -40,16 +42,17 @@ public class UploadMgr {
         return isSuccess;
     }
 
-    public UploadMgr(Context ctx, String path) {
+    public UploadMgr(Context ctx, String path,String module) {
         this.ctx = ctx;
         this.path = path;
+        this.module=module;
     }
 
     public  void StartUpload() {
         //异步的客户端对象
-        AsyncHttpClient client = new AsyncHttpClient();
+        SyncHttpClient client = new SyncHttpClient();
         //指定url路径
-        String url = StaticVar.UPLOADFILEURL4Member;
+        String url = StaticVar.UPLOADURL+"&module="+module;
         //封装文件上传的参数
         RequestParams params = new RequestParams();
         //根据路径创建文件

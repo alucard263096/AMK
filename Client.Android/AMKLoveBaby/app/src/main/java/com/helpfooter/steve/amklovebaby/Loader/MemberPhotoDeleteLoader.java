@@ -24,7 +24,7 @@ public class MemberPhotoDeleteLoader extends  ResultLoader {
         String url= StaticVar.dictHashMap.get(callApi);
 
             url= (url+"?member_id="+String.valueOf(member_id)
-                    +"?id="+String.valueOf(id)).replace(" ", "%20").replace("\n","%20");
+                    +"&id="+String.valueOf(id)).replace(" ", "%20").replace("\n","%20");
 
         return url;
     }

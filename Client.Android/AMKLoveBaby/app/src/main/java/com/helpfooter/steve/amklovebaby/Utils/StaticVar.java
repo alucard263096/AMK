@@ -11,6 +11,7 @@ public final class StaticVar {
 	public static String ProjectName="AMKLoveBaby";
 	public static String ImageFolderURL="http://www.myhkdoc.com/AMK/FilesServer/";
 	public static String APIURL="http://www.myhkdoc.com/AMK/API/";
+	public static String UPLOADURL="http://www.myhkdoc.com/AMK/CMS/fileupload.php?field=uploadfile";
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
 	public static  String UPLOADFILEURL4Member = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=member&field=uploadfile";
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";

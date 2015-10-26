@@ -24,6 +24,10 @@ public class MemberPhotoAddLoader extends  ResultLoader {
         this.photo=photo;
     }
 
+    public void NewFailResult(){
+        
+    }
+
 
     @Override
     public String getCallUrl() {

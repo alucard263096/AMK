@@ -142,7 +142,7 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         String title=txtTitle.getText().toString();
         String description=txtDescription.getText().toString();
         MemberPhotoAddLoader loader=new MemberPhotoAddLoader(this, StaticVar.Member.getId(),title,description,ret);
-        loader.start();
+        loader.RealRun();
 
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);

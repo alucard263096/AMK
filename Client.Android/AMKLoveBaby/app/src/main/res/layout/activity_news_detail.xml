@@ -34,7 +34,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
