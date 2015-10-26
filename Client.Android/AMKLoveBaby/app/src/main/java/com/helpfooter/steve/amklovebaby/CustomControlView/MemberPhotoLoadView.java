@@ -97,7 +97,7 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
     }
 
     private TextView getDeleteButton(MemberPhotoObj photo) {
-        TextView txt=new TextView(ctx);
+        TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParam();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.18f,true);
         param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
@@ -113,7 +113,7 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
     }
 
     private TextView getTitleText(MemberPhotoObj photo) {
-        TextView txt=new TextView(ctx);
+        TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.48f,true);
         param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);

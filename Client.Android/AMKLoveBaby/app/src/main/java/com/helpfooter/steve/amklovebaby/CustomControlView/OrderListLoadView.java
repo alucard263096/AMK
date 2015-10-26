@@ -20,6 +20,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
+import com.helpfooter.steve.amklovebaby.Interfaces.IOrderListView;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.OrderDetailActivity;
@@ -41,6 +42,8 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
     ArrayList<OrderObj> lstOrder;
     String filterstatus="";
 
+    ArrayList<TextView> filterTV=new ArrayList<TextView>();
+
     ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
 
     public OrderListLoadView(Activity ctx,PercentLinearLayout layout,ImageView imgNoOrder,TextView txtNoOrder,String status){
@@ -51,9 +54,12 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         this.txtNoOrder=txtNoOrder;
     }
 
+    public void AddFilterTV(TextView tv){
+        filterTV.add(tv);
+    }
+
     public void setfilterstatus(String status) {
         this.filterstatus = status;
-
     }
 
 
@@ -85,17 +91,9 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         i=0;
         for(OrderObj obj:lstOrder){
             try {
+                obj.LoadDoctorObj(ctx);
+                LinearLayout sublayout=getOrderLayout(obj);
                 i++;
-                LinearLayout sublayout = null;
-                if (obj.getAct().equals("VC")) {
-                    DoctorDao doctorDao=new DoctorDao(this.ctx);
-                    DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
-                    sublayout = getDoctorIntoLayout(obj, "预约通话时间:" + obj.getOrder_date() + " " + obj.getOrder_time(), String.valueOf(obj.getPrice()) + "元/20分钟");
-                }else if (obj.getAct().equals("CC")){
-                    DoctorDao doctorDao=new DoctorDao(this.ctx);
-                    DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
-                    sublayout = getDoctorIntoLayout(obj, obj.getDescription(), String.valueOf(obj.getPrice()) + "元/次");
-                }
                 if (sublayout != null) {
                     sublayout.setTag(obj);
                     sublayout.setOnClickListener(this);
@@ -109,115 +107,145 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         }
     }
 
-    private LinearLayout getDoctorIntoLayout(OrderObj obj,String orderTitle,String orderPrice) {
+    private LinearLayout getOrderLayout(IOrderListView order){
+        PercentLinearLayout fullLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams fullLayoutparam= ToolsUtil.getLayoutParamHeightWrap();
+        fullLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+        fullLayout.setOrientation(LinearLayout.VERTICAL);
+        fullLayout.setLayoutParams(fullLayoutparam);
 
-        DoctorDao doctorDao=new DoctorDao(this.ctx);
-        DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.valueOf(obj.getTag()));
+
+
 
         PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,false);
-        param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.topMargin=20;
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+        mainLayout.setLayoutParams(param);
+
+        LinearLayout leftLayout=getLeftLayout(order);
+        mainLayout.addView(leftLayout);
+
+
+        LinearLayout rightLayout=getRightLayout(order);
+        mainLayout.addView(rightLayout);
+
+        fullLayout.addView(mainLayout);
+        LinearLayout line=ToolsUtil.GenPLine(ctx);
+        fullLayout.addView(line);
+        return fullLayout;
+    }
+
+    private LinearLayout getRightLayout(IOrderListView order) {
+        PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.75f,true);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
         mainLayout.setLayoutParams(param);
-        //mainLayout.setBackgroundColor(Color.RED);
 
-        PercentLinearLayout titleLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams titleparam= ToolsUtil.getLayoutParam();
-        titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,false);
-        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);;
-        titleparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        titleLayout.setLayoutParams(titleparam);
-        titleLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        MyTextView txtDoctorName=new MyTextView(this.ctx);
-        txtDoctorName.setText(doctor.getName());
-        TextPaint tp= txtDoctorName.getPaint();
-        tp.setFakeBoldText(true);
-        txtDoctorName.setTextSize(17);
+        TextView txtTitle=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtTitleparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtTitle.setLayoutParams(txtTitleparam);
+        txtTitle.setTextSize(17);
+        txtTitle.setText(order.OrderTitle());
+        mainLayout.addView(txtTitle);
 
 
-        MyTextView txtAct = new MyTextView(this.ctx);
-        txtAct.setText("/"+obj.getActName());
-        txtAct.setTextSize(17);
+        TextView txtPrice=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtPriceparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtPrice.setLayoutParams(txtPriceparam);
+        txtPrice.setTextSize(14);
+        txtPrice.setText("预约价格: " + order.OrderPrice());
+        mainLayout.addView(txtPrice);
 
-        MyTextView txtOrderNo = new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams txtOrderNoparam= ToolsUtil.getLayoutParam();
-        txtOrderNo.setLayoutParams(txtOrderNoparam);
-        txtOrderNo.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
-        txtOrderNo.setTextColor(Color.parseColor("#FD7CAD"));
-        txtOrderNo.setText("未评论");
 
-        titleLayout.addView(txtDoctorName);
-        titleLayout.addView(txtAct);
-        if(obj.getStatus().equals("F")&&!obj.getHascomment().equals("Y")){
-            titleLayout.addView(txtOrderNo);
+
+        TextView txtBooking=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtBookingparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtBooking.setLayoutParams(txtBookingparam);
+        txtBooking.setText("预约时间: " + order.OrderBookingTime());
+        mainLayout.addView(txtBooking);
+
+        if(!order.OrderTips().isEmpty()) {
+            TextView txtTips = new MyTextView(ctx);
+            PercentLinearLayout.LayoutParams txtTipsparam = ToolsUtil.getLayoutParamHeightWrap();
+            txtTips.setLayoutParams(txtTipsparam);
+            txtTips.setTextColor(Color.RED);
+            txtTips.setGravity(Gravity.RIGHT);
+            txtTips.setText(order.OrderTips());
+            mainLayout.addView(txtTips);
         }
-        titleLayout.setGravity(Gravity.CENTER_VERTICAL);
-
-
-
-        PercentLinearLayout detailLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams detailparam= ToolsUtil.getLayoutParam();
-        detailparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,false);
-        detailparam.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,false);
-        detailparam.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,false);
-        detailparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);;
-        detailparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        detailLayout.setLayoutParams(detailparam);
-        detailLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        ImageView doctorPhoto=new ImageView(this.ctx);
-        //doctorPhoto.setBackgroundColor(Color.YELLOW);
-        PercentLinearLayout.LayoutParams doctorPhotoparam= ToolsUtil.getLayoutParam();
-        doctorPhotoparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
-        doctorPhoto.setLayoutParams(doctorPhotoparam);
-        detailLayout.addView(doctorPhoto);
-        doctorPhoto.setScaleType(ImageView.ScaleType.FIT_START);
-        UrlImageLoader imageLoader=new UrlImageLoader(doctorPhoto, StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto());
-        imageLoader.start();
-
-        PercentLinearLayout dcLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams dcparam= ToolsUtil.getLayoutParam();
-        //dcparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.005f,true);
-        dcLayout.setLayoutParams(dcparam);
-        dcLayout.setOrientation(LinearLayout.VERTICAL);
-        MyTextView txtOrderTime=new MyTextView(this.ctx);
-        txtOrderTime.setText(orderTitle);
-        txtOrderTime.setTextSize(16);
-        dcLayout.addView(txtOrderTime);
-
-        MyTextView txtPrice=new MyTextView(this.ctx);
-        txtPrice.setText(orderPrice);
-        txtPrice.setTextSize(15);
-        txtPrice.setTextColor(this.ctx.getResources().getColor(R.color.mydeepblue));
-        dcLayout.addView(txtPrice);
-
-        MyTextView txtOrderCreatedTime=new MyTextView(this.ctx);
-        txtOrderCreatedTime.setText("订单时间:" + obj.getCreated_time());
-        txtOrderCreatedTime.setTextColor(Color.GRAY);
-        txtOrderCreatedTime.setTextSize(12);
-        dcLayout.addView(txtOrderCreatedTime);
-
-        detailLayout.addView(dcLayout);
-
-
-        mainLayout.addView(titleLayout);
-        mainLayout.addView(ToolsUtil.GenPLine(ctx));
-        mainLayout.addView(detailLayout);
-        mainLayout.addView(ToolsUtil.GenPLine(ctx));
-
-
-
         return mainLayout;
     }
 
+    private LinearLayout getLeftLayout(IOrderListView order) {
+
+        PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.21f,true);
+        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        mainLayout.setLayoutParams(param);
+
+        ImageView img=new ImageView(ctx);
+        PercentLinearLayout.LayoutParams imgparam= ToolsUtil.getLayoutParamHeightWrap();
+        img.setAdjustViewBounds(true);
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        img.setLayoutParams(imgparam);
+        String url=order.GetPhotoUrl();
+        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
+        imageLoader.start();
+
+        TextView txt=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();
+        txt.setLayoutParams(txtparam);
+        txt.setGravity(Gravity.CENTER);
+        txt.setText(order.PhotoName());
+
+        mainLayout.addView(img);
+        mainLayout.addView(txt);
+        return mainLayout;
+    }
+    private Handler ccaHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            for(TextView tv:filterTV){
+                GetOrderCount(tv);
+            }
+        }
+    };
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
         OrderDao dao=new OrderDao(this.ctx);
         lstOrder=dao.getOrderList();
         onloadAllHandler.sendEmptyMessage(0);
+        ccaHandler.sendEmptyMessage(0);
+    }
+
+    public void GetOrderCount(TextView tv){
+        int count=0;
+        boolean haveNotice=false;
+        String filter=String.valueOf(tv.getTag());
+        for(LinearLayout lt:lstLayout){
+            IOrderListView obj=(IOrderListView)lt.getTag();
+            if(filter.equals(obj.GetStatus())){
+                count++;
+            }
+
+             if(!obj.OrderTips().isEmpty()){
+                 haveNotice=true;
+             }
+        }
+        String tvStr=tv.getText().toString();
+        String ret=tvStr+"("+String.valueOf(count)+")";
+        tv.setText(ret);
+//        if(haveNotice){
+//            tv.setTextColor(Color.RED);
+//        }
     }
 
     public void Filter(String filter) {

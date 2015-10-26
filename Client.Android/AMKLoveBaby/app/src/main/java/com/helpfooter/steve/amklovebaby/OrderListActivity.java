@@ -68,6 +68,9 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         ((TextView) findViewById(R.id.btnShowAll)).setOnClickListener(this);
         if(hasloader==false){
         orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),(ImageView)findViewById(R.id.imgNoOrder),(TextView)findViewById(R.id.txtNoOrder),"P");
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowFinished)));
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowOrdered)));
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowWaitpayment)));
         orderListLoadView.LoadList();
             hasloader=true;
         }
