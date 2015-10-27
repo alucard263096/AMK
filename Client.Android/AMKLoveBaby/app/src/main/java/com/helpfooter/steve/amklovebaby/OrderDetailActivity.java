@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderDetailLoadView;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
@@ -53,11 +54,18 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
     }
 
     private void InitUI() {
+
+        order.LoadDoctorObj(this);
+
+        String url = StaticVar.ImageFolderURL + "doctor/" + order.getDoctor().getPhoto();
+        UrlImageLoader urlImageLoader = new UrlImageLoader(((ImageView) findViewById(R.id.imgPhoto)), url);
+        urlImageLoader.start();
+
         ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());
         ((TextView) findViewById(R.id.txtPrice)).setText(order.OrderPrice());
-        if(order.equals("VC")){
+        if (order.equals("VC")) {
             ((TextView) findViewById(R.id.txtBookingTime)).setText(order.OrderBookingTime());
-        }else {
+        } else {
             ((TextView) findViewById(R.id.txtBookingTime)).setVisibility(View.GONE);
         }
         ((TextView) findViewById(R.id.txtStatusName)).setText(order.getStatusName());
@@ -66,14 +74,13 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
         ((TextView) findViewById(R.id.txtCreatedTime)).setText(order.getCreated_time());
 
 
-
         ((TextView) findViewById(R.id.txtMemberName)).setText(order.getName());
         ((TextView) findViewById(R.id.txtMemberMobile)).setText(order.getMobile());
         ((TextView) findViewById(R.id.txtMemberAge)).setText(order.getAge());
         ((TextView) findViewById(R.id.txtMemberSex)).setText(order.getSexName());
-        ((TextView) findViewById(R.id.txtActName)).setText(order.getDescription());
+        ((TextView) findViewById(R.id.txtMemberDescription)).setText(order.getDescription());
 
-        OrderDetailLoadView orderDetailLoadView=new OrderDetailLoadView(this,order);
+        OrderDetailLoadView orderDetailLoadView = new OrderDetailLoadView(this, order);
         orderDetailLoadView.AddSetOrderNext();
     }
     private android.os.Handler uiInitHandler = new android.os.Handler() {

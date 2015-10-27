@@ -59,7 +59,7 @@
                 app:layout_widthPercent="27%"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
-                android:background="@drawable/index_1"/>
+                android:src="@drawable/index_1"/>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

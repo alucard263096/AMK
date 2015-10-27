@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.helpfooter.steve.amklovebaby.OrderCommentActivity"
-    android:orientation="vertical">
+    android:orientation="vertical" android:background="#ffffff">
 
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -43,73 +43,47 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="20%"
-        app:layout_marginTopPercent="2%"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="19px"
+        android:paddingBottom="19px" android:background="#ffffff">
         <ImageView
             android:id="@+id/imgPhoto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_widthPercent="30%"
-            app:layout_marginLeftPercent="5%"
-            android:src="@drawable/doctor_demo"/>
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            app:layout_marginLeftPercent="3%"
+            android:src="@drawable/doctor_demo" />
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_widthPercent="58%"
+            app:layout_widthPercent="63%"
             app:layout_marginLeftPercent="2%"
-            app:layout_marginRightPercent="5%">
-            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            app:layout_marginRightPercent="2%">
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_heightPercent="40%"
-                app:layout_widthPercent="100%">
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:id="@+id/txtName"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="医生姓名"
-                    android:gravity="center_vertical"
-                    app:layout_textSizePercent="50%"
-                    app:layout_widthPercent="60%"/>
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                    android:id="@+id/btnFollow"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="+关注"
-                    android:gravity="center"
-                    android:background="#37A4D4"
-                    android:textColor="#ffffff"
-                    app:layout_textSizePercent="20%"
-                    app:layout_widthPercent="30%"
-                    app:layout_marginTopPercent="20%"
-                    app:layout_marginBottomPercent="40%"
-                    app:layout_marginLeftPercent="10%"
-                    app:layout_marginRightPercent="10%"/>
-            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                android:layout_height="wrap_content"
+                android:text="医生姓名"
+                android:textSize="17dp"
+                android:gravity="center_vertical"/>
             <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:id="@+id/txtOfficeTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                app:layout_textSizePercent="15%"
-                app:layout_widthPercent="100%"
-                app:layout_heightPercent="20%"
                 android:text="科室/职称"
                 android:autoText="false"
                 android:elegantTextHeight="false"
                 android:gravity="center_vertical" />
             <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                 android:id="@+id/txtOpenHour"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="false"
-                app:layout_textSizePercent="10%"
-                app:layout_widthPercent="100%"
-                app:layout_heightPercent="20%"
                 android:text="坐诊时间:XXXXXX"
                 android:autoText="false"
                 android:elegantTextHeight="false"
@@ -120,40 +94,41 @@
                 android:background="#37A4D4"></LinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layout_heightPercent="20%"
-                app:layout_widthPercent="100%">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:id="@+id/txtCharQueryCount"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="XXX人咨询"
                     android:gravity="bottom"
-                    app:layout_textSizePercent="40%"
+                    android:textSize="10dp"
                     app:layout_widthPercent="40%"/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:id="@+id/txtVideoQueryCount"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="XXX人咨询"
                     android:gravity="bottom"
-                    app:layout_textSizePercent="40%"
+                    android:textSize="10dp"
                     app:layout_widthPercent="40%"/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:id="@+id/txtGeneralScore"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="X分"
                     android:gravity="bottom"
-                    app:layout_textSizePercent="40%"
                     app:layout_widthPercent="20%"
+                    android:textSize="10dp"
                     android:textColor="@color/topbar_bg"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#cccccc"></LinearLayout>
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"

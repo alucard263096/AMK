@@ -80,12 +80,12 @@ public class OrderCommentActivity extends Activity implements View.OnClickListen
         txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
 
 
-        btnFollow=(TextView)findViewById(R.id.btnFollow);
-        if(StaticVar.Member!=null){
-            MemberFollowDoctorDao followdao=new MemberFollowDoctorDao(this);
-            hasFollow=followdao.hasFollow(doctor.getId());
-            setFollow();
-        }
+//        btnFollow=(TextView)findViewById(R.id.btnFollow);
+//        if(StaticVar.Member!=null){
+//            MemberFollowDoctorDao followdao=new MemberFollowDoctorDao(this);
+//            hasFollow=followdao.hasFollow(doctor.getId());
+//            setFollow();
+//        }
 
         rbService=(RatingBar)findViewById(R.id.rbService);
         rbAbility=(RatingBar)findViewById(R.id.rbAbility);

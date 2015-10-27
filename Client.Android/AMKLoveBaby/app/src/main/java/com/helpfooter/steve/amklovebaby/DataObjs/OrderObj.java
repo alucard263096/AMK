@@ -356,6 +356,10 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         return "未知类型";
     }
 
+    public DoctorObj getDoctor() {
+        return doctor;
+    }
+
     DoctorObj doctor;
     public void LoadDoctorObj(Activity ctx){
         DoctorDao dao=new DoctorDao(ctx);
