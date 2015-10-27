@@ -53,15 +53,27 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
     }
 
     private void InitUI() {
+        ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());
+        ((TextView) findViewById(R.id.txtPrice)).setText(order.OrderPrice());
+        if(order.equals("VC")){
+            ((TextView) findViewById(R.id.txtBookingTime)).setText(order.OrderBookingTime());
+        }else {
+            ((TextView) findViewById(R.id.txtBookingTime)).setVisibility(View.GONE);
+        }
+        ((TextView) findViewById(R.id.txtStatusName)).setText(order.getStatusName());
+
         ((TextView) findViewById(R.id.txtOrderNo)).setText(order.getOrder_no());
-        ((TextView) findViewById(R.id.txtName)).setText(order.getName());
-        ((TextView) findViewById(R.id.txtMobile)).setText(order.getMobile());
-        ((TextView) findViewById(R.id.txtPrice)).setText(String.valueOf(order.getPrice())+"元");
-        ((TextView) findViewById(R.id.txtAct)).setText(order.getActName());
-        ((TextView) findViewById(R.id.txtStatus)).setText(order.getStatusName());
+        ((TextView) findViewById(R.id.txtCreatedTime)).setText(order.getCreated_time());
+
+
+
+        ((TextView) findViewById(R.id.txtMemberName)).setText(order.getName());
+        ((TextView) findViewById(R.id.txtMemberMobile)).setText(order.getMobile());
+        ((TextView) findViewById(R.id.txtMemberAge)).setText(order.getAge());
+        ((TextView) findViewById(R.id.txtMemberSex)).setText(order.getSexName());
+        ((TextView) findViewById(R.id.txtActName)).setText(order.getDescription());
 
         OrderDetailLoadView orderDetailLoadView=new OrderDetailLoadView(this,order);
-        orderDetailLoadView.AddOrderDetailMsg();
         orderDetailLoadView.AddSetOrderNext();
     }
     private android.os.Handler uiInitHandler = new android.os.Handler() {

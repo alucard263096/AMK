@@ -40,7 +40,9 @@ public class OrderDao extends AbstractDao {
                 "guid varchar," +
                 "member_id int," +
                 "name varchar," +
-                "mobile int," +
+                "mobile varchar," +
+                "age varchar," +
+                "sex varchar," +
                 "price int," +
                 "act varchar," +
                 "created_time varchar," +
@@ -68,10 +70,10 @@ public class OrderDao extends AbstractDao {
         OrderObj obj=(OrderObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,price,act,created_time,status,process_status," +
+        sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,sex,age,price,act,created_time,status,process_status," +
                 "order_date,order_time,description,payment,payment_type,payment_time,tag,sendmessage" +
-                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
+                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),obj.getAge(),obj.getSex(),
                 obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
                 obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag(),
                 '0',obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment()};
@@ -88,10 +90,10 @@ public class OrderDao extends AbstractDao {
         OrderObj obj=(OrderObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_order set order_no=?,guid=?,member_id=?,name=?,mobile=?,price=?,act=?,created_time=?,status=?,process_status=?," +
+        sql.append("update tb_order set order_no=?,guid=?,member_id=?,name=?,mobile=?,age=?,sex=?,price=?,act=?,created_time=?,status=?,process_status=?," +
                 "order_date=?,order_time=?,description=?,payment=?,payment_type=?,payment_time=?,tag=?" +
                 ",hascomment=?,service=?,ability=?,comment=? where id=?");
-        Object[] bindArgs = {obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
+        Object[] bindArgs = {obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),obj.getAge(),obj.getSex(),
                 obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
                 obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag()
                 ,obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment(), obj.getId()};

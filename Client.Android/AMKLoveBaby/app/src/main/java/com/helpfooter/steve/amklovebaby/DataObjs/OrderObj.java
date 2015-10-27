@@ -15,6 +15,7 @@ import java.util.HashMap;
  */
 public class OrderObj extends AbstractObj implements IOrderListView {
 
+
     @Override
     public void parseCursor(Cursor cursor) {
         this.id=cursor.getInt(cursor.getColumnIndex("id"));
@@ -23,6 +24,8 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         this.member_id=cursor.getInt(cursor.getColumnIndex("member_id"));
         this.name= cursor.getString(cursor.getColumnIndex("name"));
         this.mobile= cursor.getString(cursor.getColumnIndex("mobile"));
+        this.age= cursor.getString(cursor.getColumnIndex("age"));
+        this.sex= cursor.getString(cursor.getColumnIndex("sex"));
         this.price=cursor.getInt(cursor.getColumnIndex("price"));
         this.act= cursor.getString(cursor.getColumnIndex("act"));
         this.created_time= cursor.getString(cursor.getColumnIndex("created_time"));
@@ -62,7 +65,24 @@ public class OrderObj extends AbstractObj implements IOrderListView {
     String payment_type;
     String payment_time;
 
+    String age;
+    String sex;
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     String sendmessage;
     public String getTag() {
@@ -128,6 +148,8 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         this.member_id=Integer.parseInt(lstRowValue.get("member_id"));
         this.name= lstRowValue.get("name");
         this.mobile= lstRowValue.get("mobile");
+        this.age= lstRowValue.get("age");
+        this.sex= lstRowValue.get("sex");
         this.price=Integer.parseInt(lstRowValue.get("price"));
         //this.discount=Integer.parseInt(lstRowValue.get("discount"));
         this.act= lstRowValue.get("act");
@@ -396,5 +418,12 @@ public class OrderObj extends AbstractObj implements IOrderListView {
     @Override
     public String GetStatus() {
         return getStatus();
+    }
+
+    public String getSexName() {
+        if(sex!=null&&sex.equals("M")){
+            return "男";
+        }
+        return "女";
     }
 }
