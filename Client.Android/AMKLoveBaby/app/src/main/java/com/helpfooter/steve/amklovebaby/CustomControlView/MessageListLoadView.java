@@ -142,8 +142,10 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         ImageView img=new ImageView(this.ctx);
         //img.setBackgroundColor(Color.parseColor("#ccaacc"));
         img.setScaleType(ImageView.ScaleType.FIT_START);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        img.setAdjustViewBounds(true);
+        img.setBackgroundColor(Color.parseColor("#aaeecc"));
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,true);
         img.setLayoutParams(param);
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
 
@@ -207,9 +209,10 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
     public LinearLayout getInfoLayout(MessageObj message,DoctorObj doctor){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
+        //layout.setBackgroundColor(Color.parseColor("#ccaaee"));
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.76f,true);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.82f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
 
@@ -248,7 +251,6 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
          PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParamHeightWrap();
-        buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
 
         tipsLayout.setLayoutParams(buttonparam);
         tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -259,7 +261,6 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParamHeightWrap();
         nameparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
         //  nameparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
-        nameparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,true);
         nameparam.gravity=Gravity.LEFT;
         TextView txtName = new MyTextView(this.ctx);
 
