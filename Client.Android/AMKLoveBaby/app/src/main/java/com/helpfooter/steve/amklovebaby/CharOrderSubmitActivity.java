@@ -44,13 +44,23 @@ public class CharOrderSubmitActivity extends Activity  implements View.OnClickLi
         setContentView(R.layout.activity_order_submit);
 
         //MemberMgr.GetMemberInfoFromDb(this);
-
+		
         if(MemberMgr.CheckIsLogin(this)) {
             InitData();
             InitUI();
         }
 
     }
+        @Override
+        protected void onResume() {
+            super.onResume();
+            if (StaticVar.Member == null) {
+                this.finish();
+                return;
+            }
+            InitData();
+            InitUI();
+        }
 
     private void InitUI() {
         btnBack = (ImageView) findViewById(R.id.btnBack);

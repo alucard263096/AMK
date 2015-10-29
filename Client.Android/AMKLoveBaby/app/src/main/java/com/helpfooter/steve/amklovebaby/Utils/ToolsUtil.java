@@ -69,6 +69,13 @@ public class ToolsUtil {
         param.mPercentLayoutInfo = layoutinfo;
         return param;
     }
+    public static PercentLinearLayout.LayoutParams getLayoutParamWidthHeightWrap() {
+        PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        param.mPercentLayoutInfo = layoutinfo;
+        return param;
+    }
 
     public static LinearLayout GenPLine(Context ctx) {
 
