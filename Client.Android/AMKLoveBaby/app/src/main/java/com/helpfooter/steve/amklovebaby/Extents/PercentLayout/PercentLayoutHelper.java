@@ -654,6 +654,7 @@ public class PercentLayoutHelper
     private static boolean shouldHandleMeasuredHeightTooSmall(View view, PercentLayoutInfo info)
     {
         int state = ViewCompat.getMeasuredHeightAndState(view) & ViewCompat.MEASURED_STATE_MASK;
+
         return state == ViewCompat.MEASURED_STATE_TOO_SMALL && info.heightPercent.percent >= 0 &&
                 info.mPreservedParams.height == ViewGroup.LayoutParams.WRAP_CONTENT;
     }

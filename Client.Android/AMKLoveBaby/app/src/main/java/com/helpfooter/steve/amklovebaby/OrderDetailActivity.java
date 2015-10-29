@@ -63,7 +63,7 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
 
         ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());
         ((TextView) findViewById(R.id.txtPrice)).setText(order.OrderPrice());
-        if (order.equals("VC")) {
+        if (order.getAct().equals("VC")) {
             ((TextView) findViewById(R.id.txtBookingTime)).setText(order.OrderBookingTime());
         } else {
             ((TextView) findViewById(R.id.txtBookingTime)).setVisibility(View.GONE);

@@ -218,6 +218,8 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
 
         TextView txtContent=new MyTextView(this.ctx);
+        //txtContent.setBackgroundColor(Color.parseColor("#cceedd"));
+        //txtContent.setTextColor(Color.BLACK);
         PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParamHeightWrap();
         upvoteparam.gravity=Gravity.BOTTOM;
         txtContent.setLayoutParams(upvoteparam);
@@ -248,7 +250,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         }
         txtContent.setText(strContent);
         txtContent.setTextSize(14);
-
+        txtContent.setTextColor(Color.parseColor("#909090"));
          PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
         PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParamHeightWrap();
 
@@ -265,6 +267,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         TextView txtName = new MyTextView(this.ctx);
 
         txtName.setTextSize(15);
+        txtName.setTextColor(Color.parseColor("#909090"));
         txtName.setGravity(Gravity.LEFT);
         txtName.setLayoutParams(nameparam);
         txtName.setText(doctor.getName());

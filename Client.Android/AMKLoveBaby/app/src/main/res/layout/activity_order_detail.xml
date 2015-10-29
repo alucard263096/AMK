@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.helpfooter.steve.amklovebaby.OrderDetailActivity">
 
+
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,6 +40,9 @@
             android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +63,7 @@
                 app:layout_widthPercent="27%"
                 android:scaleType="fitStart"
                 android:adjustViewBounds="true"
-                android:src="@drawable/index_1"/>
+                android:src="@drawable/babylogo"/>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -373,7 +377,7 @@
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
-
+    </ScrollView>
 
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
