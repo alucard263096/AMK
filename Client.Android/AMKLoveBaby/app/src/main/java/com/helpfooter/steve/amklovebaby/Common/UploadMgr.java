@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Environment;
 
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.SyncHttpClient;
@@ -74,6 +75,9 @@ public class UploadMgr {
                     if (arrResult != null && arrResult.length == 3) {
                         String filename = arrResult[2];
                         returnFile = filename;
+                        String url=StaticVar.ImageFolderURL+module+"/"+filename;
+                        String cacheurl=UrlImageLoader.GetImageCacheFileName(url);
+                        ToolsUtil.copyFile(path,cacheurl);
                         isSuccess = true;
                     }
                     isCompleted = true;

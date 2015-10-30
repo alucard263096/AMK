@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.ChatListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
@@ -175,7 +176,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         }.start();
     }
 
-    private void uploadFile(String path,int fileType)
+    private void uploadFile(final String path,int fileType)
     {
         //获取上传文件的路径
 
@@ -209,6 +210,10 @@ public class ChatActivity extends Activity implements View.OnClickListener {
                                  String[] arrResult = result.split("\\|");
                                  if (arrResult != null && arrResult.length == 3) {
                                      String filename = arrResult[2];
+
+                                     String url=StaticVar.ImageFolderURL+"charchat/"+filename;
+                                     String cacheurl= UrlImageLoader.GetImageCacheFileName(url);
+                                     ToolsUtil.copyFile(path,cacheurl);
                                      SendMessage(StaticVar.IMGType, filename);
                                  }
                              }
