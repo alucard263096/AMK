@@ -227,7 +227,7 @@ where doctor_id=$doctor_id and hascomment='Y'
 		$lastday=date("Y-m-d", strtotime("+14 days", strtotime($today)));
 
 		$ret=array();
-		for($i=0;$i<30;$i++){
+		for($i=0;$i<14;$i++){
 			$today=date("Y-m-d", strtotime("+1 days", strtotime($today)));
 			$s=array();
 			$s[0]=$today;
