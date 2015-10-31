@@ -23,7 +23,7 @@ public class MessageDao extends AbstractDao {
 
 
     public ArrayList<AbstractObj> getNoticeOrder(){
-        return   super.getList("sendside='D' ");
+        return   super.getList("sendside='D' and last_one<>sendmessage ");
 
     }
 
@@ -78,7 +78,8 @@ public class MessageDao extends AbstractDao {
         }
         catch (Exception ex)
         {
-            throw ex;
+            ex.printStackTrace();
+            //throw ex;
         }
 
         util.close();

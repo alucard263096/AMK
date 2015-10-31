@@ -26,22 +26,18 @@ public class MessageLoader extends WebXmlLoader {
 
 	@Override
 	public void doXml(ArrayList<HashMap<String,String>> lstRows) {
-		String updatedate="";
-		ArrayList<AbstractObj> lsObj=new ArrayList<AbstractObj>();
-		for(HashMap<String,String> cols:lstRows){
-			MessageObj obj=new MessageObj();
+		String updatedate = "";
+		ArrayList<AbstractObj> lsObj = new ArrayList<AbstractObj>();
+		for (HashMap<String, String> cols : lstRows) {
+			MessageObj obj = new MessageObj();
 			obj.parseXmlDataTable(cols);
 			lsObj.add(obj);
 		}
-		if(lsObj.size()>0){
-			MessageDao dao=new MessageDao(ctx);
-			dao.deleteTable();
-			dao.batchUpdate(lsObj);
-			if(callBack!=null){
-				callBack.CallBack(lsObj);
-			}
-	        ParamsDao paramdao=new ParamsDao(this.ctx);
-			paramdao.updateParam(this.callApi,StaticVar.GetSystemTimeString());
+		MessageDao dao = new MessageDao(ctx);
+		dao.deleteNoInList(lsObj);
+		dao.batchUpdate(lsObj);
+		if (callBack != null) {
+			callBack.CallBack(lsObj);
 		}
 	}
 

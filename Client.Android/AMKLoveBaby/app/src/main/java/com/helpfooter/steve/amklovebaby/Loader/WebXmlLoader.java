@@ -14,6 +14,8 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Message;
 import android.util.Log;
@@ -29,6 +31,19 @@ public abstract class WebXmlLoader extends Thread{
 
 	protected Context ctx;
 	protected String callApi="";
+
+	public void setOnlyWifi(boolean onlyWifi) {
+		this.onlyWifi = onlyWifi;
+	}
+
+	protected boolean onlyWifi=false;
+
+	public void setConnectivityManager(ConnectivityManager connectivityManager) {
+		this.connectivityManager = connectivityManager;
+	}
+
+	ConnectivityManager connectivityManager=null;
+
 
 	public boolean isCircle() {
 		return isCircle;
@@ -92,6 +107,15 @@ public abstract class WebXmlLoader extends Thread{
 	abstract public void doXml(ArrayList<HashMap<String,String>> lstRow);
 
 	public void RealRun(){
+		if(onlyWifi){
+			if(connectivityManager!=null) {
+				NetworkInfo mWifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+				if (mWifi.isConnected() == false) {
+					status = "F";
+					return;
+				}
+			}
+		}
 		String path=getCallUrl();
 		Log.i("webload_debugUrl", path);
 		InputStream is=getXml(path);

@@ -29,6 +29,7 @@ public class VideoChatNotice extends Thread {
     public void run(){
         while (true){
             try{
+                Thread.sleep(1000*60);
                 if(StaticVar.Member!= null){
                     if(StaticVar.CurrentActivity!=null){
                         if(StaticVar.CurrentActivity.PopupNotice()){
@@ -36,7 +37,6 @@ public class VideoChatNotice extends Thread {
                         }
                     }
                 }
-                Thread.sleep(1000*60);
             }catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -53,7 +53,7 @@ public class VideoChatNotice extends Thread {
 
     private void RealDo() {
         OrderDao dao=new OrderDao(StaticVar.CurrentActivity.GetMyActivity());
-        final OrderObj order= dao.getLatestOrder();
+        final OrderObj order= dao.getLatestOrder(false);
         if(order!=null){
             final int id=order.getId();
             boolean hastip=false;
