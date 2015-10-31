@@ -98,9 +98,9 @@ public class BottomBarButton {
         ImageView img=GetImageView();
         img.setImageResource(this.activeImageResId);
         LinearLayout layout=GetEnteryLayout();
-        layout.setBackgroundColor(Color.parseColor("#EA7598"));
+        //layout.setBackgroundColor(Color.parseColor("#EA7598"));
         TextView txt=GetTextView();
-        txt.setTextColor(Color.WHITE);
+        txt.setTextColor(Color.parseColor("#EA7598"));
     }
 
 

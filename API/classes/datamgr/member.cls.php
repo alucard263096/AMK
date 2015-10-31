@@ -23,24 +23,37 @@
 		
 	}
 
-	public function addMemberPhoto($member_id,$title,$description,$photo){
+	public function addMemberPhoto($member_id,$title,$description,$photolist){
 		$member_id=parameter_filter($member_id);
 		$title=parameter_filter($title);
 		$description=parameter_filter($description);
-		$photo=parameter_filter($photo);
 
-		$sql="select 1 from tb_member where id=$member_id ";
-		$query = $this->dbmgr->query($sql);
-		$result = $this->dbmgr->fetch_array_all($query); 
-		if(count($result)==0){
-			return	outResult(-2,"no this member ");
+		$this->dbmgr->begin_trans();
+
+		$photoarr=explode(",",$photolist);
+		//print_r($photoarr);
+		foreach($photoarr as $photo){
+			if(trim($photo)==""){
+				continue;
+			}
+			$photo=parameter_filter($photo);
+
+			$sql="select 1 from tb_member where id=$member_id ";
+			$query = $this->dbmgr->query($sql);
+			$result = $this->dbmgr->fetch_array_all($query); 
+			if(count($result)==0){
+				return	outResult(-2,"no this member ");
+			}
+		
+			$id=$this->dbmgr->getNewId("tb_member_photo");
+		
+			$sql="insert into tb_member_photo (id,member_id,title,description,photo,status,created_date,created_user,updated_date,updated_user)
+			values ($id,$member_id,'$title','$description','$photo','A',".$this->dbmgr->getDate().",1,".$this->dbmgr->getDate().",1 )   ";
+			$query = $this->dbmgr->query($sql);
+
 		}
 		
-		$id=$this->dbmgr->getNewId("tb_member_photo");
-		
-		$sql="insert into tb_member_photo (id,member_id,title,description,photo,status,created_date,created_user,updated_date,updated_user)
-		values ($id,$member_id,'$title','$description','$photo','A',".$this->dbmgr->getDate().",1,".$this->dbmgr->getDate().",1 )   ";
-		$query = $this->dbmgr->query($sql);
+		$this->dbmgr->commit_trans();
 		
 		return	outResult(0,"success",$id);
 	}

@@ -39,25 +39,6 @@ public class OrderDetailLoadView implements View.OnClickListener {
         this.order = order;
     }
 
-    public void AddOrderDetailMsg(){
-        LinearLayout sv=(LinearLayout)ctx.findViewById(R.id.svBody);
-        if(order.getAct().equals("VC")){
-            DoctorDao doctorDao=new DoctorDao(ctx);
-            DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.parseInt(order.getTag()));
-            sv.addView(GenDetailField("医生信息",doctor.getName()));
-            sv.addView(ToolsUtil.GenPLine(ctx));
-            sv.addView(GenDetailField("预约时间",order.getOrder_date()+" "+order.getOrder_time()));
-            sv.addView(ToolsUtil.GenPLine(ctx));
-        }
-        if(order.getAct().equals("CC")){
-            DoctorDao doctorDao=new DoctorDao(ctx);
-            DoctorObj doctor=(DoctorObj)doctorDao.getObj(Integer.parseInt(order.getTag()));
-            sv.addView(GenDetailField("医生信息",doctor.getName()));
-            sv.addView(ToolsUtil.GenPLine(ctx));
-            sv.addView(GenDetailField("病情描述",order.getDescription()));
-            sv.addView(ToolsUtil.GenPLine(ctx));
-        }
-    }
 
     public void AddSetOrderNext(){
         Button btnSubmit=(Button)ctx.findViewById(R.id.btnSubmit);
@@ -172,30 +153,4 @@ public class OrderDetailLoadView implements View.OnClickListener {
     }
 
 
-    private LinearLayout GenDetailField(String fieldname, String value) {
-        PercentLinearLayout layout = new PercentLinearLayout(ctx);
-        PercentLinearLayout.LayoutParams layoutParams = ToolsUtil.getLayoutParam();
-        layoutParams.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.06f, false);
-        layoutParams.mPercentLayoutInfo.topMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f, false);
-        layout.setLayoutParams(layoutParams);
-
-        MyTextView txtField = new MyTextView(ctx);
-        PercentLinearLayout.LayoutParams txtFieldlayoutParams = ToolsUtil.getLayoutParam();
-        txtFieldlayoutParams.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f, true);
-        txtFieldlayoutParams.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.27f, true);
-        txtField.setGravity(Gravity.CENTER_VERTICAL);
-        txtField.setText(fieldname);
-        txtField.setLayoutParams(txtFieldlayoutParams);
-        layout.addView(txtField);
-
-        MyTextView txtValue = new MyTextView(ctx);
-        PercentLinearLayout.LayoutParams txtValuelayoutParams = ToolsUtil.getLayoutParam();
-        txtValuelayoutParams.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.7f, true);
-        txtValue.setGravity(Gravity.CENTER_VERTICAL);
-        txtValue.setText(value);
-        txtValue.setLayoutParams(txtValuelayoutParams);
-        layout.addView(txtValue);
-
-        return layout;
-    }
 }

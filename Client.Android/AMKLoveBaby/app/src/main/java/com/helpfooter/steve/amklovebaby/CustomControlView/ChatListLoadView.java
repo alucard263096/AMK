@@ -38,6 +38,8 @@ import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ChatObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.ImageShower;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.ChatLoader;
@@ -189,13 +191,13 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
     };
 
     private LinearLayout LoadChatListData(ChatMsgEntity obj) {
-        LinearLayout layout = new LinearLayout(this.mActivity);
-        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
-        layout.setLayoutParams(param);
+        PercentLinearLayout layout = new PercentLinearLayout(this.mActivity);
+        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         param.topMargin=15;
-        param.leftMargin=(int)(StaticVar.width*0.02);
-        param.rightMargin=(int)(StaticVar.width*0.02);
         param.bottomMargin=15;
+        layout.setLayoutParams(param);
 
 
         ImageView doctorView = getPhotoView();
@@ -203,8 +205,9 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 
 
 
-        LinearLayout content = new LinearLayout(this.mActivity);
-        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.76),LinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLinearLayout content = new PercentLinearLayout(this.mActivity);
+        PercentLinearLayout.LayoutParams contentparam =ToolsUtil.getLayoutParamHeightWrap();
+        contentparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.7f,true);
         content.setLayoutParams(contentparam);
         layout.addView(content);
         if (obj.getContextType().equals(StaticVar.TxtType)) {
@@ -247,14 +250,18 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
     //文本内容
     public TextView getTextView(ChatMsgEntity obj) {
         TextView txtContext = new MyTextView(this.mActivity);
-        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.3),LinearLayout.LayoutParams.WRAP_CONTENT);
+        //txtContext.setBackgroundColor(Color.parseColor("#ccaacc"));
+        //txtContext.setBackgroundResource(R.drawable.chatbg);
+        txtContext.setBackgroundResource(R.drawable.text_view_border);
+        PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();
+        contentparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        contentparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        txtContext.setPadding(20,0,20,0);
 
         if (obj.getMsgType()) {
             txtContext.setGravity(Gravity.LEFT);
-            contentparam.leftMargin=(int)(StaticVar.width*0.05);
         }else {
             txtContext.setGravity(Gravity.RIGHT);
-            contentparam.rightMargin=(int)(StaticVar.width*0.05);
         }
         txtContext.setLayoutParams(contentparam);
         txtContext.setText(obj.getMessage());
@@ -267,7 +274,8 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
     public ImageView getPhotoView() {
         ImageView img = new ImageView(this.mActivity);
         img.setScaleType(ImageView.ScaleType.FIT_START);
-        LinearLayout.LayoutParams param =new LinearLayout.LayoutParams((int)(StaticVar.width*0.1),LinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLinearLayout.LayoutParams param =ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,true);
         img.setAdjustViewBounds(true);
 
         img.setLayoutParams(param);
@@ -277,14 +285,14 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 //    //图片
     public ImageView getIMGView(ChatMsgEntity obj) {
         ImageView img = new ImageView(this.mActivity);
+        //img.setBackgroundColor(Color.parseColor("#cceecc"));
+        img.setBackgroundResource(R.drawable.text_view_border);
+        img.setPadding(20,20, 20, 20);
         //img.setBackgroundColor(Color.parseColor("#ccaacc"));
-        LinearLayout.LayoutParams contentparam = new LinearLayout.LayoutParams((int)(StaticVar.width*0.3),LinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();
+        contentparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        contentparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
 
-        if (obj.getMsgType()) {
-            contentparam.leftMargin=(int)(StaticVar.width*0.05);
-        }else {
-            contentparam.rightMargin=(int)(StaticVar.width*0.05);
-        }
 
         String url = StaticVar.IMGCHATURL + obj.getMessage();
         Log.i("doctor_photo", url);

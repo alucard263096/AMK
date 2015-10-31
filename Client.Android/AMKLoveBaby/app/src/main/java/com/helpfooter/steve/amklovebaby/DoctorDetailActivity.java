@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -31,7 +32,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class DoctorDetailActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
+public class DoctorDetailActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
     DoctorObj doctor;
     ImageView btnBack,imgPhoto;
     TextView txtName,txtOfficeTitle,txtWorktime,txtVideoQuerycount,txtCharQuerycount,txtGeneralScore,btnVedioChat,btnCharChat;
@@ -199,4 +200,5 @@ public class DoctorDetailActivity extends Activity implements View.OnClickListen
                 break;
         }
     }
+
 }

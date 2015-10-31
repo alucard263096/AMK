@@ -5,6 +5,8 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -13,14 +15,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.MemberPhotoUploadMgr;
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMemberPhotoUploadCallBack;
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
+import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+
+import java.util.ArrayList;
 
 
-public class MemberPhotoUploadActivity extends Activity implements View.OnClickListener {
-
+public class MemberPhotoUploadActivity extends MyActivity implements View.OnClickListener,IMemberPhotoUploadCallBack {
+    GridLayout photolist;
+    EditText txtTitle,txtDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +44,17 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         ((TextView)findViewById(R.id.btnOK)).setOnClickListener(this);
         ((TextView)findViewById(R.id.btnCancel)).setOnClickListener(this);
         ((TextView)findViewById(R.id.txtPhotoSelect)).setOnClickListener(this);
+
+        txtTitle=((EditText)findViewById(R.id.txtTitle));
+        txtDescription=((EditText)findViewById(R.id.txtDescription));
+
+        photolist= ((GridLayout)findViewById(R.id.photolist));
+
+
+
     }
+
+    ArrayList<String> lst=new ArrayList<String>();
 
 
     @Override
@@ -38,11 +63,25 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         switch (v.getId()){
             case R.id.btnOK:
 
-                Intent intent = new Intent();
+                String title=txtTitle.getText().toString();
+                if(title.length()==0){
+                    Toast.makeText(this,"请输入病历标题",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(lst.size()==0){
+                    Toast.makeText(this,"请至少上传一张病历图片",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                MemberPhotoUploadMgr mgr=new MemberPhotoUploadMgr(this,lst);
+                mgr.setCallBack(this);
+                mgr.StartUpload();
+
+                //Intent intent = new Intent();
                 //intent.putExtra("return", currentSelect.SelectedValue());
                 //intent.putExtra("returnName", currentSelect.DisplayName());
-                setResult(RESULT_OK, intent);
-                this.finish();
+                //setResult(RESULT_OK, intent);
+                //this.finish();
                 return;
             case R.id.btnCancel:
                 this.finish();
@@ -78,12 +117,37 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
             cursor.close();
             if(picturePath!=null && !picturePath.isEmpty()) {
                 //this.uploadFile(picturePath,requestCode);
-                Toast.makeText(this,picturePath,Toast.LENGTH_LONG).show();
+
+                lst.add(picturePath);
+
+                ImageView imageView=new ImageView(this);
+                GridLayout.LayoutParams params=new GridLayout.LayoutParams();
+                imageView.setLayoutParams(params);
+                params.setMargins(20, 20, 20, 20);
+                params.width=100;
+                imageView.setScaleType(ImageView.ScaleType.FIT_START);
+                imageView.setAdjustViewBounds(true);
+                Bitmap bitmap= BitmapFactory.decodeFile(picturePath);
+                imageView.setImageBitmap(bitmap);
+
+                photolist.addView(imageView);
             }
         }
 
 
     }
 
+
+    @Override
+    public void CallBack(String ret) {
+        String title=txtTitle.getText().toString();
+        String description=txtDescription.getText().toString();
+        MemberPhotoAddLoader loader=new MemberPhotoAddLoader(this, StaticVar.Member.getId(),title,description,ret);
+        loader.RealRun();
+
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        this.finish();
+    }
 
 }

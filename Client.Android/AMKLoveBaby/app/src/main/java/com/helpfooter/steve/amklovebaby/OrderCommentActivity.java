@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
@@ -32,7 +33,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class OrderCommentActivity extends Activity implements View.OnClickListener,
+public class OrderCommentActivity extends MyActivity implements View.OnClickListener,
         IWebLoaderCallBack{
 
     DoctorObj doctor;
@@ -80,12 +81,12 @@ public class OrderCommentActivity extends Activity implements View.OnClickListen
         txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
 
 
-        btnFollow=(TextView)findViewById(R.id.btnFollow);
-        if(StaticVar.Member!=null){
-            MemberFollowDoctorDao followdao=new MemberFollowDoctorDao(this);
-            hasFollow=followdao.hasFollow(doctor.getId());
-            setFollow();
-        }
+//        btnFollow=(TextView)findViewById(R.id.btnFollow);
+//        if(StaticVar.Member!=null){
+//            MemberFollowDoctorDao followdao=new MemberFollowDoctorDao(this);
+//            hasFollow=followdao.hasFollow(doctor.getId());
+//            setFollow();
+//        }
 
         rbService=(RatingBar)findViewById(R.id.rbService);
         rbAbility=(RatingBar)findViewById(R.id.rbAbility);
@@ -188,4 +189,11 @@ public class OrderCommentActivity extends Activity implements View.OnClickListen
             }
         }
     };
+    public void SetCurrentActivity(){
+        StaticVar.CurrentActivity=null;
+    }
+
+    public boolean PopupNotice(){
+        return false;
+    }
 }

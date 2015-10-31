@@ -21,7 +21,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/btnReg"
             android:layout_width="wrap_content"
@@ -127,11 +127,11 @@
                 android:layout_height="match_parent"
                 app:layout_widthPercent="20%"
                 android:gravity="center"
-                android:text="验证码"/>
-            <EditText android:id="@+id/txtVerifyCode"
+                android:text="密码"/>
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText android:id="@+id/txtVerifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入验证码或密码"
+                android:hint="直接输入登录密码或点击获取验证码"
                 android:textColorHint="#aaaaaa"
                 android:inputType="textPassword"
                 android:maxLines="1"

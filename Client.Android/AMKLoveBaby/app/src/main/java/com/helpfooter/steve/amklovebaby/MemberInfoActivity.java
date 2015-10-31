@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +21,8 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomControlView.MemberPhotoLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -30,6 +31,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.MemberLoader;
+import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.loopj.android.http.AsyncHttpClient;
@@ -41,23 +43,34 @@ import java.util.ArrayList;
 import java.util.logging.Handler;
 
 
-public class MemberInfoActivity extends Activity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
+public class MemberInfoActivity extends MyActivity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
 
     EditText txtName,txtBirth,txtHistory;
     Button btnLogout;
     TextView txtMobile,btnUploadPhotos;
     TextView txtSex;
+    LinearLayout lstMemberPhotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_info);
 
-        MemberMgr.GetMemberInfoFromDb(this);
+        if(MemberMgr.CheckIsLogin(this)) {
+            InitData();
+            InitUI();
+        }
 
-        InitUI();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (StaticVar.Member == null) {
+            this.finish();
+            return;
+        }
         InitData();
-
+        InitUI();
     }
 
     private void InitUI() {
@@ -86,6 +99,8 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         btnUploadPhotos=(TextView)findViewById(R.id.btnUploadPhotos);
         btnUploadPhotos.setOnClickListener(this);
 
+        lstMemberPhotos=(LinearLayout)findViewById(R.id.lstMemberPhotos);
+
 
         LoadMemberData();
     }
@@ -101,6 +116,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         }
         txtSex.setTextColor(Color.BLACK);
     }
+    boolean hasload=false;
 
     private void LoadMemberData(){
         if(StaticVar.Member!=null){
@@ -109,6 +125,12 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             txtHistory.setText(StaticVar.Member.getHistory());
             txtMobile.setText(StaticVar.Member.getMobile());
             setTxtSex(StaticVar.Member.getSex());
+            if(hasload==false){
+                MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
+                loadView.LoadPhotoList();
+                hasload=true;
+            }
+
         }
     }
 
@@ -119,6 +141,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             MemberLoader loader=new MemberLoader(this,StaticVar.Member.getMobile());
             loader.setCallBack(this);
             loader.start();
+
 
         }
     }
@@ -135,6 +158,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
 
                 StaticVar.Member=null;
                 try{
+                    StaticVar.MainForm.RefreshMember();
                     StaticVar.MainForm.SetToHome();
                 }catch (Exception e){
                     e.printStackTrace();
@@ -147,7 +171,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
                 return;
             case R.id.btnUploadPhotos:
                 Intent intenta = new Intent(this, MemberPhotoUploadActivity.class);
-                startActivityForResult(intenta, 2);
+                startActivityForResult(intenta, 3);
                 return;
         }
     }
@@ -168,6 +192,10 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
             loader.setCallBack(callBack);
             loader.start();
             StaticVar.Member.setSex(retstr);
+        }
+        if(requestCode == 3){
+            MemberPhotoLoadView loadView=new MemberPhotoLoadView(this,StaticVar.Member.getId(),lstMemberPhotos);
+            loadView.LoadPhotoList();
         }
     }
 

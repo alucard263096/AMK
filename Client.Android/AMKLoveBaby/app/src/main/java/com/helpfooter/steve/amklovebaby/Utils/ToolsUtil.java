@@ -33,6 +33,9 @@ import org.apache.http.util.EntityUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -225,7 +228,30 @@ public class ToolsUtil {
         }
         return re_md5;
     }
+    public static void copyFile(String oldPath, String newPath) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ( (byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+        }
+        catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+        }
 
+    }
     public static PercentLinearLayout.LayoutParams getLayoutParam() {
         PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
@@ -237,6 +263,13 @@ public class ToolsUtil {
         PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
         layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        param.mPercentLayoutInfo = layoutinfo;
+        return param;
+    }
+    public static PercentLinearLayout.LayoutParams getLayoutParamWidthHeightWrap() {
+        PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
         param.mPercentLayoutInfo = layoutinfo;
         return param;
     }

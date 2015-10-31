@@ -31,7 +31,7 @@
             android:src="@drawable/zhidao_logo"
             android:contentDescription="@null" />
 -->
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentRelativeLayout>
     <LinearLayout
         android:id="@+id/content_layout"

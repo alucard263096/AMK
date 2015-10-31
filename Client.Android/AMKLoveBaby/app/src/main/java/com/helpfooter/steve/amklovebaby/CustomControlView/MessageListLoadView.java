@@ -142,8 +142,10 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         ImageView img=new ImageView(this.ctx);
         //img.setBackgroundColor(Color.parseColor("#ccaacc"));
         img.setScaleType(ImageView.ScaleType.FIT_START);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        img.setAdjustViewBounds(true);
+        img.setBackgroundColor(Color.parseColor("#aaeecc"));
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,true);
         img.setLayoutParams(param);
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
 
@@ -176,13 +178,8 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
 
         PercentLinearLayout layout=new PercentLinearLayout(ctx);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.94f,true);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
-        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
-        param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
-        param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        layout.setPadding(20,20,20,20);
 
 
 
@@ -212,15 +209,18 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
     public LinearLayout getInfoLayout(MessageObj message,DoctorObj doctor){
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.76f,true);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        //layout.setBackgroundColor(Color.parseColor("#ccaaee"));
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.82f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
 
 
         TextView txtContent=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
+        //txtContent.setBackgroundColor(Color.parseColor("#cceedd"));
+        //txtContent.setTextColor(Color.BLACK);
+        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParamHeightWrap();
         upvoteparam.gravity=Gravity.BOTTOM;
         txtContent.setLayoutParams(upvoteparam);
         String strContent = "";
@@ -250,10 +250,9 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         }
         txtContent.setText(strContent);
         txtContent.setTextSize(14);
-
+        txtContent.setTextColor(Color.parseColor("#909090"));
          PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParam();
-        buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
+        PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParamHeightWrap();
 
         tipsLayout.setLayoutParams(buttonparam);
         tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -261,14 +260,14 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
 
         //设置聊天对象名
-        PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParam();
+        PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParamHeightWrap();
         nameparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
         //  nameparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
-        nameparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,true);
         nameparam.gravity=Gravity.LEFT;
         TextView txtName = new MyTextView(this.ctx);
 
         txtName.setTextSize(15);
+        txtName.setTextColor(Color.parseColor("#909090"));
         txtName.setGravity(Gravity.LEFT);
         txtName.setLayoutParams(nameparam);
         txtName.setText(doctor.getName());
@@ -277,7 +276,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         Log.i("doctor name", doctor.getName());
         //设置最后一次聊天时间
         TextView lastchatTime=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams lastchatparam=ToolsUtil.getLayoutParam();
+        PercentLinearLayout.LayoutParams lastchatparam=ToolsUtil.getLayoutParamHeightWrap();
         lastchatparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.68f,true);
         // lastchatparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
         lastchatparam.gravity=Gravity.RIGHT;

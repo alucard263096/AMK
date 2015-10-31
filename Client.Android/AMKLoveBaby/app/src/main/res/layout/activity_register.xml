@@ -22,7 +22,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <TextView
+      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
@@ -63,7 +63,7 @@
                 app:layout_widthPercent="20%"
                 android:gravity="center"
                 android:text="+86"/>
-            <EditText android:id="@+id/txtMobile"
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText android:id="@+id/txtMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="手机号"
@@ -109,7 +109,7 @@
                 app:layout_widthPercent="20%"
                 android:gravity="center"
                 android:text="验证码"/>
-            <EditText android:id="@+id/txtVerifyCode"
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText android:id="@+id/txtVerifyCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="请输入验证码"
@@ -142,7 +142,7 @@
                 app:layout_widthPercent="20%"
                 android:gravity="center"
                 android:text="密码"/>
-            <EditText android:id="@+id/txtPassword"
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText android:id="@+id/txtPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="6-32位字母数字组合"
@@ -180,8 +180,7 @@
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:gravity="center"
-        android:background="#ffffff">
+        android:gravity="center">
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -189,6 +188,18 @@
             android:id="@+id/btnRegPP"
             android:gravity="center"
             android:text="&lt;&lt;服务条款及协议&gt;&gt;"/>
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#aaaaaa"
+            android:text="完成注册视为同意协议"/>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 

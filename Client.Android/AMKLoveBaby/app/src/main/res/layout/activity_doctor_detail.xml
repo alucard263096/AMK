@@ -20,7 +20,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:autoText="false"
             android:elegantTextHeight="false"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
 
@@ -171,7 +171,6 @@
                     app:layout_widthPercent="49%"
                     app:layout_marginRightPercent="1%"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:text="视频咨询/90元"
                     android:gravity="center"
                     android:background="#37A4D4"
@@ -183,7 +182,6 @@
                     app:layout_widthPercent="49%"
                     app:layout_marginLeftPercent="1%"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
                     android:text="图文咨询/1元"
                     android:gravity="center"
                     android:background="#FD7CAD"
@@ -195,6 +193,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
+                android:layout_marginTop="10dp"
                 android:background="#cccccc"></LinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"

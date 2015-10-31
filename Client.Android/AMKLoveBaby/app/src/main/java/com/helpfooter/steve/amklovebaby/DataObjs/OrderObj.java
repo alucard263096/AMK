@@ -1,7 +1,11 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
+import android.app.Activity;
 import android.database.Cursor;
 
+import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.Interfaces.IOrderListView;
+import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import java.util.HashMap;
@@ -9,7 +13,8 @@ import java.util.HashMap;
 /**
  * Created by Steve on 2015/9/7.
  */
-public class OrderObj extends AbstractObj {
+public class OrderObj extends AbstractObj implements IOrderListView {
+
 
     @Override
     public void parseCursor(Cursor cursor) {
@@ -19,6 +24,8 @@ public class OrderObj extends AbstractObj {
         this.member_id=cursor.getInt(cursor.getColumnIndex("member_id"));
         this.name= cursor.getString(cursor.getColumnIndex("name"));
         this.mobile= cursor.getString(cursor.getColumnIndex("mobile"));
+        this.age= cursor.getString(cursor.getColumnIndex("age"));
+        this.sex= cursor.getString(cursor.getColumnIndex("sex"));
         this.price=cursor.getInt(cursor.getColumnIndex("price"));
         this.act= cursor.getString(cursor.getColumnIndex("act"));
         this.created_time= cursor.getString(cursor.getColumnIndex("created_time"));
@@ -58,7 +65,24 @@ public class OrderObj extends AbstractObj {
     String payment_type;
     String payment_time;
 
+    String age;
+    String sex;
 
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     String sendmessage;
     public String getTag() {
@@ -124,6 +148,8 @@ public class OrderObj extends AbstractObj {
         this.member_id=Integer.parseInt(lstRowValue.get("member_id"));
         this.name= lstRowValue.get("name");
         this.mobile= lstRowValue.get("mobile");
+        this.age= lstRowValue.get("age");
+        this.sex= lstRowValue.get("sex");
         this.price=Integer.parseInt(lstRowValue.get("price"));
         //this.discount=Integer.parseInt(lstRowValue.get("discount"));
         this.act= lstRowValue.get("act");
@@ -328,5 +354,80 @@ public class OrderObj extends AbstractObj {
             return "用于在利用文字和图片与医生进行咨询";
         }
         return "未知类型";
+    }
+
+    public DoctorObj getDoctor() {
+        return doctor;
+    }
+
+    DoctorObj doctor;
+    public void LoadDoctorObj(Activity ctx){
+        DoctorDao dao=new DoctorDao(ctx);
+        String doctor_id=getTag();
+        doctor=(DoctorObj)dao.getObj(Integer.parseInt(doctor_id));
+    }
+
+    @Override
+    public String GetPhotoUrl() {
+        return StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
+    }
+
+    @Override
+    public String PhotoName() {
+        return doctor.getName();
+    }
+
+    @Override
+    public String OrderTitle() {
+        return getActName();
+    }
+
+    @Override
+    public String OrderPrice() {
+         if(act.equals("VC")){
+            return String.valueOf(getPrice())+"元/20分钟视频通话";
+        }else if(act.equals("CC")) {
+            return String.valueOf(getPrice())+"元/次";
+        };
+        return "价格显示错误";
+    }
+
+    @Override
+    public String OrderBookingTime() {
+        String ret="预约时间显示错误";
+        if(act.equals("VC")){
+            ret= getOrder_date() + " " + getOrder_time();
+        }else if(act.equals("CC")) {
+            ret= "随时开始";
+        };
+        if(getStatus().equals("F")){
+            ret+=" (已完成)";
+        }
+        return ret;
+    }
+
+    @Override
+    public String OrderTips() {
+        if(getStatus().equals("F")&&!getHascomment().equals("Y")){
+            return "尚未评价";
+        }
+        return "";
+    }
+
+    @Override
+    public int GetId() {
+        return super.getId();
+    }
+
+    @Override
+    public String GetStatus() {
+        return getStatus();
+    }
+
+    public String getSexName() {
+        if(sex!=null&&sex.equals("M")){
+            return "男";
+        }
+        return "女";
     }
 }

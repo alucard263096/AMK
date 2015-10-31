@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderDetailLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
@@ -25,7 +27,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,View.OnClickListener {
+public class OrderDetailActivity extends MyActivity implements IWebLoaderCallBack,View.OnClickListener {
 
     OrderObj order=null;
 
@@ -53,15 +55,33 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
     }
 
     private void InitUI() {
-        ((TextView) findViewById(R.id.txtOrderNo)).setText(order.getOrder_no());
-        ((TextView) findViewById(R.id.txtName)).setText(order.getName());
-        ((TextView) findViewById(R.id.txtMobile)).setText(order.getMobile());
-        ((TextView) findViewById(R.id.txtPrice)).setText(String.valueOf(order.getPrice())+"元");
-        ((TextView) findViewById(R.id.txtAct)).setText(order.getActName());
-        ((TextView) findViewById(R.id.txtStatus)).setText(order.getStatusName());
 
-        OrderDetailLoadView orderDetailLoadView=new OrderDetailLoadView(this,order);
-        orderDetailLoadView.AddOrderDetailMsg();
+        order.LoadDoctorObj(this);
+
+        String url = StaticVar.ImageFolderURL + "doctor/" + order.getDoctor().getPhoto();
+        UrlImageLoader urlImageLoader = new UrlImageLoader(((ImageView) findViewById(R.id.imgPhoto)), url);
+        urlImageLoader.start();
+
+        ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());
+        ((TextView) findViewById(R.id.txtPrice)).setText(order.OrderPrice());
+        if (order.getAct().equals("VC")) {
+            ((TextView) findViewById(R.id.txtBookingTime)).setText(order.OrderBookingTime());
+        } else {
+            ((TextView) findViewById(R.id.txtBookingTime)).setVisibility(View.GONE);
+        }
+        ((TextView) findViewById(R.id.txtStatusName)).setText(order.getStatusName());
+
+        ((TextView) findViewById(R.id.txtOrderNo)).setText(order.getOrder_no());
+        ((TextView) findViewById(R.id.txtCreatedTime)).setText(order.getCreated_time());
+
+
+        ((TextView) findViewById(R.id.txtMemberName)).setText(order.getName());
+        ((TextView) findViewById(R.id.txtMemberMobile)).setText(order.getMobile());
+        ((TextView) findViewById(R.id.txtMemberAge)).setText(order.getAge());
+        ((TextView) findViewById(R.id.txtMemberSex)).setText(order.getSexName());
+        ((TextView) findViewById(R.id.txtMemberDescription)).setText(order.getDescription());
+
+        OrderDetailLoadView orderDetailLoadView = new OrderDetailLoadView(this, order);
         orderDetailLoadView.AddSetOrderNext();
     }
     private android.os.Handler uiInitHandler = new android.os.Handler() {
@@ -99,5 +119,12 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
 //                loader.start();
                 return;
         }
+    }
+    public void SetCurrentActivity(){
+        StaticVar.CurrentActivity=null;
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

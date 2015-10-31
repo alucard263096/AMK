@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.CustomObject.VerifyCodeButtonDisable;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -32,7 +33,7 @@ import java.util.MissingFormatArgumentException;
 import java.util.logging.Handler;
 
 
-public class RegisterActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
+public class RegisterActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
 
     String threadstatus;
     Button btnSendVerifyCode,btnRegister;
@@ -188,5 +189,9 @@ public class RegisterActivity extends Activity implements View.OnClickListener,I
         }
     };
 
+
+    public boolean PopupNotice(){
+        return false;
+    }
 
 }

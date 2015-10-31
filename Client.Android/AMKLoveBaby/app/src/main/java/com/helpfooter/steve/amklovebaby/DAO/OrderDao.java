@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DAO;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.NewsObj;
@@ -40,7 +41,9 @@ public class OrderDao extends AbstractDao {
                 "guid varchar," +
                 "member_id int," +
                 "name varchar," +
-                "mobile int," +
+                "mobile varchar," +
+                "age varchar," +
+                "sex varchar," +
                 "price int," +
                 "act varchar," +
                 "created_time varchar," +
@@ -68,10 +71,10 @@ public class OrderDao extends AbstractDao {
         OrderObj obj=(OrderObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,price,act,created_time,status,process_status," +
+        sql.append("insert into tb_order (id,order_no,guid,member_id,name,mobile,sex,age,price,act,created_time,status,process_status," +
                 "order_date,order_time,description,payment,payment_type,payment_time,tag,sendmessage" +
-                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
+                ",hascomment,service,ability,comment ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        Object[] bindArgs = {obj.getId(),obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),obj.getAge(),obj.getSex(),
                 obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
                 obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag(),
                 '0',obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment()};
@@ -88,10 +91,10 @@ public class OrderDao extends AbstractDao {
         OrderObj obj=(OrderObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_order set order_no=?,guid=?,member_id=?,name=?,mobile=?,price=?,act=?,created_time=?,status=?,process_status=?," +
+        sql.append("update tb_order set order_no=?,guid=?,member_id=?,name=?,mobile=?,age=?,sex=?,price=?,act=?,created_time=?,status=?,process_status=?," +
                 "order_date=?,order_time=?,description=?,payment=?,payment_type=?,payment_time=?,tag=?" +
                 ",hascomment=?,service=?,ability=?,comment=? where id=?");
-        Object[] bindArgs = {obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),
+        Object[] bindArgs = {obj.getOrder_no(),obj.getGuid(),obj.getMember_id(),obj.getName(),obj.getMobile(),obj.getAge(),obj.getSex(),
                 obj.getPrice(),obj.getAct(),obj.getCreated_time(),obj.getStatus(),obj.getProcess_status(),
                 obj.getOrder_date(),obj.getOrder_time(),obj.getDescription(),obj.getPayment(),obj.getPayment_type(),obj.getPayment_time(),obj.getTag()
                 ,obj.getHascomment(),obj.getService(),obj.getAbility(),obj.getComment(), obj.getId()};
@@ -139,5 +142,44 @@ public class OrderDao extends AbstractDao {
         }
         return  lstr;
 
+    }
+
+    public OrderObj getLatestOrder() {
+        Cursor cursor = null;
+        try {
+            util.open();
+            cursor = util
+                    .rawQuery(
+                            "select *," +
+                                    "(strftime('%s',order_date|| ' ' ||order_time) - strftime('%s','now')) timespan from "+TableName+" " +
+                                    "where 1=1 " +
+                                    "and (strftime('%s',order_date|| ' ' ||order_time) - strftime('%s','now')) between 0 and 300 " +
+                                    "and act='VC'" +
+                                    "and status='P' " +
+                                    " order by order_date,order_time  " +
+                                    "limit 0,1",new String[] { });
+            while (cursor.moveToNext()) {
+                int second=cursor.getInt(cursor.getColumnIndex("timespan"));
+                OrderObj obj=new OrderObj();
+                obj.parseCursor(cursor);
+                return obj;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+
+    public void setPaymentSuccess(int id) {
+        util.open();
+        String sql="update tb_order set status='P' where id=? ";
+        Object[] bindArgs = {id};
+        util.execSQL(sql.toString(), bindArgs);
+        util.close();
     }
 }

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -34,7 +35,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
-public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
+public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
     private final int UPDATEVIDEOBITDELAYMILLIS = 200; //监听音频视频的码率的间隔刷新时间（毫秒）
     private final int LOCALVIDEOAUTOROTATION = 1; // 本地视频自动旋转控制
 
@@ -507,5 +508,9 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent {
         // 销毁当前界面
         destroyCurActivity();
         this.finish();
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

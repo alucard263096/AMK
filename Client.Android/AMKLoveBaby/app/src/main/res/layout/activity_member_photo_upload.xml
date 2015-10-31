@@ -10,9 +10,7 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_heightPercent="7%"
-        app:layout_widthPercent="100%"
+        android:layout_height="40dp"
         android:background="@color/topbar_bg">
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/btnOK"
@@ -25,7 +23,7 @@
             android:gravity="center"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <TextView
+        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,13 +82,13 @@
                     android:text="标题"/>
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
-                    android:id="@+id/txtName"
+                    android:id="@+id/txtTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="填写病历标题"
                     android:gravity="right"
                     android:maxLines="1"
-                    android:focusable="false"
+                    android:focusable="true"
                     android:textSize="16dp"
                     android:textColorHint="#aaaaaa"
                     app:layout_widthPercent="67%"
@@ -111,7 +109,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffffff" android:id="@+id/photolist">
+                android:background="#ffffff">
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
@@ -140,6 +138,21 @@
 
 
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff">
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/photolist"
+                    android:columnCount="6">
+                </GridLayout>
+
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -162,22 +175,20 @@
 
 
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
-                    android:id="@+id/txtBirth"
+                    android:id="@+id/txtDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="请简单描述当前选择病历的说明"
                     android:gravity="right"
-                    android:maxLines="1"
-                    android:maxLength="3"
-                    android:inputType="number"
-                    android:focusable="false"
+                    android:maxLines="3"
+                    android:maxLength="100"
+                    android:focusable="true"
                     android:textSize="16dp"
                     android:textColorHint="#aaaaaa"
                     app:layout_widthPercent="67%"
                     app:layout_marginRightPercent="3%"
                     app:layout_marginTopPercent="1%"
                     app:layout_marginBottomPercent="1%"
-                    android:singleLine="true"
                     android:editable="true"
                     android:background="@null"  android:tag="birth" />
 

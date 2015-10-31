@@ -1,6 +1,10 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import android.app.Activity;
+
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.MainActivity;
 
 import java.text.SimpleDateFormat;
@@ -11,6 +15,7 @@ public final class StaticVar {
 	public static String ProjectName="AMKLoveBaby";
 	public static String ImageFolderURL="http://www.myhkdoc.com/AMK/FilesServer/";
 	public static String APIURL="http://www.myhkdoc.com/AMK/API/";
+	public static String UPLOADURL="http://www.myhkdoc.com/AMK/CMS/fileupload.php?field=uploadfile";
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
 	public static  String UPLOADFILEURL4Member = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=member&field=uploadfile";
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
@@ -32,6 +37,9 @@ public final class StaticVar {
 	public static String RegisterSendApi="registersend";
 	public static String MemberApi="member";
 	public static String MemberUpdateApi="memberupdate";
+	public static String MemberPhotoAddApi="memberphotoadd";
+	public static String MemberPhotoApi="memberphoto";
+	public static String MemberPhotoDeleteApi="memberphotodelete";
 	public static String OrderListApi="orderlist";
 	public static String DoctorCommentApi="doctorcomment";
 	public static String VersionApi="version";
@@ -40,11 +48,12 @@ public final class StaticVar {
 	public static String MessageApi="Message";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
-	public static String CurrentVersion="1.0.0.2";
+	public static String CurrentVersion="1.0.1.2";
 	public static String TxtType="TXT";
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
+	public static IMyActivity CurrentActivity;
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
 	public static String DoctorFollowAPI="doctorfollow";
 	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
@@ -81,6 +90,9 @@ public final class StaticVar {
 		dictHashMap.put(DoctorStatisticsApi,APIURL+"Doctor/doctor_statistic.php");
 		dictHashMap.put(OrderCommentApi,APIURL+"Order/order_comment.php");
 		dictHashMap.put(DoctorCommentApi,APIURL+"Doctor/doctor_comment.php");
+		dictHashMap.put(MemberPhotoAddApi,APIURL+"Member/member_photo_add.php");
+		dictHashMap.put(MemberPhotoApi,APIURL+"Member/member_photo.php");
+		dictHashMap.put(MemberPhotoDeleteApi,APIURL+"Member/member_photo_delete.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";

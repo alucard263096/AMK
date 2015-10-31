@@ -56,12 +56,23 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
         setContentView(R.layout.activity_video_chat_order);
 
         //MemberMgr.GetMemberInfoFromDb(this);
-
         if(MemberMgr.CheckIsLogin(this)) {
             InitData();
             InitUI();
         }
 
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (StaticVar.Member == null) {
+            this.finish();
+            return;
+        }
+        InitData();
+        InitUI();
     }
 
     private void InitUI() {
@@ -244,5 +255,9 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
             resultHandler.sendEmptyMessage(0);
 
         }
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

@@ -9,18 +9,17 @@
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_heightPercent="60%"
-            app:layout_marginTopPercent="10%"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
             android:gravity="center">
             <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 app:border_width="2dp"
                 android:id="@+id/imgMyPhoto"
                 app:border_color="#cccccc"
@@ -28,7 +27,7 @@
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/txtMyName"
             android:gravity="center"
             android:text="我的名字"

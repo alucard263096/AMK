@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.NewsDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -34,7 +35,7 @@ import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import java.util.ArrayList;
 
-public class NewsDetailActivity extends Activity implements View.OnClickListener {
+public class NewsDetailActivity extends MyActivity implements View.OnClickListener {
     NewsObj news;
     DoctorObj doctor;
     ImageView btnBack;
@@ -161,6 +162,5 @@ public class NewsDetailActivity extends Activity implements View.OnClickListener
             DoctorDao doctorDao=new DoctorDao(this);
             doctor=(DoctorObj)doctorDao.getObj(news.getDoctor_id());
         }
-
     }
 }

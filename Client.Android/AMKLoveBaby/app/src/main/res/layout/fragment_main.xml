@@ -9,7 +9,7 @@
     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView android:id="@+id/section_label" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <EditText
+    <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

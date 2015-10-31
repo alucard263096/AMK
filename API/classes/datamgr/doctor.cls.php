@@ -217,17 +217,17 @@ where doctor_id=$doctor_id and hascomment='Y'
 			}
 		}
 		$today=date("Y-m-d");
-		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+		$lastday=date("Y-m-d", strtotime("+14 days", strtotime($today)));
 		$sql="select order_date, order_time from tb_order o
 			inner join tb_order_videochat ov on o.id=ov.order_id
 			 where doctor_id=$doctor_id and order_date>'$today' and order_date<='$lastday' and status<>'F' and status<>'D' and status<>'C' ";
 			$query = $this->dbmgr->query($sql);
 			$ordertime = $this->dbmgr->fetch_array_all($query); 
 		$today=date("Y-m-d");
-		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+		$lastday=date("Y-m-d", strtotime("+14 days", strtotime($today)));
 
 		$ret=array();
-		for($i=0;$i<30;$i++){
+		for($i=0;$i<14;$i++){
 			$today=date("Y-m-d", strtotime("+1 days", strtotime($today)));
 			$s=array();
 			$s[0]=$today;
@@ -238,6 +238,11 @@ where doctor_id=$doctor_id and hascomment='Y'
 			}
 			$s[1]=$numberOfWeek;
 			$s["w"]=$numberOfWeek;
+			//echo  $numberOfWeek;
+			//echo  $today;
+			//print_r($workday_arr);
+			//echo "<br />";
+			
 			if($this->inResultArray($workday_arr,$numberOfWeek)){
 				$spworktime=$workday_arr[$numberOfWeek]["worktime"];
 				$worktimecount=count($spworktime);
@@ -307,7 +312,7 @@ where doctor_id=$doctor_id and hascomment='Y'
 					$acce=Array();
 					$acce[0]=0;
 					$acce["day"]=$value[1];
-					$workday_arr[]=$acce;
+					$workday_arr[$value[1]]=$acce;
 					if($value[1]==$numberOfWeek){
 						$dayworktime_arr=explode("->",$value);
 						$dayworktime=$dayworktime_arr[1];
@@ -371,7 +376,9 @@ where doctor_id=$doctor_id and hascomment='Y'
 
 	function inResultArray($arr,$str){
 		$count=count($arr);
-		for($i=0;$i<$count;$i++){
+		//print_r($arr);
+		for($i=0;$i<=$count;$i++){
+		//echo $arr[$i]["day"]."==".$str."<br />\r\n";
 			if(in_array($str,$arr[$i])){
 				return true;
 			}

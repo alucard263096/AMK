@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -23,7 +24,13 @@ public class UrlImageLoader extends Thread {
 	
 	private final static String ALBUM_PATH  
     = Environment.getExternalStorageDirectory() +"/"+ StaticVar.ProjectName+ "/imgcache/";
-	
+
+    public void setRunInHandle(boolean runInHandle) {
+        this.runInHandle = runInHandle;
+    }
+
+    boolean runInHandle=false;
+
 	ImageView imgView;
 	String url="";
 	Uri uri=null;
@@ -46,10 +53,17 @@ public class UrlImageLoader extends Thread {
         }
 	}
 
+
     public static Bitmap GetBitmap(String _url){
         File f=new File(ALBUM_PATH);
         String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
         return  BitmapFactory.decodeFile(ALBUM_PATH+name);
+    }
+
+    public static String GetImageCacheFileName(String _url){
+
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        return ALBUM_PATH+name;
     }
 
     public static void LoadImage(ImageView _imgView,String _url){
@@ -60,21 +74,34 @@ public class UrlImageLoader extends Thread {
     }
 
 	public void run(){
-		File f=new File(ALBUM_PATH);
-		if(f.exists()==false){
-			f.mkdirs();
-		}
-		try{
-			uri= GetImageURI(this.url,f);
+        RealRun();
+	}
+
+    public void RealRun(){
+        File f=new File(ALBUM_PATH);
+        if(f.exists()==false){
+            f.mkdirs();
+        }
+        try{
+            uri= GetImageURI(this.url,f);
             Log.i("imageloader_ready", "yes");
             if(uri!=null){
                 imgView.setImageURI(uri);
             }
-		}catch(Exception e){
+        }catch(Exception e){
             Log.i("imageloader_geterror",e.getMessage());
-			e.printStackTrace();
-		}
-	}
+            e.printStackTrace();
+        }
+    }
+
+    class LoadFromHandle{
+
+        public Handler mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                RealRun();
+            }
+        };
+    }
 	
 	public Uri GetImageURI(String path, File cache) throws Exception {
         String name = ToolsUtil.Encryption(path) + path.substring(path.lastIndexOf("."));

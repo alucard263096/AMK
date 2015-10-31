@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -30,7 +31,7 @@ import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 import java.util.ArrayList;
 
 
-public class DoctorCommentActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
+public class DoctorCommentActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

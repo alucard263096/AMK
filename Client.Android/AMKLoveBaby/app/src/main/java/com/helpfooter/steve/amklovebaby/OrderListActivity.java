@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderListLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Handler;
 
-public class OrderListActivity extends Activity implements View.OnClickListener {
+public class OrderListActivity extends MyActivity implements View.OnClickListener {
     OrderListLoadView orderListLoadView;
 
     @Override
@@ -68,6 +69,9 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         ((TextView) findViewById(R.id.btnShowAll)).setOnClickListener(this);
         if(hasloader==false){
         orderListLoadView=new OrderListLoadView(this,(PercentLinearLayout)findViewById(R.id.layoutOrderList),(ImageView)findViewById(R.id.imgNoOrder),(TextView)findViewById(R.id.txtNoOrder),"P");
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowFinished)));
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowOrdered)));
+            orderListLoadView.AddFilterTV(((TextView) findViewById(R.id.btnShowWaitpayment)));
         orderListLoadView.LoadList();
             hasloader=true;
         }
@@ -121,5 +125,9 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         orderListLoadView.Filter(String.valueOf(v.getTag()));
     }
 
+
+    public boolean PopupNotice(){
+        return false;
+    }
 
 }
