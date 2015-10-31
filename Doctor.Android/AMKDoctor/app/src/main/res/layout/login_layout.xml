@@ -75,7 +75,7 @@
                 android:textSize="14dp"
                 android:textColorHint="#aaaaaa"
                 app:layout_widthPercent="70%"
-                android:singleLine="true"
+                android:singleLine="false"
                 android:phoneNumber="true"
                 android:editable="true" />
 
