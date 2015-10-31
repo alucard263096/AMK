@@ -238,6 +238,11 @@ where doctor_id=$doctor_id and hascomment='Y'
 			}
 			$s[1]=$numberOfWeek;
 			$s["w"]=$numberOfWeek;
+			//echo  $numberOfWeek;
+			//echo  $today;
+			//print_r($workday_arr);
+			//echo "<br />";
+			
 			if($this->inResultArray($workday_arr,$numberOfWeek)){
 				$spworktime=$workday_arr[$numberOfWeek]["worktime"];
 				$worktimecount=count($spworktime);
@@ -307,7 +312,7 @@ where doctor_id=$doctor_id and hascomment='Y'
 					$acce=Array();
 					$acce[0]=0;
 					$acce["day"]=$value[1];
-					$workday_arr[]=$acce;
+					$workday_arr[$value[1]]=$acce;
 					if($value[1]==$numberOfWeek){
 						$dayworktime_arr=explode("->",$value);
 						$dayworktime=$dayworktime_arr[1];
@@ -371,7 +376,9 @@ where doctor_id=$doctor_id and hascomment='Y'
 
 	function inResultArray($arr,$str){
 		$count=count($arr);
-		for($i=0;$i<$count;$i++){
+		//print_r($arr);
+		for($i=0;$i<=$count;$i++){
+		//echo $arr[$i]["day"]."==".$str."<br />\r\n";
 			if(in_array($str,$arr[$i])){
 				return true;
 			}
