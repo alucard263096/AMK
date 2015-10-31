@@ -59,7 +59,7 @@ public class OrderDao extends AbstractDao {
                 "service int," +
                 "ability int," +
                 "comment varchar," +
-                "tag varchar,"+
+                "tag varchar," +
                 "sendmessage varchar )");
         util.execSQL(sql.toString(), new Object[]{});
     }
@@ -128,11 +128,6 @@ public class OrderDao extends AbstractDao {
 
 
 
-    public ArrayList<AbstractObj> getMessageNoticeList(){
-        return   super.getList(" status='P' and sendmessage<>'1' ");
-
-        // +" and datetime(order_time,'-15 minute')<=datetime('"+ DateFormat.format("HH:MM:SS", new Date()).toString()+"','start of second')");
-    }
 
     public ArrayList<OrderObj> getOrderList(){
         ArrayList<AbstractObj> lst=  super.getList("  status<>'D' order by created_time desc ");
@@ -144,7 +139,7 @@ public class OrderDao extends AbstractDao {
 
     }
 
-    public OrderObj getLatestOrder() {
+    public OrderObj getLatestOrder(boolean isGetSent) {
         Cursor cursor = null;
         try {
             util.open();
@@ -156,6 +151,7 @@ public class OrderDao extends AbstractDao {
                                     "and (strftime('%s',order_date|| ' ' ||order_time) - strftime('%s','now')) between 0 and 300 " +
                                     "and act='VC'" +
                                     "and status='P' " +
+                                    (isGetSent?" and sendmessage<>'1'":"")+
                                     " order by order_date,order_time  " +
                                     "limit 0,1",new String[] { });
             while (cursor.moveToNext()) {
@@ -174,6 +170,8 @@ public class OrderDao extends AbstractDao {
         }
         return null;
     }
+
+
 
     public void setPaymentSuccess(int id) {
         util.open();

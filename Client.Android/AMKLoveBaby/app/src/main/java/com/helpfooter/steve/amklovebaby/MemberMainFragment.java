@@ -88,17 +88,21 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
     }
 
     public void LoadMember(){
-        if(StaticVar.Member!=null){
-            ((TextView) memberview.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
-            if(StaticVar.Member.getPhoto().length()>0) {
-                ImageView img=((ImageView) memberview.findViewById(R.id.imgMyPhoto));
-                UrlImageLoader loader = new UrlImageLoader(img, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
-                loader.start();
+        try {
+            if (StaticVar.Member != null) {
+                ((TextView) memberview.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+                if (StaticVar.Member.getPhoto().length() > 0) {
+                    ImageView img = ((ImageView) memberview.findViewById(R.id.imgMyPhoto));
+                    UrlImageLoader loader = new UrlImageLoader(img, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
+                    loader.start();
+                }
+            } else {
+                ((TextView) memberview.findViewById(R.id.txtMyName)).setText("请登录");
+                ImageView img = ((ImageView) memberview.findViewById(R.id.imgMyPhoto));
+                img.setImageResource(R.drawable.logo1);
             }
-        }else {
-            ((TextView) memberview.findViewById(R.id.txtMyName)).setText("请登录");
-            ImageView img=((ImageView) memberview.findViewById(R.id.imgMyPhoto));
-            img.setImageResource(R.drawable.logo1);
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 

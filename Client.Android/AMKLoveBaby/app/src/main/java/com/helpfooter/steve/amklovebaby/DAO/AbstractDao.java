@@ -117,7 +117,7 @@ public abstract class AbstractDao {
 			util.open();
 			cursor = util
 					.rawQuery(
-							"select * from "+TableName+" where id=? ",new String[] { String.valueOf(id) });
+							"select * from " + TableName + " where id=? ", new String[]{String.valueOf(id)});
 			while (cursor.moveToNext()) {
 
 				AbstractObj obj=this.newRealObj();
@@ -140,5 +140,18 @@ public abstract class AbstractDao {
 	abstract AbstractObj newRealObj();
 
 
-
+	public void deleteNoInList(ArrayList<AbstractObj> lstObj){
+		try {
+			StringBuilder sb = new StringBuilder();
+			sb.append("0");
+			for (AbstractObj obj : lstObj) {
+				sb.append(",");
+				sb.append(obj.getId());
+			}
+			String sql = "delete from " + TableName + " where id not in (" + sb.toString() + ")";
+			util.execSQL(sql, new Object[]{});
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+	}
 }

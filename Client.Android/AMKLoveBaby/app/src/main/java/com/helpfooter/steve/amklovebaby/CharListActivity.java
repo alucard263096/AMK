@@ -9,35 +9,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.MessageListLoadView;
-import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
-public class CharListActivity extends MyActivity implements View.OnClickListener {
+public class CharListActivity extends Activity implements View.OnClickListener {
     ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_char_list);InitUI();
-        if(MemberMgr.CheckIsLogin(this)) {
-            InitData();
-            InitUI();
-        }
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (StaticVar.Member == null) {
-            this.finish();
-            return;
-        }
+
         InitData();
         InitUI();
     }
+
     private void InitData() {
 
     }
@@ -63,9 +51,7 @@ public class CharListActivity extends MyActivity implements View.OnClickListener
     }
 
 
-    public boolean PopupNotice(){
-        return false;
-    }
+
 
 
 }
