@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.ChatListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
@@ -49,7 +50,7 @@ import java.io.File;
 import org.apache.http.Header;
 import java.util.ArrayList;
 
-public class ChatActivity extends Activity implements View.OnClickListener {
+public class ChatActivity extends MyActivity implements View.OnClickListener {
 
     private Button mBtnSendtxt;// 发送文本
     private Button mBtnSendpic;// 发送图片
@@ -272,7 +273,7 @@ public class ChatActivity extends Activity implements View.OnClickListener {
             picturePath = cursor.getString(colunm_index);
             cursor.close();
             if(picturePath!=null && !picturePath.isEmpty()) {
-                this.uploadFile(picturePath,requestCode);
+                this.uploadFile(picturePath, requestCode);
             }
         }
 
@@ -300,5 +301,10 @@ public class ChatActivity extends Activity implements View.OnClickListener {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

@@ -1,6 +1,10 @@
 package com.helpfooter.steve.amklovebaby.Utils;
 
+import android.app.Activity;
+
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.MainActivity;
 
 import java.text.SimpleDateFormat;
@@ -49,6 +53,7 @@ public final class StaticVar {
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
+	public static IMyActivity CurrentActivity;
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
 	public static String DoctorFollowAPI="doctorfollow";
 	public static String UploadDoctorFollowAPI="uploaddoctorfollow";

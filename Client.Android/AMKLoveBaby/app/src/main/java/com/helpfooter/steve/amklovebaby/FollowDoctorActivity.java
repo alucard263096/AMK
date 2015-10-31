@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomControlView.FollowDoctorListLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.CustomObject.VerifyCodeButtonDisable;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
@@ -25,7 +26,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class FollowDoctorActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack{
+public class FollowDoctorActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack{
 
     String code;
     String title;
@@ -75,6 +76,7 @@ public class FollowDoctorActivity extends Activity implements View.OnClickListen
             lstLoad.LoadDoctorListData();
         }
     };
+
 
 
 }

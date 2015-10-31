@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderListLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Handler;
 
-public class OrderListActivity extends Activity implements View.OnClickListener {
+public class OrderListActivity extends MyActivity implements View.OnClickListener {
     OrderListLoadView orderListLoadView;
 
     @Override
@@ -124,5 +125,9 @@ public class OrderListActivity extends Activity implements View.OnClickListener 
         orderListLoadView.Filter(String.valueOf(v.getTag()));
     }
 
+
+    public boolean PopupNotice(){
+        return false;
+    }
 
 }

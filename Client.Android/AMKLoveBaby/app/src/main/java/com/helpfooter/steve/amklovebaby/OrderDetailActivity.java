@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderDetailLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
@@ -26,7 +27,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,View.OnClickListener {
+public class OrderDetailActivity extends MyActivity implements IWebLoaderCallBack,View.OnClickListener {
 
     OrderObj order=null;
 
@@ -118,5 +119,12 @@ public class OrderDetailActivity extends Activity implements IWebLoaderCallBack,
 //                loader.start();
                 return;
         }
+    }
+    public void SetCurrentActivity(){
+        StaticVar.CurrentActivity=null;
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

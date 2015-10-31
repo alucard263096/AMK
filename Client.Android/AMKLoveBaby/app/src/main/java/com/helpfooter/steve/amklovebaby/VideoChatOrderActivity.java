@@ -256,4 +256,8 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
 
         }
     }
+
+    public boolean PopupNotice(){
+        return false;
+    }
 }

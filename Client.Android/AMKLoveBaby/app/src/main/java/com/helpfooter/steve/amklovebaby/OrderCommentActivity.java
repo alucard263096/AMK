@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
@@ -32,7 +33,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 
-public class OrderCommentActivity extends Activity implements View.OnClickListener,
+public class OrderCommentActivity extends MyActivity implements View.OnClickListener,
         IWebLoaderCallBack{
 
     DoctorObj doctor;
@@ -188,4 +189,11 @@ public class OrderCommentActivity extends Activity implements View.OnClickListen
             }
         }
     };
+    public void SetCurrentActivity(){
+        StaticVar.CurrentActivity=null;
+    }
+
+    public boolean PopupNotice(){
+        return false;
+    }
 }

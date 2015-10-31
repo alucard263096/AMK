@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderSubmitInfoView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -27,7 +28,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class CharOrderSubmitActivity extends Activity  implements View.OnClickListener,IWebLoaderCallBack {
+public class CharOrderSubmitActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
 
     DoctorObj doctor;
     ImageView btnBack;
@@ -202,5 +203,9 @@ public class CharOrderSubmitActivity extends Activity  implements View.OnClickLi
             resultHandler.sendEmptyMessage(0);
 
         }
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.helpfooter.steve.amklovebaby;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -18,9 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
+import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.Common.VersionUpdateMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
+import com.helpfooter.steve.amklovebaby.CustomObject.VideoChatNotice;
 import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
@@ -29,6 +32,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
+import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
@@ -37,6 +41,7 @@ import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -45,7 +50,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class MainActivity extends MyFragmentActivity implements View.OnClickListener
+public class MainActivity extends MyFragmentActivity implements View.OnClickListener,IMyActivity
         ,HomeFragment.OnFragmentInteractionListener
         ,DoctorListFragment.OnFragmentInteractionListener
         ,NewsListFragment.OnFragmentInteractionListener
@@ -92,17 +97,23 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         StaticVar.density = metric.density;      // 屏幕密度（0.75 / 1.0 / 1.5）
         StaticVar.densityDpi = metric.densityDpi;  // 屏幕密度DPI（120 / 160 / 240）
         Log.i("screen_info_width",String.valueOf(StaticVar.width));
-        Log.i("screen_info_height",String.valueOf(StaticVar.height));
-        Log.i("screen_info_density",String.valueOf(StaticVar.density));
+        Log.i("screen_info_height", String.valueOf(StaticVar.height));
+        Log.i("screen_info_density", String.valueOf(StaticVar.density));
         Log.i("screen_info_Dpi", String.valueOf(StaticVar.densityDpi));
 
         MemberMgr.GetMemberInfoFromDb(this);
         versionUpdateMgr=new VersionUpdateMgr(this);
         versionUpdateMgr.startCheckVersion();
+
+
+        VideoChatNotice videoChatNotice=new VideoChatNotice();
+        videoChatNotice.start();
+
         StaticVar.MainForm=this;
 //        DoctorDao dao=new DoctorDao(this);
 //        dao.deleteTable();
 
+        SetCurrentActivity();
     }
 
     private void InitData() {
@@ -259,6 +270,15 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Toast.makeText(this,"i am resun",Toast.LENGTH_LONG).show();
+        SetCurrentActivity();
+    }
+    public void SetCurrentActivity(){
+        StaticVar.CurrentActivity=this;
+    }
     private void uploadFile(final String path,int fileType)
     {
         //获取上传文件的路径
@@ -293,7 +313,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
                             String[] arrResult = result.split("\\|");
                             if (arrResult != null && arrResult.length == 3) {
                                 String filename = arrResult[2];
-                                memberMainFragment.setMemberPhoto(filename,path);
+                                String url=StaticVar.ImageFolderURL+"member/"+filename;
+                                String cacheurl= UrlImageLoader.GetImageCacheFileName(url);
+                                ToolsUtil.copyFile(path, cacheurl);
+                                memberMainFragment.LoadMember();
                             }
                         }
                     }
@@ -310,6 +333,17 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     }
 
 
+    public void RefreshMember() {
+        memberMainFragment.LoadMember();
+    }
 
+    @Override
+    public boolean PopupNotice() {
+        return true;
+    }
 
+    @Override
+    public Activity GetMyActivity() {
+        return this;
+    }
 }

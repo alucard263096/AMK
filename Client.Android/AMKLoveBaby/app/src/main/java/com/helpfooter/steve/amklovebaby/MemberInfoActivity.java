@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.MemberPhotoLoadView;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 import java.util.logging.Handler;
 
 
-public class MemberInfoActivity extends Activity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
+public class MemberInfoActivity extends MyActivity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
 
     EditText txtName,txtBirth,txtHistory;
     Button btnLogout;
@@ -55,11 +56,21 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_info);
 
-        MemberMgr.GetMemberInfoFromDb(this);
+        if(MemberMgr.CheckIsLogin(this)) {
+            InitData();
+            InitUI();
+        }
 
-        InitUI();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (StaticVar.Member == null) {
+            this.finish();
+            return;
+        }
         InitData();
-
+        InitUI();
     }
 
     private void InitUI() {
@@ -147,6 +158,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
 
                 StaticVar.Member=null;
                 try{
+                    StaticVar.MainForm.RefreshMember();
                     StaticVar.MainForm.SetToHome();
                 }catch (Exception e){
                     e.printStackTrace();

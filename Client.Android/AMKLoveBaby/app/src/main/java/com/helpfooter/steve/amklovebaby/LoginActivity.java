@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.CustomObject.VerifyCodeButtonDisable;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
@@ -50,7 +51,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity  implements OnClickListener,IWebLoaderCallBack {
+public class LoginActivity extends MyActivity implements OnClickListener,IWebLoaderCallBack {
 
     String threadstatus;
     Button btnSendVerifyCode,btnLogin;
@@ -178,6 +179,7 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
                     StaticVar.Member=memberObj;
                     MemberDao memberDao=new MemberDao(LoginActivity.this);
                     memberDao.refreshMember(memberObj);
+                    StaticVar.MainForm.RefreshMember();
                     LoginActivity.this.finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "验证码不正确或者已过期", Toast.LENGTH_LONG).show();
@@ -186,7 +188,9 @@ public class LoginActivity extends Activity  implements OnClickListener,IWebLoad
         }
     };
 
-
+    public boolean PopupNotice(){
+        return false;
+    }
 
 
 }

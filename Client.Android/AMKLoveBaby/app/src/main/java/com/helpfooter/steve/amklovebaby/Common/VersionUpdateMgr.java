@@ -38,6 +38,8 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
 
     public void startCheckVersion(){
         VersionLoader loader=new VersionLoader(ctx);
+        loader.setIsCircle(true);
+        loader.setCircleSecond(3600);
         loader.setCallBack(this);
         loader.start();
     }
@@ -50,10 +52,14 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
             if(currentVersion.equals("")==false
                     && version.getVersion().equals(currentVersion)==false) {
                 this.version=version;
-                showUpdataDialoghandler.sendEmptyMessage(0);
+                if(displaydialog==false) {
+                    showUpdataDialoghandler.sendEmptyMessage(0);
+                }
             }
         }
     }
+
+    boolean displaydialog=false;
 
     Handler showUpdataDialoghandler = new Handler(){
         @Override
@@ -91,6 +97,7 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("STARTDOWNLOAD", "下载apk,更新");
                 downLoadApk();
+                displaydialog=false;
             }
         });
         //当点取消按钮时进行登录
@@ -98,10 +105,12 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
                 dialog.cancel();
+                displaydialog=false;
             }
         });
         dialog = builer.create();
         dialog.show();
+        displaydialog=true;
     }
 
 

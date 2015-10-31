@@ -62,8 +62,7 @@
                 app:layout_marginRightPercent="3%"
                 app:layout_widthPercent="27%"
                 android:scaleType="fitStart"
-                android:adjustViewBounds="true"
-                android:src="@drawable/babylogo"/>
+                android:adjustViewBounds="true"/>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,23 +72,23 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtActName"
                     android:textSize="17dp"
-                    android:text="标题"/>
+                    android:text=""/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtPrice"
-                    android:text="价格"/>
+                    android:text=""/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtBookingTime"
-                    android:text="预约时间"/>
+                    android:text=""/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtStatusName"
                     android:textColor="@color/mylightblue"
-                    android:text="预约状态"/>
+                    android:text=""/>
 
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -230,7 +229,7 @@
                         android:textColor="#cacaca"
                         android:gravity="right"
                         android:text=""
-                        android:tag="预约姓名"/>
+                        android:tag=""/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -259,7 +258,7 @@
                         android:id="@+id/txtMemberMobile"
                         android:textColor="#cacaca"
                         android:gravity="right"
-                        android:text="13780001142"
+                        android:text=""
                         android:tag=""/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <LinearLayout
@@ -289,7 +288,7 @@
                         android:id="@+id/txtMemberAge"
                         android:textColor="#cacaca"
                         android:gravity="right"
-                        android:text="23"
+                        android:text=""
                         android:tag=""/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <LinearLayout
@@ -319,7 +318,7 @@
                         android:id="@+id/txtMemberSex"
                         android:textColor="#cacaca"
                         android:gravity="right"
-                        android:text="女"
+                        android:text=""
                         android:tag=""/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <LinearLayout
@@ -349,7 +348,7 @@
                         android:id="@+id/txtMemberDescription"
                         android:textColor="#cacaca"
                         android:gravity="right"
-                        android:text="个别的一个班第一个被定义"
+                        android:text=""
                         android:tag=""/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <LinearLayout

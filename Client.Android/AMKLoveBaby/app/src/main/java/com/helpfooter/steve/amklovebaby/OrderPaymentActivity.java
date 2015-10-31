@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.AlipayMgr;
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
@@ -32,7 +33,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class OrderPaymentActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack{
+public class OrderPaymentActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack{
     int order_id=0;
     OrderObj order;
     ResultObj res;
@@ -179,5 +180,9 @@ public class OrderPaymentActivity extends Activity implements View.OnClickListen
             }
             paymentHandler.sendEmptyMessage(0);
         }
+    }
+
+    public boolean PopupNotice(){
+        return false;
     }
 }

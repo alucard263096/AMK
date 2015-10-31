@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -84,30 +85,42 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        if(MemberMgr.CheckIsLogin(this.getActivity())) {
-
-        }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if(StaticVar.Member==null){
-           MainActivity main= (MainActivity)this.getActivity();
-            main.SetToHome();
-
+    public void LoadMember(){
+        if(StaticVar.Member!=null){
+            ((TextView) memberview.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+            if(StaticVar.Member.getPhoto().length()>0) {
+                ImageView img=((ImageView) memberview.findViewById(R.id.imgMyPhoto));
+                UrlImageLoader loader = new UrlImageLoader(img, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
+                loader.start();
+            }
         }else {
-            ((TextView)this.getActivity().findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+            ((TextView) memberview.findViewById(R.id.txtMyName)).setText("请登录");
+            ImageView img=((ImageView) memberview.findViewById(R.id.imgMyPhoto));
+            img.setImageResource(R.drawable.logo1);
         }
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        if(StaticVar.Member==null){
+//           MainActivity main= (MainActivity)this.getActivity();
+//            main.SetToHome();
+//
+//        }else {
+//            ((TextView)this.getActivity().findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
+//        }
+//    }
 
+    View memberview;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_member_main, container, false);
+        memberview=view;
         initUI(view);
         return  view;
     }
@@ -123,26 +136,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         imgMyPhoto= ((ImageView) view.findViewById(R.id.imgMyPhoto));
         imgMyPhoto.setOnClickListener(this);
 
-        if(StaticVar.Member!=null){
-            ((TextView) view.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
-            if(StaticVar.Member.getPhoto().length()>0) {
-                UrlImageLoader loader = new UrlImageLoader(imgMyPhoto, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
-                loader.start();
-            }
-        }
-    }
-
-    public void setMemberPhoto(String filename,String filepath){
-        //Bitmap bitmap= BitmapFactory.decodeFile(filepath);
-        //imgMyPhoto.setImageBitmap(bitmap);
-        imgMyPhoto.setImageURI(Uri.parse(filepath));
-
-        StaticVar.Member.setPhoto(filename);
-        MemberDao dao=new MemberDao(this.getActivity());
-        dao.updateObj(StaticVar.Member);
-
-        MemberUpdateLoader loader=new MemberUpdateLoader(this.getActivity(),StaticVar.Member.id,"photo",filename);
-        loader.start();
+        ((TextView) view.findViewById(R.id.txtMyName)).setOnClickListener(this);
+        LoadMember();
     }
 
     @Override
@@ -152,9 +147,11 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
             case R.id.imgMyPhoto:
                 try
                 {
-                    intent = new Intent(Intent.ACTION_GET_CONTENT);
-                    intent.setType("image/*");
-                    this.getActivity().startActivityForResult(intent, 1);
+                    if(StaticVar.Member!=null) {
+                        intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
+                        this.getActivity().startActivityForResult(intent, 1);
+                    }
                 } catch (ActivityNotFoundException e) {
 
                 }
@@ -195,6 +192,13 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 intent.putExtra("title","帮助");
                 startActivity(intent);
                 return;
+            case R.id.txtMyName:
+                if(StaticVar.Member==null) {
+                    if(MemberMgr.CheckIsLogin(this.getActivity())){
+
+                    }
+                    return;
+                }
         }
     }
 

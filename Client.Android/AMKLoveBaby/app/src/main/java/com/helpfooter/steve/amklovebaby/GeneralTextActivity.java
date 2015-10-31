@@ -11,12 +11,13 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
-public class GeneralTextActivity extends Activity implements View.OnClickListener{
+public class GeneralTextActivity extends MyActivity implements View.OnClickListener{
 
     String code;
     String title;
@@ -53,5 +54,6 @@ public class GeneralTextActivity extends Activity implements View.OnClickListene
                 return;
         }
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DAO;
 
 import android.content.Context;
+import android.database.Cursor;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.NewsObj;
@@ -141,5 +142,44 @@ public class OrderDao extends AbstractDao {
         }
         return  lstr;
 
+    }
+
+    public OrderObj getLatestOrder() {
+        Cursor cursor = null;
+        try {
+            util.open();
+            cursor = util
+                    .rawQuery(
+                            "select *," +
+                                    "(strftime('%s',order_date|| ' ' ||order_time) - strftime('%s','now')) timespan from "+TableName+" " +
+                                    "where 1=1 " +
+                                    "and (strftime('%s',order_date|| ' ' ||order_time) - strftime('%s','now')) between 0 and 300 " +
+                                    "and act='VC'" +
+                                    "and status='P' " +
+                                    " order by order_date,order_time  " +
+                                    "limit 0,1",new String[] { });
+            while (cursor.moveToNext()) {
+                int second=cursor.getInt(cursor.getColumnIndex("timespan"));
+                OrderObj obj=new OrderObj();
+                obj.parseCursor(cursor);
+                return obj;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
+    }
+
+    public void setPaymentSuccess(int id) {
+        util.open();
+        String sql="update tb_order set status='P' where id=? ";
+        Object[] bindArgs = {id};
+        util.execSQL(sql.toString(), bindArgs);
+        util.close();
     }
 }

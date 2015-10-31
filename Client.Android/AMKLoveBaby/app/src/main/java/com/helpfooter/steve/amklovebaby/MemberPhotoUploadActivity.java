@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberPhotoUploadMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
+import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMemberPhotoUploadCallBack;
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
 import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
@@ -32,7 +33,7 @@ import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import java.util.ArrayList;
 
 
-public class MemberPhotoUploadActivity extends Activity implements View.OnClickListener,IMemberPhotoUploadCallBack {
+public class MemberPhotoUploadActivity extends MyActivity implements View.OnClickListener,IMemberPhotoUploadCallBack {
     GridLayout photolist;
     EditText txtTitle,txtDescription;
     @Override
@@ -148,4 +149,5 @@ public class MemberPhotoUploadActivity extends Activity implements View.OnClickL
         setResult(RESULT_OK, intent);
         this.finish();
     }
+
 }

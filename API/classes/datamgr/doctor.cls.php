@@ -217,14 +217,14 @@ where doctor_id=$doctor_id and hascomment='Y'
 			}
 		}
 		$today=date("Y-m-d");
-		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+		$lastday=date("Y-m-d", strtotime("+14 days", strtotime($today)));
 		$sql="select order_date, order_time from tb_order o
 			inner join tb_order_videochat ov on o.id=ov.order_id
 			 where doctor_id=$doctor_id and order_date>'$today' and order_date<='$lastday' and status<>'F' and status<>'D' and status<>'C' ";
 			$query = $this->dbmgr->query($sql);
 			$ordertime = $this->dbmgr->fetch_array_all($query); 
 		$today=date("Y-m-d");
-		$lastday=date("Y-m-d", strtotime("+1 months", strtotime($today)));
+		$lastday=date("Y-m-d", strtotime("+14 days", strtotime($today)));
 
 		$ret=array();
 		for($i=0;$i<30;$i++){
