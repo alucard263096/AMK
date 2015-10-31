@@ -259,7 +259,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 				}
 				break;
 				case R.id.txt_videoEnd:
-					EndChat();
+					endVideoDialog();
 
 					break;
 				case R.id.btn_speakControl:
@@ -309,6 +309,28 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 							public void onClick(DialogInterface dialog,
 												int which) {
 								destroyCurActivity();
+							}
+						})
+				.setNegativeButton("否", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				}).show();
+	}
+
+	private void endVideoDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("你希望完成预约吗 ?")
+				.setCancelable(false)
+				.setPositiveButton("是",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+												int which) {
+								EndChat();
 							}
 						})
 				.setNegativeButton("否", new DialogInterface.OnClickListener() {

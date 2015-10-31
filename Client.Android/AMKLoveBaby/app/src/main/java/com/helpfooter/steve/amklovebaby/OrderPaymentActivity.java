@@ -215,7 +215,7 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
         }
     }
 
-<<<<<<< HEAD
+
     //微信支付
     private class GetAccessTokenTask extends AsyncTask<Void, Void, GetAccessTokenResult> {
 
@@ -525,9 +525,9 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
         String packageSign = MD5.getMessageDigest(sb.toString().getBytes()).toUpperCase();
 
         return URLEncodedUtils.format(params, "utf-8") + "&sign=" + packageSign;
-=======
+    }
     public boolean PopupNotice(){
         return false;
->>>>>>> 970b7c7344d4788bdb2b0def47bc3fedf3507cd7
+
     }
 }

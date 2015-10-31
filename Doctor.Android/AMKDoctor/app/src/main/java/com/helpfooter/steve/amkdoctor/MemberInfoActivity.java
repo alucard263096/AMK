@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amkdoctor.Common.UrlImageLoader;
+import com.helpfooter.steve.amkdoctor.CustomControlView.MemberPhotoLoadView;
 import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DAO.MemberDao;
 import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
@@ -34,6 +35,8 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
     TextView txtName,txtSex,txtAge;
     TextView txtIntroduce,txtCredentials,txtExpert,btnFollow;
     LinearLayout layoutBusiness;
+    LinearLayout lstMemberPhotos;
+    boolean hasload=false;
     int memberid;
     String age;
     String sex;
@@ -43,6 +46,7 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.member_info);
 
         InitData();
@@ -78,6 +82,12 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         txtAge=(TextView)findViewById(R.id.txtAge);
         txtAge.setText("年龄:" + age);
 
+        lstMemberPhotos=(LinearLayout)findViewById(R.id.lstMemberPhotos);
+        if(hasload==false) {
+            MemberPhotoLoadView loadView = new MemberPhotoLoadView(this,memberid, lstMemberPhotos);
+            loadView.LoadPhotoList();
+            hasload = true;
+        }
 
     }
 

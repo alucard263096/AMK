@@ -43,7 +43,7 @@
             app:layout_marginBottomPercent="20%"
             app:layout_widthPercent="30%"
             android:layout_centerVertical="true"
-            android:text="结束聊天"
+            android:text="完成预约"
             />
     </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
     <include
@@ -67,7 +67,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_background"
             android:onClick="onEndCall"
-            android:text="退出"
+            android:text="临时退出"
             android:textColor="#ffffff" />
 
         <View
