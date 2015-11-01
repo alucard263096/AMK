@@ -1,4 +1,4 @@
-package com.helpfooter.steve.amklovebaby.CustomObject;
+package com.helpfooter.steve.amkdoctor.CustomObject;
 
 /**
  * Created by Steve on 2015/11/2.

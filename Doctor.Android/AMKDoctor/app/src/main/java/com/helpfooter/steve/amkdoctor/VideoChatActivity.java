@@ -30,6 +30,7 @@ import android.widget.Toast;
 import com.bairuitech.anychat.AnyChatBaseEvent;
 import com.bairuitech.anychat.AnyChatCoreSDK;
 import com.bairuitech.anychat.AnyChatDefine;
+import com.helpfooter.steve.amkdoctor.CustomObject.AnychatConfigEntity;
 import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
