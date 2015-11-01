@@ -211,7 +211,6 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
         //layout.setBackgroundColor(Color.parseColor("#ccaaee"));
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.82f,true);
         param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,true);
         layout.setLayoutParams(param);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -295,7 +294,9 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
 
         String strOrderTime = dateformat.format(date);
         lastchatTime.setText(strOrderTime);
-        lastchatTime.setTextSize(13);
+        if(message.getSendside().equals("D")){
+            lastchatTime.setTextColor(Color.RED);
+        }
 
         Log.i("video_chatName", message.getCreated_time());
         tipsLayout.addView(txtName);

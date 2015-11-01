@@ -111,7 +111,7 @@ public class MessageObj extends AbstractObj {
         this.id=Integer.parseInt(lstRowValue.get("id"));
         this.member_id=lstRowValue.get("member_id");
         this.name=lstRowValue.get("name");
-        this.created_time=lstRowValue.get("created_time");
+        this.created_time=lstRowValue.get("updated_date");
         this.doctor_id=Integer.parseInt(lstRowValue.get("doctor_id"));
         this.last_one = lstRowValue.get("last_one");
         this.description = lstRowValue.get("description");
