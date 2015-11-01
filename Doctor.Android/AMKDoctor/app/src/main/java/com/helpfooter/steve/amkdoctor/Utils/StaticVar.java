@@ -21,9 +21,10 @@ public final class StaticVar {
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
 	public static String ChatApi="Chat";
 	public static String ChatUpdateApi="ChatUpdate";
+	public static String MemberPhotoApi="memberphoto";
 	public static String ChatEndApi="ChatEnd";
 	public static String ChatEndTimeApi="ChatEndTime";
-	public static String CurrentVersion="1.0.0.3";
+	public static String CurrentVersion="1.0.0.2";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static String VideoChatServerIp="www.myhkdoc.com";
 	public static int VideoChatServerPort=8906;
@@ -43,6 +44,7 @@ public final class StaticVar {
 		dictHashMap.put(ChatEndApi,APIURL+"/Order/order_finish.php");
 		dictHashMap.put(ChatEndTimeApi,APIURL+"/Order/videochat_chattime.php");
 		dictHashMap.put(VersionApi,APIURL+"versiondoctor.xml");
+		dictHashMap.put(MemberPhotoApi,APIURL+"Member/member_photo.php");
 	}
 
 	public static String GetSystemTimeString(){
