@@ -173,6 +173,7 @@
                     android:layout_marginTop="10dp"
                     android:text="视频咨询/90元"
                     android:gravity="center"
+                    android:textSize="17dp"
                     android:background="#37A4D4"
                     android:textColor="#ffffff"
                     android:id="@+id/btnVedioChat"/>
@@ -183,6 +184,7 @@
                     app:layout_marginLeftPercent="1%"
                     android:layout_marginTop="10dp"
                     android:text="图文咨询/1元"
+                    android:textSize="17dp"
                     android:gravity="center"
                     android:background="#FD7CAD"
                     android:textColor="#ffffff"
@@ -317,14 +319,8 @@
                     android:layout_height="wrap_content"
                     app:layout_widthPercent="50%"
                     android:text="用户评论"
+                    android:textColor="@color/mydeepblue"
                     android:textSize="15dp"/>
-                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_widthPercent="50%"
-                        android:text="&gt;"
-                        android:gravity="right"
-                        android:textSize="15dp"/>
                     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
                 <LinearLayout
