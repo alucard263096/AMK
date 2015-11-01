@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
+import android.widget.ImageView;
 
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
 
@@ -24,5 +25,15 @@ public class SexObj  implements ISelectObj {
     @Override
     public String SelectedValue() {
         return isMale?"M":"F";
+    }
+
+    @Override
+    public boolean ShowLogo() {
+        return false;
+    }
+
+    @Override
+    public void LoadImage(ImageView img) {
+
     }
 }

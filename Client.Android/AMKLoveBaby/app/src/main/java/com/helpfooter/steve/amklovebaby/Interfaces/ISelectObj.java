@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amklovebaby.Interfaces;
 
+import android.widget.ImageView;
+
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 
 import java.util.ArrayList;
@@ -10,4 +12,6 @@ import java.util.ArrayList;
 public interface ISelectObj {
     String DisplayName();
     String SelectedValue();
+    boolean ShowLogo();
+    void LoadImage(ImageView img);
 }

@@ -1,5 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
+import android.widget.ImageView;
+
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
 
 /**
@@ -9,10 +11,14 @@ public class PaymentTypeObj implements ISelectObj {
 
     String paymentType;
     String paymentCode;
+    boolean showLogo;
+    int resId;
 
-    public PaymentTypeObj(String paymentType, String paymentCode) {
+    public PaymentTypeObj(String paymentType, String paymentCode,boolean showLogo,int resId) {
         this.paymentType = paymentType;
         this.paymentCode = paymentCode;
+        this.showLogo=showLogo;
+        this.resId=resId;
     }
 
     public String getPaymentType() {
@@ -39,5 +45,15 @@ public class PaymentTypeObj implements ISelectObj {
     @Override
     public String SelectedValue() {
         return paymentCode;
+    }
+
+    @Override
+    public boolean ShowLogo() {
+        return showLogo;
+    }
+
+    @Override
+    public void LoadImage(ImageView img) {
+        img.setImageResource(resId);
     }
 }

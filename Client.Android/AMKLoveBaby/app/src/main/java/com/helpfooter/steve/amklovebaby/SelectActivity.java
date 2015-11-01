@@ -64,6 +64,19 @@ public abstract class SelectActivity extends Activity implements View.OnClickLis
             PercentLinearLayout.LayoutParams layoutparam=ToolsUtil.getLayoutParamHeightWrap();
             layout.setLayoutParams(layoutparam);
 
+            if(obj.ShowLogo()) {
+                ImageView img = new ImageView(this);
+                PercentLinearLayout.LayoutParams imglayoutparam = ToolsUtil.getLayoutParamHeightWrap();
+                imglayoutparam.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f, true);
+                imglayoutparam.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f, true);
+                imglayoutparam.mPercentLayoutInfo.topMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f, true);
+                img.setAdjustViewBounds(true);
+                img.setLayoutParams(imglayoutparam);
+                obj.LoadImage(img);
+
+                layout.addView(img);
+            }
+
             TextView txtName=new MyTextView(this);
             PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
             param.setMargins(20, 15, 15, 15);

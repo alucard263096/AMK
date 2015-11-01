@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
+import android.widget.ImageView;
 
 import com.helpfooter.steve.amklovebaby.Interfaces.ISelectObj;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
@@ -94,5 +95,15 @@ public class WorkDayObj extends AbstractObj implements ISelectObj {
     @Override
     public String SelectedValue() {
         return date;
+    }
+
+    @Override
+    public boolean ShowLogo() {
+        return false;
+    }
+
+    @Override
+    public void LoadImage(ImageView img) {
+
     }
 }
