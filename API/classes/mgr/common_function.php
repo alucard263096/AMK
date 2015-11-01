@@ -113,10 +113,35 @@ function utf8_for_xml($string)
 	return $ret;
 }
 function CovertSpecialChat($tags){
-	$tags = iconv('utf-8', 'gbk', $tags);
-	$tags = preg_replace('/\xa3([\xa1-\xfe])/e', 'chr(ord(\1)-0x80)', $tags);
-	$tags = iconv( 'gbk', 'utf-8', $tags);
-	return $tags;
+//０１２３ＡＢＣＤＦＷＳ＼＂，．？＜＞｛｝［］＊＆＾％＃＠！～（）＋－｜：；
+	$value_change = array('０'=>'0'
+			,'＼'=>'\\'
+			,'＂'=>'"'
+			,'，'=>', '
+			,'．'=>'. '
+			,'？'=>'? '
+			,'＜'=>'<'
+			,'＞'=>'>'
+			,'｛'=>'{'
+			,'｝'=>'}'
+			,'［'=>'['
+			,'］'=>']'
+			,'＆'=>'&'
+			,'＾'=>'^'
+			,'％'=>'%'
+			,'＃'=>'#'
+			,'＠'=>'@'
+			,'！'=>'! '
+			,'～'=>'~'
+			,'（'=>'('
+			,'）'=>')'
+			,'＋'=>'+'
+			,'－'=>'-'
+			,'｜'=>'|'
+			,'：'=>':'
+			,'；'=>';'
+			,'、'=>', ');
+	return strtr($tags,$value_change);
 }
 function outResult($num,$message,$return=""){
 	$array=Array();
