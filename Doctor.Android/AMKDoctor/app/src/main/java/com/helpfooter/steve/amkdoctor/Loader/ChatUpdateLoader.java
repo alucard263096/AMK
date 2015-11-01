@@ -31,10 +31,6 @@ public class ChatUpdateLoader extends WebXmlLoader {
 		SendSide=sendside;
 		Content=content;
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 
 

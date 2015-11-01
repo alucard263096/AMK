@@ -24,7 +24,7 @@ public class MessageDao extends AbstractDao {
 
     }
     public ArrayList<AbstractObj> getMessageList(int doctorId){
-      return   super.getList("doctor_id= "+doctorId+"  order by created_time desc");
+      return   super.getList(" status='P' and doctor_id= "+doctorId+"  order by updated_date desc");
     }
 
     public MessageObj getObj(int doctorId){
@@ -64,10 +64,12 @@ public class MessageDao extends AbstractDao {
                 "member_id varchar," +
                 "name varchar," +
                 "created_time varchar," +
-                "last_one varchar," +
+                 "updated_date varchar," +
+                 "last_one varchar," +
                 "sendside varchar," +
                 "member_photo varchar," +
                  "sendmessage varchar," +
+                "status varchar," +
                 "description varchar)");
         util.execSQL(sql.toString(), new Object[]{});
 
@@ -89,9 +91,9 @@ public class MessageDao extends AbstractDao {
         MessageObj obj=(MessageObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_message (id,member_id,name,created_time,doctor_id,last_one,description,sendside,member_photo,sendmessage" +
-                ") values (?,?,?,?,?,?,?,?,?,?)");
-        Object[] bindArgs = {obj.getId(),obj.getMember_id(),obj.getName(),obj.getCreated_time(),obj.getDoctor_id(),obj.getLast_one(),obj.getDescription(),obj.getSendside(),obj.getMember_photo(),obj.getSendside()};
+        sql.append("insert into tb_message (id,member_id,name,created_time,doctor_id,last_one,description,sendside,member_photo,sendmessage,updated_date,status" +
+                ") values (?,?,?,?,?,?,?,?,?,?,?,?)");
+        Object[] bindArgs = {obj.getId(),obj.getMember_id(),obj.getName(),obj.getCreated_time(),obj.getDoctor_id(),obj.getLast_one(),obj.getDescription(),obj.getSendside(),obj.getMember_photo(),obj.getSendside(),obj.getUpdated_date(),obj.getStatus()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -106,8 +108,8 @@ public class MessageDao extends AbstractDao {
         MessageObj obj=(MessageObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_message set last_one=?, description=?,sendside=?,member_photo=? where id=? ");
-        Object[] bindArgs = {obj.getLast_one(),obj.getDescription(),obj.getSendside(),obj.getMember_photo(),obj.getId()};
+        sql.append("update tb_message set last_one=?, description=?,sendside=?,member_photo=?,updated_date=?,status=? where id=? ");
+        Object[] bindArgs = {obj.getLast_one(),obj.getDescription(),obj.getSendside(),obj.getMember_photo(),obj.getUpdated_date(),obj.getStatus(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();

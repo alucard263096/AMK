@@ -26,10 +26,6 @@ public class ChatEndTimeLoader extends WebXmlLoader {
 		Mini=min;
 
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 	@Override
 	public void doXml(ArrayList<HashMap<String,String>> lstRows) {

@@ -87,7 +87,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
     private void OnloadMessage() {
 
         if(this.mainlayout.getChildCount()>0) {
-            this.mainlayout.removeViews(0, this.mainlayout.getChildCount() - 1);
+            this.mainlayout.removeAllViews();
         }
         //mainlayout.removeAllViewsInLayout();
         for(MessageObj obj:lstMessages){
@@ -278,7 +278,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
-            date = dateformat.parse(message.getCreated_time());
+            date = dateformat.parse(message.getUpdated_date());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -288,7 +288,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         lastchatTime.setText(strOrderTime);
         lastchatTime.setTextSize(13);
 
-        Log.i("video_chatName", message.getCreated_time());
+        Log.i("video_chatName", message.getUpdated_date());
         tipsLayout.addView(txtName);
         tipsLayout.addView(lastchatTime);
 
@@ -339,8 +339,8 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         MessageDao dao=new MessageDao(this.ctx);
 
         ArrayList<AbstractObj> lstObj=dao.getMessageList(StaticVar.Doctor.getId());
-
-        for(AbstractObj obj:lstObjs) {
+        lstMessages.clear();
+        for(AbstractObj obj:lstObj) {
             lstMessages.add((MessageObj)obj);
         }
 
@@ -354,8 +354,9 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
                 {
                     try {
                         while(true) {
-                            sleep(1000000);
+
                             LoadList();
+                            sleep(30000);
 
                         }
                     } catch (InterruptedException e) {

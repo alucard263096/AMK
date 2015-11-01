@@ -74,6 +74,9 @@ public class MessageObj extends AbstractObj {
     String last_one;
     String description;
 
+
+
+    String updated_date;
     public String getSendmessage() {
         return sendmessage;
     }
@@ -83,6 +86,23 @@ public class MessageObj extends AbstractObj {
     }
 
     String sendmessage;
+    public String getUpdated_date() {
+        return updated_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String stauts) {
+        this.status = status;
+    }
+
+    String status;
+
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
+    }
     public String getSendside() {
         return sendside;
     }
@@ -113,6 +133,8 @@ public class MessageObj extends AbstractObj {
         setSendside(cursor.getString(cursor.getColumnIndex("sendside")));
         setMember_photo(cursor.getString(cursor.getColumnIndex("member_photo")));
         setSendmessage(cursor.getString(cursor.getColumnIndex("sendmessage")));
+        setUpdated_date(cursor.getString(cursor.getColumnIndex("updated_date")));
+        setStatus(cursor.getString(cursor.getColumnIndex("status")));
     }
 
     @Override
@@ -127,6 +149,8 @@ public class MessageObj extends AbstractObj {
         this.description = lstRowValue.get("description");
         this.sendside = lstRowValue.get("sendside");
         this.member_photo = lstRowValue.get("member_photo");
+        this.updated_date = lstRowValue.get("updated_date");
+        this.status = lstRowValue.get("status");
         //this.sendmessage = lstRowValue.get("sendmessage");
 
     }

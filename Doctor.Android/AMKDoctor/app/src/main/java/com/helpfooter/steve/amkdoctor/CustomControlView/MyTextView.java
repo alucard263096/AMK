@@ -28,10 +28,15 @@ public class MyTextView  extends TextView {
 
     public void init(Context context) {
         try {
-            //setTypeface(FontUtil.setFont(context));
+            setTypeface(FontUtil.setFont(context));
         }catch (Exception ex){
             Log.e("LoadFontError",ex.getMessage());
         }
-
+        setPadding(0, -1 * 10, 0, -1 * 10);
+    }
+    public void setTextSize(float size){
+        super.setTextSize(size);
+        int z=(int)size;
+        setPadding(0, -1 * z, 0, -1 * z);
     }
 }

@@ -96,106 +96,67 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
 
     public LinearLayout LoadBookerListData(BookerObj obj){
-        PercentLinearLayout toplayout=new PercentLinearLayout(ctx);
-        PercentLinearLayout.LayoutParams topparam=ToolsUtil.getLayoutParam();
-        topparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.19f,false);
-        topparam.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.03f,false);
-        topparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-        topparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-
-
-        toplayout.setBackgroundResource(R.drawable.cardlinearlayout);
-        // layout.setBackgroundColor(Color.parseColor("#ffffff"));
-        //String backgroundcolor=getBackgroundColor(i);
-        //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
-        toplayout.setLayoutParams(topparam);
-        toplayout.setOrientation(LinearLayout.HORIZONTAL);
-
-            PercentLinearLayout layout=new PercentLinearLayout(ctx);
-            PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-            param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.98f,false);
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
-            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
+        PercentLinearLayout fullLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams fullLayoutparam= ToolsUtil.getLayoutParamHeightWrap();
+        fullLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+        fullLayout.setOrientation(LinearLayout.VERTICAL);
+        fullLayout.setLayoutParams(fullLayoutparam);
 
 
 
-            layout.setBackgroundColor(Color.parseColor("#ffffff"));
-            //String backgroundcolor=getBackgroundColor(i);
-            //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
-            layout.setLayoutParams(param);
-            layout.setOrientation(LinearLayout.HORIZONTAL);
 
-            ImageView imgPhoto=getPhotoView(obj);
-            layout.addView(imgPhoto);
-            LinearLayout infolayout=getInfoLayout(obj);
-            layout.addView(infolayout);
-        toplayout.addView(layout);
-        LinearLayout line =ToolsUtil.GenPLine(this.ctx);
-        toplayout.addView(line);
-        return toplayout;
-            //layout.setTag(obj);
-            //layout.setOnClickListener(this);
-            //this.mainlayout.addView(layout);
+        PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.topMargin=20;
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        mainLayout.setOrientation(LinearLayout.HORIZONTAL);
+        mainLayout.setLayoutParams(param);
+
+        LinearLayout leftLayout=getLeftLayout(obj);
+        mainLayout.addView(leftLayout);
+
+
+        LinearLayout rightLayout=getRightLayout(obj);
+        mainLayout.addView(rightLayout);
+
+        fullLayout.addView(mainLayout);
+        LinearLayout line=ToolsUtil.GenPLine(ctx);
+        fullLayout.addView(line);
+        return fullLayout;
 
     }
 
+    private LinearLayout getRightLayout(BookerObj booker) {
+        PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.75f,true);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        mainLayout.setLayoutParams(param);
+
+        TextView txtTitle=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtTitleparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtTitle.setLayoutParams(txtTitleparam);
+        txtTitle.setTextSize(17);
+        txtTitle.setText("名称： " + booker.getCustname());
+
+        mainLayout.addView(txtTitle);
 
 
+        TextView txtTime=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtTimeparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtTime.setLayoutParams(txtTimeparam);
+        txtTime.setTextSize(14);
+        txtTime.setText("预约时间： " + booker.getOrderdate() + " " + booker.getOrdertime());
+        mainLayout.addView(txtTime);
 
 
-    public LinearLayout getInfoLayout(BookerObj booker){
-        PercentLinearLayout layout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.62f,true);
-        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        layout.setLayoutParams(param);
-        layout.setOrientation(LinearLayout.VERTICAL);
-
-
-        TextView txtOrderTime=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams titleparam=ToolsUtil.getLayoutParam();
-        titleparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        titleparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.13f,true);
-        txtOrderTime.setTextSize(15);
-        //txtTitle.setGravity(Gravity.CENTER_VERTICAL);
-        txtOrderTime.setLayoutParams(titleparam);
-        txtOrderTime.setText("预约时间： "+booker.getOrderdate()+" "+booker.getOrdertime());
-        TextPaint tp= txtOrderTime.getPaint();
-        tp.setFakeBoldText(true);
-        Log.i("video_chatTime", booker.getOrderdate()+" "+booker.getOrdertime());
-
-        TextView txtName=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams custnameparam=ToolsUtil.getLayoutParam();
-        custnameparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
-        txtName.setGravity(Gravity.CENTER_VERTICAL);
-        txtName.setLayoutParams(custnameparam);
-        txtName.setTextColor(Color.GRAY);
-        txtName.setText("名称： "+booker.getCustname());
-        txtName.setTextSize(15);
-        TextPaint tnp= txtName.getPaint();
-        tnp.setFakeBoldText(true);
-        Log.i("video_chatName", booker.getCustname());
-
-
-        PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
-        PercentLinearLayout.LayoutParams buttonparam=ToolsUtil.getLayoutParam();
-        buttonparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        buttonparam.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.17f,true);
-
-        tipsLayout.setLayoutParams(buttonparam);
-        tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-
-
-        TextView txtBeginChart=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParam();
-        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
-        upvoteparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.65f,true);
-        txtBeginChart.setLayoutParams(upvoteparam);
+        TextView txtBeginChart=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtBeginChartparam= ToolsUtil.getLayoutParamHeightWrap();
+        txtBeginChartparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.4f,true);
+        txtBeginChartparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,true);
+        txtBeginChart.setLayoutParams(txtBeginChartparam);
         txtBeginChart.setClickable(true);
-
-
         txtBeginChart.setBackgroundColor(Color.parseColor("#37A4D4"));
         txtBeginChart.setTextColor(Color.parseColor("#ffffff"));
         txtBeginChart.setGravity(Gravity.CENTER);
@@ -204,32 +165,51 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         txtBeginChart.setContentDescription("BUTTON");
         txtBeginChart.setTag(booker);
         txtBeginChart.setOnClickListener(this);
-        tipsLayout.addView(txtBeginChart);
+        mainLayout.addView(txtBeginChart);
 
-        layout.addView(txtOrderTime);
-        layout.addView(txtName);
-        layout.addView(tipsLayout);
-        return  layout;
+
+        return mainLayout;
     }
 
-    public ImageView getPhotoView(BookerObj obj){
-        ImageView img=new ImageView(this.ctx);
-        img.setScaleType(ImageView.ScaleType.FIT_XY);
-        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.33f,true);
-        String url=StaticVar.ImageFolderURL+"member/"+obj.getMember_photo();
-        Log.i("doctor_photo", url);
-        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
-        imgLoad.start();
+    private LinearLayout getLeftLayout(BookerObj booker) {
+
+        PercentLinearLayout mainLayout=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.21f,true);
+        param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        mainLayout.setLayoutParams(param);
+
+        ImageView img=new ImageView(ctx);
+        PercentLinearLayout.LayoutParams imgparam= ToolsUtil.getLayoutParamHeightWrap();
+        img.setAdjustViewBounds(true);
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        img.setLayoutParams(imgparam);
         img.setContentDescription("IMAGE");
-        img.setLayoutParams(param);
-        img.setTag(obj);
+        img.setTag(booker);
         img.setOnClickListener(this);
-        return img;
+        String url=StaticVar.ImageFolderURL+"member/"+booker.getMember_photo();
+        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
+        imageLoader.start();
+
+        TextView txt=new MyTextView(ctx);
+        PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();
+        txt.setLayoutParams(txtparam);
+        txt.setGravity(Gravity.CENTER);
+        txt.setText("点击查看");
+
+        mainLayout.addView(img);
+        mainLayout.addView(txt);
+        return mainLayout;
     }
 
 
-    private String getBackgroundColor(int number) {
+
+
+
+
+
+       private String getBackgroundColor(int number) {
         switch (number%4){
             case 0:
                 return "#FD7CAD";

@@ -43,6 +43,7 @@ import com.helpfooter.steve.amkdoctor.DataObjs.MessageObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.Loader.ChatLoader;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
+import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
 
@@ -53,19 +54,21 @@ public class MessageService extends Service {
     //获取消息线程
     private MessageThread messageThread = null;
     //加载最新视频预约列表
-    private OrderListThread orderlistThread = null;
+
 
     //加载最新聊天列表
     private ChatlistThread chatlistThread = null;
+
     private Intent messageIntent = null;
     private PendingIntent messagePendingIntent = null;
     private MessageService mService = this;
     private Notification messageNotification = null;
     private NotificationManager messageNotificatioManager = null;
-    private static final int messageSleepTIme = 3000;//600000;
+    private static final int messageSleepTIme = 600000;//600000;
     private int messageNotificationID = 1000;
     private BookerLoader ol;
    private NetworkInfo mWifi;
+    private MessageLoader messageLoader;
     public IBinder onBind(Intent intent) {
         return null;
     }
@@ -85,10 +88,20 @@ public class MessageService extends Service {
         messageNotification.flags = Notification.FLAG_AUTO_CANCEL;
         messageNotification.icon = R.drawable.icon;
         //开启线程
-        ol = new BookerLoader(mService.getApplicationContext());
-        orderlistThread = new OrderListThread();
-        orderlistThread.isRunning = true;
-        orderlistThread.start();
+
+
+         ol = new BookerLoader(mService.getApplicationContext());
+        ol.setIsCircle(true);
+        ol.setCircleSecond(600);
+        ol.setOnlyWifi(true);
+        ol.setConnectivityManager(connManager);
+        ol.start();
+        messageLoader = new MessageLoader(mService.getApplicationContext());
+        messageLoader.setIsCircle(true);
+        messageLoader.setCircleSecond(180);
+        messageLoader.setOnlyWifi(true);
+        messageLoader.setConnectivityManager(connManager);
+        messageLoader.start();
 
         messageThread = new MessageThread();
         messageThread.isRunning = true;
@@ -104,26 +117,9 @@ public class MessageService extends Service {
 
 
 
-    //获取所有订单数据
-    class OrderListThread extends Thread{
-        //运行状态，下一步骤有大用
-        public boolean isRunning = true;
-        public void run() {
-            while(isRunning){
-                try {
 
-                    //获取服务器消息
-                    if(mWifi.isConnected()) {
-                        ol.run();
-                    }
-                    //休息10分钟
-                    Thread.sleep(messageSleepTIme);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
+
+
 
 
     /**

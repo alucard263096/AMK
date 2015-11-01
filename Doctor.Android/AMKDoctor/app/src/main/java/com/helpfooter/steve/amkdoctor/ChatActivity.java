@@ -1,8 +1,10 @@
 package com.helpfooter.steve.amkdoctor;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -140,7 +142,8 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
                 mTextViewRecevier.setFocusableInTouchMode(true);
                 break;
             case R.id.txt_End:
-                EndChat();
+                endChatDialog();
+
 
                 break;
 
@@ -148,6 +151,27 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         }
     }
 
+    private void endChatDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("你希望结束聊天吗 ?")
+                .setCancelable(false)
+                .setPositiveButton("是",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                EndChat();
+                            }
+                        })
+                .setNegativeButton("否", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                }).show();
+    }
     private void SendFile(String filetype,int iCode) {
         try
         {

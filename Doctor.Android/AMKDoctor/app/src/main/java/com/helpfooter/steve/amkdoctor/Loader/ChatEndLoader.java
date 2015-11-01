@@ -25,10 +25,6 @@ public class ChatEndLoader extends WebXmlLoader {
 	    OrderId=orderid;
 
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 	@Override
 	public void doXml(ArrayList<HashMap<String,String>> lstRows) {

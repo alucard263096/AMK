@@ -27,10 +27,7 @@ public class MessageLoader extends WebXmlLoader {
 		super(ctx,"");
 		DoctorId=doctorid;
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
+
 
 
 

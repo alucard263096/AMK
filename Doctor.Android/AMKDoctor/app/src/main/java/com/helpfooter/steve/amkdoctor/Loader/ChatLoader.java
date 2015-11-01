@@ -29,10 +29,6 @@ public class ChatLoader extends WebXmlLoader {
 		super(ctx,"");
 	    OrderId=orderid;
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 	/*//不存数据库，直接取
 	public void GetChatData() {

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.helpfooter.steve.amklovebaby.LoginActivity"
+    tools:context="com.helpfooter.steve.amkdoctor.LoginActivity"
     android:orientation="vertical"
     android:background="#ffffff">
 
     <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         app:layout_widthPercent="100%"
         android:background="@color/myblue">
         <ImageView

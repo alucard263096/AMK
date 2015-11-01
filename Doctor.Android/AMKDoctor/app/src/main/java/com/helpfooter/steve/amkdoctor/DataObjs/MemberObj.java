@@ -84,7 +84,7 @@ public class MemberObj extends AbstractObj {
         this.id=Integer.parseInt(lstRowValue.get("id"));
         this.sex=lstRowValue.get("sex");
         this.name=lstRowValue.get("name");
-        this.age=Integer.parseInt(lstRowValue.get("birth"));
+        this.age=getDateYears(lstRowValue.get("birth"));
         this.photo=lstRowValue.get("photo");
 
     }

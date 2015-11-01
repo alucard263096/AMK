@@ -27,10 +27,6 @@ public class DoctorLoader extends WebXmlLoader {
 		super(ctx,"");
 		UserName=username;
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 
 	@Override

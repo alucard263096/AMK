@@ -27,10 +27,6 @@ public class MemberLoader extends WebXmlLoader {
 		super(ctx,"");
 		MemberId=member_id;
 	}
-	IWebLoaderCallBack callBack;
-	public void setCallBack(IWebLoaderCallBack val){
-		callBack=val;
-	}
 
 
 	@Override
