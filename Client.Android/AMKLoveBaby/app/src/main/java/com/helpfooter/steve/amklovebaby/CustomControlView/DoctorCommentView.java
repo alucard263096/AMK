@@ -99,7 +99,7 @@ public class DoctorCommentView {
 
             MyTextView txtCommentDate=new MyTextView(ctx);
             PercentLinearLayout.LayoutParams txtCommentDateparam= ToolsUtil.getLayoutParamHeightWrap();
-            txtCommentDateparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,true);
+            txtCommentDateparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.4f,true);
             txtCommentDate.setLayoutParams(txtCommentDateparam);
             txtCommentDate.setText(ToolsUtil.earseMobileNo(comment.getMember_name()));
             txtCommentDate.setTextSize(12);
