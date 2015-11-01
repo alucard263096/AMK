@@ -87,6 +87,7 @@ header("Content-type: text/xml");
 			if($value instanceof DateTime){
 				$value= $value->format('Y-m-d H:i:s');
 			}
+			$value=CovertSpecialChat($value);
 
 			$value_change = array('&'=>'&amp;'
 			,'#'=>'&#35;'
@@ -110,6 +111,37 @@ function utf8_for_xml($string)
 {
     $ret= preg_replace ('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
 	return $ret;
+}
+function CovertSpecialChat($tags){
+//０１２３ＡＢＣＤＦＷＳ＼＂，．？＜＞｛｝［］＊＆＾％＃＠！～（）＋－｜：；
+	$value_change = array('０'=>'0'
+			,'＼'=>'\\'
+			,'＂'=>'"'
+			,'，'=>', '
+			,'．'=>'. '
+			,'？'=>'? '
+			,'＜'=>'<'
+			,'＞'=>'>'
+			,'｛'=>'{'
+			,'｝'=>'}'
+			,'［'=>'['
+			,'］'=>']'
+			,'＆'=>'&'
+			,'＾'=>'^'
+			,'％'=>'%'
+			,'＃'=>'#'
+			,'＠'=>'@'
+			,'！'=>'! '
+			,'～'=>'~'
+			,'（'=>'('
+			,'）'=>')'
+			,'＋'=>'+'
+			,'－'=>'-'
+			,'｜'=>'|'
+			,'：'=>':'
+			,'；'=>';'
+			,'、'=>', ');
+	return strtr($tags,$value_change);
 }
 function outResult($num,$message,$return=""){
 	$array=Array();
