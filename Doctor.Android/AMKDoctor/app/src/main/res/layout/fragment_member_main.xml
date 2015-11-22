@@ -1,0 +1,316 @@
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.helpfooter.steve.amkdoctor.MemberMainFragment"
+    android:background="@color/newgray">
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/newgray" android:layout_marginBottom="10dp">
+
+        <!-- TODO: Update blank fragment layout -->
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="35%"
+            android:gravity="center"
+            android:background="@color/newblue"
+            android:orientation="vertical">
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+                <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:gravity="center">
+                    <com.helpfooter.steve.amkdoctor.CustomControlView.CircleImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:border_width="2dp"
+                        android:id="@+id/imgMyPhoto"
+                        app:border_color="#cccccc"
+                        android:src="@drawable/myaboutus" />
+                </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtMyName"
+                    android:gravity="center"
+                    android:text="我的名字"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+
+
+
+
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+        <!--蓝色部分结束-->
+        <!--第一行-->
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="10%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/txtService"
+                android:gravity="left"
+                android:text="诊所服务"
+                android:layout_marginLeft="20px"
+                app:layout_marginTopPercent="20%"
+                android:textSize="20dp" />
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="20%"
+            app:layout_widthPercent="100%"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgNormalChat"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/bar_actmember" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtNormalChat"
+                    android:gravity="center"
+                    android:text="图文咨询"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="1px"
+                android:background="#cccccc"
+                ></com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgVideoChat"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/bar_actvideochat" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtVideoChat"
+                    android:gravity="center"
+                    android:text="视频聊天"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="1px"
+                android:background="#cccccc"
+                ></com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgMessage"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/mynotice" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtMessage"
+                    android:gravity="center"
+                    android:text="消息中心"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+        <!--第二行-->
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="10%"
+            app:layout_marginTopPercent="1%"
+            app:layout_marginBottomPercent="1%"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/txtOtherService"
+                android:gravity="left"
+                android:text="其他服务"
+                android:layout_marginLeft="20px"
+                app:layout_marginTopPercent="20%"
+                android:textSize="20dp" />
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_heightPercent="20%"
+            app:layout_widthPercent="100%"
+            android:gravity="center"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgInfo"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/myinfo" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtInfo"
+                    android:gravity="center"
+                    android:text="个人信息"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="1px"
+                android:background="#cccccc"
+                ></com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgSecrit"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/mycon" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtSecrit"
+                    android:gravity="center"
+                    android:text="隐私政策"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="1px"
+                android:background="#cccccc"
+                ></com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33.33%"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="30%"
+                    app:layout_heightPercent="30%"
+                    app:layout_marginTopPercent="20%"
+
+                    android:id="@+id/imgUs"
+                    android:scaleType="centerInside"
+                    app:border_color="#cccccc"
+                    android:src="@drawable/myaboutus" />
+                <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="70%"
+                    app:layout_marginLeftPercent="2%"
+                    app:layout_marginRightPercent="2%"
+                    app:layout_marginBottomPercent="10%"
+                    android:id="@+id/txtUs"
+                    android:gravity="center"
+                    android:text="关于我们"
+                    android:textSize="17dp" />
+            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+</FrameLayout>
+
+

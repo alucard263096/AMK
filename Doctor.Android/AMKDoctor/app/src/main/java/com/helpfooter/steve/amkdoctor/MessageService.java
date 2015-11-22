@@ -35,6 +35,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;

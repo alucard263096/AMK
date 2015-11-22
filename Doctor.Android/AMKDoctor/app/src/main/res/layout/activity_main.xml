@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_heightPercent="7%"
-            android:background="#2EA3D7">
+            android:background="@color/newblue">
             <!--
             <ImageView
                 android:id="@+id/iv_logo"
@@ -48,7 +48,7 @@
                 android:autoText="false"
                 android:elegantTextHeight="false"
                 android:gravity="center"
-                android:textSize="24dp" />
+                android:textSize="23dp" />
         </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentRelativeLayout>
         <LinearLayout
             android:id="@+id/content_layout"

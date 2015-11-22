@@ -16,7 +16,7 @@
         android:layout_height="45dp"
         app:layout_widthPercent="100%"
         android:id="@+id/rl_layout"
-        android:background="@color/myblue">
+        android:background="@color/newblue">
 
     <ImageView
         android:id="@+id/btn_back"
@@ -120,7 +120,7 @@
             app:layout_widthPercent="12%"
             android:layout_height="35dp"
             app:layout_marginLeftPercent="1%"
-            android:background="@color/myblue"
+            android:background="@color/newblue"
             android:textColor="@color/white"
             android:gravity="center"
             android:text="图片" />
