@@ -118,9 +118,9 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     private void InitData() {
 
         WindowManager wm = this.getWindowManager();
-        Intent service = new Intent(this.getApplicationContext(),MessageService.class);
+      /*  Intent service = new Intent(this.getApplicationContext(),MessageService.class);
         this.getApplicationContext().startService(service);
-
+*/
         MemberMgr.GetMemberInfoFromDb(this);
 
         versionUpdateMgr=new VersionUpdateMgr(this);

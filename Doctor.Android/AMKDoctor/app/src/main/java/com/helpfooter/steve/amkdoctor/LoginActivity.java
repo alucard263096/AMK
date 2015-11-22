@@ -16,6 +16,7 @@ import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 import com.helpfooter.steve.amkdoctor.Utils.ToolsUtil;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
@@ -159,6 +160,7 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		intParams();
 		initView();
 		initLoginProgress();
@@ -168,6 +170,7 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 		versionUpdateMgr.startCheckVersion();
 
 	}
+
 
 	protected void intParams() {
 		configEntity = ConfigService.LoadConfig(this);
