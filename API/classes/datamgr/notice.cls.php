@@ -22,6 +22,19 @@
 	{
 		
 	}
+
+	public function getNoticeList($doctor_id,$lastupdate_time){
+		if($doctor_id==""){
+			return	outResult(-1,"doctor_id can not be null");
+		}
+		$doctor_id=parameter_filter($doctor_id);
+		$sql="select * from v_notice_doctor where doctor_id=$doctor_id ";
+		$sql.=" order by created_date desc";
+		//echo $sql;
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+	}
 	
 	public function sendOrderForDoctor($order){
 	
