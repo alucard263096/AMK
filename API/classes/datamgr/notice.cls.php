@@ -28,12 +28,33 @@
 			return	outResult(-1,"doctor_id can not be null");
 		}
 		$doctor_id=parameter_filter($doctor_id);
-		$sql="select * from v_notice_doctor where doctor_id=$doctor_id ";
+		$sql="select top 100 * from v_notice_doctor where doctor_id=$doctor_id ";
 		$sql.=" order by created_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		return $result;
+	}
+
+	
+	public function setNoticeRead($doctor_id,$id){
+		if($doctor_id==""){
+			return	outResult(-1,"doctor_id can not be null");
+		}
+		if($id==""){
+			return	outResult(-1,"id can not be null");
+		}
+		$sql="select * from tb_notice_doctor where notice_id=$id and doctor_id=$doctor_id ";
+		 $query = $this->dbmgr->query($sql);
+		 $result = $this->dbmgr->fetch_array_all($query); 
+		 if(count($result)==0){
+			$sql="insert into tb_notice_doctor (doctor_id,notice_id,haveread) values ($doctor_id,$id,'Y') ";
+			$query = $this->dbmgr->query($sql);
+		}else{
+		 
+			return	outResult(-1,"no this id record");
+		 }
+		return	outResult(0,"success");
 	}
 	
 	public function sendOrderForDoctor($order){
