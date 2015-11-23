@@ -29,7 +29,7 @@
 		}
 		$doctor_id=parameter_filter($doctor_id);
 		$sql="select top 100 * from v_notice_doctor where doctor_id=$doctor_id ";
-		$sql.=" order by created_date desc";
+		$sql.=" order by publish_date desc";
 		//echo $sql;
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
