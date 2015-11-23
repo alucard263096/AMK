@@ -50,10 +50,7 @@
 		 if(count($result)==0){
 			$sql="insert into tb_notice_doctor (doctor_id,notice_id,haveread) values ($doctor_id,$id,'Y') ";
 			$query = $this->dbmgr->query($sql);
-		}else{
-		 
-			return	outResult(-1,"no this id record");
-		 }
+		}
 		return	outResult(0,"success");
 	}
 	
