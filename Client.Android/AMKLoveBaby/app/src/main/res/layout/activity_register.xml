@@ -47,7 +47,7 @@
         app:layout_marginTopPercent="5%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"
-        android:background="@color/myred">
+        android:background="@color/myblue">
 
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
@@ -166,7 +166,7 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/myred"
+        android:background="@color/myblue"
         app:layout_marginTopPercent="3%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"
@@ -184,7 +184,7 @@
         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/myblue"
+            android:textColor="@color/myred"
             android:id="@+id/btnRegPP"
             android:gravity="center"
             android:text="&lt;&lt;服务条款及协议&gt;&gt;"/>
