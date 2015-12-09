@@ -1,27 +1,20 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ViewFlipper;
 
-import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
-import com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView;
 import com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView;
+import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,6 +84,22 @@ public class HomeFragment extends Fragment implements IMyFragment {
 
         mOrde=(LinearLayout)view.findViewById(R.id.order);
         mOrde.setOnClickListener(((MainActivity)this.getActivity()));
+
+        MyTextView textView = (MyTextView)view.findViewById(R.id.doctortext);
+        TextPaint tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.helpNews);
+        tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.MyInfo);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.myOrder);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
     }
 
     public void initBanner(View view)  {

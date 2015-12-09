@@ -12,25 +12,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#ffffff" android:layout_marginBottom="10dp">
-
     <!-- TODO: Update blank fragment layout -->
-        <com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView
-            android:id="@+id/imageSlider"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:flipInterval="5000"
-            app:layout_heightPercent="35%" >
-
-        </com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView>
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_heightPercent="36%"
-            app:layout_widthPercent="90%"
-            app:layout_marginTopPercent="2%"
+            app:layout_widthPercent="100%"
+            app:layout_marginTopPercent="0%"
             app:layout_marginBottomPercent="1%"
-            app:layout_marginLeftPercent="5%"
-            app:layout_marginRightPercent="5%">
+            app:layout_marginLeftPercent="0%"
+            app:layout_marginRightPercent="0%">
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -57,7 +48,10 @@
                     android:textSize="17dp"
                     android:textColor="#ffffff"
                     app:layout_marginLeftPercent="10%"
-                    android:gravity="bottom" />
+                    android:gravity="bottom"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:id="@+id/doctortext"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
@@ -85,16 +79,17 @@
                     android:textSize="17dp"
                     android:textColor="#ffffff"
                     app:layout_marginRightPercent="10%"
-                    android:gravity="bottom|right" />
+                    android:gravity="bottom|right"
+                    android:id="@+id/helpNews" />
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_heightPercent="33%"
-            app:layout_widthPercent="90%"
-            app:layout_marginLeftPercent="5%"
-            app:layout_marginRightPercent="5%" >
+            app:layout_widthPercent="100%"
+            app:layout_marginLeftPercent="0%"
+            app:layout_marginRightPercent="0%" >
 
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
@@ -122,7 +117,8 @@
                     android:textSize="17dp"
                     android:textColor="#ffffff"
                     app:layout_marginLeftPercent="10%"
-                    android:gravity="bottom" />
+                    android:gravity="bottom"
+                    android:id="@+id/MyInfo"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
@@ -150,9 +146,18 @@
                     android:textSize="17dp"
                     android:textColor="#ffffff"
                     app:layout_marginRightPercent="10%"
-                    android:gravity="bottom|right" />
+                    android:gravity="bottom|right"
+                    android:id="@+id/myOrder"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+        <com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_marginTopPercent="2%"
+            android:flipInterval="5000"
+            app:layout_heightPercent="31%" >
 
+        </com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 </FrameLayout>
