@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.helpfooter.steve.amklovebaby.HomeFragment"
-    android:background="#ffffff">
+    android:background="#F6F4F1">
+
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#ffffff" android:layout_marginBottom="10dp">
+        android:background="#F6F4F1"
+        android:layout_marginBottom="10dp">
     <!-- TODO: Update blank fragment layout -->
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
@@ -25,12 +27,12 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="54%"
+                app:layout_widthPercent="50%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#FD7CAD"
+                android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:id="@+id/doctor">
                 <ImageView
@@ -38,16 +40,16 @@
                     android:layout_height="match_parent"
                     app:layout_heightPercent="40%"
                     app:layout_marginLeftPercent="30%"
-                    app:layout_marginTopPercent="10%"
-                    android:src="@drawable/index_1" />
+                    app:layout_marginTopPercent="20%"
+                    android:src="@drawable/index_5" />
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="医生咨询"
-                    app:layout_heightPercent="40%"
+                    android:text="找医生"
+                    app:layout_heightPercent="30%"
                     android:textSize="17dp"
-                    android:textColor="#ffffff"
-                    app:layout_marginLeftPercent="10%"
+                    android:textColor="#000000"
+                    app:layout_marginLeftPercent="40%"
                     android:gravity="bottom"
                     android:clickable="false"
                     android:focusableInTouchMode="false"
@@ -56,33 +58,75 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="42%"
+                app:layout_widthPercent="50%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#F7CB20"
+                android:background="#F6F4F1"
                 android:orientation="vertical"
                 android:id="@+id/news">
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="100%"
+                    app:layout_heightPercent="50%"
+                    app:layout_marginLeftPercent="1%"
+                    app:layout_marginRightPercent="1%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_marginBottomPercent="1%"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_heightPercent="40%"
+                        app:layout_marginLeftPercent="20%"
+                        app:layout_marginTopPercent="10%"
+                        android:src="@drawable/index_6" />
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="快速提问"
+                        app:layout_heightPercent="40%"
+                        android:textSize="17dp"
+                        android:textColor="#000000"
+                        app:layout_marginRightPercent="20%"
+                        android:gravity="bottom|right"
+                        android:id="@+id/quickAsk" />
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_widthPercent="100%"
+                    app:layout_heightPercent="50%"
+                    app:layout_marginLeftPercent="1%"
+                    app:layout_marginRightPercent="1%"
+                    app:layout_marginTopPercent="1%"
+                    app:layout_marginBottomPercent="1%"
+                    android:background="#FFFFFF"
+                    android:orientation="vertical">
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_heightPercent="40%"
-                    app:layout_marginLeftPercent="30%"
+                    app:layout_marginLeftPercent="20%"
                     app:layout_marginTopPercent="10%"
-                    android:src="@drawable/index_2" />
+                    android:src="@drawable/index_7" />
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="健康资讯"
+                    android:text="视频会诊"
                     app:layout_heightPercent="40%"
                     android:textSize="17dp"
-                    android:textColor="#ffffff"
-                    app:layout_marginRightPercent="10%"
+                    android:textColor="#000000"
+                    app:layout_marginRightPercent="20%"
                     android:gravity="bottom|right"
                     android:id="@+id/helpNews" />
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -94,12 +138,12 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="38%"
+                app:layout_widthPercent="33%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#B9E5C3"
+                android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:id="@+id/member">
                 <ImageView
@@ -112,10 +156,10 @@
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="我的"
+                    android:text="健康咨询"
                     app:layout_heightPercent="30%"
                     android:textSize="17dp"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     app:layout_marginLeftPercent="10%"
                     android:gravity="bottom"
                     android:id="@+id/MyInfo"/>
@@ -123,12 +167,12 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="58%"
+                app:layout_widthPercent="33%"
                 app:layout_marginLeftPercent="1%"
                 app:layout_marginRightPercent="1%"
                 app:layout_marginTopPercent="1%"
                 app:layout_marginBottomPercent="1%"
-                android:background="#37A4D4"
+                android:background="#FFFFFF"
                 android:orientation="vertical"
                 android:id="@+id/order">
                 <ImageView
@@ -141,15 +185,47 @@
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="我的预约"
+                    android:text="健康食谱"
                     app:layout_heightPercent="20%"
                     android:textSize="17dp"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     app:layout_marginRightPercent="10%"
                     android:gravity="bottom|right"
                     android:id="@+id/myOrder"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="33%"
+                app:layout_marginLeftPercent="1%"
+                app:layout_marginRightPercent="1%"
+                app:layout_marginTopPercent="1%"
+                app:layout_marginBottomPercent="1%"
+                android:background="#FFFFFF"
+                android:orientation="vertical"
+                android:id="@+id/order1">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_heightPercent="40%"
+                    app:layout_marginLeftPercent="50%"
+                    app:layout_marginTopPercent="10%"
+                    android:src="@drawable/index_4" />
+                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="孕产常识"
+                    app:layout_heightPercent="20%"
+                    android:textSize="17dp"
+                    android:textColor="#000000"
+                    app:layout_marginRightPercent="10%"
+                    android:gravity="bottom|right"
+                    android:id="@+id/myOrder1"/>
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
         <com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView
             android:id="@+id/imageSlider"
             android:layout_width="match_parent"
@@ -160,4 +236,6 @@
 
         </com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
+
 </FrameLayout>
