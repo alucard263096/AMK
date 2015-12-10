@@ -157,7 +157,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(view.getId()==R.id.doctor){
             buttonBarClick(doctorBarButton);
         }
-        if(view.getId()==R.id.news){
+        if(view.getId()==R.id.quickAskQuestion){
             buttonBarClick(newsBarButton);
         }
         if(view.getId()==R.id.member){

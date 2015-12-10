@@ -61,7 +61,7 @@
         app:layout_marginTopPercent="5%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"
-        android:background="@color/myred">
+        android:background="@color/myblue">
 
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
@@ -151,7 +151,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/myred"
+        android:background="@color/myblue"
         app:layout_marginTopPercent="3%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"

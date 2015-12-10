@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="topbar_bg">#1B90E1</color>
+    <color name="topbar_bg">#38D165</color>
     <color name="bottomtab_normal">#c8bca5</color>
     <color name="bottomtab_press">#EA7598</color>
     <color name="line">#c8bca5</color>

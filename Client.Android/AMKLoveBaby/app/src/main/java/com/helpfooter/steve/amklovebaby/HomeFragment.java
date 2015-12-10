@@ -30,7 +30,7 @@ public class HomeFragment extends Fragment implements IMyFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private LinearLayout mDoctor,mNews,mMember,mOrde;
+    private LinearLayout mDoctor,mNews,mMember,mOrde,mQuickAskQuestion;
 
     private IndexBannerSilderView mImageSilder;
 
@@ -74,10 +74,13 @@ public class HomeFragment extends Fragment implements IMyFragment {
 
     private void initUI(View view) {
         mDoctor=(LinearLayout)view.findViewById(R.id.doctor);
-        mDoctor.setOnClickListener(((MainActivity)this.getActivity()));
+        mDoctor.setOnClickListener((MainActivity)this.getActivity());
 
-        mNews=(LinearLayout)view.findViewById(R.id.news);
-        mNews.setOnClickListener(((MainActivity)this.getActivity()));
+        mQuickAskQuestion = (LinearLayout)view.findViewById(R.id.quickAskQuestion);
+        mQuickAskQuestion.setOnClickListener((MainActivity)this.getActivity());
+
+        //mNews=(LinearLayout)view.findViewById(R.id.news);
+        //mNews.setOnClickListener(((MainActivity)this.getActivity()));
 
         mMember=(LinearLayout)view.findViewById(R.id.member);
         mMember.setOnClickListener(((MainActivity)this.getActivity()));
@@ -85,19 +88,27 @@ public class HomeFragment extends Fragment implements IMyFragment {
         mOrde=(LinearLayout)view.findViewById(R.id.order);
         mOrde.setOnClickListener(((MainActivity)this.getActivity()));
 
-        MyTextView textView = (MyTextView)view.findViewById(R.id.doctortext);
+        MyTextView textView = (MyTextView)view.findViewById(R.id.findDoctor);
         TextPaint tp = textView.getPaint();
         tp.setFakeBoldText(true);
 
-        textView = (MyTextView)view.findViewById(R.id.helpNews);
+        textView = (MyTextView)view.findViewById(R.id.quickAsk);
         tp = textView.getPaint();
         tp.setFakeBoldText(true);
 
-        textView = (MyTextView)view.findViewById(R.id.MyInfo);
+        textView = (MyTextView)view.findViewById(R.id.vedioDoctor);
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
 
-        textView = (MyTextView)view.findViewById(R.id.myOrder);
+        textView = (MyTextView)view.findViewById(R.id.healthAsk);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.newsList1);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.newsList2);
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
     }
