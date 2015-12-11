@@ -148,7 +148,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
-        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "我的", memberMainFragment);
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "个人中心", memberMainFragment);
     }
 
 
@@ -158,7 +158,10 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
             buttonBarClick(doctorBarButton);
         }
         if(view.getId()==R.id.quickAskQuestion){
-            buttonBarClick(newsBarButton);
+            //buttonBarClick(newsBarButton);
+            Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
+            intent2.putExtra("Id", "1");
+            startActivity(intent2);
         }
         if(view.getId()==R.id.member){
             buttonBarClick(memberMainBarButton);
