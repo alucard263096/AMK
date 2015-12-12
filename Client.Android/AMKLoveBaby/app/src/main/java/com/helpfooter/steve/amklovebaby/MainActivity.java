@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import com.helpfooter.steve.amklovebaby.Common.VersionUpdateMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.CustomObject.VideoChatNotice;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
@@ -154,25 +156,50 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.doctor){
-            buttonBarClick(doctorBarButton);
+        DoctorLoader loader = null;
+        DoctorObj obj = null;
+        Intent intent2 = null;
+        int id = view.getId();
+        switch (id)
+        {
+            case R.id.doctor:
+                buttonBarClick(doctorBarButton);
+                break;
+            case R.id.quickAskQuestion:
+                loader=new DoctorLoader(this);
+                obj = loader.GetDoctor(1);
+                intent2 = new Intent(this, CharOrderSubmitActivity.class);
+                intent2.putExtra("Id", obj.getId());
+                startActivity(intent2);
+                break;
+            case R.id.videoAskQuestion:
+                loader=new DoctorLoader(this);
+                obj = loader.GetDoctor(2);
+                intent2 = new Intent(this, VideoChatOrderActivity.class);
+                intent2.putExtra("Id", obj.getId());
+                startActivity(intent2);
+                break;
+            case R.id.askForHealth:
+                newsListFragment.SetCategory("0");
+                buttonBarClick(newsBarButton);
+                break;
+            case R.id.earlierStudy:
+                //Intent intent = new Intent(this, OrderListActivity.class);
+                //startActivity(intent);
+                //newsListFragment=new NewsListFragment();
+                newsListFragment.SetCategory("1");
+                buttonBarClick(newsBarButton);
+                break;
+            case R.id.pregnancy:
+                newsListFragment.SetCategory("2");
+                buttonBarClick(newsBarButton);
+                break;
+            default:
+                break;
         }
-        if(view.getId()==R.id.quickAskQuestion){
-            //buttonBarClick(newsBarButton);
-            Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
-            intent2.putExtra("Id", "1");
-            startActivity(intent2);
-        }
-        if(view.getId()==R.id.member){
-            buttonBarClick(memberMainBarButton);
-        }
-        if(view.getId()==R.id.order){
-            Intent intent = new Intent(this, OrderListActivity.class);
-            startActivity(intent);
-            return;
-        }
+
         for(BottomBarButton barButton:lstBottomBar){
-            if(view==barButton.GetEnteryLayout()){
+            if(view == barButton.GetEnteryLayout()){
                 buttonBarClick(barButton);
                 return;
             }
@@ -207,8 +234,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
      * @param transaction
      * @param fragment
      */
-    private void addOrShowFragment(FragmentTransaction transaction,
-                                   Fragment fragment) {
+    private void addOrShowFragment(FragmentTransaction transaction, Fragment fragment) {
 
         if(currentFragment==null){
             if(!fragment.isAdded()) {
@@ -217,6 +243,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
             if(fragment instanceof IMyFragment){
                 IMyFragment myFragment=(IMyFragment)fragment;
                 titleTextView.setText(myFragment.getTitle());
+                titleTextView.getPaint().setFakeBoldText(true);
             }
             currentFragment = fragment;
             return;
@@ -235,6 +262,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(fragment instanceof IMyFragment){
             IMyFragment myFragment=(IMyFragment)fragment;
             titleTextView.setText(myFragment.getTitle());
+            titleTextView.getPaint().setFakeBoldText(true);
         }
         currentFragment = fragment;
     }

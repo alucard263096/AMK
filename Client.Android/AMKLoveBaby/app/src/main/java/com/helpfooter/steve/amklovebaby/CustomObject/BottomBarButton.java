@@ -91,7 +91,7 @@ public class BottomBarButton {
         LinearLayout layout=GetEnteryLayout();
         layout.setBackgroundColor(Color.WHITE);
         TextView txt=GetTextView();
-        txt.setTextColor(Color.parseColor("#949494"));
+        txt.setTextColor(Color.parseColor("#000000"));
     }
 
     public  void SetActive(){
@@ -100,7 +100,7 @@ public class BottomBarButton {
         LinearLayout layout=GetEnteryLayout();
         //layout.setBackgroundColor(Color.parseColor("#EA7598"));
         TextView txt=GetTextView();
-        txt.setTextColor(Color.parseColor("#EA7598"));
+        txt.setTextColor(Color.parseColor("#38D165"));
     }
 
 

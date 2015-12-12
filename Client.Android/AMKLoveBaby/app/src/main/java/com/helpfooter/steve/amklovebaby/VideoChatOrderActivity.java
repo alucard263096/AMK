@@ -45,7 +45,7 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
     ImageView btnBack;
     Button btnSubmit;
 
-    TextView txtOrderDate,txtOrderTime,txtSex,txtMobile;
+    TextView txtOrderDate,txtOrderTime,txtSex,txtMobile, txtTitle;
     EditText txtName,txtAge,txtDescription;
 
 
@@ -76,6 +76,9 @@ public class VideoChatOrderActivity extends Activity implements View.OnClickList
     }
 
     private void InitUI() {
+        txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
+
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
 

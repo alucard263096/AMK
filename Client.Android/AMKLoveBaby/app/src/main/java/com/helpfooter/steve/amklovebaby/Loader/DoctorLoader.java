@@ -56,6 +56,11 @@ public class DoctorLoader extends WebXmlLoader {
 		}
 	}
 
+	public DoctorObj GetDoctor(int type)
+	{
+		DoctorDao dao = new DoctorDao(this.ctx);
+		return dao.GetDoctor(type);
+	}
 //	EventListFragment eventListFragment;
 //
 //	public EventListLoader(EventListFragment _eventListFragment){

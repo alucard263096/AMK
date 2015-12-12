@@ -34,7 +34,7 @@ public class CharOrderSubmitActivity extends MyActivity implements View.OnClickL
     ImageView btnBack;
     Button btnSubmit;
 
-    TextView txtSex,txtMobile;
+    TextView txtSex,txtMobile,txtTitle;
     EditText txtName,txtAge,txtDescription;
 
 
@@ -64,6 +64,9 @@ public class CharOrderSubmitActivity extends MyActivity implements View.OnClickL
         }
 
     private void InitUI() {
+        txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
+
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
 

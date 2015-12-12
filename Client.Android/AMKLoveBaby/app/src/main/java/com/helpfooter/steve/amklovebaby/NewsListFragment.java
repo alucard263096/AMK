@@ -36,6 +36,7 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String mCategory;
     NewsListLoadView lstLoad;
     private OnFragmentInteractionListener mListener;
 
@@ -59,6 +60,11 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
 
     public NewsListFragment() {
         // Required empty public constructor
+    }
+
+    public void SetCategory(String Category)
+    {
+        this.mCategory = Category;
     }
 
     @Override
@@ -103,6 +109,21 @@ public class NewsListFragment extends Fragment implements IMyFragment,View.OnCli
         udCategoryE =(LinearLayout)view.findViewById(R.id.udCategoryE);
         udCategoryF =(LinearLayout)view.findViewById(R.id.udCategoryF);
 
+        //switch (this.mCategory)
+        //{
+        //    case "0":
+        //        onClick(btnCategoryH);
+        //        break;
+        //   case "1":
+        //       onClick(btnCategoryE);
+        //       break;
+        //   case "2":
+        //       onClick(btnCategoryP);
+        //       break;
+        //   default:
+        //       onClick(btnCategoryH);
+        //       break;
+        //}
         onClick(btnCategoryH);
 
     }
