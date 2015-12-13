@@ -162,36 +162,15 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         int id = view.getId();
         switch (id)
         {
+            case R.id.videoAskQuestion:
+            case R.id.quickAskQuestion:
             case R.id.doctor:
                 buttonBarClick(doctorBarButton);
                 break;
-            case R.id.quickAskQuestion:
-                loader=new DoctorLoader(this);
-                obj = loader.GetDoctor(1);
-                intent2 = new Intent(this, CharOrderSubmitActivity.class);
-                intent2.putExtra("Id", obj.getId());
-                startActivity(intent2);
-                break;
-            case R.id.videoAskQuestion:
-                loader=new DoctorLoader(this);
-                obj = loader.GetDoctor(2);
-                intent2 = new Intent(this, VideoChatOrderActivity.class);
-                intent2.putExtra("Id", obj.getId());
-                startActivity(intent2);
-                break;
+            case R.id.pregnancy:
+            case R.id.earlierStudy:
             case R.id.askForHealth:
                 newsListFragment.SetCategory("0");
-                buttonBarClick(newsBarButton);
-                break;
-            case R.id.earlierStudy:
-                //Intent intent = new Intent(this, OrderListActivity.class);
-                //startActivity(intent);
-                //newsListFragment=new NewsListFragment();
-                newsListFragment.SetCategory("1");
-                buttonBarClick(newsBarButton);
-                break;
-            case R.id.pregnancy:
-                newsListFragment.SetCategory("2");
                 buttonBarClick(newsBarButton);
                 break;
             default:
