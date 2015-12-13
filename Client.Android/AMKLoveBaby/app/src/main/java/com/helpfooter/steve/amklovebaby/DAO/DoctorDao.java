@@ -5,11 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Steve on 2015/8/31.
@@ -22,7 +20,40 @@ public class DoctorDao extends AbstractDao {
 
 
     public ArrayList<AbstractObj> getDoctorList(){
-      return   super.getList(" status='A' order by general_score desc");
+        return   super.getList(" status='A' order by general_score desc");
+    }
+
+    public DoctorObj GetDoctor(int type)
+    {
+        Cursor cursor = null;
+        AbstractObj obj = null;
+        try {
+            util.open();
+            String sql = "";
+            if (type == 0) //获取图文会诊用户
+            {
+                sql = "select * from tb_doctor a where status='A' and enable_charchat = 'Y' order by general_score desc limit 1";
+            }
+            else //视频会诊用户
+            {
+                sql = "select * from tb_doctor a where status='A' and enable_videochat = 'Y' order by general_score desc limit 1";
+            }
+
+            cursor = util.rawQuery(sql,new String[] {  });
+            while (cursor.moveToNext()) {
+                obj=newRealObj();
+                obj.parseCursor(cursor);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+            util.close();
+        }
+        return (DoctorObj)obj;
     }
 
     @Override

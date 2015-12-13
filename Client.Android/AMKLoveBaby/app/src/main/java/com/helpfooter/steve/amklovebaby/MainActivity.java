@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
@@ -24,22 +23,12 @@ import com.helpfooter.steve.amklovebaby.Common.VersionUpdateMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amklovebaby.CustomObject.VideoChatNotice;
-import com.helpfooter.steve.amklovebaby.DAO.BannerDao;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
-import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
-import com.helpfooter.steve.amklovebaby.DAO.ParamsDao;
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.BannerObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
-import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
-import com.helpfooter.steve.amklovebaby.Loader.OrderListLoader;
-import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 import com.loopj.android.http.AsyncHttpClient;
@@ -161,28 +150,35 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
         doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
-        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "我的", memberMainFragment);
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "个人中心", memberMainFragment);
     }
 
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.doctor){
-            buttonBarClick(doctorBarButton);
+        DoctorLoader loader = null;
+        DoctorObj obj = null;
+        Intent intent2 = null;
+        int id = view.getId();
+        switch (id)
+        {
+            case R.id.videoAskQuestion:
+            case R.id.quickAskQuestion:
+            case R.id.doctor:
+                buttonBarClick(doctorBarButton);
+                break;
+            case R.id.pregnancy:
+            case R.id.earlierStudy:
+            case R.id.askForHealth:
+                newsListFragment.SetCategory("0");
+                buttonBarClick(newsBarButton);
+                break;
+            default:
+                break;
         }
-        if(view.getId()==R.id.news){
-            buttonBarClick(newsBarButton);
-        }
-        if(view.getId()==R.id.member){
-            buttonBarClick(memberMainBarButton);
-        }
-        if(view.getId()==R.id.order){
-            Intent intent = new Intent(this, OrderListActivity.class);
-            startActivity(intent);
-            return;
-        }
+
         for(BottomBarButton barButton:lstBottomBar){
-            if(view==barButton.GetEnteryLayout()){
+            if(view == barButton.GetEnteryLayout()){
                 buttonBarClick(barButton);
                 return;
             }
@@ -217,8 +213,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
      * @param transaction
      * @param fragment
      */
-    private void addOrShowFragment(FragmentTransaction transaction,
-                                   Fragment fragment) {
+    private void addOrShowFragment(FragmentTransaction transaction, Fragment fragment) {
 
         if(currentFragment==null){
             if(!fragment.isAdded()) {
@@ -227,6 +222,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
             if(fragment instanceof IMyFragment){
                 IMyFragment myFragment=(IMyFragment)fragment;
                 titleTextView.setText(myFragment.getTitle());
+                titleTextView.getPaint().setFakeBoldText(true);
             }
             currentFragment = fragment;
             return;
@@ -245,6 +241,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         if(fragment instanceof IMyFragment){
             IMyFragment myFragment=(IMyFragment)fragment;
             titleTextView.setText(myFragment.getTitle());
+            titleTextView.getPaint().setFakeBoldText(true);
         }
         currentFragment = fragment;
     }

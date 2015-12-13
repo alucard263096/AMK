@@ -1,27 +1,20 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ViewFlipper;
 
-import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
-import com.helpfooter.steve.amklovebaby.CustomControlView.ImageSilderView;
 import com.helpfooter.steve.amklovebaby.CustomControlView.IndexBannerSilderView;
+import com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +30,7 @@ public class HomeFragment extends Fragment implements IMyFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private LinearLayout mDoctor,mNews,mMember,mOrde;
+    private LinearLayout mDoctor,mQuickAskQuestion,mVideoAsk,mNews1,mNews2,mNews3;
 
     private IndexBannerSilderView mImageSilder;
 
@@ -81,16 +74,58 @@ public class HomeFragment extends Fragment implements IMyFragment {
 
     private void initUI(View view) {
         mDoctor=(LinearLayout)view.findViewById(R.id.doctor);
-        mDoctor.setOnClickListener(((MainActivity)this.getActivity()));
+        mDoctor.setOnClickListener((MainActivity)this.getActivity());
 
-        mNews=(LinearLayout)view.findViewById(R.id.news);
-        mNews.setOnClickListener(((MainActivity)this.getActivity()));
+        mQuickAskQuestion = (LinearLayout)view.findViewById(R.id.quickAskQuestion);
+        mQuickAskQuestion.setOnClickListener((MainActivity)this.getActivity());
 
-        mMember=(LinearLayout)view.findViewById(R.id.member);
-        mMember.setOnClickListener(((MainActivity)this.getActivity()));
+        mVideoAsk = (LinearLayout)view.findViewById(R.id.videoAskQuestion);
+        mVideoAsk.setOnClickListener((MainActivity)this.getActivity());
 
-        mOrde=(LinearLayout)view.findViewById(R.id.order);
-        mOrde.setOnClickListener(((MainActivity)this.getActivity()));
+        mNews1=(LinearLayout)view.findViewById(R.id.askForHealth);
+        mNews1.setOnClickListener(((MainActivity)this.getActivity()));
+
+        mNews2=(LinearLayout)view.findViewById(R.id.earlierStudy);
+        mNews2.setOnClickListener(((MainActivity)this.getActivity()));
+
+        mNews3=(LinearLayout)view.findViewById(R.id.pregnancy);
+        mNews3.setOnClickListener(((MainActivity)this.getActivity()));
+
+        MyTextView textView = (MyTextView)view.findViewById(R.id.findDoctor);
+        TextPaint tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.findDoctorDesc);
+        tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.quickAsk);
+        tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.quickAskDesc);
+        tp = textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.vedioDoctor);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.vedioDoctorDesc);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.healthAsk);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.newsList1);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
+        textView = (MyTextView)view.findViewById(R.id.newsList2);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
     }
 
     public void initBanner(View view)  {
