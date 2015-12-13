@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         app:layout_widthPercent="100%"
-        android:background="@color/myblue">
+        android:background="@color/newblue">
         <ImageView
             android:id="@+id/btnBack"
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="false"
-            android:text="快捷登录"
+            android:text="登录阿米卡"
             android:contentDescription="@null"
             android:textColor="#ffffff"
             app:layout_widthPercent="80%"
@@ -47,7 +47,7 @@
         app:layout_marginTopPercent="5%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"
-        android:background="@color/myblue">
+        android:background="@color/newblue">
 
         <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
@@ -122,7 +122,7 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/myblue"
+        android:background="@color/newblue"
         app:layout_marginTopPercent="3%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"

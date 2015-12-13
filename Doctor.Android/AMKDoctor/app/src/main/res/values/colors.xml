@@ -16,7 +16,8 @@
     <color name="myyello">#F7CB20</color>
     <color name="mygreen">#B9E5C3</color>
     <color name="mylightblue">#81CAE6</color>
-
+    <color name="newblue">#1C91E0</color>
+    <color name="newgray">#F1F1F1</color>
     //chatAny
     <color name="trans_white">#20ffffff</color>
     <color name="trans">#00000000</color>

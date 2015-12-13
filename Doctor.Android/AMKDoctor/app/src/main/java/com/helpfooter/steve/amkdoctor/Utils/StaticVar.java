@@ -1,8 +1,11 @@
 package com.helpfooter.steve.amkdoctor.Utils;
 
+import com.helpfooter.steve.amkdoctor.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
+import com.helpfooter.steve.amkdoctor.Interfaces.IMyActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -29,9 +32,9 @@ public final class StaticVar {
 	public static String VideoChatServerIp="www.myhkdoc.com";
 	public static int VideoChatServerPort=8906;
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
-
-
-
+    public static ArrayList<BottomBarButton> lstBottomBar=null;
+	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
+	public static IMyActivity CurrentActivity;
 	public static DoctorObj Doctor=null;
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");

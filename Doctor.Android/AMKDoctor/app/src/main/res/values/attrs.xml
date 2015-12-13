@@ -24,5 +24,9 @@
         <attr name="layout_paddingLeftPercent" format="string"/>
         <attr name="layout_paddingRightPercent" format="string"/>
     </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
 
 </resources>

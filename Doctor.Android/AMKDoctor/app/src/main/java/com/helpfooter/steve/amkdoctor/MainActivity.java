@@ -1,7 +1,7 @@
 package com.helpfooter.steve.amkdoctor;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,9 +17,7 @@ import com.helpfooter.steve.amkdoctor.CustomObject.MyFragmentActivity;
 import com.helpfooter.steve.amkdoctor.Interfaces.IMyFragment;
 import com.helpfooter.steve.amkdoctor.Loader.BannerLoader;
 import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
-import com.helpfooter.steve.amkdoctor.Loader.MemberLoader;
 import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
-import com.helpfooter.steve.amkdoctor.Utils.MyResourceIdUtil;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
 import java.util.ArrayList;
@@ -27,14 +25,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends MyFragmentActivity implements View.OnClickListener
         ,VedioChatListFragment.OnFragmentInteractionListener
-        ,NormalChatFragment.OnFragmentInteractionListener {
+        ,NormalChatFragment.OnFragmentInteractionListener
+        ,MemberMainFragment.OnFragmentInteractionListener{
 
     private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
 
-    private BottomBarButton VedioChatListBarButton,NormalChatButton;
+    private BottomBarButton VedioChatListBarButton,NormalChatButton,memberMainBarButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +83,21 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         bottomTabLayout=(LinearLayout)findViewById(R.id.ll_bottom_tab);
         contentLayout=(LinearLayout)findViewById(R.id.content_layout);
 
-        VedioChatListBarButton=new BottomBarButton(this.getApplicationContext(), "chatVideo", 0, 0, "视频会诊", new VedioChatListFragment(this) );
-        NormalChatButton=new BottomBarButton(this.getApplicationContext(), "chatNormal", 0, 0, "图文咨询", new NormalChatFragment(this));
+        VedioChatListBarButton=new BottomBarButton(this.getApplicationContext(), "chatVideo", R.drawable.bar_videochat, R.drawable.bar_actvideochat, "视频会诊", new VedioChatListFragment(this) );
+        NormalChatButton=new BottomBarButton(this.getApplicationContext(), "chatNormal", R.drawable.bar_normarchat, R.drawable.bar_actmember, "图文咨询", new NormalChatFragment(this));
+        memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "我", new MemberMainFragment(this));
+    }
+
+    public void InitBottomBar(){
+        lstBottomBar=new ArrayList<BottomBarButton>();
+        lstBottomBar.add(VedioChatListBarButton);
+        lstBottomBar.add(NormalChatButton);
+        lstBottomBar.add(memberMainBarButton);
+
+        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar, this);
+        StaticVar.lstBottomBar = lstBottomBar;
+        this.onClick(lstBottomBar.get(0).GetEnteryLayout());
+
     }
 
 
@@ -111,15 +123,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     }
 
 
-    public void InitBottomBar(){
-        lstBottomBar=new ArrayList<BottomBarButton>();
-        lstBottomBar.add(VedioChatListBarButton);
-        lstBottomBar.add(NormalChatButton);
 
-        BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar, this);
-        this.onClick(lstBottomBar.get(0).GetEnteryLayout());
-
-    }
 
     /**
      * 添加或者显示碎片
@@ -162,4 +166,6 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     public void onFragmentInteraction(Uri uri){
         //you can leave it empty
     }
+
+
 }

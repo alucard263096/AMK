@@ -157,7 +157,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         txtBeginChartparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,true);
         txtBeginChart.setLayoutParams(txtBeginChartparam);
         txtBeginChart.setClickable(true);
-        txtBeginChart.setBackgroundColor(Color.parseColor("#37A4D4"));
+        txtBeginChart.setBackgroundColor(Color.parseColor("#1C91E0"));
         txtBeginChart.setTextColor(Color.parseColor("#ffffff"));
         txtBeginChart.setGravity(Gravity.CENTER);
         txtBeginChart.setText("开始视频");
