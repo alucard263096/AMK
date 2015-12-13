@@ -83,7 +83,7 @@ where doctor_id=$doctor_id and hascomment='Y'
 	{
 		$lastupdate_time=parameter_filter($lastupdate_time);
 		$sql="select id, license,name,photo,office,title,bookingtime,introduce,credentials,expert
-		,enable_videochat,videochat_price,enable_charchat,charchat_price,status
+		,enable_videochat,videochat_price,enable_charchat,charchat_price,status,is_taiwan
 		,".$this->dbmgr->getIsNull("ms.general",1000)." as general_score
 		,".$this->dbmgr->getIsNull("ms.service",1000)." as service_score
 		,".$this->dbmgr->getIsNull("ms.ability",1000)." as ability_score
