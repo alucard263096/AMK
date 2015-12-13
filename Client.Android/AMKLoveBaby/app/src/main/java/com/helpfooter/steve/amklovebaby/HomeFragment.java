@@ -111,6 +111,10 @@ public class HomeFragment extends Fragment implements IMyFragment {
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
 
+        textView = (MyTextView)view.findViewById(R.id.vedioDoctorDesc);
+        tp=textView.getPaint();
+        tp.setFakeBoldText(true);
+
         textView = (MyTextView)view.findViewById(R.id.healthAsk);
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
