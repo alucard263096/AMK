@@ -76,11 +76,10 @@ public class HomeFragment extends Fragment implements IMyFragment {
         mDoctor=(LinearLayout)view.findViewById(R.id.doctor);
         mDoctor.setOnClickListener((MainActivity)this.getActivity());
 
-        mQuickAskQuestion = (LinearLayout)view.findViewById(R.id.quickAskQuestion);
-        mQuickAskQuestion.setOnClickListener((MainActivity)this.getActivity());
 
-        mVideoAsk = (LinearLayout)view.findViewById(R.id.videoAskQuestion);
-        mVideoAsk.setOnClickListener((MainActivity)this.getActivity());
+        ((LinearLayout)view.findViewById(R.id.lvTaiwanDoctor)).setOnClickListener((MainActivity) this.getActivity());
+        ((LinearLayout)view.findViewById(R.id.lvCharDoctor)).setOnClickListener((MainActivity) this.getActivity());
+        ((LinearLayout)view.findViewById(R.id.lvVideoDoctor)).setOnClickListener((MainActivity) this.getActivity());
 
         mNews1=(LinearLayout)view.findViewById(R.id.askForHealth);
         mNews1.setOnClickListener(((MainActivity)this.getActivity()));
@@ -107,11 +106,11 @@ public class HomeFragment extends Fragment implements IMyFragment {
         tp = textView.getPaint();
         tp.setFakeBoldText(true);
 
-        textView = (MyTextView)view.findViewById(R.id.vedioDoctor);
+        textView = (MyTextView)view.findViewById(R.id.quickShiping);
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
 
-        textView = (MyTextView)view.findViewById(R.id.vedioDoctorDesc);
+        textView = (MyTextView)view.findViewById(R.id.quickTuwen);
         tp=textView.getPaint();
         tp.setFakeBoldText(true);
 

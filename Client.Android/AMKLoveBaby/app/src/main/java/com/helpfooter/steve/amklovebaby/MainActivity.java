@@ -162,9 +162,11 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         int id = view.getId();
         switch (id)
         {
-            case R.id.videoAskQuestion:
-            case R.id.quickAskQuestion:
+            case R.id.lvCharDoctor:
+            case R.id.lvTaiwanDoctor:
+            case R.id.lvVideoDoctor:
             case R.id.doctor:
+                doctorListFragment.reload((String)view.getTag());
                 buttonBarClick(doctorBarButton);
                 break;
             case R.id.pregnancy:
