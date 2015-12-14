@@ -78,6 +78,7 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         View view= inflater.inflate(R.layout.fragment_doctor_list, container, false);
 
 
+
         DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list));
         lstLoad.LoadDoctorListData();
         //DoctorLoader loader=new DoctorLoader(this.getActivity());
@@ -115,6 +116,9 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
         return "医生咨询";
     }
 
+    public void reload(String search) {
+
+    }
 
 
     /**

@@ -156,6 +156,14 @@ public class DoctorObj extends AbstractObj {
         status=val;
     }
 
+    String is_taiwan;
+    public void  setIsTaiwan(String val){
+        is_taiwan=val;
+    }
+    public String  getIsTaiwan(){
+       return is_taiwan;
+    }
+
     @Override
     public void parseCursor(Cursor cursor) {
 
@@ -180,6 +188,7 @@ public class DoctorObj extends AbstractObj {
         setVideoquerycount(cursor.getInt(cursor.getColumnIndex("videoquerycount")));
         setCharquerycount(cursor.getInt(cursor.getColumnIndex("charquerycount")));
         setChat_time(cursor.getInt(cursor.getColumnIndex("chat_time")));
+        is_taiwan=cursor.getString(cursor.getColumnIndex("is_taiwan"));
     }
 
     @Override
@@ -207,6 +216,7 @@ public class DoctorObj extends AbstractObj {
         this.charquerycount=Integer.parseInt(lstRowValue.get("charquerycount"));
         this.chat_time=Integer.parseInt(lstRowValue.get("chat_time"));
 
+        is_taiwan=lstRowValue.get("is_taiwan");
     }
 
     public void parseXmlDataTableForStatistics(HashMap<String, String> lstRowValue) {
