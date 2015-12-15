@@ -60,6 +60,7 @@ public class DoctorListLoadView implements View.OnClickListener {
 
             ImageView imgPhoto=getPhotoView(obj);
             layout.addView(imgPhoto);
+
             LinearLayout infolayout=getInfoLayout(obj);
             layout.addView(infolayout);
 
@@ -98,6 +99,11 @@ public class DoctorListLoadView implements View.OnClickListener {
         PercentLinearLayout.LayoutParams nameRatioparam=ToolsUtil.getLayoutParamHeightWrap();
         nameRatiolayout.setLayoutParams(nameRatioparam);
         nameRatiolayout.setOrientation(LinearLayout.HORIZONTAL);
+
+        PercentLinearLayout layoutPrice = new PercentLinearLayout(this.ctx);
+        param = ToolsUtil.getLayoutParamHeightWrap();
+        layoutPrice.setLayoutParams(param);
+        layoutPrice.setOrientation(LinearLayout.HORIZONTAL);
 
         TextView txtName=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams nameparam=ToolsUtil.getLayoutParamHeightWrap();
@@ -138,6 +144,7 @@ public class DoctorListLoadView implements View.OnClickListener {
 
         layout.addView(nameRatiolayout);
         layout.addView(txtExpert);
+        layout.addView(layoutPrice);
         return  layout;
     }
 
