@@ -181,8 +181,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 parsActivity.onClick(StaticVar.lstBottomBar.get(0).GetEnteryLayout());
                 return;
             case R.id.imgMessage:
-               /* intent = new Intent(this.getActivity(), MemberInfoActivity.class);
-                startActivity(intent);*/
+               intent = new Intent(this.getActivity(), NoticeListActivity.class);
+                startActivity(intent);
                 return;
             case R.id.imgSecrit:
                 intent = new Intent(this.getActivity(), GeneralTextActivity.class);

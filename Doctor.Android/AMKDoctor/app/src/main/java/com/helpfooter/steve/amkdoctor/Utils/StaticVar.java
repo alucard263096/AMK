@@ -27,18 +27,22 @@ public final class StaticVar {
 	public static String MemberPhotoApi="memberphoto";
 	public static String ChatEndApi="ChatEnd";
 	public static String ChatEndTimeApi="ChatEndTime";
-	public static String CurrentVersion="1.0.0.3";
+	public static String CurrentVersion="1.0.0.4";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static String VideoChatServerIp="www.myhkdoc.com";
 	public static int VideoChatServerPort=8906;
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
     public static ArrayList<BottomBarButton> lstBottomBar=null;
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
+	public static String NoticApi="Notice";
+	public static String NoticReadApi="NoticeRead";
 	public static IMyActivity CurrentActivity;
 	public static DoctorObj Doctor=null;
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
 		dictHashMap.put(BannerApi,APIURL+"banner.php");
+		dictHashMap.put(NoticApi,APIURL+"notice/list.php");
+		dictHashMap.put(NoticReadApi,APIURL+"notice/read.php");
 		dictHashMap.put(BookerApi,APIURL+"Order/videochat.php");
 		dictHashMap.put(MessageApi,APIURL+"Order/charchat.php");
 		dictHashMap.put(ChatApi,APIURL+"Order/charchat_one.php");

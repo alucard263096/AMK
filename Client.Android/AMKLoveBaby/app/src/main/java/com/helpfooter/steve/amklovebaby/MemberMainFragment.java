@@ -232,7 +232,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
 
     @Override
     public String getTitle() {
-        return "我的";
+        return "我的资料";
     }
 
 
