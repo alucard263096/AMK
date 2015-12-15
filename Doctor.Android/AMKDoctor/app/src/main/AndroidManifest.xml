@@ -59,15 +59,19 @@
             android:name="MemberInfoActivity">
 
         </activity>
-<<<<<<< HEAD
+
         <activity
 
             android:name="GeneralTextActivity">
 
         </activity>
+        <activity
 
-=======
->>>>>>> b705870b3a0d6f23ac9292979b0ac8296096914b
+            android:name="NoticeListActivity">
+
+        </activity>
+
+
        <service
             android:name=".MessageService"
             android:enabled="true"

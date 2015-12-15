@@ -1,0 +1,59 @@
+<com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.helpfooter.steve.amkdoctor.NoticeListActivity">
+
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_heightPercent="7%"
+        app:layout_widthPercent="100%"
+        android:background="@color/newblue">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/back"
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <com.helpfooter.steve.amkdoctor.CustomControlView.MyTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:focusable="false"
+            android:text="消息列表"
+            android:contentDescription="@null"
+            android:textColor="#ffffff"
+            app:layout_widthPercent="80%"
+            app:layout_heightPercent="100%"
+            android:autoText="false"
+            android:elegantTextHeight="false"
+            android:gravity="center"
+            android:textSize="23dp" />
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/normal_notice_list"
+            >
+
+        </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+
+    </ScrollView>
+
+</com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
