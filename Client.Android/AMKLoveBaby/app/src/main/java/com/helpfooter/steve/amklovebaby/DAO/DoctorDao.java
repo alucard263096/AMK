@@ -82,6 +82,7 @@ public class DoctorDao extends AbstractDao {
                 "enable_charchat varchar," +
                 "charchat_price int," +
                 "status varchar," +
+                "is_taiwan varchar," +
                 "videoquerycount int," +
                 "charquerycount int," +
                 "chat_time int," +
@@ -108,10 +109,10 @@ public class DoctorDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_doctor (id, license, name,photo,title, office, bookingtime, introduce, credentials, expert" +
-                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status " +
-                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ",enable_videochat,videochat_price, enable_charchat, charchat_price, status,is_taiwan " +
+                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-        ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getChat_time()};
+        ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getIsTaiwan(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getChat_time()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
@@ -126,9 +127,9 @@ public class DoctorDao extends AbstractDao {
 
         StringBuffer sql = new StringBuffer();
         sql.append("update tb_doctor set license=?, name=?,photo=?,title=?, office=?, bookingtime=?, introduce=?, credentials=?, expert=?" +
-                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?,general_score=?,service_score=?,ability_score=?,videoquerycount=?,charquerycount=?,chat_time=? where id=? ");
+                ",enable_videochat=?,videochat_price=?, enable_charchat=?, charchat_price=?, status=?, is_taiwan=?,general_score=?,service_score=?,ability_score=?,videoquerycount=?,charquerycount=?,chat_time=? where id=? ");
         Object[] bindArgs = {obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
-                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getCharquerycount(),obj.getChat_time(),obj.getId()};
+                ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getIsTaiwan(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getCharquerycount(),obj.getChat_time(),obj.getId()};
         util.execSQL(sql.toString(),bindArgs);
 
         util.close();
