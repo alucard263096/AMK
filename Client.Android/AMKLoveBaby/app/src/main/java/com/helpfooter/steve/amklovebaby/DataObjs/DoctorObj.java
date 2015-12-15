@@ -2,8 +2,6 @@ package com.helpfooter.steve.amklovebaby.DataObjs;
 
 import android.database.Cursor;
 
-import com.helpfooter.steve.amklovebaby.FollowDoctorActivity;
-
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
@@ -111,6 +109,27 @@ public class DoctorObj extends AbstractObj {
     }
     public int getCharchatPrice(){
         return charchat_price;
+    }
+    public int getMaxPrice()
+    {
+        int price = 0;
+        if(enable_charchat == "Y" && enable_videochat == "Y")
+        {
+            price = charchat_price > videochat_price ? charchat_price : videochat_price;
+        }
+        else if(enable_charchat == "N" && enable_videochat == "Y")
+        {
+            price = videochat_price;
+        }
+        else if (enable_charchat == "Y" && enable_videochat == "N")
+        {
+            price = videochat_price;
+        }
+        else
+        {
+            price = 0;
+        }
+        return price;
     }
     public String getStatus(){
         return status;
