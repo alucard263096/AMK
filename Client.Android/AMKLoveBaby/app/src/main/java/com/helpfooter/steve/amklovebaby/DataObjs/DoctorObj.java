@@ -113,15 +113,15 @@ public class DoctorObj extends AbstractObj {
     public int getMaxPrice()
     {
         int price = 0;
-        if(enable_charchat == "Y" && enable_videochat == "Y")
+        if(enable_charchat.equals("Y") && enable_videochat.equals("Y"))
         {
             price = charchat_price > videochat_price ? charchat_price : videochat_price;
         }
-        else if(enable_charchat == "N" && enable_videochat == "Y")
+        else if(enable_charchat.equals("N") && enable_videochat.equals("Y"))
         {
             price = videochat_price;
         }
-        else if (enable_charchat == "Y" && enable_videochat == "N")
+        else if (enable_charchat.equals("Y") && enable_videochat.equals("N"))
         {
             price = videochat_price;
         }
