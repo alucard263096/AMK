@@ -51,8 +51,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -280,6 +278,16 @@ public class ToolsUtil {
         LinearLayout.LayoutParams pLineLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1);
         pLine.setLayoutParams(pLineLayout);
         pLine.setBackgroundColor(Color.parseColor("#cccccc"));
+
+        return pLine;
+    }
+
+    public static LinearLayout GenPLine2(Context ctx) {
+
+        LinearLayout pLine = new LinearLayout(ctx);
+        LinearLayout.LayoutParams pLineLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
+        pLine.setLayoutParams(pLineLayout);
+        pLine.setBackgroundColor(Color.parseColor("#919191"));
 
         return pLine;
     }
