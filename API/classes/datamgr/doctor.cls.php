@@ -42,6 +42,19 @@ where doctor_id=$doctor_id and hascomment='Y'
 		return $result;
 	}
 
+	public function getDoctorFollowCount($doctor_id){
+
+		$doctor_id=parameter_filter($doctor_id)+0;
+		$sql="select COUNT(1) from tb_doctor a
+inner join tb_member_follow_doctor b on a.id=b.doctor_id
+where a.id=$doctor_id";
+
+		$query = $this->dbmgr->query($sql);
+		$result = $this->dbmgr->fetch_array_all($query); 
+		return $result;
+
+	}
+
 	
 	public function getDoctorInfoByLoginId($login_id)
 	{
