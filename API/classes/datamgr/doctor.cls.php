@@ -45,7 +45,7 @@ where doctor_id=$doctor_id and hascomment='Y'
 	public function getDoctorFollowCount($doctor_id){
 
 		$doctor_id=parameter_filter($doctor_id)+0;
-		$sql="select COUNT(1) from tb_doctor a
+		$sql="select COUNT(1) count from tb_doctor a
 inner join tb_member_follow_doctor b on a.id=b.doctor_id
 where a.id=$doctor_id";
 
