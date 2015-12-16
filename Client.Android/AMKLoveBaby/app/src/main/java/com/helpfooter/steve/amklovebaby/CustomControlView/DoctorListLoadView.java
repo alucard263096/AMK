@@ -48,10 +48,10 @@ public class DoctorListLoadView implements View.OnClickListener {
         for(DoctorObj obj:lstDoctor){
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
             PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
             param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
             param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0f,false);
             //String backgroundcolor=getBackgroundColor(i);
             //layout.setBackgroundColor(Color.parseColor(backgroundcolor));
             layout.setLayoutParams(param);
@@ -126,7 +126,7 @@ public class DoctorListLoadView implements View.OnClickListener {
         layout0.setOrientation(LinearLayout.HORIZONTAL);
 
         PercentLinearLayout layout1=new PercentLinearLayout(this.ctx);
-        param1=ToolsUtil.getLayoutParamHeightWrap();
+        param1 = ToolsUtil.getLayoutParamHeightWrap();
         param1.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.80f, true);
         layout1.setLayoutParams(param1);
         layout1.setOrientation(LinearLayout.VERTICAL);
@@ -135,7 +135,8 @@ public class DoctorListLoadView implements View.OnClickListener {
         TextView txtName=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams paramName = ToolsUtil.getLayoutParamHeightWrap();
         paramName.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        paramName.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        //paramName.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        paramName.leftMargin = 27;
         txtName.setLayoutParams(paramName);
         txtName.setTextSize(17);
         txtName.setText(doctor.getName());
@@ -147,10 +148,10 @@ public class DoctorListLoadView implements View.OnClickListener {
 
         //医生信息
         TextView txtDoctorInfo = new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams paramOrganization = ToolsUtil.getLayoutParam();
-        paramOrganization.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-
-        txtDoctorInfo.setLayoutParams(paramOrganization);
+        PercentLinearLayout.LayoutParams paramInfo = ToolsUtil.getLayoutParam();
+        //paramInfo.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        paramInfo.leftMargin = 27;
+        txtDoctorInfo.setLayoutParams(paramInfo);
         txtDoctorInfo.setTextSize(15);
         txtDoctorInfo.setText(doctor.getOffice() + "   " + doctor.getTitle());
         txtDoctorInfo.setTextColor(Color.BLACK);
@@ -207,9 +208,8 @@ public class DoctorListLoadView implements View.OnClickListener {
         //描述
         TextView txtExpert=new MyTextView(this.ctx);
         PercentLinearLayout.LayoutParams paramExpert = ToolsUtil.getLayoutParam();
-        //paramExpert.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
-        //paramExpert.mPercentLayoutInfo.topMarginPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-        paramExpert.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        paramExpert.leftMargin = 27;
+        //paramExpert.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
 
         txtExpert.setPadding(0, 25, 0, 0);
         txtExpert.setLayoutParams(paramExpert);
@@ -223,10 +223,12 @@ public class DoctorListLoadView implements View.OnClickListener {
 
         //价格
         PercentLinearLayout layoutPrice = new PercentLinearLayout(this.ctx);
-        param = ToolsUtil.getLayoutParamHeightWrap();
-        param.mPercentLayoutInfo.heightPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,true);
-        param.mPercentLayoutInfo.rightMarginPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0f,true);
-        param.topMargin = 20;
+        param = ToolsUtil.getLayoutParam();
+        param.mPercentLayoutInfo.heightPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f,true);
+        param.mPercentLayoutInfo.rightMarginPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
+        //param.topMargin = 20;
+        //layoutPrice.setPadding(0,15,0,0);
+
         layoutPrice.setLayoutParams(param);
         layoutPrice.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -234,7 +236,9 @@ public class DoctorListLoadView implements View.OnClickListener {
         ImageView img=new ImageView(this.ctx);
         img.setScaleType(ImageView.ScaleType.FIT_START);
         img.setAdjustViewBounds(true);
-        param=ToolsUtil.getLayoutParamHeightWrap();
+        //img.setPadding(20, 15, 0, 0);
+        param.leftMargin = 27;
+        param=ToolsUtil.getLayoutParam();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.10f,true);
 
         if(doctor.getEnableCharchat().equals("Y")) {
@@ -250,8 +254,10 @@ public class DoctorListLoadView implements View.OnClickListener {
         img=new ImageView(this.ctx);
         img.setScaleType(ImageView.ScaleType.FIT_START);
         img.setAdjustViewBounds(true);
-        param=ToolsUtil.getLayoutParamHeightWrap();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,true);
+        //img.setPadding(10, 15, 10, 0);
+        param=ToolsUtil.getLayoutParam();
+        param.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.10f,true);
+        param.leftMargin = 10;
 
         if(doctor.getEnableVideochat().equals("Y")) {
             img.setImageResource(R.drawable.video1);
@@ -262,10 +268,11 @@ public class DoctorListLoadView implements View.OnClickListener {
         img.setLayoutParams(param);
         layoutPrice.addView(img);
 
-        TextView txtPrice = new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams paramPrice = ToolsUtil.getLayoutParamHeightWrap();
-
-        txtPrice.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+        //价格
+        TextView txtPrice = new TextView(this.ctx);
+        PercentLinearLayout.LayoutParams paramPrice = ToolsUtil.getLayoutParam();
+        txtPrice.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+        //txtPrice.setPadding(0,0,10,0);
         txtPrice.setLayoutParams(paramPrice);
         tp = txtPrice.getPaint();
         tp.setFakeBoldText(true);

@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import org.w3c.dom.Text;
 
@@ -55,16 +57,25 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         btnBack.setOnClickListener(this);
 
         imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.height = 200;
+        param.width = 200;
+        param.leftMargin = 20;
+        param.topMargin = 20;
+        imgPhoto.setLayoutParams(param);
         UrlImageLoader il=new UrlImageLoader(imgPhoto, StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto());
 
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(doctor.getName());
+        txtName.setTextColor(Color.BLACK);
         txtName.getPaint().setFakeBoldText(true);;
 
         txtOfficeTitle=(TextView)findViewById(R.id.txtOfficeTitle);
-        txtOfficeTitle.setText(doctor.getOffice() + "/" + doctor.getTitle());
+        txtOfficeTitle.setText(doctor.getOffice() + "  " + doctor.getTitle());
+        txtOfficeTitle.setTextColor(Color.parseColor("#919191"));
+        txtOfficeTitle.getPaint().setFakeBoldText(true);
 
-        txtWorktime=(TextView)findViewById(R.id.txtOpenHour);
+        /*txtWorktime=(TextView)findViewById(R.id.txtOpenHour);
         txtWorktime.setText("坐诊时间:"+doctor.getBookingtime());
 
         txtVideoQuerycount=(TextView)findViewById(R.id.txtVideoQueryCount);
@@ -74,7 +85,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         txtCharQuerycount.setText(String.valueOf("图文咨询:"+doctor.getCharquerycount())+"次");
 
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
-        txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));
+        txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));*/
 
         if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
             layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
