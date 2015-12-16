@@ -43,7 +43,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -86,6 +85,12 @@
             android:name=".PaymentSuccActivity"
             android:label="@string/title_activity_payment_succ"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="amklovebaby" android:pathPrefix="/xxx/success" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
