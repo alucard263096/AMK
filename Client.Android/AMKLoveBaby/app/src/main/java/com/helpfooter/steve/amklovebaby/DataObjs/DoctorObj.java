@@ -25,6 +25,16 @@ public class DoctorObj extends AbstractObj {
     String status;
     int general_score;
 
+    public int getFollowCount() {
+        return followCount;
+    }
+
+    public void setFollowCount(int followCount) {
+        this.followCount = followCount;
+    }
+
+    int followCount;
+
     public int getChat_time() {
         return chat_time;
     }
@@ -69,6 +79,10 @@ public class DoctorObj extends AbstractObj {
 
     public void setVideoquerycount(int videoquerycount) {
         this.videoquerycount = videoquerycount;
+    }
+
+    public  int TotalHandleCount(){
+        return getCharquerycount()+getVideoquerycount();
     }
 
     int charquerycount;
@@ -208,6 +222,7 @@ public class DoctorObj extends AbstractObj {
         setCharquerycount(cursor.getInt(cursor.getColumnIndex("charquerycount")));
         setChat_time(cursor.getInt(cursor.getColumnIndex("chat_time")));
         is_taiwan=cursor.getString(cursor.getColumnIndex("is_taiwan"));
+        followCount=cursor.getInt(cursor.getColumnIndex("follow_count"));
     }
 
     @Override
@@ -247,6 +262,11 @@ public class DoctorObj extends AbstractObj {
         this.videoquerycount=Integer.parseInt(lstRowValue.get("videoquerycount"));
         this.charquerycount=Integer.parseInt(lstRowValue.get("charquerycount"));
         this.chat_time=Integer.parseInt(lstRowValue.get("chat_time"));
+
+    }
+    public static int parseXmlDataTableForFollowCount(HashMap<String, String> lstRowValue) {
+
+        return Integer.parseInt(lstRowValue.get("count"));
 
     }
     public int getGeneralScore() {

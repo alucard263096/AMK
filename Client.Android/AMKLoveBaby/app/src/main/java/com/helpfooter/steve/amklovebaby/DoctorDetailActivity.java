@@ -23,6 +23,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.MemberFollowDoctorObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorCommentLoader;
+import com.helpfooter.steve.amklovebaby.Loader.DoctorFollowCountLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
@@ -166,6 +167,9 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
         DoctorStatisticsLoader statisticsLoader=new DoctorStatisticsLoader(this,id);
         statisticsLoader.start();
+
+        DoctorFollowCountLoader followCountLoader=new DoctorFollowCountLoader(this,id);
+        followCountLoader.start();
     }
 
     @Override
