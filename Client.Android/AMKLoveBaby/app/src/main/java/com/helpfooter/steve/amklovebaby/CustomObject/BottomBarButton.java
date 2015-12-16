@@ -72,8 +72,8 @@ public class BottomBarButton {
 
         PercentLinearLayout.LayoutParams param=new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo=new PercentLayoutHelper.PercentLayoutInfo();
-        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.6f,false);
-        layoutinfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.1f,false);
+        layoutinfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,false);
+        layoutinfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,false);
         layoutinfo.fillLayoutParams(param,PercentLinearLayout.LayoutParams.MATCH_PARENT,PercentLinearLayout.LayoutParams.MATCH_PARENT);
         param.mPercentLayoutInfo=layoutinfo;
 
@@ -133,7 +133,7 @@ public class BottomBarButton {
         //txtParam.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         txtView.setText(displayName);
         txtView.setTextColor(Color.parseColor("#949494"));
-        txtView.setTextSize(12);
+        txtView.setTextSize(11);
         txtView.setLayoutParams(param);
         //txtView.setBackgroundColor(Color.BLUE);
         return  txtView;

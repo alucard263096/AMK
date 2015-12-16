@@ -88,6 +88,7 @@ public class DoctorDao extends AbstractDao {
                 "chat_time int," +
                 "service_score int," +
                 "ability_score int," +
+                "follow_count int," +
                 "general_score int)");
         util.execSQL(sql.toString(), new Object[]{});
 
@@ -110,7 +111,7 @@ public class DoctorDao extends AbstractDao {
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_doctor (id, license, name,photo,title, office, bookingtime, introduce, credentials, expert" +
                 ",enable_videochat,videochat_price, enable_charchat, charchat_price, status,is_taiwan " +
-                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time,follow_count) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)");
         Object[] bindArgs = {obj.getId(),obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
         ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getIsTaiwan(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getChat_time()};
         util.execSQL(sql.toString(),bindArgs);
@@ -146,6 +147,17 @@ public class DoctorDao extends AbstractDao {
 
         util.close();
 
+    }
+
+    public void updateFollowCount(int doctor_id,int count){
+        util.open();
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("update tb_doctor set follow_count=? where id=? ");
+        Object[] bindArgs = {count,doctor_id};
+        util.execSQL(sql.toString(),bindArgs);
+
+        util.close();
     }
 
     @Override
