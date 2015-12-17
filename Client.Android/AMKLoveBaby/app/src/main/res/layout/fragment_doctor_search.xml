@@ -15,17 +15,31 @@
             android:layout_height="match_parent"
             android:background="@drawable/view_raduis"
             app:layout_widthPercent="90%"
-            app:layout_marginLeftPercent="5%">
-            <SearchView
+            app:layout_marginLeftPercent="5%" android:orientation="horizontal">
+            <com.helpfooter.steve.amklovebaby.CustomControlView.MyEditText
                 android:id="@+id/txtSearch"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:iconifiedByDefault="true"
-                android:inputType="textCapWords"
+                android:layout_height="wrap_content"
+                android:hint="输入医生、科室、医院进行搜索"
+                android:gravity="left"
+                android:maxLines="1"
+                android:focusable="true"
+                android:textSize="16dp"
+                android:textColorHint="#aaaaaa"
+                app:layout_widthPercent="70%"
+                app:layout_marginLeftPercent="5%"
+                app:layout_marginRightPercent="3%"
+                app:layout_marginTopPercent="1%"
+                app:layout_marginBottomPercent="1%"
                 android:imeOptions="actionSearch"
-                app:layout_widthPercent="90%"
-                app:layout_marginLeftPercent="5%">
-            </SearchView>
+                android:singleLine="true"
+                android:editable="true"
+                android:background="@null" />
+            <ImageView
+                android:id="@+id/btnSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/searchbut"/>
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 

@@ -7,9 +7,13 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -34,7 +38,7 @@ import java.util.ArrayList;
  * Use the {@link DoctorSearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DoctorSearchFragment extends Fragment implements IMyFragment, View.OnClickListener {
+public class DoctorSearchFragment extends Fragment implements IMyFragment, View.OnClickListener, TextView.OnEditorActionListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -77,7 +81,8 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
         }
     }
 
-    SearchView txtSearch;
+    EditText txtSearch;
+    ImageView btnView;
     TextView txtChar;
     TextView txtVideo;
     private ViewGroup container = null;
@@ -87,7 +92,10 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_doctor_search, container, false);
-        txtSearch=(SearchView)view.findViewById(R.id.txtSearch);
+        txtSearch=(EditText)view.findViewById(R.id.txtSearch);
+        txtSearch.setOnEditorActionListener(this);
+        btnView=(ImageView)view.findViewById(R.id.btnSearch);
+        btnView.setOnClickListener(this);
 
         txtChar=(TextView)view.findViewById(R.id.txtChar);
         txtVideo=(TextView)view.findViewById(R.id.txtVideo);
@@ -175,15 +183,43 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
         return "找医生";
     }
 
+    public void callSearch(){
+
+        String keyword=txtSearch.getText().toString();
+        String search=" ( name like '%"+keyword+"%'"+
+                " or office like '%"+keyword+"%'"+
+                " or title like '%"+keyword+"%'"+
+                " or introduce like '%"+keyword+"%'"+
+                " or credentials like '%"+keyword+"%'"+
+                " or expert like '%"+keyword+"%' )";
+        Intent intent2 = new Intent(this.getActivity(), DoctorListActivity.class);
+        intent2.putExtra("name", "关键字:"+txtSearch.getText().toString());
+        intent2.putExtra("search", search);
+        this.getActivity().startActivity(intent2);
+    }
+
     @Override
     public void onClick(View v) {
-        if(v.getTag() instanceof DoctorSearchLableObj){
+        if(v.getId()==R.id.btnSearch){
+            callSearch();
+        }
+        else if(v.getTag() instanceof DoctorSearchLableObj){
             DoctorSearchLableObj lableObj=(DoctorSearchLableObj)v.getTag();
             Intent intent = new Intent(this.getActivity(), DoctorListActivity.class);
             intent.putExtra("name", lableObj.getName());
             intent.putExtra("search", lableObj.getSearch());
             this.getActivity().startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+
+            callSearch();
+            return true;
+        }
+        return false;
     }
 
     /**
