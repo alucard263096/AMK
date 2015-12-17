@@ -25,7 +25,7 @@ include_once ROOT . '/libs/unionpay/utf8/func/common.php';
  */
 
  $order_no=$_REQUEST["order_no"];
- $info=$orderMgr->getOrderByOrderNo($orderId);
+ $info=$orderMgr->getOrderByOrderNo($order_no);
  $time=date("YmdHis");
  $price=$info["price"]*100;
  $price=1;
