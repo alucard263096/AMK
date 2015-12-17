@@ -1,7 +1,7 @@
 <?php
-include_once ROOT . 'libs/unionpay/utf8/func/log.class.php';
-include_once ROOT . 'libs/unionpay/utf8/func/SDKConfig.php';
-include_once ROOT . 'libs/unionpay/utf8/func/secureUtil.php';
+include_once ROOT . '/libs/unionpay/utf8/func/log.class.php';
+include_once ROOT . '/libs/unionpay/utf8/func/SDKConfig.php';
+include_once ROOT . '/libs/unionpay/utf8/func/secureUtil.php';
 // 初始化日志
 $log = new PhpLog ( SDK_LOG_FILE_PATH, "PRC", SDK_LOG_LEVEL );
 
@@ -168,6 +168,37 @@ eot;
 	}
 	$html .= <<<eot
    <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html>
+eot;
+	return $html;
+}
+
+/**
+ * 构造自动提交表单
+ *
+ * @param unknown_type $params        	
+ * @param unknown_type $action        	
+ * @return string
+ */
+function create_test_html($params, $action) {
+	// <body onload="javascript:document.pay_form.submit();">
+	$encodeType = isset ( $params ['encoding'] ) ? $params ['encoding'] : 'UTF-8';
+	$html = <<<eot
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={$encodeType}" />
+</head>
+<body>
+    <form id="pay_form" name="pay_form" action="{$action}" method="post">
+	
+eot;
+	foreach ( $params as $key => $value ) {
+		$html .= "    <input type=\"hidden\" name=\"{$key}\" id=\"{$key}\" value=\"{$value}\" />\n";
+	}
+	$html .= <<<eot
+    <input type="submit" >
     </form>
 </body>
 </html>

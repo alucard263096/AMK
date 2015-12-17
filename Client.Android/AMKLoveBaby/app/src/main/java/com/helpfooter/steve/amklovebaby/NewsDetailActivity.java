@@ -52,101 +52,19 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
 
-        idBody=(ScrollView)findViewById(R.id.idBody);
+        ((TextView) findViewById(R.id.title)).setText("");
 
-        WebView webView=(WebView)findViewById(R.id.txtContext);
-        webView.setHorizontalScrollBarEnabled(false);
-        webView.setHorizontalScrollbarOverlay(false);
-        webView.setScrollbarFadingEnabled(false);
-        webView.getSettings().setBuiltInZoomControls(false);
-        webView.setBackgroundColor(0);
-
-        ((TextView)findViewById(R.id.txtTitle)).setText(news.getTitle());
-        TextPaint tp= ((TextView)findViewById(R.id.txtTitle)).getPaint();
-        tp.setFakeBoldText(true);
-        ((TextView)findViewById(R.id.publish_date)).setText(news.getPublish_date());
-        ImageView imgPhoto=(ImageView)findViewById(R.id.imgPhoto);
-        if(news.getPhoto().length()>3){
-            UrlImageLoader imagePhotoLoad=new UrlImageLoader(imgPhoto, StaticVar.ImageFolderURL+"news/"+news.getPhoto());
-            imagePhotoLoad.start();
-        }else {
-            imgPhoto.setVisibility(View.GONE);
-        }
-        NewsLoader newsLoader=new NewsLoader(this);
-        newsLoader.setGetNewsContext(news.getId());
-        webView.getSettings().setDefaultTextEncodingName("UTF -8");
-        NewsContentLoad contentLoad=new NewsContentLoad(webView);
-        newsLoader.setCallBack(contentLoad);
-        newsLoader.start();
-
-        LinearLayout layoutDoctor=(LinearLayout)findViewById(R.id.layoutDoctor);
-        if(doctor==null){
-            layoutDoctor.setVisibility(View.GONE);
-            //addHeightForWebView(0.15f);
-            PercentLinearLayout.LayoutParams vidt=ToolsUtil.getLayoutParam();
-            idBody.setLayoutParams(vidt);
-        }else{
-            layoutDoctor.setTag(doctor);
-            layoutDoctor.setOnClickListener(this);
-            ImageView imgDoctorPhoto=(ImageView)findViewById(R.id.imgDoctorPhoto);
-            UrlImageLoader imagePhotoLoad=new UrlImageLoader(imgPhoto, StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto());
-            imagePhotoLoad.start();
-            ((TextView)findViewById(R.id.txtDoctorName)).setText(doctor.getName());
-            ((TextView)findViewById(R.id.txtDoctorOfficeTitle)).setText(doctor.getOffice()+"/"+doctor.getTitle());
-        }
-
+        ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.NewsUrl +String.valueOf( news.getId()));
+        ((WebView) findViewById(R.id.txtContext)).setBackgroundColor(0);
     }
 
-    public  void addHeightForWebView(float h){
-        //float orih=((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
-        //((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent=100;
-                //new PercentLayoutHelper.PercentLayoutInfo.PercentVal(orih+0.9f,true);
 
-        //float c =((PercentLinearLayout.LayoutParams)idBody.getLayoutParams()).mPercentLayoutInfo.heightPercent.percent;
-
-    }
-
-    class NewsContentLoad implements IWebLoaderCallBack{
-        WebView webView;
-        NewsObj news;
-        public NewsContentLoad(WebView webview){
-            this.webView=webview;
-        }
-        @Override
-        public void CallBack(ArrayList<AbstractObj> lstObjs) {
-            if(lstObjs.size()>0){
-                NewsObj obj=(NewsObj)lstObjs.get(0);
-                news=obj;
-                mHandler.sendEmptyMessageDelayed(0, 0);
-            }
-        }
-        private Handler mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg)
-            {
-                try {
-                    String content=news.getContent();
-                    Log.i("webview_cont",content);
-                    webView.loadData(ToolsUtil.FormatString(content), "text/html; charset=UTF-8", null);
-                }catch (Exception ex){
-                    Log.i("webview_err",ex.getMessage());
-                    ex.printStackTrace();
-                }
-            }
-        };
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnBack:
                 this.finish();
-                return;
-            case R.id.layoutDoctor:
-                DoctorObj obj=(DoctorObj)v.getTag();
-                Intent intent = new Intent(this, DoctorDetailActivity.class);
-                intent.putExtra("Id", obj.getId());
-                startActivity(intent);
                 return;
         }
 
@@ -157,10 +75,5 @@ public class NewsDetailActivity extends MyActivity implements View.OnClickListen
         int id = intent.getIntExtra("Id", 0);
         NewsDao dao=new NewsDao(this);
         news=(NewsObj)dao.getObj(id);
-
-        if(news.getDoctor_id()>0){
-            DoctorDao doctorDao=new DoctorDao(this);
-            doctor=(DoctorObj)doctorDao.getObj(news.getDoctor_id());
-        }
     }
 }

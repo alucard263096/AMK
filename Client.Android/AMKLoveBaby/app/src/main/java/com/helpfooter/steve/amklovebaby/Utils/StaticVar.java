@@ -63,6 +63,7 @@ public final class StaticVar {
 	public static int height ;   // 屏幕高度（像素）
 	public static float density ;      // 屏幕密度（0.75 / 1.0 / 1.5）
 	public static int densityDpi ;  // 屏幕密度DPI（120 / 160 / 240）
+	public static String NewsUrl="http://www.myhkdoc.com/AMK/CMS/news.php?id=";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
