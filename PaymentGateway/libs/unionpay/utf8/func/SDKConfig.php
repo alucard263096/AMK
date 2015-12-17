@@ -8,10 +8,10 @@ const SDK_SIGN_CERT_PATH = 'C:/AMK/certs/amika.pfx';
 const SDK_SIGN_CERT_PWD = 'amika';
 
 // 密码加密证书（这条一般用不到的请随便配）
-const SDK_ENCRYPT_CERT_PATH = 'D:/AMK/certs/acp_test_enc.cer';
+const SDK_ENCRYPT_CERT_PATH = 'C:/AMK/certs/acp_test_enc.cer';
 
 // 验签证书路径（请配到文件夹，不要配到具体文件）
-const SDK_VERIFY_CERT_DIR = 'D:/AMK/certs/';
+const SDK_VERIFY_CERT_DIR = 'C:/AMK/certs/';
 
 // 前台请求地址
 const SDK_FRONT_TRANS_URL = 'https://101.231.204.80:5000/gateway/api/frontTransReq.do';
