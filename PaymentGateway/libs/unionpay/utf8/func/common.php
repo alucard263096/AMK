@@ -176,6 +176,37 @@ eot;
 }
 
 /**
+ * 构造自动提交表单
+ *
+ * @param unknown_type $params        	
+ * @param unknown_type $action        	
+ * @return string
+ */
+function create_test_html($params, $action) {
+	// <body onload="javascript:document.pay_form.submit();">
+	$encodeType = isset ( $params ['encoding'] ) ? $params ['encoding'] : 'UTF-8';
+	$html = <<<eot
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={$encodeType}" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="{$action}" method="post">
+	
+eot;
+	foreach ( $params as $key => $value ) {
+		$html .= "    <input type=\"hidden\" name=\"{$key}\" id=\"{$key}\" value=\"{$value}\" />\n";
+	}
+	$html .= <<<eot
+    <input type="submit" >
+    </form>
+</body>
+</html>
+eot;
+	return $html;
+}
+
+/**
  * map转换string
  *
  * @param
