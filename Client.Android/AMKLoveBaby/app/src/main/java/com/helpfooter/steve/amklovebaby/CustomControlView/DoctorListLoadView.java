@@ -31,12 +31,12 @@ public class DoctorListLoadView implements View.OnClickListener {
     public LinearLayout mainlayout;
     public ArrayList<DoctorObj> lstDoctor;
     public Context ctx;
-    public  DoctorListLoadView(Context ctx,LinearLayout layout){
+    public  DoctorListLoadView(Context ctx,LinearLayout layout,String search){
         this.ctx=ctx;
         this.mainlayout=layout;
-        this.mainlayout.addView(getBannerView());
+        //this.mainlayout.addView(getBannerView());
         DoctorDao dao=new DoctorDao(this.ctx);
-        ArrayList<AbstractObj> lst=dao.getDoctorList();
+        ArrayList<AbstractObj> lst=dao.getDoctorList(search);
         lstDoctor=new ArrayList<DoctorObj>();
         for(AbstractObj obj:lst){
             lstDoctor.add((DoctorObj)obj);
@@ -103,6 +103,7 @@ public class DoctorListLoadView implements View.OnClickListener {
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
         param.height = 200;
         param.width = 200;
+        param.topMargin=30;
         String url= StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
         UrlImageLoader imgLoad=new UrlImageLoader(img,url);
         imgLoad.start();

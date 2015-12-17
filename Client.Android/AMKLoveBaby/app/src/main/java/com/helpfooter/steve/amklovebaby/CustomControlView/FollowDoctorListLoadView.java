@@ -28,7 +28,7 @@ import java.util.ArrayList;
  */
 public class FollowDoctorListLoadView extends DoctorListLoadView  {
     public FollowDoctorListLoadView(Context ctx, LinearLayout layout) {
-        super(ctx, layout);
+        super(ctx, layout," and 1=2 ");
         DoctorDao dao=new DoctorDao(this.ctx);
         ArrayList<AbstractObj> lst=dao.getDoctorListWithFollow();
         lstDoctor=new ArrayList<DoctorObj>();

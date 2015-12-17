@@ -14,6 +14,7 @@
     <string name="bottom_tab_know">知道</string>
     <string name="bottom_tab_wantknow">我想知道</string>
     <string name="bottom_tab_my">我的</string>
+    <string name="searchquery">输入医生、医院、科室、疾病名称</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -36,5 +37,6 @@
     <string name="title_activity_order_comment">OrderCommentActivity</string>
     <string name="title_activity_doctor_comment">DoctorCommentActivity</string>
     <string name="title_activity_select">SelectActivity</string>
-    <string name="title_activity_member_photo_upload">MemberPhotoUploadActivity</string>>
+    <string name="title_activity_member_photo_upload">MemberPhotoUploadActivity</string>
+    <string name="title_activity_doctor_list">DoctorListActivity</string>>
 </resources>
