@@ -43,6 +43,7 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -87,9 +88,13 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="amklovebaby" android:pathPrefix="/xxx/success" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:pathPrefix="/xxx/success"
+                    android:scheme="amklovebaby" />
             </intent-filter>
         </activity>
         <activity
@@ -176,19 +181,30 @@
         <activity
             android:name=".MemberPhotoUploadActivity"
             android:label="@string/title_activity_member_photo_upload"
-            android:screenOrientation="portrait"  >
+            android:screenOrientation="portrait" >
         </activity>
+
         <service
             android:name=".MessageService"
             android:enabled="true"
             android:exported="true" >
         </service>
-        <receiver android:name=".BootBroadcastReceiver" android:label="@string/app_name">
+
+        <receiver
+            android:name=".BootBroadcastReceiver"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".DoctorListActivity"
+            android:label="@string/title_activity_doctor_list"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

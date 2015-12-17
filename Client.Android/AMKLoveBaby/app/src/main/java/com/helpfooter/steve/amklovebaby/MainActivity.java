@@ -41,21 +41,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends MyFragmentActivity implements View.OnClickListener,IMyActivity
         ,HomeFragment.OnFragmentInteractionListener
-        ,DoctorListFragment.OnFragmentInteractionListener
+        ,DoctorSearchFragment.OnFragmentInteractionListener
         ,NewsListFragment.OnFragmentInteractionListener
         ,MemberMainFragment.OnFragmentInteractionListener{
 
     private LinearLayout bottomTabLayout,contentLayout;
     private Fragment currentFragment;
     private HomeFragment homeFragment;
-    private DoctorListFragment doctorListFragment;
+    private DoctorSearchFragment doctorSearchFragment;
     private NewsListFragment newsListFragment;
     private MemberMainFragment memberMainFragment;
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
     VersionUpdateMgr versionUpdateMgr;
 
-    private BottomBarButton homeBarButton,newsBarButton,doctorBarButton,memberMainBarButton;
+    private BottomBarButton homeBarButton,newsBarButton,doctorSearchBarButton,memberMainBarButton;
 
     static boolean hasload=false;
     @Override
@@ -143,13 +143,13 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         contentLayout=(LinearLayout)findViewById(R.id.content_layout);
 
         homeFragment=new HomeFragment();
-        doctorListFragment=new DoctorListFragment();
+        doctorSearchFragment=new DoctorSearchFragment();
         newsListFragment=new NewsListFragment();
         memberMainFragment=new MemberMainFragment();
 
         homeBarButton=new BottomBarButton(this.getApplicationContext(), "home", R.drawable.bar_home, R.drawable.bar_home_active, "首页", homeFragment );
         newsBarButton=new BottomBarButton(this.getApplicationContext(), "news", R.drawable.bar_news, R.drawable.bar_news_active, "新闻", newsListFragment);
-        doctorBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "医生", doctorListFragment);
+        doctorSearchBarButton=new BottomBarButton(this.getApplicationContext(), "doctor", R.drawable.bar_doctor, R.drawable.bar_doctor_active, "找医生", doctorSearchFragment);
         memberMainBarButton=new BottomBarButton(this.getApplicationContext(), "member", R.drawable.bar_member,R.drawable.bar_member_active,  "个人中心", memberMainFragment);
     }
 
@@ -163,11 +163,26 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         switch (id)
         {
             case R.id.lvCharDoctor:
+                intent2 = new Intent(this, DoctorListActivity.class);
+                intent2.putExtra("name","图文咨询");
+                intent2.putExtra("search", " enable_charchat='Y' ");
+                this.startActivity(intent2);
+                break;
+
             case R.id.lvTaiwanDoctor:
+                intent2 = new Intent(this, DoctorListActivity.class);
+                intent2.putExtra("name","海外医生");
+                intent2.putExtra("search", " is_taiwan='Y' ");
+                this.startActivity(intent2);
+                break;
             case R.id.lvVideoDoctor:
+                intent2 = new Intent(this, DoctorListActivity.class);
+                intent2.putExtra("name","视频会诊");
+                intent2.putExtra("search", " enable_videochat='Y' ");
+                this.startActivity(intent2);
+                break;
             case R.id.doctor:
-                doctorListFragment.reload((String)view.getTag());
-                buttonBarClick(doctorBarButton);
+                buttonBarClick(doctorSearchBarButton);
                 break;
             case R.id.pregnancy:
             case R.id.earlierStudy:
@@ -201,7 +216,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
         lstBottomBar=new ArrayList<BottomBarButton>();
         lstBottomBar.add(homeBarButton);
         lstBottomBar.add(newsBarButton);
-        lstBottomBar.add(doctorBarButton);
+        lstBottomBar.add(doctorSearchBarButton);
         lstBottomBar.add(memberMainBarButton);
 
         BottomBarButton.CreateEnteryBottomBar(bottomTabLayout, lstBottomBar, this);
@@ -358,4 +373,6 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     public Activity GetMyActivity() {
         return this;
     }
+
+
 }

@@ -42,21 +42,21 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent" android:scrollbarStyle="outsideOverlay"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+            <!--医生基本信息-->
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="19px"
                 android:paddingBottom="19px"
-                android:background="#11CCEE"
                 app:layout_widthPercent="100%">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView1
                     android:id="@+id/imgPhoto"
@@ -69,7 +69,6 @@
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:orientation="vertical"
                     app:layout_widthPercent="80%"
                     app:layout_marginLeftPercent="0%"
@@ -77,7 +76,6 @@
                     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/myred"
                         app:layout_widthPercent="100%"
                         android:orientation="horizontal">
                         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
@@ -87,19 +85,28 @@
                             android:text="医生姓名"
                             android:textSize="20dp"
                             android:gravity="center_vertical"
-                            app:layout_widthPercent="78%"/>
-                        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                            android:id="@+id/btnFollow"
+                            app:layout_widthPercent="66%"
+                            app:layout_marginLeftPercent="2%"/>
+                        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="+关注"
-                            android:gravity="center"
-                            android:layout_gravity="right"
-                            android:background="#37A4D4"
-                            android:textColor="#ffffff"
-                            android:textSize="11dp"
-                            app:layout_widthPercent="22%"
-                            app:layout_marginRightPercent="0%"/>
+                            android:orientation="vertical"
+                            android:background="#38D165"
+                            android:padding="1pt"
+                            app:layout_widthPercent="30%"
+                            app:layout_marginRightPercent="2%">
+                            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                                android:id="@+id/btnFollow"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="+ 关注"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="#38D165"
+                                android:background="#ffffff"
+                                android:textSize="18dp"
+                                app:layout_widthPercent="100%"/>
+                        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                         android:id="@+id/txtOfficeTitle"
@@ -109,21 +116,129 @@
                         android:text="科室/职称"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:gravity="center_vertical" />
+                        android:textSize="16dp"
+                        app:layout_marginLeftPercent="2%"
+                        android:gravity="top"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
+                android:layout_height="2px"
                 android:background="#cccccc"></LinearLayout>
-
-
+            <!--粉丝数，服务人数，推荐指数-->
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:id="@+id/layoutBusinee">
+                android:id="@+id/layout1"
+                android:background="#FFFFFF"
+                app:layout_widthPercent="100%">
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutFans"
+                    android:background="#FFFFFF"
+                    app:layout_widthPercent="33%">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtFansText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="粉丝数"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtFansNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="1000"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutService"
+                    android:background="#FFFFFF"
+                    app:layout_widthPercent="33%">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtServiceText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="服务人数"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtServiceNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="1000"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutRecommend"
+                    android:background="#FFFFFF"
+                    app:layout_widthPercent="34%">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtRecomandText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="推荐指数"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:id="@+id/txtRecomandNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:text="1000"
+                        android:autoText="false"
+                        android:elegantTextHeight="false"
+                        android:textSize="16dp"
+                        app:layout_widthPercent="100%"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            <!--图文咨询，视频咨询...-->
+            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/layoutBusinee"
+                android:background="#FFFFFF"
+                app:layout_widthPercent="100%">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -133,7 +248,7 @@
                     android:text="视频咨询/90元"
                     android:gravity="center"
                     android:textSize="17dp"
-                    android:background="#37A4D4"
+                    android:background="@color/myred"
                     android:textColor="#ffffff"
                     android:id="@+id/btnVedioChat"/>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
@@ -145,17 +260,17 @@
                     android:text="图文咨询/1元"
                     android:textSize="17dp"
                     android:gravity="center"
-                    android:background="#FD7CAD"
+                    android:background="@color/mygreen"
                     android:textColor="#ffffff"
                     android:id="@+id/btnCharChat"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="10dp"
                 android:background="#cccccc"></LinearLayout>
+            <!--介绍-->
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -180,6 +295,7 @@
                     app:layout_marginLeftPercent="2%"
                     app:layout_marginRightPercent="2%"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1px"
@@ -301,8 +417,6 @@
 
 
         </LinearLayout>
-
-
     </ScrollView>
 
 

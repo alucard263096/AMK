@@ -315,7 +315,7 @@
                     app:layout_marginBottomPercent="10%"
                     android:id="@+id/txtMySet"
                     android:gravity="center"
-                    android:text="设置"
+                    android:text="服务条款"
                     android:textSize="15dp" />
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout

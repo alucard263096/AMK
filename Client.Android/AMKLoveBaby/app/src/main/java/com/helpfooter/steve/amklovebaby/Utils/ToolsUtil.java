@@ -287,7 +287,7 @@ public class ToolsUtil {
         LinearLayout pLine = new LinearLayout(ctx);
         LinearLayout.LayoutParams pLineLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 2);
         pLine.setLayoutParams(pLineLayout);
-        pLine.setBackgroundColor(Color.parseColor("#919191"));
+        pLine.setBackgroundColor(Color.parseColor("#cccccc"));
 
         return pLine;
     }
