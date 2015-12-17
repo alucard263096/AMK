@@ -1,7 +1,7 @@
 <?php
-include_once ROOT . 'libs/unionpay/utf8/func/SDKConfig.php';
-include_once ROOT . 'libs/unionpay/utf8/func/common.php';
-include_once ROOT . 'libs/unionpay/utf8/func/log.class.php';
+include_once ROOT . '/libs/unionpay/utf8/func/SDKConfig.php';
+include_once ROOT . '/libs/unionpay/utf8/func/common.php';
+include_once ROOT . '/libs/unionpay/utf8/func/log.class.php';
 
 // 初始化日志
 $log = new PhpLog ( SDK_LOG_FILE_PATH, "PRC", SDK_LOG_LEVEL );
