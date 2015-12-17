@@ -43,7 +43,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent" android:scrollbarStyle="outsideOverlay"
         android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:background="@color/mygray">
         <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -57,6 +57,7 @@
                 android:orientation="horizontal"
                 android:paddingTop="19px"
                 android:paddingBottom="19px"
+                android:background="#ffffff"
                 app:layout_widthPercent="100%">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView1
                     android:id="@+id/imgPhoto"
@@ -70,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_widthPercent="80%"
+                    app:layout_widthPercent="70%"
                     app:layout_marginLeftPercent="0%"
                     app:layout_marginRightPercent="0%">
                     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -87,26 +88,20 @@
                             android:gravity="center_vertical"
                             app:layout_widthPercent="66%"
                             app:layout_marginLeftPercent="2%"/>
-                        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                            android:id="@+id/btnFollow"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:background="#38D165"
-                            android:padding="1pt"
-                            app:layout_widthPercent="30%"
-                            app:layout_marginRightPercent="2%">
-                            <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                                android:id="@+id/btnFollow"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="+ 关注"
-                                android:gravity="center"
-                                android:layout_gravity="center_vertical"
-                                android:textColor="#38D165"
-                                android:background="#ffffff"
-                                android:textSize="18dp"
-                                app:layout_widthPercent="100%"/>
-                        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                            android:text="+ 关注"
+                            android:gravity="center"
+                            android:layout_gravity="center_vertical"
+                            android:height="30dp"
+                            android:includeFontPadding="false"
+                            android:textColor="#38D165"
+                            android:background="@drawable/text_view_border6"
+                            android:textSize="18dp"
+                            app:layout_widthPercent="28%"
+                            android:layout_marginRight="10dp"/>
                     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                         android:id="@+id/txtOfficeTitle"
@@ -125,7 +120,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="2px"
-                android:background="#cccccc"></LinearLayout>
+                android:background="#cccccc">
+            </LinearLayout>
             <!--粉丝数，服务人数，推荐指数-->
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
@@ -231,38 +227,146 @@
                         android:layout_gravity="center_vertical"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+
             <!--图文咨询，视频咨询...-->
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/layoutBusinee"
-                android:background="#FFFFFF"
+                android:background="#cccccc"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10px"
+                android:paddingBottom="10px"
                 app:layout_widthPercent="100%">
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_widthPercent="49%"
-                    app:layout_marginRightPercent="1%"
-                    android:layout_marginTop="10dp"
-                    android:text="视频咨询/90元"
-                    android:gravity="center"
-                    android:textSize="17dp"
-                    android:background="@color/myred"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnVedioChat"/>
-                <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutChat"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="20px"
+                    app:layout_widthPercent="33%"
+                    android:layout_marginRight="3px">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_widthPercent="100%"
+                        app:layout_marginRightPercent="1%"
+                        android:layout_marginTop="10dp"
+                        android:text="图文咨询"
+                        android:gravity="center"
+                        android:textSize="17dp"
+                        android:background="#ffffff"
+                        android:textColor="#919191"
+                        android:id="@+id/txtPictChat"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imgPictChat"
+                        android:src="@drawable/chart3"
+                        android:layout_marginTop="25px"
+                        android:layout_marginBottom="25px"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/txtChatPrice"
+                        app:layout_widthPercent="70%"
+                        android:text="￥25/次"
+                        android:height="25dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginTop="10dp"
+                        android:textSize="17dp"
+                        android:background="@drawable/text_view_border5"
+                        android:textColor="@color/topbar_bg"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_widthPercent="49%"
-                    app:layout_marginLeftPercent="1%"
-                    android:layout_marginTop="10dp"
-                    android:text="图文咨询/1元"
-                    android:textSize="17dp"
-                    android:gravity="center"
-                    android:background="@color/mygreen"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnCharChat"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutVideo"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="20px"
+                    app:layout_widthPercent="33%"
+                    android:layout_marginRight="3px">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_widthPercent="100%"
+                        app:layout_marginRightPercent="1%"
+                        android:layout_marginTop="10dp"
+                        android:text="视频咨询"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:background="#ffffff"
+                        android:textColor="#919191"
+                        android:id="@+id/txtVedioChat"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imgVideo"
+                        android:src="@drawable/video3"
+                        android:layout_marginTop="25px"
+                        android:layout_marginBottom="25px"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/txtVedioPrice"
+                        app:layout_widthPercent="70%"
+                        android:layout_gravity="center"
+                        android:text="￥25/次 >"
+                        android:height="25dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginTop="10dp"
+                        android:textSize="17dp"
+                        android:background="@drawable/text_view_border5"
+                        android:textColor="@color/topbar_bg"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutRegister"
+                    android:background="#FFFFFF"
+                    android:paddingBottom="20px"
+                    android:layout_marginRight="0px">
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_widthPercent="100%"
+                        app:layout_marginRightPercent="1%"
+                        android:layout_marginTop="10dp"
+                        android:text="门诊挂号"
+                        android:gravity="center"
+                        android:textSize="17sp"
+                        android:background="#ffffff"
+                        android:textColor="#919191"
+                        android:id="@+id/txtRegister"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imgRegister"
+                        android:src="@drawable/register"
+                        android:layout_marginTop="25px"
+                        android:layout_marginBottom="25px"/>
+                    <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/txtRegisterPrice"
+                        app:layout_widthPercent="70%"
+                        android:layout_gravity="center"
+                        android:text="尚未开通"
+                        android:height="25dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:layout_marginTop="10dp"
+                        android:textSize="17dp"
+                        android:background="@drawable/text_view_border7"
+                        android:textColor="@color/mygray"/>
+                </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
             <LinearLayout

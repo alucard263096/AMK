@@ -85,12 +85,12 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
         txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));*/
 
-        if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
-            layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
+        /*if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
+            //layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
             layoutBusiness.setVisibility(LinearLayout.GONE);
         }else {
-            btnVedioChat=(TextView)findViewById(R.id.btnVedioChat);
-            btnCharChat=(TextView)findViewById(R.id.btnCharChat);
+            //btnVedioChat=(TextView)findViewById(R.id.btnVedioChat);
+            //btnCharChat=(TextView)findViewById(R.id.btnCharChat);
             if(doctor.getEnableVideochat().equals("Y")){
                 btnVedioChat.setText("视频咨询/" + String.valueOf(doctor.getVideochatPrice()) + "元");
                 btnVedioChat.setOnClickListener(this);
@@ -103,7 +103,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
             }else{
                 btnCharChat.setVisibility(LinearLayout.GONE);
             }
-        }
+        }*/
 
         btnFollow=(TextView)findViewById(R.id.btnFollow);
         btnFollow.setOnClickListener(this);
@@ -181,7 +181,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
                 intent3.putExtra("Id", doctor.getId());
                 startActivity(intent3);
                 break;
-            case R.id.btnVedioChat:
+            /*case R.id.btnVedioChat:
                 Intent intent = new Intent(this, VideoChatOrderActivity.class);
                 intent.putExtra("Id", doctor.getId());
                 startActivity(intent);
@@ -190,7 +190,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
                 Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
                 intent2.putExtra("Id", doctor.getId());
                 startActivity(intent2);
-                break;
+                break;*/
             case R.id.btnFollow:
                 if(MemberMgr.CheckIsLogin(this)){
                     hasFollow=!hasFollow;
