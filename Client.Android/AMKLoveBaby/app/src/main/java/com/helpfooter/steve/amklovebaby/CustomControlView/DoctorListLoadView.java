@@ -132,11 +132,17 @@ public class DoctorListLoadView implements View.OnClickListener {
         layout1.setLayoutParams(param1);
         layout1.setOrientation(LinearLayout.VERTICAL);
 
+
+        PercentLinearLayout layout2=new PercentLinearLayout(this.ctx);
+        PercentLinearLayout.LayoutParams param2 = ToolsUtil.getLayoutParamHeightWrap();
+        param2.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
+        layout2.setLayoutParams(param2);
+        layout2.setOrientation(LinearLayout.HORIZONTAL);
+
+
         //医生名称
         TextView txtName=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams paramName = ToolsUtil.getLayoutParamHeightWrap();
-        paramName.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        //paramName.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        PercentLinearLayout.LayoutParams paramName = ToolsUtil.getLayoutParamWidthHeightWrap();
         paramName.leftMargin = 27;
         txtName.setLayoutParams(paramName);
         txtName.setTextSize(17);
@@ -145,6 +151,24 @@ public class DoctorListLoadView implements View.OnClickListener {
         TextPaint tp= txtName.getPaint();
         tp.setFakeBoldText(true);
         //tp.setStrokeWidth(10f);
+
+        layout2.addView(txtName);
+
+        if(doctor.getIsTaiwan().equals("Y")){
+            TextView txtOutDoc=new MyTextView(this.ctx);
+            PercentLinearLayout.LayoutParams txtOutDocParam = ToolsUtil.getLayoutParamHeightWrap();
+            txtOutDocParam.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
+            //paramName.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+            txtOutDocParam.leftMargin = 27;
+            txtOutDoc.setLayoutParams(txtOutDocParam);
+            txtOutDoc.setTextSize(12);
+            txtOutDoc.setText("海外");
+            txtOutDoc.setTextColor(Color.GRAY);
+            layout2.addView(txtOutDoc);
+        }
+
+
+
 
 
         //医生信息
@@ -158,7 +182,7 @@ public class DoctorListLoadView implements View.OnClickListener {
         txtDoctorInfo.setTextColor(Color.BLACK);
         tp= txtDoctorInfo.getPaint();
         tp.setFakeBoldText(true);
-        layout1.addView(txtName);
+        layout1.addView(layout2);
         layout1.addView(txtDoctorInfo);
 
         //分数，推荐指数
