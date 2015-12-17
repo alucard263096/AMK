@@ -1,12 +1,9 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,12 +22,9 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorCommentLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorFollowCountLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
-import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Loader.UpdateFollowDoctorLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -38,7 +32,7 @@ import java.util.ArrayList;
 public class DoctorDetailActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
     DoctorObj doctor;
     ImageView btnBack,imgPhoto;
-    TextView txtName,txtOfficeTitle,txtWorktime,txtVideoQuerycount,txtCharQuerycount,txtGeneralScore,btnVedioChat,btnCharChat;
+    TextView txtName,txtOfficeTitle,btnVedioChat,btnCharChat;
     TextView txtIntroduce,txtCredentials,txtExpert,btnFollow;
     LinearLayout layoutBusiness;
 
@@ -69,7 +63,10 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(doctor.getName());
         txtName.setTextColor(Color.BLACK);
-        txtName.getPaint().setFakeBoldText(true);;
+        txtName.getPaint().setFakeBoldText(true);
+
+        btnFollow = (TextView)findViewById(R.id.btnFollow);
+        btnFollow.getPaint().setFakeBoldText(true);
 
         txtOfficeTitle=(TextView)findViewById(R.id.txtOfficeTitle);
         txtOfficeTitle.setText(doctor.getOffice() + "  " + doctor.getTitle());
