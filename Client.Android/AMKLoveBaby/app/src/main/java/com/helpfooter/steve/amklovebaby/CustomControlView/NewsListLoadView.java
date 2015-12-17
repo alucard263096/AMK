@@ -46,39 +46,61 @@ public class NewsListLoadView implements View.OnClickListener {
         int i=1;
         for(NewsObj obj:lstNews){
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
+            layout.setBackgroundColor(Color.parseColor("#ffffff"));
+            layout.setPadding(40, 20, 40, 20);
             PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-            param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.bottomMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
-            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,false);
+            param.setMargins(0, 40, 0, 0);
             layout.setLayoutParams(param);
-            layout.setOrientation(LinearLayout.HORIZONTAL);
+            layout.setOrientation(LinearLayout.VERTICAL);
 
-            ImageView imgPhoto=getPhotoView(obj);
-            layout.addView(imgPhoto);
-            LinearLayout infolayout=getInfoLayout(obj);
-            layout.addView(infolayout);
+            LinearLayout top=GetTopLayout(obj);
+            layout.addView(top);
+            LinearLayout line=ToolsUtil.GenPLine(this.ctx);
+            layout.addView(line);
+
+            TextView txtGood=new MyTextView(this.ctx);
+            PercentLinearLayout.LayoutParams txtGoodparam=ToolsUtil.getLayoutParamHeightWrap();
+            txtGoodparam.setMargins(0,20,0,0);
+            //txtSummary.setBackgroundColor(Color.parseColor("#ffccee"));
+            txtGood.setGravity(Gravity.RIGHT);
+            txtGood.setLayoutParams(txtGoodparam);
+            txtGood.setTextColor(Color.GRAY);
+            txtGood.setText("赞(" + obj.getUpvote() + ")");
+            txtGood.setTextSize(10);
+            layout.addView(txtGood);
 
             layout.setTag(obj);
             layout.setOnClickListener(this);
             this.mainlayout.addView(layout);
 
-            LinearLayout line=ToolsUtil.GenPLine(this.ctx);
-            line.setTag(obj);
-            this.mainlayout.addView(line);
-
-
             i++;
         }
     }
+
+    private LinearLayout GetTopLayout(NewsObj obj) {
+
+        PercentLinearLayout layout=new PercentLinearLayout(ctx);
+        layout.setPadding(20, 20, 20, 20);
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.setMargins(0, 20, 0, 20);
+        layout.setLayoutParams(param);
+        layout.setOrientation(LinearLayout.HORIZONTAL);
+
+        ImageView imgPhoto=getPhotoView(obj);
+        layout.addView(imgPhoto);
+        LinearLayout infolayout=getInfoLayout(obj);
+        layout.addView(infolayout);
+
+        return layout;
+    }
+
     public ImageView getPhotoView(NewsObj news){
         ImageView img=new ImageView(this.ctx);
         img.setScaleType(ImageView.ScaleType.FIT_START);
         PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f,true);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
         String url= StaticVar.ImageFolderURL+"news/"+news.getThumbnail();
         img.setAdjustViewBounds(true);
-        Log.i("doctor_photo",url);
         UrlImageLoader imgLoad=new UrlImageLoader(img,url);
         imgLoad.start();;
         img.setLayoutParams(param);
@@ -113,36 +135,37 @@ public class NewsListLoadView implements View.OnClickListener {
         txtSummary.setTextColor(Color.GRAY);
         txtSummary.setText(news.getSummary());
         txtSummary.setTextSize(10);
+        txtSummary.setPadding(0, -9, 0, -9);
         Log.i("news_summary", news.getSummary());
 
+//
+//        PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
+//        //tipsLayout.setBackgroundColor(Color.parseColor("#ffaaee"));
+//        PercentLinearLayout.LayoutParams tipsparam=ToolsUtil.getLayoutParamHeightWrap();
+//        tipsparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
+//        tipsLayout.setLayoutParams(tipsparam);
+//        tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-        PercentLinearLayout tipsLayout=new PercentLinearLayout(this.ctx);
-        //tipsLayout.setBackgroundColor(Color.parseColor("#ffaaee"));
-        PercentLinearLayout.LayoutParams tipsparam=ToolsUtil.getLayoutParamHeightWrap();
-        tipsparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(1f,true);
-        tipsLayout.setLayoutParams(tipsparam);
-        tipsLayout.setOrientation(LinearLayout.HORIZONTAL);
-
-        TextView txtPublishDate=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams publishdateparam= ToolsUtil.getLayoutParamHeightWrap();
-        publishdateparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
-        txtPublishDate.setLayoutParams(publishdateparam);
-        txtPublishDate.setText(news.getPublish_date());
-        txtPublishDate.setTextSize(10);
-        tipsLayout.addView(txtPublishDate);
-
-        TextView txtUpvote=new MyTextView(this.ctx);
-        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParamHeightWrap();
-        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
-        txtUpvote.setLayoutParams(upvoteparam);
-        txtUpvote.setGravity(Gravity.RIGHT);
-        txtUpvote.setText("赞(" + news.getUpvote() + ")");
-        txtUpvote.setTextSize(10);
-        tipsLayout.addView(txtUpvote);
+//        TextView txtPublishDate=new MyTextView(this.ctx);
+//        PercentLinearLayout.LayoutParams publishdateparam= ToolsUtil.getLayoutParamHeightWrap();
+//        publishdateparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
+//        txtPublishDate.setLayoutParams(publishdateparam);
+//        txtPublishDate.setText(news.getPublish_date());
+//        txtPublishDate.setTextSize(10);
+//        tipsLayout.addView(txtPublishDate);
+//
+//        TextView txtUpvote=new MyTextView(this.ctx);
+//        PercentLinearLayout.LayoutParams upvoteparam= ToolsUtil.getLayoutParamHeightWrap();
+//        upvoteparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.5f,true);
+//        txtUpvote.setLayoutParams(upvoteparam);
+//        txtUpvote.setGravity(Gravity.RIGHT);
+//        txtUpvote.setText("赞(" + news.getUpvote() + ")");
+//        txtUpvote.setTextSize(10);
+//        tipsLayout.addView(txtUpvote);
 
         layout.addView(txtTitle);
         layout.addView(txtSummary);
-        layout.addView(tipsLayout);
+        //layout.addView(tipsLayout);
         return  layout;
     }
 
