@@ -46,7 +46,6 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         InitData();
         InitUI();
     }
-
     private void InitUI() {
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
@@ -66,8 +65,17 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(doctor.getName());
+
         txtName.setTextColor(Color.BLACK);
         txtName.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtNameCategory);
+        if(doctor.getIsTaiwan().equals("Y")) {
+            text.setVisibility(View.VISIBLE);
+        }
+        else {
+            text.setVisibility(View.INVISIBLE);
+        }
 
         btnFollow = (TextView)findViewById(R.id.btnFollow);
         btnFollow.getPaint().setFakeBoldText(true);

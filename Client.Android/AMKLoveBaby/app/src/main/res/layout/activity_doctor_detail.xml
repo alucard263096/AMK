@@ -82,8 +82,16 @@
                             android:layout_height="wrap_content"
                             android:text="医生姓名"
                             android:textSize="20dp"
-                            android:gravity="center_vertical"
-                            app:layout_widthPercent="70%"/>
+                            app:layout_widthPercent="28%"
+                            android:gravity="center_vertical"/>
+                        <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+                            android:id="@+id/txtNameCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="海外"
+                            android:textSize="12dp"
+                            android:gravity="bottom"
+                            app:layout_widthPercent="42%"/>
                         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                             android:id="@+id/btnFollow"
                             android:layout_width="match_parent"
