@@ -71,14 +71,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:layout_widthPercent="70%"
                     app:layout_marginLeftPercent="0%"
                     app:layout_marginRightPercent="0%">
                     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_widthPercent="100%"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingLeft="30px"
+                        android:paddingRight="10px">
                         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                             android:id="@+id/txtName"
                             android:layout_width="match_parent"
@@ -86,8 +87,7 @@
                             android:text="医生姓名"
                             android:textSize="20dp"
                             android:gravity="center_vertical"
-                            app:layout_widthPercent="66%"
-                            app:layout_marginLeftPercent="2%"/>
+                            app:layout_widthPercent="70%"/>
                         <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                             android:id="@+id/btnFollow"
                             android:layout_width="match_parent"
@@ -99,9 +99,7 @@
                             android:includeFontPadding="false"
                             android:textColor="#38D165"
                             android:background="@drawable/text_view_border6"
-                            android:textSize="18dp"
-                            app:layout_widthPercent="28%"
-                            android:layout_marginRight="10dp"/>
+                            android:textSize="18dp"/>
                     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                         android:id="@+id/txtOfficeTitle"
@@ -112,8 +110,8 @@
                         android:autoText="false"
                         android:elegantTextHeight="false"
                         android:textSize="16dp"
-                        app:layout_marginLeftPercent="2%"
-                        android:gravity="top"/>
+                        android:layout_marginLeft="30px"
+                        android:gravity="top|left"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
@@ -229,15 +227,19 @@
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 
             <!--图文咨询，视频咨询...-->
-            <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingTop="20px"
+                android:paddingBottom="20px"
+                android:layout_marginTop="10dp">
+                <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/layoutBusinee"
                 android:background="#cccccc"
-                android:layout_marginTop="20dp"
-                android:paddingTop="10px"
-                android:paddingBottom="10px"
                 app:layout_widthPercent="100%">
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
@@ -272,7 +274,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/txtChatPrice"
                         app:layout_widthPercent="70%"
-                        android:text="￥25/次"
+                        android:text="￥25/次 >"
                         android:height="25dp"
                         android:layout_gravity="center"
                         android:gravity="center"
@@ -299,7 +301,7 @@
                         android:layout_marginTop="10dp"
                         android:text="视频咨询"
                         android:gravity="center"
-                        android:textSize="17sp"
+                        android:textSize="17dp"
                         android:background="#ffffff"
                         android:textColor="#919191"
                         android:id="@+id/txtVedioChat"/>
@@ -315,9 +317,9 @@
                         android:layout_height="match_parent"
                         android:id="@+id/txtVedioPrice"
                         app:layout_widthPercent="70%"
-                        android:layout_gravity="center"
                         android:text="￥25/次 >"
                         android:height="25dp"
+                        android:layout_gravity="center"
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:layout_marginTop="10dp"
@@ -368,6 +370,7 @@
                         android:textColor="@color/mygray"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
