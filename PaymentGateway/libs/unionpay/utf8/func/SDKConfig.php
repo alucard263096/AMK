@@ -35,10 +35,10 @@ const SDK_Card_Request_Url = 'https://101.231.204.80:5000/gateway/api/cardTransR
 const SDK_App_Request_Url = 'https://101.231.204.80:5000/gateway/api/appTransReq.do';
 
 // 前台通知地址 (商户自行配置通知地址)
-const SDK_FRONT_NOTIFY_URL = 'http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/notify_url.php';
+const SDK_FRONT_NOTIFY_URL = 'http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/return.php';
 
 // 后台通知地址 (商户自行配置通知地址，需配置外网能访问的地址)
-const SDK_BACK_NOTIFY_URL = 'http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/return.php';
+const SDK_BACK_NOTIFY_URL = 'http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/notify_url.php';
 
 //文件下载目录 
 const SDK_FILE_DOWN_PATH = 'C:/AMK/file/';
