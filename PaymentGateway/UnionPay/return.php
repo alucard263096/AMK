@@ -42,6 +42,7 @@ function openApp() {
          }  
   
 }
+openApp();
 </script>
 </body>
 </html>
