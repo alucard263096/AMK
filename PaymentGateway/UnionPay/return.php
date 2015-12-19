@@ -21,6 +21,7 @@ include_once ROOT . '/libs/unionpay/utf8/func/secureUtil.php';
 					$info=$orderMgr->getOrderByOrderNo($orderId);
 					$orderMgr->updateOrderPayment($info["id"],"UNION",$ret["trade_no"]);
 					$smsMgr->SendQueryConfirm($info["mobile"],$info["tag_name"],$info["order_date"]." ".$info["order_time"]);
+					$order_id=$info["id"];
 					?>
 					
 <html>
@@ -35,7 +36,7 @@ function openApp() {
              if(isrefresh == 1) {  
                  return  
              }  
-             window.location.href = 'myapp://amklovebaby/success?order_no=<?php echo $orderId; ?>';  
+             window.location.href = 'myapp://amklovebaby/success?order_no=<?php echo $order_id; ?>';  
              window.setTimeout(function () {  
                      window.location.href += '&refresh=1' // 附加一个特殊参数，用来标识这次刷新不要再调用myapp:// 了  
              }, 500);  
