@@ -1,7 +1,7 @@
 <?php
   require '../include/common.inc.php';
-include_once ROOT . 'libs/unionpay/utf8/func/common.php';
-include_once ROOT . 'libs/unionpay/utf8/func/secureUtil.php';
+include_once ROOT . '/libs/unionpay/utf8/func/common.php';
+include_once ROOT . '/libs/unionpay/utf8/func/secureUtil.php';
   require ROOT.'/classes/datamgr/order.cls.php';
   require ROOT.'/classes/datamgr/sms.cls.php';
 

@@ -57,5 +57,5 @@ $params = array(
 
 sign ( $params );
 $uri = SDK_FRONT_TRANS_URL;
-$html_form = create_test_html ( $params, $uri );
+$html_form = create_html ( $params, $uri );
 echo $html_form;
