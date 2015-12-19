@@ -46,10 +46,13 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         InitData();
         InitUI();
     }
-
     private void InitUI() {
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
+
+        TextView text = (TextView)findViewById(R.id.title);
+        text.setText(doctor.getName() + doctor.getOffice() + "诊所");
+        text.getPaint().setFakeBoldText(true);
 
         imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
         PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
@@ -62,8 +65,17 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(doctor.getName());
+
         txtName.setTextColor(Color.BLACK);
         txtName.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtNameCategory);
+        if(doctor.getIsTaiwan().equals("Y")) {
+            text.setVisibility(View.VISIBLE);
+        }
+        else {
+            text.setVisibility(View.INVISIBLE);
+        }
 
         btnFollow = (TextView)findViewById(R.id.btnFollow);
         btnFollow.getPaint().setFakeBoldText(true);
@@ -72,6 +84,109 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         txtOfficeTitle.setText(doctor.getOffice() + "  " + doctor.getTitle());
         txtOfficeTitle.setTextColor(Color.parseColor("#919191"));
         txtOfficeTitle.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtFansText);
+        text.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtFansNum);
+        text.setText(String.valueOf(doctor.getFollowCount()));
+        text.getPaint().setFakeBoldText(true);
+        text.setTextColor(Color.BLACK);
+
+        text = (TextView)findViewById(R.id.txtServiceText);
+        text.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtServiceNum);
+        text.setText(String.valueOf(doctor.getCharquerycount() + doctor.getVideoquerycount()));
+        text.getPaint().setFakeBoldText(true);
+        text.setTextColor(Color.BLACK);
+
+        text = (TextView)findViewById(R.id.txtRecomandText);
+        text.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtRecomandNum);
+        text.setText(doctor.getRealGeneralScore());
+        text.getPaint().setFakeBoldText(true);
+        text.setTextColor(Color.BLACK);
+
+        float fScore = Float.parseFloat(doctor.getRealGeneralScore());
+        ImageView imgHigh = (ImageView)findViewById(R.id.imgHigh);
+        if(fScore >= 4.0f)
+        {
+            imgHigh.setImageResource(R.drawable.height);
+            imgHigh.setVisibility(View.VISIBLE);
+            param= ToolsUtil.getLayoutParamHeightWrap();
+            param.height = 80;
+            param.width = 80;
+            param.topMargin = 10;
+            imgHigh.setLayoutParams(param);
+        }
+        else
+        {
+            imgHigh.setVisibility(View.INVISIBLE);
+        }
+
+        //图文咨询
+        text = (TextView)findViewById(R.id.txtPictChat);
+        text.getPaint().setFakeBoldText(true);
+
+        ImageView img = (ImageView)findViewById(R.id.imgPictChat);
+
+        if(doctor.getEnableCharchat().equals("Y")) {
+            img.setImageResource(R.drawable.chart3);
+            text = (TextView) findViewById(R.id.txtChatPrice);
+            text.setBackgroundResource(R.drawable.text_view_border5);
+            text.setText("￥" + String.valueOf(doctor.getCharchatPrice()) + "/次 >");
+            text.getPaint().setFakeBoldText(true);
+            text.setTextSize(15);
+            ((LinearLayout)findViewById(R.id.layoutChat)).setOnClickListener(this);
+        }
+        else {
+            img.setImageResource(R.drawable.chart4);
+            text = (TextView) findViewById(R.id.txtChatPrice);
+            text.setBackgroundResource(R.drawable.text_view_border7);
+            text.setText("尚未开通");
+            text.setTextColor(Color.parseColor("#cccccc"));
+            text.getPaint().setFakeBoldText(true);
+        }
+
+        //视频咨询
+        text = (TextView)findViewById(R.id.txtVedioChat);
+        text.getPaint().setFakeBoldText(true);
+
+        img = (ImageView)findViewById(R.id.imgVideo);
+
+        if(doctor.getEnableVideochat().equals("Y")) {
+            img.setImageResource(R.drawable.video3);
+            text = (TextView) findViewById(R.id.txtVedioPrice);
+            text.setBackgroundResource(R.drawable.text_view_border5);
+            text.setText("￥" + String.valueOf(doctor.getVideochatPrice()) + "/次 >");
+            text.getPaint().setFakeBoldText(true);
+            text.setTextSize(15);
+            ((LinearLayout)findViewById(R.id.layoutVideo)).setOnClickListener(this);
+        }
+        else {
+            img.setImageResource(R.drawable.video3);
+            text = (TextView) findViewById(R.id.txtVedioPrice);
+            text.setBackgroundResource(R.drawable.text_view_border7);
+            text.setText("尚未开通");
+            text.setTextColor(Color.parseColor("#cccccc"));
+            text.getPaint().setFakeBoldText(true);
+        }
+
+        //门诊挂号
+        text = (TextView)findViewById(R.id.txtRegister);
+        text.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtRegisterPrice);
+        text.getPaint().setFakeBoldText(true);
+
+        //医生介绍
+        text = (TextView)findViewById(R.id.txtIntroductionTitle);
+        text.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtRegisterPrice);
+        text.getPaint().setFakeBoldText(true);
 
         /*txtWorktime=(TextView)findViewById(R.id.txtOpenHour);
         txtWorktime.setText("坐诊时间:"+doctor.getBookingtime());
@@ -85,12 +200,12 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         txtGeneralScore=(TextView)findViewById(R.id.txtGeneralScore);
         txtGeneralScore.setText(String.valueOf(doctor.getRealGeneralScore()));*/
 
-        if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
-            layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
+        /*if(!doctor.getEnableVideochat().equals("Y")&&!doctor.getEnableCharchat().equals("Y")){
+            //layoutBusiness=(LinearLayout)findViewById(R.id.layoutBusinee);
             layoutBusiness.setVisibility(LinearLayout.GONE);
         }else {
-            btnVedioChat=(TextView)findViewById(R.id.btnVedioChat);
-            btnCharChat=(TextView)findViewById(R.id.btnCharChat);
+            //btnVedioChat=(TextView)findViewById(R.id.btnVedioChat);
+            //btnCharChat=(TextView)findViewById(R.id.btnCharChat);
             if(doctor.getEnableVideochat().equals("Y")){
                 btnVedioChat.setText("视频咨询/" + String.valueOf(doctor.getVideochatPrice()) + "元");
                 btnVedioChat.setOnClickListener(this);
@@ -103,7 +218,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
             }else{
                 btnCharChat.setVisibility(LinearLayout.GONE);
             }
-        }
+        }*/
 
         btnFollow=(TextView)findViewById(R.id.btnFollow);
         btnFollow.setOnClickListener(this);
@@ -115,13 +230,27 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
         txtIntroduce=(TextView)findViewById(R.id.txtIntroduce);
         txtIntroduce.setText(doctor.getIntroduce());
+        txtIntroduce.setTextSize(14);
+        txtIntroduce.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtCredentialsTitle);
+        text.getPaint().setFakeBoldText(true);
 
         txtCredentials=(TextView)findViewById(R.id.txtCredentials);
         txtCredentials.setText(doctor.getCredentials());
+        txtCredentials.setTextSize(14);
+        txtCredentials.getPaint().setFakeBoldText(true);
+
+        text = (TextView)findViewById(R.id.txtExpertTitle);
+        text.getPaint().setFakeBoldText(true);
 
         txtExpert=(TextView)findViewById(R.id.txtExpert);
         txtExpert.setText(doctor.getExpert());
+        txtExpert.setTextSize(14);
+        txtExpert.getPaint().setFakeBoldText(true);
 
+        text = (TextView)findViewById(R.id.txtCommentTitle);
+        text.getPaint().setFakeBoldText(true);
 
         ((LinearLayout)findViewById(R.id.btnOpenComment)).setOnClickListener(this);
 
@@ -181,12 +310,12 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
                 intent3.putExtra("Id", doctor.getId());
                 startActivity(intent3);
                 break;
-            case R.id.btnVedioChat:
+            case R.id.layoutVideo:
                 Intent intent = new Intent(this, VideoChatOrderActivity.class);
                 intent.putExtra("Id", doctor.getId());
                 startActivity(intent);
                 break;
-            case R.id.btnCharChat:
+            case R.id.layoutChat:
                 Intent intent2 = new Intent(this, CharOrderSubmitActivity.class);
                 intent2.putExtra("Id", doctor.getId());
                 startActivity(intent2);

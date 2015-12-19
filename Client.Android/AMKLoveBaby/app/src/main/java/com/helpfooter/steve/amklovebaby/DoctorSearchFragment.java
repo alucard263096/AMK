@@ -1,12 +1,11 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +14,12 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorSearchLableObj;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentFrameLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -151,6 +145,7 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
         txt.setBackground(getResources().getDrawable(R.drawable.text_view_border4));
         txt.setLayoutParams(layoutParams);
         setLableForTxt(txt, obj);
+
         return txt;
     }
 
