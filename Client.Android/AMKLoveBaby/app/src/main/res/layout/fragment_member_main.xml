@@ -78,7 +78,7 @@
                 android:gravity="left"
                 android:text="常用服务"
                 android:layout_marginLeft="20px"
-                app:layout_marginTopPercent="8%"
+                app:layout_marginTopPercent="5%"
                 android:textSize="20dp" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -92,7 +92,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnMyInfo"
                 android:orientation="vertical">
@@ -127,7 +127,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnCharlist"
                 android:orientation="vertical">
@@ -162,7 +162,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnMyOrder"
                 android:orientation="vertical">
@@ -197,7 +197,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnMyDoctor"
                 android:orientation="vertical">
@@ -242,7 +242,7 @@
                 android:gravity="left"
                 android:text="其他服务"
                 android:layout_marginLeft="20px"
-                app:layout_marginTopPercent="8%"
+                app:layout_marginTopPercent="5%"
                 android:textSize="20dp" />
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -256,7 +256,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnHelpDocument"
                 android:orientation="vertical">
@@ -291,7 +291,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnPP"
                 android:orientation="vertical">
@@ -326,7 +326,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnAboutus"
                 android:orientation="vertical">
@@ -361,7 +361,7 @@
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="25%"
+                app:layout_widthPercent="24.8%"
                 android:gravity="center"
                 android:id="@+id/btnNothing"
                 android:orientation="vertical">

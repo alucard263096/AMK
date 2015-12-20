@@ -11,6 +11,6 @@ public class PaymentTypeSelectActivity extends SelectActivity {
     public void InitData() {
         lst.add(new PaymentTypeObj("支付宝钱包","ALIPAY",true,R.drawable.alipay_logo));
         lst.add(new PaymentTypeObj("微信钱包","WEIXIN",true,R.drawable.weixin_logo));
-        lst.add(new PaymentTypeObj("测试","TEST",false,0));
+        lst.add(new PaymentTypeObj("银联支付","UNIONPAY",true,R.drawable.unionpay));
     }
 }

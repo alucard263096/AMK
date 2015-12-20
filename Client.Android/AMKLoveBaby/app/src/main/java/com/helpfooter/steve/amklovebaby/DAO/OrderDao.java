@@ -139,6 +139,18 @@ public class OrderDao extends AbstractDao {
 
     }
 
+    public Boolean getPaySucess(int id){
+        ArrayList<AbstractObj> lst=  super.getList("  status='P' and id="+id );
+        if(lst.size()==1)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
     public OrderObj getLatestOrder(boolean isGetSent) {
         Cursor cursor = null;
         try {
