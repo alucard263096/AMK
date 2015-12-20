@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.helpfooter.steve.amklovebaby.NewsDetailActivity"
-    android:background="#ffffff">
+    tools:context="com.helpfooter.steve.amklovebaby.DoctorListActivity">
 
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -29,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="false"
-            android:text="标题"
+            android:text="医生列表"
             android:contentDescription="@null"
             android:textColor="#ffffff"
             app:layout_widthPercent="80%"
@@ -39,9 +38,24 @@
             android:gravity="center"
             android:textSize="18dp" />
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-
-    <WebView
-        android:id="@+id/txtContext"
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scaleType="fitXY"
+    android:src="@drawable/personaldoctor"/>
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent">
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/doctor_list" android:background="#ffffff">
+        </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    </ScrollView>
+
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

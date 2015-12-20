@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -45,9 +46,16 @@ public class PaymentSuccActivity extends Activity implements View.OnClickListene
     }
 
     private void InitData() {
+
+        OrderDao orderDao=new OrderDao(this);
+
         Intent intent = getIntent();
         int order_id = intent.getIntExtra("Id", 0);
-        OrderDao orderDao=new OrderDao(this);
+        if(order_id==0){
+            Uri uridata = this.getIntent().getData();
+            String order_no = uridata.getQueryParameter("order_no");
+            order_id=orderDao.getOrderId(order_no);
+        }
         order=(OrderObj)orderDao.getObj(order_id);
     }
 

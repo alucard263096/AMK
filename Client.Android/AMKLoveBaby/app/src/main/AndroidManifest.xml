@@ -90,6 +90,7 @@
             android:name=".PaymentSuccActivity"
             android:label="@string/title_activity_payment_succ"
             android:screenOrientation="portrait" >
+<<<<<<< HEAD
            <!-- <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -100,6 +101,18 @@
                     android:pathPrefix="/success"
                     android:scheme="myapp" />
             </intent-filter>-->
+=======
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:pathPrefix="/xxx/success"
+                    android:scheme="amklovebaby" />
+            </intent-filter>
+>>>>>>> 6dcc259d197e93ddff40c06b857ae0207af7f8eb
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -186,19 +199,30 @@
         <activity
             android:name=".MemberPhotoUploadActivity"
             android:label="@string/title_activity_member_photo_upload"
-            android:screenOrientation="portrait"  >
+            android:screenOrientation="portrait" >
         </activity>
+
         <service
             android:name=".MessageService"
             android:enabled="true"
             android:exported="true" >
         </service>
-        <receiver android:name=".BootBroadcastReceiver" android:label="@string/app_name">
+
+        <receiver
+            android:name=".BootBroadcastReceiver"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".DoctorListActivity"
+            android:label="@string/title_activity_doctor_list"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,22 +1,16 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorListLoadView;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
-import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
-
-import java.util.ArrayList;
 
 
 /**
@@ -79,7 +73,7 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
 
 
 
-        DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list));
+        DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list),"");
         lstLoad.LoadDoctorListData();
         //DoctorLoader loader=new DoctorLoader(this.getActivity());
         //loader.start();

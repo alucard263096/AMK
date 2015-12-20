@@ -49,7 +49,7 @@ public final class StaticVar {
 	public static String MessageApi="Message";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
-	public static String CurrentVersion="1.0.1.8";
+	public static String CurrentVersion="1.0.1.31";
 	public static String TxtType="TXT";
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";
@@ -58,11 +58,13 @@ public final class StaticVar {
 	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
 	public static String DoctorFollowAPI="doctorfollow";
 	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
+	public static String DoctorFollowCountApi="doctorfollowcount";
 
 	public static int width ;     // 屏幕宽度（像素）
 	public static int height ;   // 屏幕高度（像素）
 	public static float density ;      // 屏幕密度（0.75 / 1.0 / 1.5）
 	public static int densityDpi ;  // 屏幕密度DPI（120 / 160 / 240）
+	public static String NewsUrl="http://www.myhkdoc.com/AMK/CMS/news.php?id=";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -94,6 +96,7 @@ public final class StaticVar {
 		dictHashMap.put(MemberPhotoAddApi,APIURL+"Member/member_photo_add.php");
 		dictHashMap.put(MemberPhotoApi,APIURL+"Member/member_photo.php");
 		dictHashMap.put(MemberPhotoDeleteApi,APIURL+"Member/member_photo_delete.php");
+		dictHashMap.put(DoctorFollowCountApi,APIURL+"Doctor/doctor_follow_count.php");
 	}
 
 	public static String VideoChatServerIp="www.myhkdoc.com";

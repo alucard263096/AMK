@@ -206,6 +206,7 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 
 
         PercentLinearLayout content = new PercentLinearLayout(this.mActivity);
+        //content.setBackground(mActivity.getResources().getDrawable(R.drawable.view_raduis));
         PercentLinearLayout.LayoutParams contentparam =ToolsUtil.getLayoutParamHeightWrap();
         contentparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.7f,true);
         content.setLayoutParams(contentparam);
@@ -252,7 +253,11 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
         TextView txtContext = new MyTextView(this.mActivity);
         //txtContext.setBackgroundColor(Color.parseColor("#ccaacc"));
         //txtContext.setBackgroundResource(R.drawable.chatbg);
-        txtContext.setBackgroundResource(R.drawable.text_view_border);
+        if (obj.getMsgType()) {
+            txtContext.setBackgroundResource(R.drawable.text_view_border4);
+        }else {
+            txtContext.setBackgroundResource(R.drawable.text_view_border3);
+        }
         PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();
         contentparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
         contentparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
@@ -286,7 +291,11 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
     public ImageView getIMGView(ChatMsgEntity obj) {
         ImageView img = new ImageView(this.mActivity);
         //img.setBackgroundColor(Color.parseColor("#cceecc"));
-        img.setBackgroundResource(R.drawable.text_view_border);
+        if (obj.getMsgType()) {
+            img.setBackgroundResource(R.drawable.text_view_border4);
+        }else {
+            img.setBackgroundResource(R.drawable.text_view_border3);
+        }
         img.setPadding(20,20, 20, 20);
         //img.setBackgroundColor(Color.parseColor("#ccaacc"));
         PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();

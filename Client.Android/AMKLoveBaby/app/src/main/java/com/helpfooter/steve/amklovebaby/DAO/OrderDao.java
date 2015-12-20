@@ -192,4 +192,26 @@ public class OrderDao extends AbstractDao {
         util.execSQL(sql.toString(), bindArgs);
         util.close();
     }
+
+    public int getOrderId(String order_no) {
+        Cursor cursor = null;
+        try {
+            util.open();
+            cursor = util
+                    .rawQuery(
+                            "select id from tb_order where order_id='"+order_no+"' ",new String[] { });
+            while (cursor.moveToNext()) {
+                int id=cursor.getInt(cursor.getColumnIndex("id"));
+                return id;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return 0;
+    }
 }

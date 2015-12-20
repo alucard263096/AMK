@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.DoctorSearchLableObj;
 
 import java.util.ArrayList;
 
@@ -19,8 +20,8 @@ public class DoctorDao extends AbstractDao {
     }
 
 
-    public ArrayList<AbstractObj> getDoctorList(){
-        return   super.getList(" status='A' order by general_score desc");
+    public ArrayList<AbstractObj> getDoctorList(String search){
+        return   super.getList(" status='A' "+search+" order by general_score desc");
     }
 
     public DoctorObj GetDoctor(int type)
@@ -88,6 +89,7 @@ public class DoctorDao extends AbstractDao {
                 "chat_time int," +
                 "service_score int," +
                 "ability_score int," +
+                "follow_count int," +
                 "general_score int)");
         util.execSQL(sql.toString(), new Object[]{});
 
@@ -110,7 +112,7 @@ public class DoctorDao extends AbstractDao {
         StringBuffer sql = new StringBuffer();
         sql.append("insert into tb_doctor (id, license, name,photo,title, office, bookingtime, introduce, credentials, expert" +
                 ",enable_videochat,videochat_price, enable_charchat, charchat_price, status,is_taiwan " +
-                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                ",general_score,service_score,ability_score,videoquerycount,charquerycount,chat_time,follow_count) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)");
         Object[] bindArgs = {obj.getId(),obj.getLicense(),obj.getName(),obj.getPhoto(),obj.getTitle(),obj.getOffice(),obj.getBookingtime(),obj.getIntroduce(),obj.getCredentials(),obj.getExpert()
         ,obj.getEnableVideochat(),obj.getVideochatPrice(),obj.getEnableCharchat(),obj.getCharchatPrice(),obj.getStatus(),obj.getIsTaiwan(),obj.getGeneralScore(),obj.getService_score(),obj.getAbility_score(),obj.getVideoquerycount(),obj.getChat_time()};
         util.execSQL(sql.toString(),bindArgs);
@@ -148,10 +150,78 @@ public class DoctorDao extends AbstractDao {
 
     }
 
+    public void updateFollowCount(int doctor_id,int count){
+        util.open();
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("update tb_doctor set follow_count=? where id=? ");
+        Object[] bindArgs = {count,doctor_id};
+        util.execSQL(sql.toString(),bindArgs);
+
+        util.close();
+    }
+
     @Override
     AbstractObj newRealObj() {
         return new DoctorObj();
     }
+
+    public ArrayList<DoctorSearchLableObj> getDoctorOfficeLables(){
+        String sql="select SUM(1) count,office name,'office='''||office||'''' search from tb_doctor " +
+                "where status='A' " +
+                "group by office " +
+                "order by count desc";
+        return getDoctorLableList(sql);
+    }
+
+
+    public DoctorSearchLableObj getDoctorInTaiwanLables(){
+        String sql="select COUNT(1) count,'海外医生' name,'is_taiwan=''Y''' search from tb_doctor " +
+                "where status='A' and  is_taiwan='Y'";
+        return getDoctorLableList(sql).get(0);
+    }
+
+
+
+    public DoctorSearchLableObj getDoctorCharLables(){
+        String sql="select COUNT(1) count,'图文咨询' name,'enable_charchat=''Y''' search from tb_doctor " +
+                "where status='A' and enable_charchat='Y'";
+        return getDoctorLableList(sql).get(0);
+    }
+
+    public DoctorSearchLableObj getDoctorVideoLables(){
+        String sql="select COUNT(1) count,'视频会诊' name,'enable_videochat=''Y''' search from tb_doctor " +
+                "where status='A' and  enable_videochat='Y'";
+        return getDoctorLableList(sql).get(0);
+    }
+
+    private ArrayList<DoctorSearchLableObj> getDoctorLableList(String sql){
+        ArrayList<DoctorSearchLableObj> lst=new ArrayList<DoctorSearchLableObj>();
+
+        Cursor cursor = null;
+        try {
+            util.open();
+
+            cursor = util.rawQuery(sql,new String[] {  });
+            while (cursor.moveToNext()) {
+                DoctorSearchLableObj obj=new DoctorSearchLableObj(
+                        cursor.getInt(cursor.getColumnIndex("count")),
+                        cursor.getString(cursor.getColumnIndex("name")),
+                        cursor.getString(cursor.getColumnIndex("search"))
+                );
+                lst.add(obj);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return lst;
+    }
+
 
     public ArrayList<AbstractObj> getDoctorListWithFollow() {
         ArrayList<AbstractObj> lst=new ArrayList<AbstractObj>();
@@ -180,4 +250,5 @@ public class DoctorDao extends AbstractDao {
         }
         return lst;
     }
+
 }
