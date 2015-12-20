@@ -23,16 +23,6 @@ include_once ROOT . '/libs/unionpay/utf8/func/secureUtil.php';
 					$smsMgr->SendQueryConfirm($info["mobile"],$info["tag_name"],$info["order_date"]." ".$info["order_time"]);
 					$order_id=$info["id"];
 					?>
-					
-<html>
-<head>
-</head>
-<body>
-<script>
-window.close();
-</script>
-</body>
-</html>
 					<?php
 				}
 				//如果卡号我们业务配了会返回且配了需要加密的话，请按此方法解密
@@ -44,3 +34,27 @@ window.close();
 				echo '签名为空';
 			}
 ?>
+					
+<html>
+<head>
+</head>
+<body>
+<script>
+function openApp() {  
+  
+        if (/android/i.test(navigator.userAgent)) {  
+             var isrefresh = getUrlParam('refresh'); // 获得refresh参数  
+             if(isrefresh == 1) {  
+                 return  
+             }  
+             window.location.href = 'myapp://amklovebaby/success?order_no=<?php echo $order_id; ?>';  
+             window.setTimeout(function () {  
+                     window.location.href += '&refresh=1' // 附加一个特殊参数，用来标识这次刷新不要再调用myapp:// 了  
+             }, 500);  
+         }  
+  
+}
+openApp();
+</script>
+</body>
+</html>
