@@ -1,38 +1,16 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Message;
-import android.os.Parcelable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.CustomControlView.OrderListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Handler;
 
 public class OrderListActivity extends MyActivity implements View.OnClickListener {
     OrderListLoadView orderListLoadView;
@@ -62,7 +40,7 @@ public class OrderListActivity extends MyActivity implements View.OnClickListene
     boolean hasloader=false;
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
-
+        ((TextView)findViewById(R.id.title)).getPaint().setFakeBoldText(true);
         ((TextView) findViewById(R.id.btnShowFinished)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowOrdered)).setOnClickListener(this);
         ((TextView) findViewById(R.id.btnShowWaitpayment)).setOnClickListener(this);

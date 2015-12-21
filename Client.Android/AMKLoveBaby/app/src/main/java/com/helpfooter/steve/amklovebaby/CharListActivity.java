@@ -1,18 +1,13 @@
 package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.MessageListLoadView;
-import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
-import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
-import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
 public class CharListActivity extends Activity implements View.OnClickListener {
@@ -32,6 +27,7 @@ public class CharListActivity extends Activity implements View.OnClickListener {
     MessageListLoadView lstLoad;
     boolean hasNewView=false;
     private void InitUI() {
+        ((TextView)findViewById(R.id.title)).getPaint().setFakeBoldText(true);
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         if(hasNewView==false){
             lstLoad = new MessageListLoadView(this, this.getApplicationContext(), (LinearLayout) findViewById(R.id.normal_chat_list));

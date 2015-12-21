@@ -63,7 +63,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	private Button mEndCallBtn;
 	private ImageButton mBtnCameraCtrl; // 控制视频的按钮
 	private ImageButton mBtnSpeakCtrl; // 控制音频的按钮
-    private int myUserId;
+	private int myUserId;
 	public AnyChatCoreSDK anychatSDK;
 	BookerObj booker;
 	DoctorObj doctor;
@@ -78,21 +78,21 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 		setContentView(R.layout.video_activity);
 
 		Intent intent = getIntent();
-		 order_id = Integer.parseInt(intent.getStringExtra("orderId"));
+		order_id = Integer.parseInt(intent.getStringExtra("orderId"));
 		BookerDao bookerDao=new BookerDao(this);
 		booker=(BookerObj)bookerDao.getObj(order_id);
-		 doctor_id=Integer.parseInt(intent.getStringExtra("docId"));
+		doctor_id=Integer.parseInt(intent.getStringExtra("docId"));
 		DoctorDao doctorDao=new DoctorDao(this);
 		doctor=(DoctorObj)doctorDao.getObj(doctor_id);
 
 
 
-			InitSDK();
-			InitLogin();
-			InitLayout();
+		InitSDK();
+		InitLogin();
+		InitLayout();
 
-			// 如果视频流过来了，则把背景设置成透明的
-			handler.postDelayed(runnable, UPDATEVIDEOBITDELAYMILLIS);
+		// 如果视频流过来了，则把背景设置成透明的
+		handler.postDelayed(runnable, UPDATEVIDEOBITDELAYMILLIS);
 		//标记视频聊天开始时间
 		BookerDao newbookerDao=new BookerDao(this);
 		newbookerDao.updateBeginTime(order_id);
@@ -114,82 +114,82 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 		anychatSDK.SetBaseEvent(this);
 		anychatSDK.mSensorHelper.InitSensor(this);
 		AnyChatCoreSDK.mCameraHelper.SetContext(this);
-		
-		
-        ApplyVideoConfig();
+
+
+		ApplyVideoConfig();
 
 	}
-	
-	
 
-    // 根据配置文件配置视频参数
-    private void ApplyVideoConfig() {
-        AnychatConfigEntity configEntity=new AnychatConfigEntity();
-            // 设置本地视频编码的码率（如果码率为0，则表示使用质量优先模式）
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_BITRATECTRL,
-                    configEntity.mVideoBitrate);
+
+
+	// 根据配置文件配置视频参数
+	private void ApplyVideoConfig() {
+		AnychatConfigEntity configEntity=new AnychatConfigEntity();
+		// 设置本地视频编码的码率（如果码率为0，则表示使用质量优先模式）
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_BITRATECTRL,
+				configEntity.mVideoBitrate);
 //			if (configEntity.mVideoBitrate == 0) {
-            // 设置本地视频编码的质量
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_QUALITYCTRL,
-                    configEntity.mVideoQuality);
+		// 设置本地视频编码的质量
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_QUALITYCTRL,
+				configEntity.mVideoQuality);
 //			}
-            // 设置本地视频编码的帧率
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_FPSCTRL,
-                    configEntity.mVideoFps);
-            // 设置本地视频编码的关键帧间隔
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_GOPCTRL,
-                    configEntity.mVideoFps * 4);
-            // 设置本地视频采集分辨率
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_WIDTHCTRL,
-                    configEntity.mResolutionWidth);
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_HEIGHTCTRL,
-                    configEntity.mResolutionHeight);
-            // 设置视频编码预设参数（值越大，编码质量越高，占用CPU资源也会越高）
-            AnyChatCoreSDK.SetSDKOptionInt(
-                    AnyChatDefine.BRAC_SO_LOCALVIDEO_PRESETCTRL,
-                    configEntity.mVideoPreset);
-        // 让视频参数生效
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_LOCALVIDEO_APPLYPARAM,
-                configEntity.mConfigMode);
-        // P2P设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_NETWORK_P2PPOLITIC,
-                configEntity.mEnableP2P);
-        // 本地视频Overlay模式设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_LOCALVIDEO_OVERLAY,
-                configEntity.mVideoOverlay);
-        // 回音消除设置
-        AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_AUDIO_ECHOCTRL,
-                configEntity.mEnableAEC);
-        // 平台硬件编码设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_CORESDK_USEHWCODEC,
-                configEntity.mUseHWCodec);
-        // 视频旋转模式设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_LOCALVIDEO_ROTATECTRL,
-                configEntity.mVideoRotateMode);
-        // 本地视频采集偏色修正设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_LOCALVIDEO_FIXCOLORDEVIA,
-                configEntity.mFixColorDeviation);
-        // 视频GPU渲染设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_VIDEOSHOW_GPUDIRECTRENDER,
-                configEntity.mVideoShowGPURender);
-        // 本地视频自动旋转设置
-        AnyChatCoreSDK.SetSDKOptionInt(
-                AnyChatDefine.BRAC_SO_LOCALVIDEO_AUTOROTATION,
-                configEntity.mVideoAutoRotation);
-    }
+		// 设置本地视频编码的帧率
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_FPSCTRL,
+				configEntity.mVideoFps);
+		// 设置本地视频编码的关键帧间隔
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_GOPCTRL,
+				configEntity.mVideoFps * 4);
+		// 设置本地视频采集分辨率
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_WIDTHCTRL,
+				configEntity.mResolutionWidth);
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_HEIGHTCTRL,
+				configEntity.mResolutionHeight);
+		// 设置视频编码预设参数（值越大，编码质量越高，占用CPU资源也会越高）
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_PRESETCTRL,
+				configEntity.mVideoPreset);
+		// 让视频参数生效
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_APPLYPARAM,
+				configEntity.mConfigMode);
+		// P2P设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_NETWORK_P2PPOLITIC,
+				configEntity.mEnableP2P);
+		// 本地视频Overlay模式设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_OVERLAY,
+				configEntity.mVideoOverlay);
+		// 回音消除设置
+		AnyChatCoreSDK.SetSDKOptionInt(AnyChatDefine.BRAC_SO_AUDIO_ECHOCTRL,
+				configEntity.mEnableAEC);
+		// 平台硬件编码设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_CORESDK_USEHWCODEC,
+				configEntity.mUseHWCodec);
+		// 视频旋转模式设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_ROTATECTRL,
+				configEntity.mVideoRotateMode);
+		// 本地视频采集偏色修正设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_FIXCOLORDEVIA,
+				configEntity.mFixColorDeviation);
+		// 视频GPU渲染设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_VIDEOSHOW_GPUDIRECTRENDER,
+				configEntity.mVideoShowGPURender);
+		// 本地视频自动旋转设置
+		AnyChatCoreSDK.SetSDKOptionInt(
+				AnyChatDefine.BRAC_SO_LOCALVIDEO_AUTOROTATION,
+				configEntity.mVideoAutoRotation);
+	}
 
 	@TargetApi(Build.VERSION_CODES.ECLAIR)
 	private void InitLayout() {

@@ -1,19 +1,13 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
@@ -40,7 +34,7 @@ public class GeneralTextActivity extends MyActivity implements View.OnClickListe
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         ((TextView) findViewById(R.id.title)).setText(title);
-
+        ((TextView) findViewById(R.id.title)).getPaint().setFakeBoldText(true);
         ((WebView) findViewById(R.id.txtContext)).loadUrl(StaticVar.GeneralTextUrl + code);
 
         ((WebView) findViewById(R.id.txtContext)).setBackgroundColor(0);

@@ -5,13 +5,9 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Message;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Message;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,10 +20,7 @@ import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderLoader;
-import com.helpfooter.steve.amklovebaby.Loader.PaymentLoader;
-import com.helpfooter.steve.amklovebaby.Loader.UnionPaymentLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
 
 import java.util.ArrayList;
 
@@ -73,7 +66,7 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
         Button btnSubmit=(Button)findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(this);
         btnSubmit.setBackgroundResource(R.color.myblue);
-
+        ((TextView)findViewById(R.id.title)).getPaint().setFakeBoldText(true);
         ((TextView)findViewById(R.id.txtPrice)).setText(String.valueOf(order.getPrice()) + "元");
 
         txtPaymentType=((TextView)findViewById(R.id.txtPaymentType));

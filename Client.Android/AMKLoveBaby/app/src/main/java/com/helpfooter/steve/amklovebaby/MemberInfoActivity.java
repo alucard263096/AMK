@@ -1,16 +1,9 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Message;
-import android.provider.MediaStore;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,27 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
-import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.MemberPhotoLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
 import com.helpfooter.steve.amklovebaby.DAO.MemberDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.MemberLoader;
-import com.helpfooter.steve.amklovebaby.Loader.MemberPhotoAddLoader;
 import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 
 public class MemberInfoActivity extends MyActivity implements View.OnClickListener,View.OnFocusChangeListener,IWebLoaderCallBack {
@@ -75,6 +59,9 @@ public class MemberInfoActivity extends MyActivity implements View.OnClickListen
 
     private void InitUI() {
         ((ImageView)findViewById(R.id.btnBack)).setOnClickListener(this);
+
+        TextView txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
 
         txtName=(EditText)findViewById(R.id.txtName);
         txtName.setOnFocusChangeListener(this);
