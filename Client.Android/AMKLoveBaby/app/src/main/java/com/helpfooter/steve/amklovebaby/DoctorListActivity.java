@@ -1,27 +1,14 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorListLoadView;
-import com.helpfooter.steve.amklovebaby.CustomControlView.FollowDoctorListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
-import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
-import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 
 public class DoctorListActivity extends MyActivity implements View.OnClickListener {
 
@@ -44,8 +31,10 @@ public class DoctorListActivity extends MyActivity implements View.OnClickListen
 
     private void InitUI() {
 
-        if(name.length()>2){
-            ((TextView)findViewById(R.id.title)).setText(name);
+        if(name.length() >= 2){
+            TextView txtTitle = ((TextView) findViewById(R.id.title));
+            txtTitle.setText(name);
+            txtTitle.getPaint().setFakeBoldText(true);
         }
         if(search.length()>2){
             search=" and "+search;

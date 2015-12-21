@@ -1,23 +1,14 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Message;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomControlView.FollowDoctorListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.CustomObject.VerifyCodeButtonDisable;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
@@ -45,7 +36,8 @@ public class FollowDoctorActivity extends MyActivity implements View.OnClickList
 
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
-
+        TextView txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
         MemberFollowDoctorLoader loader=new MemberFollowDoctorLoader(this,StaticVar.Member.getId());
         loader.setCallBack(this);
         loader.start();

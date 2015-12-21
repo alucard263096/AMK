@@ -1,12 +1,8 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Message;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,16 +17,12 @@ import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
-import com.helpfooter.steve.amklovebaby.Loader.LoginSendLoader;
-import com.helpfooter.steve.amklovebaby.Loader.MemberLoader;
 import com.helpfooter.steve.amklovebaby.Loader.RegSendLoader;
 import com.helpfooter.steve.amklovebaby.Loader.RegisterLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import java.util.ArrayList;
-import java.util.MissingFormatArgumentException;
-import java.util.logging.Handler;
 
 
 public class RegisterActivity extends MyActivity implements View.OnClickListener,IWebLoaderCallBack {
@@ -53,6 +45,9 @@ public class RegisterActivity extends MyActivity implements View.OnClickListener
 
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
+
+        TextView txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
 
         btnSendVerifyCode=((Button)findViewById(R.id.btnSendVerifyCode));
         btnSendVerifyCode.setOnClickListener(this);
