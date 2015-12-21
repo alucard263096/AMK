@@ -31,3 +31,4 @@ proguard/
 # template Files
 *.template
 /templates_c
+.idea

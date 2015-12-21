@@ -94,13 +94,8 @@
     <orderEntry type="library" exported="" name="Native_Libs2" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="libammsdk" level="project" />
-<<<<<<< HEAD
     <orderEntry type="library" exported="" name="httpclient-4.3.6" level="project" />
     <orderEntry type="library" exported="" name="httpcore-4.4.3" level="project" />
-=======
-    <orderEntry type="library" exported="" name="httpcore-4.4.3" level="project" />
-    <orderEntry type="library" exported="" name="httpclient-4.3.6" level="project" />
->>>>>>> e85b5e0b451b4fe841f1c1dd1d45e18aec270caf
     <orderEntry type="library" exported="" name="support-annotations-22.2.1" level="project" />
     <orderEntry type="library" exported="" name="alipaySDK-20150818" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.9" level="project" />
