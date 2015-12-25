@@ -63,7 +63,7 @@
             app:layout_marginLeftPercent="5%"
             android:gravity="center"
             app:layout_marginRightPercent="5%"
-            android:background="@drawable/text_view_border2"
+            android:background="@drawable/text_view_border3"
             android:text="图文咨询（1024）"
             android:tag="enable_charchat='Y'"/>
         <TextView
