@@ -51,7 +51,7 @@ public class FollowDoctorListLoadView extends DoctorListLoadView  {
             this.mainlayout.addView(txtEmpty);
 
         }else {
-            super.LoadDoctorListData();
+            super.LoadDoctorListData(lstDoctor);
         }
 
     }
