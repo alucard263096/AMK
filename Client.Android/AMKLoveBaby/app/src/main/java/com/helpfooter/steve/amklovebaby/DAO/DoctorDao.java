@@ -21,7 +21,7 @@ public class DoctorDao extends AbstractDao {
 
 
     public ArrayList<AbstractObj> getDoctorList(String search){
-        return   super.getList(" status='A' "+search+" order by general_score desc");
+        return   super.getList(" status='A' "+search+" order by general_score desc,id desc");
     }
 
     public DoctorObj GetDoctor(int type)
