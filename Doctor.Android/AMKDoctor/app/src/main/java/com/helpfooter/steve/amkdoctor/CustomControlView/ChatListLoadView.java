@@ -101,7 +101,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
                         ChatLoader loader = new ChatLoader(mActivity, mOrderid);
                         loader.setCallBack(valCallBack);
                         loader.run();
-                        sleep(3000);
+                        sleep(1000);
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
