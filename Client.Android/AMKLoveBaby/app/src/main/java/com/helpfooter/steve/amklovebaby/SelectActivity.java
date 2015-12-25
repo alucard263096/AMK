@@ -83,9 +83,15 @@ public abstract class SelectActivity extends Activity implements View.OnClickLis
             txtName.setTextSize(15);
             txtName.setLayoutParams(param);
             txtName.setText(obj.DisplayName());
+            txtName.setTextColor(Color.BLACK);
 
             layout.setTag(obj);
-            layout.setOnClickListener(this);
+            if(!obj.IsDisabled()) {
+                layout.setOnClickListener(this);
+            }else {
+                txtName.setTextColor(Color.GRAY);
+            }
+
 
             layout.addView(txtName);
             sv.addView(layout);

@@ -36,4 +36,8 @@ public class SexObj  implements ISelectObj {
     public void LoadImage(ImageView img) {
 
     }
+    @Override
+    public boolean IsDisabled() {
+        return false;
+    }
 }
