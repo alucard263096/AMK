@@ -143,7 +143,7 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
         LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         layoutParams.setMargins(20, 10, 10, 20);
 
-        txt.setBackground(getResources().getDrawable(R.drawable.text_view_border4));
+        txt.setBackground(getResources().getDrawable(R.drawable.text_view_border3));
         txt.setLayoutParams(layoutParams);
         setLableForTxt(txt, obj);
 

@@ -13,5 +13,6 @@ public interface ISelectObj {
     String DisplayName();
     String SelectedValue();
     boolean ShowLogo();
+    boolean IsDisabled();
     void LoadImage(ImageView img);
 }

@@ -54,6 +54,10 @@ public class WorkDayObj extends AbstractObj implements ISelectObj {
     public void parseCursor(Cursor cursor) {
 
     }
+    @Override
+    public boolean IsDisabled() {
+        return false;
+    }
 
     @Override
     public void parseXmlDataTable(HashMap<String, String> lstRowValue) {

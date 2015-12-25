@@ -53,6 +53,12 @@ public class PaymentTypeObj implements ISelectObj {
     }
 
     @Override
+    public boolean IsDisabled() {
+        return false;
+    }
+
+
+    @Override
     public void LoadImage(ImageView img) {
         img.setImageResource(resId);
     }

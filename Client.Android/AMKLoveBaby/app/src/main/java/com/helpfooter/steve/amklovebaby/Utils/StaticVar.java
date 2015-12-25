@@ -13,13 +13,13 @@ import java.util.HashMap;
 
 public final class StaticVar {
 	public static String ProjectName="AMKLoveBaby";
-	public static String ImageFolderURL="http://www.myhkdoc.com/AMK/FilesServer/";
-	public static String APIURL="http://www.myhkdoc.com/AMK/API/";
-	public static String UPLOADURL="http://www.myhkdoc.com/AMK/CMS/fileupload.php?field=uploadfile";
-	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
-	public static  String UPLOADFILEURL4Member = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=member&field=uploadfile";
-	public static  String UNIONPAYURL="http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/submit.php";
-	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
+	public static String ImageFolderURL="http://120.24.239.49/AMK/FilesServer/";
+	public static String APIURL="http://120.24.239.49/AMK/API/";
+	public static String UPLOADURL="http://120.24.239.49/AMK/CMS/fileupload.php?field=uploadfile";
+	public static  String UPLOADFILEURL = "http://120.24.239.49/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
+	public static  String UPLOADFILEURL4Member = "http://120.24.239.49/AMK/CMS/fileupload.php?module=member&field=uploadfile";
+	public static  String UNIONPAYURL="http://120.24.239.49/AMK/PaymentGateway/UnionPay/submit.php";
+	public static String IMGCHATURL="http://120.24.239.49/AMK/FilesServer/charchat/";
 	public static String IndexBannerApi="index_banner";
 	public static String BannerApi="banner";
 	public static String DoctorApi="doctor";
@@ -55,7 +55,7 @@ public final class StaticVar {
 	public static String DOCType="DOC";
 	public static MainActivity MainForm;
 	public static IMyActivity CurrentActivity;
-	public static String GeneralTextUrl="http://www.myhkdoc.com/AMK/CMS/general.php?code=";
+	public static String GeneralTextUrl="http://120.24.239.49/AMK/CMS/general.php?code=";
 	public static String DoctorFollowAPI="doctorfollow";
 	public static String UploadDoctorFollowAPI="uploaddoctorfollow";
 	public static String DoctorFollowCountApi="doctorfollowcount";
@@ -64,7 +64,7 @@ public final class StaticVar {
 	public static int height ;   // 屏幕高度（像素）
 	public static float density ;      // 屏幕密度（0.75 / 1.0 / 1.5）
 	public static int densityDpi ;  // 屏幕密度DPI（120 / 160 / 240）
-	public static String NewsUrl="http://www.myhkdoc.com/AMK/CMS/news.php?id=";
+	public static String NewsUrl="http://120.24.239.49/AMK/CMS/news.php?id=";
 
 	static {
 		dictHashMap.put(IndexBannerApi,APIURL+"Banner/index_banner.php");
@@ -99,7 +99,7 @@ public final class StaticVar {
 		dictHashMap.put(DoctorFollowCountApi,APIURL+"Doctor/doctor_follow_count.php");
 	}
 
-	public static String VideoChatServerIp="www.myhkdoc.com";
+	public static String VideoChatServerIp="120.24.239.49";
 	public static int VideoChatServerPort=8906;
 
 	public static String GetSystemTimeString(){
