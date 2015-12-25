@@ -276,11 +276,15 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
     private void setFollow() {
         if(hasFollow){
-            btnFollow.setBackgroundColor(getResources().getColor(R.color.myyello));
-            btnFollow.setText("已关注");
+            //btnFollow.setBackgroundColor(Color.parseColor("#D5C9B8"));
+            btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6_1));
+            btnFollow.setTextColor(Color.WHITE);
+            btnFollow.setText("取消关注");
         }else {
-            btnFollow.setBackgroundColor(getResources().getColor(R.color.myblue));
-            btnFollow.setText("+关注");
+            //btnFollow.setBackgroundColor(getResources().getColor(R.color.myblue));
+            btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6));
+            btnFollow.setTextColor(Color.parseColor("#38D165"));
+            btnFollow.setText("+ 关注");
         }
     }
 

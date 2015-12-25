@@ -140,8 +140,9 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
     private TextView createTxtForLable(DoctorSearchLableObj obj){
         TextView txt=new TextView(this.getActivity());
         txt.setPadding(30, 10, 30, 20);
-        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         layoutParams.setMargins(20, 10, 10, 20);
+
         txt.setBackground(getResources().getDrawable(R.drawable.text_view_border4));
         txt.setLayoutParams(layoutParams);
         setLableForTxt(txt, obj);

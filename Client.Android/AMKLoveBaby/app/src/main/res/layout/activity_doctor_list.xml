@@ -43,7 +43,7 @@
     android:layout_height="wrap_content"
     android:scaleType="fitXY"
     android:src="@drawable/personaldoctor"/>
-    <ScrollView
+    <com.helpfooter.steve.amklovebaby.CustomControlView.SlowScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -56,6 +56,6 @@
             android:orientation="vertical"
             android:id="@+id/doctor_list" android:background="#ffffff">
         </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
-    </ScrollView>
+    </com.helpfooter.steve.amklovebaby.CustomControlView.SlowScrollView>
 
 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

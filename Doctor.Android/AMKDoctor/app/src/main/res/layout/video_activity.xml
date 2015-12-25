@@ -9,7 +9,7 @@
         android:layout_height="45dp"
         app:layout_widthPercent="100%"
         android:id="@+id/rl_layout"
-        android:background="@color/newblue">
+        android:background="@color/myblue">
 
         <ImageView
             android:id="@+id/btn_videoback"

@@ -1,32 +1,17 @@
 package com.helpfooter.steve.amklovebaby;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.helpfooter.steve.amklovebaby.Common.UrlImageLoader;
 import com.helpfooter.steve.amklovebaby.CustomControlView.DoctorCommentView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
-import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
-import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
-import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
-import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorCommentLoader;
-import com.helpfooter.steve.amklovebaby.Loader.DoctorStatisticsLoader;
-import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
-import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import java.util.ArrayList;
 
@@ -45,7 +30,8 @@ public class DoctorCommentActivity extends MyActivity implements View.OnClickLis
 
     private void InitUI() {
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
-
+        TextView txtTitle = (TextView)findViewById(R.id.title);
+        txtTitle.getPaint().setFakeBoldText(true);
     }
 
     boolean hasload=false;

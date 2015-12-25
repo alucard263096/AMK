@@ -13,13 +13,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
 
-public class PaymentSuccActivity extends MyActivity implements View.OnClickListener {
+public class PaymentSuccActivity extends Activity implements View.OnClickListener {
 
     OrderObj order;
 
@@ -58,7 +57,6 @@ public class PaymentSuccActivity extends MyActivity implements View.OnClickListe
             order_id=orderDao.getOrderId(order_no);
         }
         order=(OrderObj)orderDao.getObj(order_id);
-        orderDao.setPaymentSuccess(order.getId());
     }
 
     @Override
@@ -81,9 +79,5 @@ public class PaymentSuccActivity extends MyActivity implements View.OnClickListe
                 }
                 return;
         }
-    }
-
-    public boolean PopupNotice(){
-        return false;
     }
 }

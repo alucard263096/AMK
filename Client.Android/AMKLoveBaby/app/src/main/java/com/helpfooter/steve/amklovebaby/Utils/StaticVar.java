@@ -18,6 +18,7 @@ public final class StaticVar {
 	public static String UPLOADURL="http://www.myhkdoc.com/AMK/CMS/fileupload.php?field=uploadfile";
 	public static  String UPLOADFILEURL = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=charchat&field=uploadfile";
 	public static  String UPLOADFILEURL4Member = "http://www.myhkdoc.com/AMK/CMS/fileupload.php?module=member&field=uploadfile";
+	public static  String UNIONPAYURL="http://www.myhkdoc.com/AMK/PaymentGateway/UnionPay/submit.php";
 	public static String IMGCHATURL="http://www.myhkdoc.com/AMK/FilesServer/charchat/";
 	public static String IndexBannerApi="index_banner";
 	public static String BannerApi="banner";
@@ -48,7 +49,7 @@ public final class StaticVar {
 	public static String MessageApi="Message";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
-	public static String CurrentVersion="1.0.1.31";
+	public static String CurrentVersion="1.0.1.33";
 	public static String TxtType="TXT";
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";

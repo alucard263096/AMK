@@ -40,8 +40,9 @@
              >
         </activity>
         <activity
-            android:name="VideoChatActivity">
+            android:name=".VideoChatActivity"
 
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
