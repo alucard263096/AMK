@@ -44,6 +44,9 @@ public class WorktimeObj extends AbstractObj implements ISelectObj {
 
     @Override
     public String DisplayName() {
+        if(used.equals("Y")){
+            return time+"(已使用)";
+        }
         return time;
     }
 
@@ -60,5 +63,13 @@ public class WorktimeObj extends AbstractObj implements ISelectObj {
     @Override
     public void LoadImage(ImageView img) {
 
+    }
+
+    @Override
+    public boolean IsDisabled() {
+        if(used.equals("Y")){
+            return  true;
+        }
+        return false;
     }
 }

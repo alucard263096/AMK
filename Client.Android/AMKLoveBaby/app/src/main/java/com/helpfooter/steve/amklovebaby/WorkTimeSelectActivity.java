@@ -30,9 +30,7 @@ public class WorkTimeSelectActivity extends SelectActivity implements IWebLoader
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
         for(AbstractObj obj:lstObjs){
             WorktimeObj wd=(WorktimeObj)obj;
-            if(wd.getUsed().equals("N")){
-                lst.add(wd);
-            }
+            lst.add(wd);
         }
         DiaplayListHandler.sendEmptyMessage(0);
     }
