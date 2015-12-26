@@ -103,7 +103,7 @@
                             android:height="30sp"
                             android:width="80sp"
                             android:includeFontPadding="false"
-                            android:textColor="#38D165"
+                            android:textColor="#1C91E0"
                             android:background="@drawable/text_view_border6"
                             android:textSize="18sp"/>
                     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -149,8 +149,10 @@
                         android:text="粉丝数"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         app:layout_widthPercent="100%"
+
+                        android:height="30sp"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"/>
                     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
@@ -161,8 +163,10 @@
                         android:text="1000"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         app:layout_widthPercent="100%"
+                        android:layout_marginBottom="10sp"
+                        android:height="30sp"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -181,8 +185,10 @@
                         android:text="服务人数"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         app:layout_widthPercent="100%"
+
+                        android:height="30sp"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"/>
                     <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
@@ -193,8 +199,10 @@
                         android:text="1000"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         app:layout_widthPercent="100%"
+                        android:layout_marginBottom="10sp"
+                        android:height="30sp"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -213,7 +221,8 @@
                         android:text="推荐指数"
                         android:autoText="false"
                         android:elegantTextHeight="false"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
+                        android:height="30sp"
                         app:layout_widthPercent="100%"
                         android:gravity="center"
                         android:layout_gravity="center_vertical"/>
@@ -231,14 +240,17 @@
                             android:text="1000"
                             android:autoText="false"
                             android:elegantTextHeight="false"
-                            android:textSize="16dp"
+                            android:textSize="16sp"
                             app:layout_widthPercent="58%"
+                            android:layout_marginBottom="8sp"
+                            android:height="30sp"
                             android:gravity="right"
                             android:layout_gravity="center_vertical"/>
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:id="@+id/imgHigh"
+                            android:height="30sp"
                             app:layout_widthPercent="42%"
                             android:layout_marginLeft="0px"
                             android:src="@drawable/height" />
@@ -251,9 +263,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="20px"
+                android:paddingTop="10px"
                 android:paddingBottom="20px"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10px">
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -275,10 +287,9 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
-                        android:layout_marginTop="10dp"
                         android:text="图文咨询"
                         android:gravity="center"
-                        android:textSize="17dp"
+                        android:textSize="17sp"
                         android:background="#ffffff"
                         android:textColor="#919191"
                         android:id="@+id/txtPictChat"/>
@@ -302,7 +313,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border5"
-                        android:textColor="@color/topbar_bg"/>
+                        android:textColor="@color/newblue"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
@@ -318,10 +329,10 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
-                        android:layout_marginTop="10dp"
+
                         android:text="视频咨询"
                         android:gravity="center"
-                        android:textSize="17dp"
+                        android:textSize="17sp"
                         android:background="#ffffff"
                         android:textColor="#919191"
                         android:id="@+id/txtVedioChat"/>
@@ -345,7 +356,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border5"
-                        android:textColor="@color/topbar_bg"/>
+                        android:textColor="@color/newblue"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
@@ -360,7 +371,7 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
-                        android:layout_marginTop="10dp"
+
                         android:text="门诊挂号"
                         android:gravity="center"
                         android:textSize="17sp"
@@ -387,7 +398,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border7"
-                        android:textColor="@color/mygray"/>
+                        android:textColor="@color/deepgray"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </LinearLayout>
@@ -416,10 +427,11 @@
                     android:layout_height="1px"
                     android:background="#cccccc"></LinearLayout>
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
-                android:id="@+id/txtIntroduce"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="介绍介绍介绍介绍介绍介绍介绍介绍"
+                    android:id="@+id/txtIntroduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="介绍介绍介绍介绍介绍介绍介绍介绍"
+                    android:lineSpacingExtra="10dp"
                     app:layout_marginLeftPercent="2%"
                     app:layout_marginRightPercent="2%"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
@@ -448,6 +460,7 @@
                     android:id="@+id/txtCredentials"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:lineSpacingExtra="10dp"
                     android:text="资质资质资质资质资质资质"
                     app:layout_marginLeftPercent="2%"
                     app:layout_marginRightPercent="2%"/>
@@ -485,6 +498,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="擅长擅长擅长擅长擅长擅长擅长"
+                    android:lineSpacingExtra="10dp"
                     app:layout_marginLeftPercent="2%"
                     app:layout_marginRightPercent="2%"/>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>

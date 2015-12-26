@@ -17,6 +17,7 @@
     <color name="mygreen">#B9E5C3</color>
     <color name="mylightblue">#81CAE6</color>
     <color name="mydeepblue">#6D78AF</color>
-    <color name="mygray">#cccccc</color>
+    <color name="mygray">#EEEEEE</color>
+    <color name="deepgray">#919191</color>
     <color name="newblue">#1C91E0</color>
 </resources>
