@@ -189,10 +189,34 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         mainLayout.setOrientation(LinearLayout.VERTICAL);
         mainLayout.setLayoutParams(param);
 
-        ImageView img=new ImageView(ctx);
+/*        CircleImageView1 img = new CircleImageView1(this.ctx);
+        img.setScaleType(CircleImageView.ScaleType.CENTER_CROP);
+        img.setAdjustViewBounds(false);
+
+        PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
+        param.height = 200;
+        param.width = 200;
+        param.topMargin=30;
+        String url= StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
+        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();
+        //img.setImageResource(R.drawable.doctor_demo);
+        img.setBorderColor(Color.parseColor("#919191"));
+        img.setLayoutParams(param);*/
+
+        CircleImageView1 img=new CircleImageView1(ctx);
+        img.setScaleType(CircleImageView.ScaleType.CENTER_CROP);
+        img.setAdjustViewBounds(false);
+
         PercentLinearLayout.LayoutParams imgparam= ToolsUtil.getLayoutParamHeightWrap();
-        img.setAdjustViewBounds(true);
-        img.setScaleType(ImageView.ScaleType.FIT_START);
+        //imgparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
+        imgparam.height = 200;
+        imgparam.width = 200;
+        imgparam.topMargin=30;
+
+        /*img.setAdjustViewBounds(true);
+        img.setScaleType(ImageView.ScaleType.FIT_START);*/
         img.setLayoutParams(imgparam);
         String url=order.GetPhotoUrl();
         UrlImageLoader imageLoader=new UrlImageLoader(img,url);

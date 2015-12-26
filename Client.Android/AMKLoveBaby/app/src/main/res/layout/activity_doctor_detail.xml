@@ -262,7 +262,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffffff"
-                android:paddingTop="10px"
+                android:paddingTop="20px"
                 android:paddingBottom="20px"
                 android:layout_marginTop="10px">
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -286,9 +286,10 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
+                        android:layout_marginTop="10dp"
                         android:text="图文咨询"
                         android:gravity="center"
-                        android:textSize="17sp"
+                        android:textSize="17dp"
                         android:background="#ffffff"
                         android:textColor="#919191"
                         android:id="@+id/txtPictChat"/>
@@ -312,7 +313,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border5"
-                        android:textColor="@color/newblue"/>
+                        android:textColor="@color/topbar_bg"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
@@ -328,10 +329,10 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
-
+                        android:layout_marginTop="10dp"
                         android:text="视频咨询"
                         android:gravity="center"
-                        android:textSize="17sp"
+                        android:textSize="17dp"
                         android:background="#ffffff"
                         android:textColor="#919191"
                         android:id="@+id/txtVedioChat"/>
@@ -355,7 +356,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border5"
-                        android:textColor="@color/newblue"/>
+                        android:textColor="@color/topbar_bg"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
                 <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                     android:layout_width="match_parent"
@@ -370,7 +371,7 @@
                         android:layout_height="match_parent"
                         app:layout_widthPercent="100%"
                         app:layout_marginRightPercent="1%"
-
+                        android:layout_marginTop="10dp"
                         android:text="门诊挂号"
                         android:gravity="center"
                         android:textSize="17sp"
@@ -397,7 +398,7 @@
                         android:layout_marginTop="10dp"
                         android:textSize="17dp"
                         android:background="@drawable/text_view_border7"
-                        android:textColor="@color/deepgray"/>
+                        android:textColor="@color/mygray"/>
                 </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
             </LinearLayout>
