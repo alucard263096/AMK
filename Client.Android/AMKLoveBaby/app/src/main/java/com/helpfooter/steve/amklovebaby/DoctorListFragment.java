@@ -74,7 +74,7 @@ public class DoctorListFragment extends Fragment implements IMyFragment {
 
 
         DoctorListLoadView lstLoad=new DoctorListLoadView(view.getContext(),(LinearLayout)view.findViewById(R.id.doctor_list),"");
-        lstLoad.LoadDoctorListData();
+        lstLoad.LoadDoctorListData(lstLoad.lstDoctor);
         //DoctorLoader loader=new DoctorLoader(this.getActivity());
         //loader.start();
 

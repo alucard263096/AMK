@@ -10,6 +10,7 @@ import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -60,6 +62,7 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
     private TextView mTextViewRecevier; //聊天对象
     private ScrollView mScrollView;
     private String context; //聊天内容
+    private String Type; //聊天类型
     private int order_id;
     private DoctorObj doctor;
     public Activity mActivity;
@@ -110,6 +113,7 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
         mBtnBack.setOnClickListener(this);
         mEditTextContent=(EditText)findViewById(R.id.et_sendmessage);
         mTextViewRecevier=(TextView)findViewById(R.id.txt_Receiver);
+        mScrollView =(ScrollView)findViewById(R.id.chatScroll);
         MemberObj member = StaticVar.Member;
         mTextViewRecevier.setText(member.getName());
         if(hasNewView==false) {
@@ -134,14 +138,20 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
 
                 mEditTextContent.setText("");
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             case R.id.btn_sendPic:
                 SendFile("image/*",IMAGE_CODE);
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             case R.id.btn_sendFile:
                 SendFile("*/*",FILE_CODE);
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
 
         }
@@ -159,6 +169,31 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
     }
 
     private void SendMessage(String txtType, String strContent) {
+
+        context=strContent;
+        Type = txtType;
+        new Thread(){
+            public void run()
+            {
+                LinearLayout sublayout = null;
+                ChatMsgEntity obj = new ChatMsgEntity();
+                obj.setMsgType(false);
+                obj.setMessage(context);
+                obj.setContextType(Type);
+                sublayout = chatListLoadView.LoadChatListData(obj);
+                if (sublayout != null) {
+                    sublayout.setTag(obj);
+                    try {
+                        chatListLoadView.mainlayout.addView(sublayout);
+                    } catch (Exception ex) {
+
+                        Log.i("ERROR", ex.toString());
+                    }
+
+                }
+            }
+        }.start();
+
         loader=new ChatUpdateLoader(mActivity,order_id,doctor.getId(),SENDERTYPE,txtType,strContent);
         if(strContent.isEmpty())
         {

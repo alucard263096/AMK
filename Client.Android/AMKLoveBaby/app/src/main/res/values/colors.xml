@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="topbar_bg">#38D165</color>
+    <color name="topbar_bg">#1C91E0</color>
     <color name="bottomtab_normal">#c8bca5</color>
     <color name="bottomtab_press">#EA7598</color>
     <color name="line">#c8bca5</color>
@@ -18,4 +18,5 @@
     <color name="mylightblue">#81CAE6</color>
     <color name="mydeepblue">#6D78AF</color>
     <color name="mygray">#cccccc</color>
+    <color name="newblue">#1C91E0</color>
 </resources>
