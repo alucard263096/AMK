@@ -79,7 +79,7 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
     private ProgressBar progressBar;
     private int DownedFileLength;
     private int FileLength;
-
+    public ArrayList<ChatMsgEntity> lstOldList;
     private Bitmap myphoto;
     private Bitmap doctorphoto;
 
@@ -106,10 +106,10 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 
     ChatLoader loader;
     public void LoadContent(){
-
+        lstOldList=new ArrayList<ChatMsgEntity>();
         loader = new ChatLoader(mActivity.getApplicationContext(), mOrderid,doctor.getId());
         loader.setCallBack(this);
-        loader.setCircleSecond(3);
+        loader.setCircleSecond(1);
         loader.setIsCircle(true);
         loader.start();
     }
@@ -161,8 +161,12 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 
     private void OnloadMessage() {
 
-        //mainlayout.removeAllViewsInLayout();
-        for (ChatMsgEntity obj : lstMsgEntity) {
+        if(lstMsgEntity.size()==lstOldList.size())
+        {
+            return;
+        }
+        List<ChatMsgEntity> NewMstEntitys=lstMsgEntity.subList(lstOldList.size(),lstMsgEntity.size());
+        for (ChatMsgEntity obj : NewMstEntitys) {
 
             LinearLayout sublayout = null;
 
@@ -176,6 +180,7 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
 
                     Log.i("ERROR", ex.toString());
                 }
+                lstOldList.add(obj);
             }
         }
         onloadScrollHandler.sendEmptyMessage(0);
@@ -190,7 +195,7 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
         }
     };
 
-    private LinearLayout LoadChatListData(ChatMsgEntity obj) {
+    public LinearLayout LoadChatListData(ChatMsgEntity obj) {
         PercentLinearLayout layout = new PercentLinearLayout(this.mActivity);
         PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParamHeightWrap();
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);

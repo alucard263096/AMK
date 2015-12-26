@@ -30,20 +30,28 @@ import java.util.ArrayList;
 public class DoctorListLoadView implements View.OnClickListener {
     public LinearLayout mainlayout;
     public ArrayList<DoctorObj> lstDoctor;
+    public ArrayList<AbstractObj> lst;
     public Context ctx;
+    public int rowCount;
     public  DoctorListLoadView(Context ctx,LinearLayout layout,String search){
         this.ctx=ctx;
         this.mainlayout=layout;
         //this.mainlayout.addView(getBannerView());
         DoctorDao dao=new DoctorDao(this.ctx);
-        ArrayList<AbstractObj> lst=dao.getDoctorList(search);
+         lst=dao.getDoctorList(search);
         lstDoctor=new ArrayList<DoctorObj>();
+        rowCount=0;
         for(AbstractObj obj:lst){
             lstDoctor.add((DoctorObj)obj);
+            rowCount++;
+            if(lstDoctor.size()>=10)
+            {
+                break;
+            }
         }
     }
 
-    public void LoadDoctorListData(){
+    public void LoadDoctorListData(ArrayList<DoctorObj> lstDoctor){
         int i=1;
         for(DoctorObj obj:lstDoctor){
             PercentLinearLayout layout=new PercentLinearLayout(ctx);
