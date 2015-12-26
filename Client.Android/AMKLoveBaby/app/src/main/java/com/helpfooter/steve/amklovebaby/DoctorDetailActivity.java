@@ -146,7 +146,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
             text = (TextView) findViewById(R.id.txtChatPrice);
             text.setBackgroundResource(R.drawable.text_view_border7);
             text.setText("尚未开通");
-            text.setTextColor(Color.parseColor("#cccccc"));
+            text.setTextColor(getResources().getColor(R.color.deepgray));
             text.getPaint().setFakeBoldText(true);
         }
 
@@ -170,7 +170,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
             text = (TextView) findViewById(R.id.txtVedioPrice);
             text.setBackgroundResource(R.drawable.text_view_border7);
             text.setText("尚未开通");
-            text.setTextColor(Color.parseColor("#cccccc"));
+            text.setTextColor(getResources().getColor(R.color.deepgray));
             text.getPaint().setFakeBoldText(true);
         }
 
@@ -283,7 +283,7 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
         }else {
             //btnFollow.setBackgroundColor(getResources().getColor(R.color.myblue));
             btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6));
-            btnFollow.setTextColor(Color.parseColor("#38D165"));
+            btnFollow.setTextColor(getResources().getColor(R.color.newblue));
             btnFollow.setText("+ 关注");
         }
     }

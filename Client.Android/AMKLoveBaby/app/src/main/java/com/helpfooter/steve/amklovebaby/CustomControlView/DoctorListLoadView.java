@@ -148,6 +148,9 @@ public class DoctorListLoadView implements View.OnClickListener {
         txtName.setTextSize(17);
         txtName.setText(doctor.getName());
         txtName.setTextColor(Color.BLACK);
+
+        txtName.setIncludeFontPadding(false);
+        txtName.setPadding(0,30,0,5);
         TextPaint tp= txtName.getPaint();
         tp.setFakeBoldText(true);
         //tp.setStrokeWidth(10f);
@@ -164,12 +167,9 @@ public class DoctorListLoadView implements View.OnClickListener {
             txtOutDoc.setTextSize(12);
             txtOutDoc.setText("海外");
             txtOutDoc.setTextColor(Color.GRAY);
+
             layout2.addView(txtOutDoc);
         }
-
-
-
-
 
         //医生信息
         TextView txtDoctorInfo = new MyTextView(this.ctx);
@@ -177,11 +177,12 @@ public class DoctorListLoadView implements View.OnClickListener {
         //paramInfo.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
         paramInfo.leftMargin = 27;
         txtDoctorInfo.setLayoutParams(paramInfo);
-        txtDoctorInfo.setTextSize(15);
+        txtDoctorInfo.setTextSize(14);
         txtDoctorInfo.setText(doctor.getOffice() + "   " + doctor.getTitle());
-        txtDoctorInfo.setTextColor(Color.BLACK);
-        tp= txtDoctorInfo.getPaint();
-        tp.setFakeBoldText(true);
+        txtDoctorInfo.setPadding(0, 15, 0, 0);
+        txtDoctorInfo.setIncludeFontPadding(false);
+        txtDoctorInfo.setTextColor(Color.GRAY);
+
         layout1.addView(layout2);
         layout1.addView(txtDoctorInfo);
 
@@ -235,8 +236,8 @@ public class DoctorListLoadView implements View.OnClickListener {
         PercentLinearLayout.LayoutParams paramExpert = ToolsUtil.getLayoutParam();
         paramExpert.leftMargin = 27;
         //paramExpert.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
-
-        txtExpert.setPadding(0, 25, 0, 0);
+        txtExpert.setIncludeFontPadding(false);
+        txtExpert.setPadding(0, 25, 0, 25);
         txtExpert.setLayoutParams(paramExpert);
         txtExpert.setSingleLine(true);
         txtExpert.setEllipsize(TextUtils.TruncateAt.valueOf("END"));
@@ -248,11 +249,13 @@ public class DoctorListLoadView implements View.OnClickListener {
 
         //价格
         PercentLinearLayout layoutPrice = new PercentLinearLayout(this.ctx);
+
         param = ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.heightPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f,true);
+        //param.mPercentLayoutInfo.heightPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.20f,true);
         param.mPercentLayoutInfo.rightMarginPercent  = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
+        //param.height = 50;
         //param.topMargin = 20;
-        //layoutPrice.setPadding(0,15,0,0);
+        layoutPrice.setPadding(0, 25, 0, 25);
 
         layoutPrice.setLayoutParams(param);
         layoutPrice.setOrientation(LinearLayout.HORIZONTAL);

@@ -61,7 +61,7 @@
         app:layout_marginTopPercent="5%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"
-        android:background="@color/myblue">
+        android:background="@color/newblue">
 
         <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
             android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 app:layout_marginLeftPercent="3%"
                 app:layout_marginRightPercent="3%"
                 app:layout_widthPercent="24%"
-                android:background="@color/mygreen"
+                android:background="@color/newblue"
                 android:gravity="center"
                 android:textSize="10dp"
                 android:text="获取验证码"
@@ -151,7 +151,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/myblue"
+        android:background="@color/newblue"
         app:layout_marginTopPercent="3%"
         app:layout_marginLeftPercent="5%"
         app:layout_marginRightPercent="5%"

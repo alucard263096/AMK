@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Layout;
+
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.helpfooter.steve.amklovebaby.R;
 import com.helpfooter.steve.amklovebaby.Utils.MyResourceIdUtil;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.client.cache.Resource;
 
 /**
  * Created by Steve on 2015/8/26.
@@ -100,7 +103,8 @@ public class BottomBarButton {
         LinearLayout layout=GetEnteryLayout();
         //layout.setBackgroundColor(Color.parseColor("#EA7598"));
         TextView txt=GetTextView();
-        txt.setTextColor(Color.parseColor("#38D165"));
+        txt.setTextColor(Color.parseColor("#1C91E0"));
+
     }
 
 
