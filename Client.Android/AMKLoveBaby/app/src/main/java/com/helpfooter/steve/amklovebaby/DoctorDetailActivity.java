@@ -111,19 +111,13 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
 
         float fScore = Float.parseFloat(doctor.getRealGeneralScore());
         ImageView imgHigh = (ImageView)findViewById(R.id.imgHigh);
-        if(fScore >= 4.0f)
+        if(fScore <=4.0f)
         {
-            imgHigh.setImageResource(R.drawable.height);
-            imgHigh.setVisibility(View.VISIBLE);
-            param= ToolsUtil.getLayoutParamHeightWrap();
-            param.height = 80;
-            param.width = 80;
-            param.topMargin = 10;
-            imgHigh.setLayoutParams(param);
+
+            imgHigh.setVisibility(View.GONE);
         }
         else
         {
-            imgHigh.setVisibility(View.INVISIBLE);
         }
 
         //图文咨询
@@ -277,12 +271,12 @@ public class DoctorDetailActivity extends MyActivity implements View.OnClickList
     private void setFollow() {
         if(hasFollow){
             //btnFollow.setBackgroundColor(Color.parseColor("#D5C9B8"));
-            btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6_1));
-            btnFollow.setTextColor(Color.WHITE);
-            btnFollow.setText("取消关注");
+            //btnFollow.setBackgroundColor();
+            //btnFollow.setTextColor(Color);
+            btnFollow.setText("已关注");
         }else {
             //btnFollow.setBackgroundColor(getResources().getColor(R.color.myblue));
-            btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6));
+            //btnFollow.setBackground(getResources().getDrawable(R.drawable.text_view_border6));
             btnFollow.setTextColor(getResources().getColor(R.color.newblue));
             btnFollow.setText("+ 关注");
         }
