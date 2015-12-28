@@ -84,9 +84,15 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
 
         lstMemberPhotos=(LinearLayout)findViewById(R.id.lstMemberPhotos);
         if(hasload==false) {
-            MemberPhotoLoadView loadView = new MemberPhotoLoadView(this,memberid, lstMemberPhotos);
-            loadView.LoadPhotoList();
-            hasload = true;
+            try {
+                MemberPhotoLoadView loadView = new MemberPhotoLoadView(this, memberid, lstMemberPhotos);
+                loadView.LoadPhotoList();
+                hasload = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }

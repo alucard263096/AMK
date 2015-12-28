@@ -26,8 +26,8 @@ public class MemberDao extends AbstractDao {
     }
 
     public MemberObj getObj(int memberId){
-       /* ArrayList<AbstractObj> lst=  super.getList("  id= "+memberId);*/
-        ArrayList<AbstractObj> lst=  super.getList("   ");
+        ArrayList<AbstractObj> lst=  super.getList("  id= "+memberId);
+
         for(AbstractObj abobj:lst){
             return (MemberObj)abobj;
         }
@@ -50,7 +50,7 @@ public class MemberDao extends AbstractDao {
                  "name varchar," +
                 "sex varchar," +
                 "photo varchar," +
-                "age varchar)");
+                "age int)");
         util.execSQL(sql.toString(), new Object[]{});
 
     }
@@ -70,7 +70,7 @@ public class MemberDao extends AbstractDao {
         MemberObj obj=(MemberObj)abobj;
 
         StringBuffer sql = new StringBuffer();
-        sql.append("insert into tb_member (id, name,photo,sex, age" +
+        sql.append("insert into tb_member (id, name,photo,sex, age)" +
                 " values (?,?,?,?,?)");
         Object[] bindArgs = {obj.getId(),obj.getName(),obj.getPhoto(),obj.getSex(),obj.getAge()};
         util.execSQL(sql.toString(),bindArgs);

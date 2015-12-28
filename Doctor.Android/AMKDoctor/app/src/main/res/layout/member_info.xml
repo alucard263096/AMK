@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.helpfooter.steve.amklovebaby.MemberInfoActivity"
+    tools:context="com.helpfooter.steve.amkdoctor.MemberInfoActivity"
     android:orientation="vertical">
     <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="false"
-            android:text="医生详情"
+            android:text="会员详情"
             android:contentDescription="@null"
             android:textColor="#ffffff"
             app:layout_widthPercent="80%"
@@ -41,12 +41,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical">
 
             <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +75,7 @@
                             android:id="@+id/txtName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="医生姓名"
+                            android:text="姓名"
                             android:textSize="17dp"
                             android:gravity="center_vertical"
                             app:layout_widthPercent="60%"/>
@@ -111,65 +108,7 @@
                 android:layout_height="1px"
                 android:layout_marginTop="10dp"
                 android:background="#cccccc"></LinearLayout>
-            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff">
 
-
-            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"></LinearLayout>
-            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff">
-
-
-            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"></LinearLayout>
-            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff">
-
-
-            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"></LinearLayout>
-            <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#ffffff">
-
-
-            </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"></LinearLayout>
-
-
-
-
-
-
-
-
-
-
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="10dp"
-                android:background="#cccccc"></LinearLayout>
             <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -196,13 +135,10 @@
 
                 </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
             </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#cccccc"></LinearLayout>
 
 
-        </LinearLayout>
+
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
 
     </ScrollView>
 

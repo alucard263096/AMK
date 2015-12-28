@@ -70,27 +70,32 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
         ArrayList<AbstractObj> readlist=dao.getList("1=1");
 
         mainlayout.removeAllViews();
-        for(AbstractObj obj:readlist){
-            MemberPhotoObj photo=(MemberPhotoObj)obj;
+        try {
+            for (AbstractObj obj : readlist) {
+                MemberPhotoObj photo = (MemberPhotoObj) obj;
 
-            PercentLinearLayout layout=new PercentLinearLayout(ctx);
-            PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
-            param.topMargin=10;
-            param.bottomMargin=10;
-            param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
-            param.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f,true);
-            layout.setLayoutParams(param);
-            layout.setOrientation(LinearLayout.HORIZONTAL);
+                PercentLinearLayout layout = new PercentLinearLayout(ctx);
+                PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParamHeightWrap();
+                param.topMargin = 10;
+                param.bottomMargin = 10;
+                param.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f, true);
+                param.mPercentLayoutInfo.rightMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.02f, true);
+                layout.setLayoutParams(param);
+                layout.setOrientation(LinearLayout.HORIZONTAL);
 
-            ImageView img=getImage(photo);
-            layout.addView(img);
+                ImageView img = getImage(photo);
+                layout.addView(img);
 
-            TextView title=getTitleText(photo);
-            layout.addView(title);
+                TextView title = getTitleText(photo);
+                layout.addView(title);
 
 
-
-            mainlayout.addView(layout);
+                mainlayout.addView(layout);
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
         }
     }
 
@@ -119,8 +124,13 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
         String url= StaticVar.ImageFolderURL+"member/"+photo.getPhoto();
         UrlImageLoader imageLoader=new UrlImageLoader(img,url);
         imageLoader.start();
-
-        img.setOnClickListener(this);
+        try {
+            img.setOnClickListener(this);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
         img.setTag(photo);
         return img;
     }

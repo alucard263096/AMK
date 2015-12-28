@@ -32,9 +32,12 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amkdoctor.ChatActivity;
 import com.helpfooter.steve.amkdoctor.Common.UrlImageLoader;
+import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
+import com.helpfooter.steve.amkdoctor.DAO.MemberDao;
 import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.ChatObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.MemberObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.MessageObj;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
@@ -81,34 +84,44 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     private ProgressBar progressBar;
     private int DownedFileLength;
     private int FileLength;
+    public MemberObj member;
+    private Bitmap memberphoto;
+    private Bitmap doctorphoto;
+    private String updated_date="";
 
 
-    public ChatListLoadView(Activity activ, LinearLayout layout, int orderid, String currusertype) {
+    public ChatListLoadView(Activity activ, LinearLayout layout, int orderid,MemberObj Member, String currusertype) {
         this.mActivity = activ;
         this.mainlayout = layout;
         this.mOrderid = orderid;
         this.mCurrUserType = currusertype;
+        this.member=Member;
+
+        String doctorphotourl=StaticVar.ImageFolderURL+"doctor/"+StaticVar.Doctor.getPhoto();
+        doctorphoto=UrlImageLoader.GetBitmap(doctorphotourl);
+
+
+        String memberphotourl=StaticVar.ImageFolderURL+"member/"+member.getPhoto();
+        memberphoto=UrlImageLoader.GetBitmap(memberphotourl);
     }
 
+    ChatLoader loader;
     public void LoadList() {
         lstOldList=new ArrayList<ChatMsgEntity>();
         progressBar=(ProgressBar)mActivity.findViewById(R.id.progressBar);
         valCallBack = this;
-        new Thread() {
-            public void run() {
-                try {
-                    while (true) {
-                        ChatLoader loader = new ChatLoader(mActivity, mOrderid);
-                        loader.setCallBack(valCallBack);
-                        loader.run();
-                        sleep(1000);
-                    }
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+        loader = new ChatLoader(mActivity, mOrderid);
+        loader.setCallBack(this);
+        loader.setCircleSecond(1);
+        loader.setIsCircle(true);
+        loader.start();
+
+    }
+
+    public void UnloadContent(){
+
+        loader.setIsCircle(false);
+        loader.interrupt();
     }
 
 
@@ -152,7 +165,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
     private void OnloadMessage() {
 
-        if(lstMsgEntity.size()<=lstOldList.size())
+        if(lstMsgEntity.size()==lstOldList.size())
         {
             return;
         }
@@ -189,51 +202,63 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
         }
     };
 
-    private LinearLayout LoadChatListData(ChatMsgEntity obj) {
+    public LinearLayout LoadChatListData(ChatMsgEntity obj) {
         PercentLinearLayout layout = new PercentLinearLayout(this.mActivity);
         PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
 
-        param.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.10f, false);
-        param.mPercentLayoutInfo.leftMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f, false);
-        param.mPercentLayoutInfo.rightMarginPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f, false);
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.9f,true);
+        param.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.05f,true);
+        param.topMargin=15;
+        param.bottomMargin=15;
         layout.setLayoutParams(param);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        //对方发送消息
-        if (obj.getMsgType()) {
-            //添加头像
-            ImageView headerView = getPhotoView(obj);
-            layout.addView(headerView);
-        }
 
-        //文本
+
+        ImageView doctorView = getPhotoView();
+        layout.addView(doctorView);
+
+
+
+        PercentLinearLayout content = new PercentLinearLayout(this.mActivity);
+        //content.setBackground(mActivity.getResources().getDrawable(R.drawable.view_raduis));
+        PercentLinearLayout.LayoutParams contentparam =ToolsUtil.getLayoutParamHeightWrap();
+        contentparam.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.7f,true);
+        content.setLayoutParams(contentparam);
+        layout.addView(content);
         if (obj.getContextType().equals(StaticVar.TxtType)) {
             TextView contextView = getTextView(obj);
-            layout.addView(contextView);
-        }
-        //文件
-        if (obj.getContextType().equals(StaticVar.DOCType)) {
+            content.addView(contextView);
+        }else if (obj.getContextType().equals(StaticVar.DOCType)) {
+
             TextView contextView = getTextView(obj);
             contextView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
             contextView.setTag(obj);
+
+            contextView.setText("发送了一个文件");
+
             contextView.setOnClickListener(this);
-            layout.addView(contextView);
-        }
-        if (obj.getContextType().equals(StaticVar.IMGType)) {
+            content.addView(contextView);
+
+        }else if (obj.getContextType().equals(StaticVar.IMGType)) {
             ImageView IMGView = getIMGView(obj);
-            //图片重新设置父项高度
-            // PercentLinearLayout.LayoutParams topparam=(PercentLinearLayout.LayoutParams)layout.getLayoutParams();
-            //param.mPercentLayoutInfo.heightPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f,false);
-            layout.addView(IMGView);
-        }
-        //自己发送消息
-        if (!obj.getMsgType()) {
-            //添加头像
-            ImageView headerView = getPhotoView(obj);
-            layout.addView(headerView);
+            content.addView(IMGView);
         }
 
+        ImageView myView = getPhotoView();
+        layout.addView(myView);
+
+
+
+        if (obj.getMsgType()) {
+            doctorView.setImageBitmap(doctorphoto);
+            content.setGravity(Gravity.LEFT);
+        }else {
+            myView.setImageBitmap(memberphoto);
+            content.setGravity(Gravity.RIGHT);
+        }
 
         return layout;
+
+
 
     }
 
@@ -241,48 +266,40 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     //文本内容
     public TextView getTextView(ChatMsgEntity obj) {
         TextView txtContext = new MyTextView(this.mActivity);
-        PercentLinearLayout.LayoutParams contextparam = ToolsUtil.getLayoutParam();
-        contextparam.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.8f, true);
+        if (obj.getMsgType()) {
+            txtContext.setBackgroundResource(R.drawable.text_view_border4);
+        }else {
+            txtContext.setBackgroundResource(R.drawable.text_view_border3);
+        }
+
+        PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();
+        contentparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        contentparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        txtContext.setPadding(20, 0, 20, 0);
 
         if (obj.getMsgType()) {
-            contextparam.gravity = Gravity.LEFT;
+
             txtContext.setGravity(Gravity.LEFT);
         } else {
-            contextparam.gravity = Gravity.RIGHT;
+
             txtContext.setGravity(Gravity.RIGHT);
         }
 
 
-        txtContext.setLayoutParams(contextparam);
+        txtContext.setLayoutParams(contentparam);
         txtContext.setText(obj.getMessage());
-        txtContext.setTextColor(Color.GRAY);
-        txtContext.setTextSize(13);
         return txtContext;
     }
 
     //头像
-    public ImageView getPhotoView(ChatMsgEntity obj) {
+    public ImageView getPhotoView() {
         ImageView img = new ImageView(this.mActivity);
-
-        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.2f, true);
-
-
-        if (obj.getMsgType()) {
-            param.gravity = Gravity.LEFT;
-            img.setScaleType(ImageView.ScaleType.FIT_START);
-        } else {
-            param.gravity = Gravity.RIGHT;
-            img.setScaleType(ImageView.ScaleType.FIT_END);
-        }
-
-        String url = "http://www.myhkdoc.com/AMK/FilesServer/doctor/15083123000b.png";
-        Log.i("doctor_photo", url);
-        UrlImageLoader imgLoad = new UrlImageLoader(img, url);
-        imgLoad.start();
+        img.setScaleType(ImageView.ScaleType.FIT_START);
+        PercentLinearLayout.LayoutParams param =ToolsUtil.getLayoutParamHeightWrap();
+        param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.15f,true);
+        img.setAdjustViewBounds(true);
 
         img.setLayoutParams(param);
-
 
         return img;
     }
@@ -291,24 +308,23 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     public ImageView getIMGView(ChatMsgEntity obj) {
         ImageView img = new ImageView(this.mActivity);
 
-        PercentLinearLayout.LayoutParams param = ToolsUtil.getLayoutParam();
-        param.mPercentLayoutInfo.widthPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.8f, true);
-        param.mPercentLayoutInfo.heightPercent = new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.25f, true);
-
         if (obj.getMsgType()) {
-            param.gravity = Gravity.LEFT;
-            img.setScaleType(ImageView.ScaleType.FIT_START);
-        } else {
-            param.gravity = Gravity.RIGHT;
-            img.setScaleType(ImageView.ScaleType.FIT_END);
+            img.setBackgroundResource(R.drawable.text_view_border4);
+        }else {
+            img.setBackgroundResource(R.drawable.text_view_border3);
         }
+        img.setPadding(20,20, 20, 20);
+        //img.setBackgroundColor(Color.parseColor("#ccaacc"));
+        PercentLinearLayout.LayoutParams contentparam = ToolsUtil.getLayoutParamWidthHeightWrap();
+        contentparam.mPercentLayoutInfo.leftMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
+        contentparam.mPercentLayoutInfo.rightMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.04f,true);
 
         String url = StaticVar.IMGCHATURL + obj.getMessage();
         Log.i("doctor_photo", url);
         UrlImageLoader imgLoad = new UrlImageLoader(img, url);
         imgLoad.start();
 
-        img.setLayoutParams(param);
+        img.setLayoutParams(contentparam);
         img.setAdjustViewBounds(true);
         img.setTag(obj);
         img.setOnClickListener(this);
@@ -350,12 +366,18 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
         for (AbstractObj obj : lstObjs) {
 
             ChatObj chatobj = (ChatObj) obj;
-            initMsgEntity(chatobj.getContent());
+            if(!updated_date.equals(chatobj.getUpdated_date())){
+                initMsgEntity(chatobj.getContent());
+                if (this.lstMsgEntity != null && this.lstMsgEntity.size() > 0) {
+                    onloadMessageHandler.sendEmptyMessage(0);
+                }
+                updated_date=chatobj.getUpdated_date();
+            }
         }
 
-        if (this.lstMsgEntity != null && this.lstMsgEntity.size() > 0) {
+       /* if (this.lstMsgEntity != null && this.lstMsgEntity.size() > 0) {
             onloadMessageHandler.sendEmptyMessage(0);
-        }
+        }*/
 
     }
 

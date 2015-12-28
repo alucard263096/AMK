@@ -30,6 +30,16 @@ public class ChatObj extends AbstractObj {
         return content;
     }
 
+    public String getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
+    }
+
+    String updated_date;
+
     @Override
     public void setId(int id) {
         this.id = id;

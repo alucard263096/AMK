@@ -329,6 +329,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
                 obj.getDoctorid(), "Test");*/
         Intent intent = new Intent(this.ctx, ChatActivity.class);
         intent.putExtra("orderId", String.valueOf(obj.getId()));
+        intent.putExtra("memberId", String.valueOf(obj.getMember_id()));
         this.ctx.startActivity(intent);
 
     }

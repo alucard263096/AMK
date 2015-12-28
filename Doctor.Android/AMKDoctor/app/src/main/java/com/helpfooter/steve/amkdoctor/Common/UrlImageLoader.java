@@ -43,7 +43,11 @@ public class UrlImageLoader extends Thread {
 		}
 	}
 
-
+    public static Bitmap GetBitmap(String _url){
+        File f=new File(ALBUM_PATH);
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        return  BitmapFactory.decodeFile(ALBUM_PATH+name);
+    }
 
 	public Uri GetImageURI(String path, File cache) throws Exception {
         String name = ToolsUtil.Encryption(path) + path.substring(path.lastIndexOf("."));

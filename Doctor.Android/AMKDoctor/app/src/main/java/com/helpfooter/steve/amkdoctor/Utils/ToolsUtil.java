@@ -20,6 +20,14 @@ import java.util.regex.Pattern;
 
 public class ToolsUtil {
 
+    public static PercentLinearLayout.LayoutParams getLayoutParamWidthHeightWrap() {
+        PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();
+        layoutinfo.fillLayoutParams(param, PercentLinearLayout.LayoutParams.WRAP_CONTENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
+        param.mPercentLayoutInfo = layoutinfo;
+        return param;
+    }
+    
     public static PercentLinearLayout.LayoutParams getLayoutParamHeightWrap() {
         PercentLinearLayout.LayoutParams param = new PercentLinearLayout.LayoutParams(PercentLinearLayout.LayoutParams.MATCH_PARENT, PercentLinearLayout.LayoutParams.WRAP_CONTENT);
         PercentLayoutHelper.PercentLayoutInfo layoutinfo = new PercentLayoutHelper.PercentLayoutInfo();

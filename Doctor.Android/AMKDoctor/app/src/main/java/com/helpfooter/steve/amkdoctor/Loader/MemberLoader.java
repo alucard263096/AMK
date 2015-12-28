@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.helpfooter.steve.amkdoctor.DAO.DoctorDao;
 import com.helpfooter.steve.amkdoctor.DAO.MemberDao;
+import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
 import com.helpfooter.steve.amkdoctor.DAO.ParamsDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
@@ -39,7 +40,8 @@ public class MemberLoader extends WebXmlLoader {
 			lsObj.add(obj);
 		}
 		if(lsObj.size()>0){
-
+			MemberDao dao=new MemberDao(ctx);
+			dao.batchUpdate(lsObj);
 			if(callBack!=null){
 				callBack.CallBack(lsObj);
 			}

@@ -8,10 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceActivity;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,10 +35,12 @@ import com.helpfooter.steve.amkdoctor.CustomControlView.BookListLoadView;
 import com.helpfooter.steve.amkdoctor.CustomControlView.ChatListLoadView;
 import com.helpfooter.steve.amkdoctor.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amkdoctor.DAO.BookerDao;
+import com.helpfooter.steve.amkdoctor.DAO.MemberDao;
 import com.helpfooter.steve.amkdoctor.DAO.MessageDao;
 import com.helpfooter.steve.amkdoctor.DataObjs.AbstractObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.BookerObj;
 import com.helpfooter.steve.amkdoctor.DataObjs.DoctorObj;
+import com.helpfooter.steve.amkdoctor.DataObjs.MemberObj;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amkdoctor.Interfaces.IWebLoaderCallBack;
@@ -43,6 +49,7 @@ import com.helpfooter.steve.amkdoctor.Loader.BookerLoader;
 import com.helpfooter.steve.amkdoctor.Loader.ChatEndLoader;
 import com.helpfooter.steve.amkdoctor.Loader.ChatLoader;
 import com.helpfooter.steve.amkdoctor.Loader.ChatUpdateLoader;
+import com.helpfooter.steve.amkdoctor.Loader.MemberLoader;
 import com.helpfooter.steve.amkdoctor.Loader.MessageLoader;
 import com.helpfooter.steve.amkdoctor.Utils.ChatMsgEntity;
 import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
@@ -67,6 +74,7 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
     private TextView mTextEnd;//结束聊天
     private ScrollView mScrollView;
     private String context; //聊天内容
+    private String Type; //聊天类型
     private int order_id;
     public Activity mActivity;
     private static int IMAGE_CODE = 1;
@@ -74,6 +82,10 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
     private static String SENDERTYPE = "D"; //消息发送方
     private ChatUpdateLoader loader=null;
     private ChatEndLoader endloader=null;
+    private MemberObj member=null;
+    private ChatListLoadView chatListLoadView=null;
+    private MemberLoader ml=null;
+    private LinearLayout sublayout = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +95,54 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         mActivity=this;
         Intent intent = getIntent();
         order_id = Integer.parseInt(intent.getStringExtra("orderId"));
-       initUI(order_id);
+        int member_id = Integer.parseInt(intent.getStringExtra("memberId"));
+        MemberDao memberDao=new MemberDao(this);
+        member=(MemberObj)memberDao.getObj(member_id);
+        if(member==null)
+        {
+
+            ml = new MemberLoader(this,String.valueOf(member_id));
+            ml.setCallBack(this);
+            MemberListThread  memberlistThread = new MemberListThread();
+            memberlistThread.start();
+
+        }
+       initUI();
         InitData();
     }
+
+    class MemberListThread extends Thread{
+        //运行状态，下一步骤有大用
+
+        public void run() {
+
+            try {
+                ml.run();
+            } catch (Exception e) {
+                Thread.currentThread().interrupt();
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
+    private Handler onloadMemberHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            initUI();
+        }
+    };
+
+    private Handler onloadViewHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg)
+        {
+            chatListLoadView.mainlayout.addView(sublayout);;
+        }
+    };
 
 
 
@@ -97,7 +154,11 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
     /**
      * 初始化UI
      */
-    private void initUI(int orderid) {
+    private void initUI() {
+        if(member==null)
+        {
+            return;
+        }
         mBtnSendtxt =(Button)findViewById(R.id.btn_sendTxt);
         mBtnSendpic =(Button)findViewById(R.id.btn_sendPic);
         mBtnSendfile =(Button)findViewById(R.id.btn_sendFile);
@@ -113,7 +174,7 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         DoctorObj doc = StaticVar.Doctor;
         mTextViewRecevier.setText(doc.getName());
 
-        ChatListLoadView chatListLoadView=new ChatListLoadView(this,(PercentLinearLayout)findViewById(R.id.message_chat_list),orderid,"D");
+        chatListLoadView=new ChatListLoadView(this,(PercentLinearLayout)findViewById(R.id.message_chat_list),order_id,member,"D");
         chatListLoadView.LoadList();
     }
 
@@ -123,6 +184,7 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         String mobile;
         switch (v.getId()) {
             case R.id.btn_back:
+                chatListLoadView.UnloadContent();
                 this.finish();
                 return;
             case R.id.btn_sendTxt:
@@ -132,14 +194,20 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
 
                 mEditTextContent.setText("");
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             case R.id.btn_sendPic:
                 SendFile("image/*",IMAGE_CODE);
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             case R.id.btn_sendFile:
                 SendFile("*/*",FILE_CODE);
                 mTextViewRecevier.setFocusableInTouchMode(true);
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
             case R.id.txt_End:
                 endChatDialog();
@@ -183,7 +251,34 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         }
     }
 
+
+
     private void SendMessage(String txtType, String strContent) {
+        context=strContent;
+        Type = txtType;
+        new Thread(){
+            public void run()
+            {
+
+                ChatMsgEntity obj = new ChatMsgEntity();
+                obj.setMsgType(false);
+                obj.setMessage(context);
+                obj.setContextType(Type);
+                sublayout = chatListLoadView.LoadChatListData(obj);
+                if (sublayout != null) {
+                    sublayout.setTag(obj);
+                    try {
+                        onloadViewHandler.sendEmptyMessage(0);
+
+                    } catch (Exception ex) {
+
+                        Log.i("ERROR", ex.toString());
+                    }
+
+                }
+            }
+        }.start();
+
         loader=new ChatUpdateLoader(mActivity,order_id,SENDERTYPE,txtType,strContent);
         if(strContent.isEmpty())
         {
@@ -220,8 +315,21 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
 
     @Override
     public void CallBack(ArrayList<AbstractObj> lstObjs) {
+        if(lstObjs==null) {
+            this.finish();
+        }
+        else
+        {
 
-        this.finish();
+            if(lstObjs!=null && lstObjs.size()>0)
+                member=(MemberObj)lstObjs.toArray()[0];
+
+
+
+            if (member !=null) {
+                onloadMemberHandler.sendEmptyMessage(0);
+            }
+        }
 
        /* if (lstObj.size() > 0) {
             onloadAllHandler.sendEmptyMessage(0);
