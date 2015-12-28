@@ -12,6 +12,14 @@ namespace SCM
     public class DataBaseMgr
     {
         string connectionStr = "";
+        string ret="";
+        public string Return
+        {
+            get
+            {
+                return ret;
+            }
+        }
         public DataBaseMgr()
         {
             connectionStr = ConfigurationManager.ConnectionStrings["Default"].ToString();
@@ -34,6 +42,7 @@ namespace SCM
             }
             catch(Exception ex)
             {
+                ret = ex.Message;
                 return null;
             }
         }
@@ -52,11 +61,12 @@ namespace SCM
             }
             catch (Exception ex)
             {
+                ret = ex.Message;
                 return null;
             }
         }
 
-        public void executeNoneQuery(string sql)
+        public bool executeNoneQuery(string sql)
         {
             try
             {
@@ -67,11 +77,14 @@ namespace SCM
                     {
                         cmd.ExecuteNonQuery();
                     }
+                    return true;
                 }
             }
             catch (Exception ex)
             {
+                ret = ex.Message;
             }
+            return false;
         }
     }
 }

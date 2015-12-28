@@ -28,10 +28,10 @@ namespace SCM
 
         }
 
-        public bool sendSuccessBookingMsg(string mobile,string doctorName,string orderDate){
+        public bool sendSuccessBookingMsg(string mobile,string doctorName){
 
             string bookingsuccess = ConfigurationManager.AppSettings["bookingsuccess"].ToString();
-            string[] content = new string[] { doctorName, orderDate };
+            string[] content = new string[] { doctorName };
             try
             {
                 CCPRestSDK.CCPRestSDK api = new CCPRestSDK.CCPRestSDK();

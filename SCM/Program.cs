@@ -25,35 +25,50 @@ inner join tb_order_videochat v on o.id=v.order_id
 inner join tb_doctor d on v.doctor_id=d.id
 where ISNULL(send,'N')<>'Y'
 and Convert(datetime,o.order_date+' '+o.order_time)>'{0}'
-and Convert(datetime,o.order_date+' '+o.order_time)<'{1}' ", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.AddMinutes(17).ToString("yyyy-MM-dd HH:mm:ss"));
+and Convert(datetime,o.order_date+' '+o.order_time)<'{1}' 
+", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), DateTime.Now.AddMinutes(17).ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dt = dbMgr.executeDataTable(sql);
-                int successCount=0;
-                foreach (DataRow dr in dt.Rows)
+                if (dt == null)
                 {
-                    string id = dr["id"].ToString();
-                    string doctor_name = dr["doctor_name"].ToString();
-                    string order_date = dr["order_date"].ToString();
-                    string mobile = dr["mobile"].ToString();
-                    SMSMgr smsMgr = new SMSMgr();
-                    bool sent = smsMgr.sendSuccessBookingMsg(mobile, doctor_name, order_date);
-                    if (sent)
-                    {
-                        string format=string.Format("发送{0}短信成功",mobile);
-                        Console.WriteLine(format);
-                        logInfo.Info(format);
-                        string update = "update tb_order set send='Y' where id="+id;
-                        dbMgr.executeNoneQuery(sql);
-                        successCount++;
-                    }
-                    else
-                    {
-                        string format = string.Format("发送{0}短信失败，原因：{1}", mobile, smsMgr.Result);
-                        Console.WriteLine(format);
-                        logError.Error(format);
-                    }
+                    string format = string.Format("获取数据失败:" + sql+": "+dbMgr.Return);
+                    Console.WriteLine(format);
+                    logInfo.Error(format);
                 }
-                string totalFormat = string.Format("完成发送，共{0}条信息需要发送，其中{1}条发送成功", dt.Rows.Count, successCount);
-                Console.WriteLine(totalFormat);
+                else
+                {
+                    int successCount = 0;
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        string id = dr["id"].ToString();
+                        string doctor_name = dr["doctor_name"].ToString();
+                        string order_date = dr["order_date"].ToString();
+                        string mobile = dr["mobile"].ToString();
+                        SMSMgr smsMgr = new SMSMgr();
+                        bool sent = smsMgr.sendSuccessBookingMsg(mobile, doctor_name);
+                        if (sent)
+                        {
+                            string format = string.Format("发送{0}短信成功", mobile);
+                            Console.WriteLine(format);
+                            logInfo.Info(format);
+                            string update = "update tb_order set send='Y' where id=" + id;
+                            if (!dbMgr.executeNoneQuery(update))
+                            {
+                                string format1 = string.Format("更新数据失败:" + update + ": " + dbMgr.Return);
+                                Console.WriteLine(format1);
+                                logInfo.Error(format1);
+                            }
+                            successCount++;
+                        }
+                        else
+                        {
+                            string format = string.Format("发送{0}短信失败，原因：{1}", mobile, smsMgr.Result);
+                            Console.WriteLine(format);
+                            logError.Error(format);
+                        }
+                    }
+                    string totalFormat = string.Format("完成发送，共{0}条信息需要发送，其中{1}条发送成功", dt.Rows.Count, successCount);
+                    Console.WriteLine(totalFormat);
+                }
                 Thread.Sleep(1000 * 60);
             }
 
