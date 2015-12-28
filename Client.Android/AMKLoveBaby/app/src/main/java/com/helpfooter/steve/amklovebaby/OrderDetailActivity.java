@@ -19,10 +19,12 @@ import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.ResultObj;
+import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderLoader;
 import com.helpfooter.steve.amklovebaby.Loader.PaymentLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
+import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
 import java.util.ArrayList;
 
@@ -58,8 +60,19 @@ public class OrderDetailActivity extends MyActivity implements IWebLoaderCallBac
 
         order.LoadDoctorObj(this);
 
+        ((TextView)findViewById(R.id.title)).getPaint().setFakeBoldText(true);
+
+        ImageView imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
+        PercentLinearLayout.LayoutParams param= ToolsUtil.getLayoutParamHeightWrap();
+        param.height = 200;
+        param.width = 200;
+        param.leftMargin = 20;
+        param.topMargin = 20;
+        param.rightMargin = 10;
+        param.leftMargin = 10;
+        imgPhoto.setLayoutParams(param);
         String url = StaticVar.ImageFolderURL + "doctor/" + order.getDoctor().getPhoto();
-        UrlImageLoader urlImageLoader = new UrlImageLoader(((ImageView) findViewById(R.id.imgPhoto)), url);
+        UrlImageLoader urlImageLoader = new UrlImageLoader(imgPhoto, url);
         urlImageLoader.start();
 
         ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());

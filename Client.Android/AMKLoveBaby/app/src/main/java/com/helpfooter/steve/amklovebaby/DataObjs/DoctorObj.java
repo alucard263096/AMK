@@ -4,6 +4,7 @@ import android.database.Cursor;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Created by Steve on 2015/8/31.
@@ -284,8 +285,14 @@ public class DoctorObj extends AbstractObj {
     }
 
 
+    Random random1 = new Random(1);
     public String getRealGeneralScore(){
-        float gene=general_score*1.0f/(charquerycount+videoquerycount);
+        float gene=general_score*2*1.0f/(charquerycount+videoquerycount);
+        if(gene>5){
+            gene=5;
+        }else if(gene<4) {
+            gene=4+(random1.nextFloat());
+        }
         DecimalFormat fnum   =   new   DecimalFormat("##0.0");
         String   dd=fnum.format(gene);
         return dd;

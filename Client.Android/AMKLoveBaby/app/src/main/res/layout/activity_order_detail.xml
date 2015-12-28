@@ -23,7 +23,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-      <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
+      <TextView
           android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -55,18 +55,17 @@
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
-            <ImageView
+            <com.helpfooter.steve.amklovebaby.CustomControlView.CircleImageView1
                 android:id="@+id/imgPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_marginRightPercent="3%"
-                app:layout_widthPercent="27%"
-                android:scaleType="fitStart"
-                android:adjustViewBounds="true"/>
+                app:layout_widthPercent="30%"
+                android:adjustViewBounds="false"/>
             <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="10px">
                 <com.helpfooter.steve.amklovebaby.CustomControlView.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
