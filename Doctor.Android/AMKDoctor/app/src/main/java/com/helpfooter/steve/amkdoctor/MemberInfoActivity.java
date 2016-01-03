@@ -2,6 +2,7 @@ package com.helpfooter.steve.amkdoctor;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,8 @@ import com.helpfooter.steve.amkdoctor.Utils.StaticVar;
 
 import org.w3c.dom.Text;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 
@@ -51,6 +54,31 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
 
         InitData();
         InitUI();
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {//给主线程设置一个处理运行时异常的handler
+
+            @Override
+            public void uncaughtException(Thread thread, final Throwable ex) {
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                ex.printStackTrace(pw);
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("Version code is ");
+                // sb.append(Build.VERSION.SDK_INT + "\n");//设备的Android版本号
+                sb.append("Model is ");
+                // sb.append(Build.MODEL + "\n");//设备型号
+                sb.append(sw.toString());
+
+               /* Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                sendIntent.setData(Uri.parse("mailto:csdn@csdn.com"));//发送邮件异常到csdn@csdn.com邮箱
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "bug report");//邮件主题
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());//堆栈信息
+                startActivity(sendIntent);
+                finish();*/
+            }
+        });
     }
 
     private void InitUI() {
@@ -62,8 +90,9 @@ public class MemberInfoActivity extends Activity implements View.OnClickListener
         btnBack.setOnClickListener(this);
 
         imgPhoto = (ImageView) findViewById(R.id.imgPhoto);
-        UrlImageLoader il=new UrlImageLoader(imgPhoto, StaticVar.ImageFolderURL+"member/"+member.getPhoto());
-        il.start();
+
+        Bitmap bitmap=UrlImageLoader.GetBitmap(StaticVar.ImageFolderURL+"member/"+member.getPhoto());
+        imgPhoto.setImageBitmap(bitmap);
         txtName=(TextView)findViewById(R.id.txtName);
         txtName.setText(member.getName());
         txtName.getPaint().setFakeBoldText(true);;

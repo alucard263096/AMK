@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -122,8 +123,10 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
         img.setLayoutParams(param);
 
         String url= StaticVar.ImageFolderURL+"member/"+photo.getPhoto();
-        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
-        imageLoader.start();
+       /* UrlImageLoader imageLoader=new UrlImageLoader(img,url);
+        imageLoader.start();*/
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        img.setImageBitmap(bitmap);
         try {
             img.setOnClickListener(this);
         }

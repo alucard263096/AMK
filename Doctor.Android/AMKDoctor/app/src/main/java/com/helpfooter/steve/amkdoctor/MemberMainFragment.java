@@ -200,6 +200,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
             case R.id.imgUs:
 
                 intent = new Intent(this.getActivity(), GeneralTextActivity.class);
+               /* intent = new Intent(this.getActivity(), VideoChatActivitytest.class);*/
+
                 intent.putExtra("code","aboutus");
                 intent.putExtra("title","关于我们");
                 startActivity(intent);

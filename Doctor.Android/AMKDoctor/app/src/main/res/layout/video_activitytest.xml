@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        app:layout_widthPercent="100%"
+        android:id="@+id/rl_layout"
+        android:background="@color/myblue">
+
+        <ImageView
+            android:id="@+id/btn_videoback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+
+            app:layout_widthPercent="10%"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"/>
+        <TextView
+            android:id="@+id/txt_videoReceiver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20.0sp"
+            android:layout_centerVertical="true"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"
+            app:layout_widthPercent="60%"
+            android:layout_toRightOf="@+id/btn_back"
+            android:layout_toEndOf="@+id/btn_back" />
+        <TextView
+            android:id="@+id/txt_videoEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20.0sp"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginRightPercent="1%"
+            app:layout_marginBottomPercent="20%"
+            app:layout_widthPercent="30%"
+            android:layout_centerVertical="true"
+            android:text="完成预约"
+            />
+    </com.helpfooter.steve.amkdoctor.Extents.PercentLayout.PercentLinearLayout>
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        layout="@layout/video_sessiontest"
+        android:gravity="center_vertical" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:background="#7f7f7f"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/endCall"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_background"
+            android:onClick="onEndCall"
+            android:text="临时退出"
+            android:textColor="#ffffff" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/btn_speakControl"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/speak_on"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/btn_cameraControl"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/camera_on"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/trans_white" />
+
+        <ImageButton
+            android:id="@+id/ImgSwichVideo"
+            android:layout_width="52dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/button_background"
+            android:src="@drawable/switchvideo" />
+
+    </LinearLayout>
+
+</LinearLayout>

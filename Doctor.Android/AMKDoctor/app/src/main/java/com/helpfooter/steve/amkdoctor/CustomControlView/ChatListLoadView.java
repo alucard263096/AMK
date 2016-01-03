@@ -90,6 +90,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     private String updated_date="";
 
 
+
     public ChatListLoadView(Activity activ, LinearLayout layout, int orderid,MemberObj Member, String currusertype) {
         this.mActivity = activ;
         this.mainlayout = layout;
@@ -233,7 +234,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
             contextView.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
             contextView.setTag(obj);
 
-            contextView.setText("发送了一个文件");
+            contextView.setText("发送了一个文件(点击下载)");
 
             contextView.setOnClickListener(this);
             content.addView(contextView);
@@ -249,10 +250,10 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
 
         if (obj.getMsgType()) {
-            doctorView.setImageBitmap(doctorphoto);
+            doctorView.setImageBitmap(memberphoto);
             content.setGravity(Gravity.LEFT);
         }else {
-            myView.setImageBitmap(memberphoto);
+            myView.setImageBitmap(doctorphoto);
             content.setGravity(Gravity.RIGHT);
         }
 
@@ -321,8 +322,10 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
         String url = StaticVar.IMGCHATURL + obj.getMessage();
         Log.i("doctor_photo", url);
-        UrlImageLoader imgLoad = new UrlImageLoader(img, url);
-        imgLoad.start();
+        /*UrlImageLoader imgLoad = new UrlImageLoader(img, url);
+        imgLoad.start();*/
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        img.setImageBitmap(bitmap);
 
         img.setLayoutParams(contentparam);
         img.setAdjustViewBounds(true);
@@ -396,7 +399,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
                         break;
                     case 2:
-                        Toast.makeText(mActivity.getApplicationContext(), "下载完成", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mActivity.getApplicationContext(), "文件成功下载到"+"/sdcard/AMKChat/"+fileName, Toast.LENGTH_LONG).show();
                         progressBar.setVisibility(View.GONE);
                         break;
 
@@ -462,6 +465,7 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
                     Message message2=new Message();
                     message2.what=2;
                     downhandler.sendMessage(message2);
+                    //Toast.makeText(mActivity.getApplicationContext(),"文件成功下载到："+newFilename,);
                     //完毕，关闭所有链接
                     os.close();
                     is.close();

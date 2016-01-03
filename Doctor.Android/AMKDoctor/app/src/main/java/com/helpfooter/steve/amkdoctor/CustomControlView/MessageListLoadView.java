@@ -51,6 +51,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -64,6 +65,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
     public boolean IsFristRun=true;
     public Activity mActivity;
     ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
+    public HashMap<Integer,Bitmap> dictDoctorImage=new HashMap<Integer,Bitmap>();
     public MessageListLoadView(Activity activ, Context ctx, LinearLayout layout){
         this.mActivity=activ;
         this.ctx=ctx;
@@ -124,13 +126,16 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
         String strurl=StaticVar.ImageFolderURL+"member/"+obj.getMember_photo();
         Log.i("doctor_photo", strurl);
-        UrlImageLoader imgLoad=new UrlImageLoader(img,strurl);
-        imgLoad.start();
-       /* Drawable drawable = img.getDrawable();
-        if (null != drawable) {
-            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-            img.setImageBitmap(toOvalBitmap(bitmap, 1f));
-        }*/
+
+        Bitmap bitmap=null;
+        int memberid=Integer.parseInt(obj.getMember_id());
+        if(dictDoctorImage.containsKey(memberid)){
+            bitmap=dictDoctorImage.get(memberid);
+        }else {
+            bitmap=UrlImageLoader.GetBitmap(strurl);
+            dictDoctorImage.put(memberid,bitmap);
+        }
+        img.setImageBitmap(bitmap);
        img.setLayoutParams(param);
 
         return img;
@@ -287,6 +292,9 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         String strOrderTime = dateformat.format(date);
         lastchatTime.setText(strOrderTime);
         lastchatTime.setTextSize(13);
+        if(message.getSendside().equals("C")){
+            lastchatTime.setTextColor(Color.RED);
+        }
 
         Log.i("video_chatName", message.getUpdated_date());
         tipsLayout.addView(txtName);

@@ -61,6 +61,9 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.io.File;
 import org.apache.http.Header;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 public class ChatActivity extends Activity implements View.OnClickListener,IWebLoaderCallBack {
@@ -109,6 +112,7 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         }
        initUI();
         InitData();
+
     }
 
     class MemberListThread extends Thread{
@@ -171,6 +175,7 @@ public class ChatActivity extends Activity implements View.OnClickListener,IWebL
         mTextViewRecevier=(TextView)findViewById(R.id.txt_Receiver);
         mTextEnd=(TextView)findViewById(R.id.txt_End);
         mTextEnd.setOnClickListener(this);
+        mScrollView =(ScrollView)findViewById(R.id.chatScroll);
         DoctorObj doc = StaticVar.Doctor;
         mTextViewRecevier.setText(doc.getName());
 

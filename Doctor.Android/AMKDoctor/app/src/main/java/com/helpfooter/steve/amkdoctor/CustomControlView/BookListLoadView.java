@@ -33,6 +33,7 @@ import com.helpfooter.steve.amkdoctor.VideoChatActivity;
 //import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -45,6 +46,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
     public boolean IsFristRun=true;
     public Activity mActivity;
     ArrayList<LinearLayout> lstLayout=new ArrayList<LinearLayout>();
+    public HashMap<Integer,Bitmap> dictDoctorImage=new HashMap<Integer,Bitmap>();
     public  BookListLoadView(Activity activ,Context ctx,LinearLayout layout){
         this.mActivity=activ;
         this.ctx=ctx;
@@ -189,8 +191,18 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         img.setTag(booker);
         img.setOnClickListener(this);
         String url=StaticVar.ImageFolderURL+"member/"+booker.getMember_photo();
-        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
-        imageLoader.start();
+
+        /*Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        img.setImageBitmap(bitmap);*/
+        Bitmap bitmap=null;
+        int memberid=Integer.parseInt(booker.getCustid());
+        if(dictDoctorImage.containsKey(memberid)){
+            bitmap=dictDoctorImage.get(memberid);
+        }else {
+            bitmap=UrlImageLoader.GetBitmap(url);
+            dictDoctorImage.put(memberid,bitmap);
+        }
+        img.setImageBitmap(bitmap);
 
         TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();
