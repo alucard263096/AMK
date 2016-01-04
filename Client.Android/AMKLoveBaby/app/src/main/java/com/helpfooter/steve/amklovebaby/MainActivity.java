@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,6 +29,7 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IMyActivity;
 import com.helpfooter.steve.amklovebaby.Interfaces.IMyFragment;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
 import com.helpfooter.steve.amklovebaby.Loader.DoctorLoader;
+import com.helpfooter.steve.amklovebaby.Loader.MemberUpdateLoader;
 import com.helpfooter.steve.amklovebaby.Loader.NewsLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
@@ -54,6 +56,7 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
     private TextView titleTextView;
     ArrayList<BottomBarButton> lstBottomBar;
     VersionUpdateMgr versionUpdateMgr;
+    private MemberUpdateLoader updateloader;
 
     private BottomBarButton homeBarButton,newsBarButton,doctorSearchBarButton,memberMainBarButton;
 
@@ -341,9 +344,11 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
                             if (arrResult != null && arrResult.length == 3) {
                                 String filename = arrResult[2];
                                 String url=StaticVar.ImageFolderURL+"member/"+filename;
+                                UpdatePhoto(filename);
                                 String cacheurl= UrlImageLoader.GetImageCacheFileName(url);
                                 ToolsUtil.copyFile(path, cacheurl);
-                                memberMainFragment.LoadMember();
+                                memberMainFragment.LoadMember(url);
+
                             }
                         }
                     }
@@ -359,9 +364,25 @@ public class MainActivity extends MyFragmentActivity implements View.OnClickList
 
     }
 
+    private void UpdatePhoto(String FileName) {
+       updateloader=new MemberUpdateLoader(this.getApplicationContext(),StaticVar.Member.getId(),"Photo",FileName);
+
+        new Thread(){
+            public void run()
+            {
+                try {
+                    updateloader.run();
+                } catch (Exception e) {
+                    Thread.currentThread().interrupt();
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
+
 
     public void RefreshMember() {
-        memberMainFragment.LoadMember();
+        memberMainFragment.LoadMember("");
     }
 
     @Override

@@ -49,7 +49,7 @@ public class NewsListLoadView implements View.OnClickListener {
             layout.setBackgroundColor(Color.parseColor("#ffffff"));
             layout.setPadding(40, 20, 40, 20);
             PercentLinearLayout.LayoutParams param=ToolsUtil.getLayoutParamHeightWrap();
-            param.setMargins(0, 40, 0, 0);
+            param.setMargins(0, 15, 0, 0);
             layout.setLayoutParams(param);
             layout.setOrientation(LinearLayout.VERTICAL);
 

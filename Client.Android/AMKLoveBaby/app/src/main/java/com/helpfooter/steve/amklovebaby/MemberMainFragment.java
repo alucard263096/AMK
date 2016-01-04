@@ -87,8 +87,15 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         }
     }
 
-    public void LoadMember(){
+    public void LoadMember(String newfilename){
         try {
+            if(!newfilename.equals(""))
+            {
+                Bitmap bitmap=null;
+                bitmap=UrlImageLoader.GetBitmap(newfilename);
+                ((ImageView) memberview.findViewById(R.id.imgMyPhoto)).setImageBitmap(bitmap);
+                return;
+            }
             if (StaticVar.Member != null) {
                 ((TextView) memberview.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
                 if (StaticVar.Member.getPhoto().length() > 0) {
@@ -141,7 +148,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
         imgMyPhoto.setOnClickListener(this);
 
         ((TextView) view.findViewById(R.id.txtMyName)).setOnClickListener(this);
-        LoadMember();
+        LoadMember("");
     }
 
     @Override
@@ -205,6 +212,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 }
         }
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

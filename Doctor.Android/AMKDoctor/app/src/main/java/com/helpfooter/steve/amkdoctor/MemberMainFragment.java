@@ -161,7 +161,7 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 {
                     if(StaticVar.Doctor!=null) {
                         intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image*//**//*");
+                        intent.setType("image/*");
                         this.getActivity().startActivityForResult(intent, 1);
                     }
                 } catch (ActivityNotFoundException e) {
