@@ -410,7 +410,30 @@ inner join tb_order_charchat v1 on v.id=v1.order_id and v.act='CC')
 		return	outResult(0,"success",$id);
 		
 	}
-
+	
+	///$type=txt,img,doc
+	public function updateCharchatMessage($order_id,$doctor_id,$old,$new){
+		
+		$order_id=parameter_filter($order_id);
+		$sendside=parameter_filter($sendside);
+		$old=parameter_filter($old);
+		$new=parameter_filter($new);
+		
+		//read to create 
+		$this->dbmgr->begin_trans();
+		
+		
+		$sql="update tb_order_charchat set 
+content=REPLACE(content,'{|}$old','{|}$new'), 
+last_one=REPLACE(last_one,'$old','$new')  where order_id=$order_id and doctor_id=$doctor_id   ";
+		$query = $this->dbmgr->query($sql);
+		
+		$this->updateOrder($order_id);
+		
+		$this->dbmgr->commit_trans();
+		return	outResult(0,"success",$id);
+		
+	}
 	
 	public function payment($order_id,$member_id,$payment_type){
 		if($order_id==""){
