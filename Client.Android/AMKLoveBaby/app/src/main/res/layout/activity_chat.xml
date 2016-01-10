@@ -64,7 +64,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_bottom"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="80dp"
     android:layout_alignParentBottom="true"
     >
     <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:background="@drawable/edittext1"
-            app:layout_widthPercent="60%"
+            app:layout_widthPercent="84%"
             app:layout_marginLeftPercent="1%"
             android:textSize="18sp"
             />
@@ -98,7 +98,7 @@
             app:layout_marginLeftPercent="1%"
             android:gravity="center"
             android:text="发送" />
-        <Button
+       <!-- <Button
             android:id="@+id/btn_sendPic"
             android:layout_width="wrap_content"
             app:layout_widthPercent="12%"
@@ -118,8 +118,51 @@
             android:textColor="@color/white"
 
             android:gravity="center"
-            android:text="文件" />
+            android:text="文件" />-->
 
+
+    </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
+    <com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_marginBottomPercent="1%"
+
+        android:id="@+id/buto_chat_downlist"
+        android:layout_below="@+id/buto_chat_list"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/btnTakePic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/takephoto"
+            app:layout_widthPercent="33%"
+            android:scaleType="centerInside"
+            app:layout_marginTopPercent="10%"
+            app:layout_marginBottomPercent="10%"/>
+        <ImageView
+            android:id="@+id/btn_sendPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/picture"
+            app:layout_widthPercent="33%"
+            app:layout_marginTopPercent="10%"
+            app:layout_marginBottomPercent="10%"/>
+        <ImageView
+            android:id="@+id/btn_sendFile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:src="@drawable/folder"
+            app:layout_widthPercent="33%"
+            app:layout_marginTopPercent="10%"
+            app:layout_marginBottomPercent="10%"/>
 
     </com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout>
 </RelativeLayout>

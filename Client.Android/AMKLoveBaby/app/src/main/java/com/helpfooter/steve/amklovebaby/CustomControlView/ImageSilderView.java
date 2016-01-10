@@ -1,6 +1,7 @@
 package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
@@ -40,8 +41,10 @@ public class ImageSilderView extends ViewFlipper  {
         ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         //imageView.setImageURI(UrlImageLoader);
-        UrlImageLoader urlImageLoader=new UrlImageLoader(imageView,url);
-        urlImageLoader.start();
+       /* UrlImageLoader urlImageLoader=new UrlImageLoader(imageView,url);
+        urlImageLoader.start();*/
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        imageView.setImageBitmap(bitmap);
         lstImageView.add(imageView);
         return  imageView;
     }

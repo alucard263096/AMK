@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -113,8 +114,10 @@ public class DoctorListLoadView implements View.OnClickListener {
         param.width = 200;
         param.topMargin=30;
         String url= StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
-        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
-        imgLoad.start();
+        /*UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();*/
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        img.setImageBitmap(bitmap);
         //img.setImageResource(R.drawable.doctor_demo);
         img.setBorderColor(Color.parseColor("#919191"));
         img.setLayoutParams(param);

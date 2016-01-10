@@ -41,6 +41,7 @@ public final class StaticVar {
 	public static String MemberPhotoAddApi="memberphotoadd";
 	public static String MemberPhotoApi="memberphoto";
 	public static String MemberPhotoDeleteApi="memberphotodelete";
+	public static String PhotoCancelApi="photocancel";
 	public static String OrderListApi="orderlist";
 	public static String DoctorCommentApi="doctorcomment";
 	public static String VersionApi="version";
@@ -96,6 +97,7 @@ public final class StaticVar {
 		dictHashMap.put(MemberPhotoAddApi,APIURL+"Member/member_photo_add.php");
 		dictHashMap.put(MemberPhotoApi,APIURL+"Member/member_photo.php");
 		dictHashMap.put(MemberPhotoDeleteApi,APIURL+"Member/member_photo_delete.php");
+		dictHashMap.put(PhotoCancelApi,APIURL+"Order/charchat_msg_update.php");
 		dictHashMap.put(DoctorFollowCountApi,APIURL+"Doctor/doctor_follow_count.php");
 	}
 

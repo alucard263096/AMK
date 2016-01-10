@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby.CustomControlView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -219,8 +220,10 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         img.setScaleType(ImageView.ScaleType.FIT_START);*/
         img.setLayoutParams(imgparam);
         String url=order.GetPhotoUrl();
-        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
-        imageLoader.start();
+        /*UrlImageLoader imageLoader=new UrlImageLoader(img,url);
+        imageLoader.start();*/
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        img.setImageBitmap(bitmap);
 
         TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();

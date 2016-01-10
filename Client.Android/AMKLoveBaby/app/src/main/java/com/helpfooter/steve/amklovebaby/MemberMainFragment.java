@@ -100,8 +100,10 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 ((TextView) memberview.findViewById(R.id.txtMyName)).setText("你好," + StaticVar.Member.getName());
                 if (StaticVar.Member.getPhoto().length() > 0) {
                     ImageView img = ((ImageView) memberview.findViewById(R.id.imgMyPhoto));
-                    UrlImageLoader loader = new UrlImageLoader(img, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
-                    loader.start();
+                    /*UrlImageLoader loader = new UrlImageLoader(img, StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
+                    loader.start();*/
+                    Bitmap bitmap=UrlImageLoader.GetBitmap(StaticVar.ImageFolderURL + "member/" + StaticVar.Member.getPhoto());
+                    img.setImageBitmap(bitmap);
                 }
             } else {
                 ((TextView) memberview.findViewById(R.id.txtMyName)).setText("请登录");

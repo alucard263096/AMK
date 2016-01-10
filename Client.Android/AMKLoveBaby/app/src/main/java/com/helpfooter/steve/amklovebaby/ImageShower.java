@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -24,8 +25,11 @@ public class ImageShower extends Activity {
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 		ImageView image=(ImageView)findViewById(R.id.bigImage);
-		UrlImageLoader imgLoad = new UrlImageLoader(image, url);
-		imgLoad.start();
+		/*UrlImageLoader imgLoad = new UrlImageLoader(image, url);
+		imgLoad.start();*/
+
+		Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+		image.setImageBitmap(bitmap);
 
 		// �����رպ�dialog
 		new Handler().postDelayed(new Runnable() {

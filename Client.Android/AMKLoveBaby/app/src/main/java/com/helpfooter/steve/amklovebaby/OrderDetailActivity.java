@@ -2,6 +2,7 @@ package com.helpfooter.steve.amklovebaby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -72,8 +73,11 @@ public class OrderDetailActivity extends MyActivity implements IWebLoaderCallBac
         param.leftMargin = 10;
         imgPhoto.setLayoutParams(param);
         String url = StaticVar.ImageFolderURL + "doctor/" + order.getDoctor().getPhoto();
-        UrlImageLoader urlImageLoader = new UrlImageLoader(imgPhoto, url);
-        urlImageLoader.start();
+       /* UrlImageLoader urlImageLoader = new UrlImageLoader(imgPhoto, url);
+        urlImageLoader.start();*/
+
+        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        imgPhoto.setImageBitmap(bitmap);
 
         ((TextView) findViewById(R.id.txtActName)).setText(order.getActName());
         ((TextView) findViewById(R.id.txtPrice)).setText(order.OrderPrice());

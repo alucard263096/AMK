@@ -125,7 +125,7 @@ public class MemberPhotoLoadView implements IWebLoaderCallBack,View.OnClickListe
         String url= StaticVar.ImageFolderURL+"member/"+photo.getPhoto();
        /* UrlImageLoader imageLoader=new UrlImageLoader(img,url);
         imageLoader.start();*/
-        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        Bitmap bitmap=UrlImageLoader.copressImage(url);
         img.setImageBitmap(bitmap);
         try {
             img.setOnClickListener(this);

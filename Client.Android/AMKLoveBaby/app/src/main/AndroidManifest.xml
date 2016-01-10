@@ -91,7 +91,7 @@
             android:label="@string/title_activity_payment_succ"
             android:screenOrientation="portrait" >
 
-           <!-- <intent-filter>
+           <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -100,7 +100,7 @@
                     android:host="amklovebaby"
                     android:pathPrefix="/success"
                     android:scheme="myapp" />
-            </intent-filter>-->
+            </intent-filter>
 
 
         </activity>

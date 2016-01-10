@@ -43,6 +43,41 @@ public class UrlImageLoader extends Thread {
 		}
 	}
 
+    public static Bitmap copressImage(String _url){
+        String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
+        File picture = new File(ALBUM_PATH+name);
+        BitmapFactory.Options bitmapFactoryOptions = new BitmapFactory.Options();
+//下面这个设置是将图片边界不可调节变为可调节
+        bitmapFactoryOptions.inJustDecodeBounds = true;
+        bitmapFactoryOptions.inSampleSize = 2;
+        int outWidth = bitmapFactoryOptions.outWidth;
+        int outHeight = bitmapFactoryOptions.outHeight;
+        Bitmap bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(),
+                bitmapFactoryOptions);
+        float imagew = 150;
+        float imageh = 150;
+        int yRatio = (int) Math.ceil(bitmapFactoryOptions.outHeight
+                / imageh);
+        int xRatio = (int) Math
+                .ceil(bitmapFactoryOptions.outWidth / imagew);
+        if (yRatio > 1 || xRatio > 1) {
+            if (yRatio > xRatio) {
+                bitmapFactoryOptions.inSampleSize = yRatio;
+            } else {
+                bitmapFactoryOptions.inSampleSize = xRatio;
+            }
+        }
+        bitmapFactoryOptions.inJustDecodeBounds = false;
+        bmap = BitmapFactory.decodeFile(picture.getAbsolutePath(),
+                bitmapFactoryOptions);
+        if(bmap != null){
+//ivwCouponImage.setImageBitmap(bmap);
+            return bmap;
+        }
+        return null;
+    }
+
+
     public static Bitmap GetBitmap(String _url){
         File f=new File(ALBUM_PATH);
         String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
