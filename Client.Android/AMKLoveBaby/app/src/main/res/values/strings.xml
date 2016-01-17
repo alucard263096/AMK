@@ -38,5 +38,6 @@
     <string name="title_activity_doctor_comment">DoctorCommentActivity</string>
     <string name="title_activity_select">SelectActivity</string>
     <string name="title_activity_member_photo_upload">MemberPhotoUploadActivity</string>
-    <string name="title_activity_doctor_list">DoctorListActivity</string>>
+    <string name="title_activity_doctor_list">DoctorListActivity</string>
+    <string name="title_activity_wxpay_entry">WXPayEntryActivity</string>>
 </resources>

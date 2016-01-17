@@ -56,13 +56,11 @@
             android:name=".DoctorDetailActivity"
             android:label="@string/title_activity_doctor_detail"
             android:screenOrientation="portrait" >
-
         </activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait" >
-
         </activity>
         <activity
             android:name=".NewsDetailActivity"
@@ -79,8 +77,6 @@
             android:label="@string/title_activity_order"
             android:screenOrientation="portrait" >
         </activity>
-
-
         <activity
             android:name=".OrderPaymentActivity"
             android:label="@string/title_activity_order_payment"
@@ -90,9 +86,9 @@
             android:name=".PaymentSuccActivity"
             android:label="@string/title_activity_payment_succ"
             android:screenOrientation="portrait" >
-
-           <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -101,14 +97,11 @@
                     android:pathPrefix="/success"
                     android:scheme="myapp" />
             </intent-filter>
-
-
         </activity>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"
             android:screenOrientation="portrait" >
-
         </activity>
         <activity
             android:name=".OrderListActivity"
@@ -138,6 +131,12 @@
             android:name=".CharListActivity"
             android:label="@string/title_activity_char_list"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:label="@string/title_activity_wxpay_entry"
+            android:launchMode="singleTop" >
         </activity>
         <activity
             android:name=".GeneralTextActivity"

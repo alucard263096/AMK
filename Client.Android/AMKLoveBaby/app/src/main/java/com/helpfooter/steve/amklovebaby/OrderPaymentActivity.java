@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
+import com.helpfooter.steve.amklovebaby.Common.WxpayMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
@@ -22,6 +23,8 @@ import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.OrderLoader;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 
@@ -43,6 +46,31 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
             ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
             InitData();
         }
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {//给主线程设置一个处理运行时异常的handler
+
+            @Override
+            public void uncaughtException(Thread thread, final Throwable ex) {
+
+                StringWriter sw = new StringWriter();
+                PrintWriter pw = new PrintWriter(sw);
+                ex.printStackTrace(pw);
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.append("Version code is ");
+                // sb.append(Build.VERSION.SDK_INT + "\n");//设备的Android版本号
+                sb.append("Model is ");
+                // sb.append(Build.MODEL + "\n");//设备型号
+                sb.append(sw.toString());
+
+               /* Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                sendIntent.setData(Uri.parse("mailto:csdn@csdn.com"));//发送邮件异常到csdn@csdn.com邮箱
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "bug report");//邮件主题
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sb.toString());//堆栈信息
+                startActivity(sendIntent);
+                finish();*/
+            }
+        });
     }
 
 
@@ -102,9 +130,9 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
                     Toast.makeText(this,"请选择一种支付方式",Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(payment_type.equals("TEST")) {
-                    //以分为单位
-                   // UnionPayMgr.payit(1);
+                if(payment_type.equals("WEIXIN")) {
+                    WxpayMgr mgr=new WxpayMgr(this,order);
+                    mgr.pay();
                 }
                 else if(payment_type.equals("UNIONPAY"))
                 {
