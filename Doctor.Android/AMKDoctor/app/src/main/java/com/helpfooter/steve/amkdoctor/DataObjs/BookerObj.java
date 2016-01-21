@@ -31,7 +31,16 @@ public class BookerObj extends AbstractObj {
     String description;
     String age;
     String sex;
+    long chatsec;
 
+    public long getChatSec() {
+        return chatsec;
+    }
+
+
+    public void setChatSec(long chatSec) {
+        this.chatsec = chatSec;
+    }
     public String getBegintime() {
         return begintime;
     }

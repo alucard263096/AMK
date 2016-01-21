@@ -20,7 +20,7 @@
             app:layout_widthPercent="10%"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"/>
-        <TextView
+      <!--  <TextView
             android:id="@+id/txt_videoReceiver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,23 @@
             app:layout_marginBottomPercent="20%"
             app:layout_widthPercent="60%"
             android:layout_toRightOf="@+id/btn_back"
-            android:layout_toEndOf="@+id/btn_back" />
+            android:layout_toEndOf="@+id/btn_back" />-->
+        <Chronometer
+            android:id ="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_marginTopPercent="20%"
+            app:layout_marginBottomPercent="20%"
+            app:layout_widthPercent="60%"
+
+            android:gravity="center"
+            android:format="%s"
+            android:textSize="20.0sp"
+            android:layout_toRightOf="@+id/btn_back"
+            android:layout_toEndOf="@+id/btn_back"
+            android:textColor="#ffffff"
+            android:layout_centerVertical="true"
+            />
         <TextView
             android:id="@+id/txt_videoEnd"
             android:layout_width="wrap_content"

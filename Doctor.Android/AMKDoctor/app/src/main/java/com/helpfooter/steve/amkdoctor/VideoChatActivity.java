@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -70,8 +72,9 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	int order_id;
 	ChatEndLoader endloader;
 	int doctor_id;
-
+	private Chronometer timer;
 	private TextView mTextEnd;//结束聊天
+	private long recordingTime = 0;// 记录下来的总时间
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,6 +87,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 		doctor_id=Integer.parseInt(intent.getStringExtra("docId"));
 		DoctorDao doctorDao=new DoctorDao(this);
 		doctor=(DoctorObj)doctorDao.getObj(doctor_id);
+		recordingTime=booker.getChatSec();
 
 
 
@@ -95,7 +99,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 		handler.postDelayed(runnable, UPDATEVIDEOBITDELAYMILLIS);
 		//标记视频聊天开始时间
 		BookerDao newbookerDao=new BookerDao(this);
-		newbookerDao.updateBeginTime(order_id);
+
 
 	}
 
@@ -194,6 +198,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	@TargetApi(Build.VERSION_CODES.ECLAIR)
 	private void InitLayout() {
 		//this.setTitle("在" + doctor.getName() + "的诊室中");
+		timer = (Chronometer)this.findViewById(R.id.chronometer);
 		mMyView = (SurfaceView) findViewById(R.id.surface_local);
 		mOtherView = (SurfaceView) findViewById(R.id.surface_remote);
 		mImgSwitchVideo = (ImageButton) findViewById(R.id.ImgSwichVideo);
@@ -383,6 +388,13 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 							@Override
 							public void onClick(DialogInterface dialog,
 												int which) {
+								if (timer.isActivated()) {
+									timer.stop();
+								}
+								//recordingTime = ;
+								BookerDao bd = new BookerDao(VideoChatActivity.this);
+								bd.updateChatSec(order_id, recordingTime);
+
 								destroyCurActivity();
 							}
 						})
@@ -425,9 +437,15 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			{
 				try {
 					endloader.run();
+					if (timer.isActivated()) {
+						timer.stop();
+					}
+					recordingTime = SystemClock.elapsedRealtime();
 					BookerDao bd = new BookerDao(VideoChatActivity.this);
+					bd.updateChatSec(order_id, recordingTime);
+
 					BookerObj bObj= bd.getObj(order_id);
-					int mini =getDateMins(bObj.getBegintime());
+					int mini =(int)(recordingTime/1000);
 					ChatEndTimeLoader endTimeloader=new ChatEndTimeLoader(VideoChatActivity.this,order_id,mini);
 					endTimeloader.run();
 				} catch (Exception e) {
@@ -581,6 +599,8 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	public void OnAnyChatConnectMessage(boolean bSuccess) {
 		if (!bSuccess) {
 			Toast.makeText(this, "连接服务器失败，自动重连，请稍后...", Toast.LENGTH_LONG).show();
+			timer.stop();
+			recordingTime = SystemClock.elapsedRealtime();
 		}
 		anychatSDK.Login(String.valueOf(doctor_id),"");
 	}
@@ -613,6 +633,10 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 			anychatSDK.UserCameraControl(userID, 1);
 			anychatSDK.UserSpeakControl(userID, 1);
+			//if(bOtherVideoOpened && bSelfVideoOpened) {
+				timer.setBase(SystemClock.elapsedRealtime() - recordingTime);
+				timer.start();
+			//}
 		}
 	}
 

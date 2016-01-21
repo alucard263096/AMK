@@ -169,8 +169,8 @@ public class MemberMainFragment extends Fragment  implements IMyFragment,View.On
                 }
                 return;
             case R.id.imgInfo:
-                 /*intent = new Intent(this.getActivity(), MemberInfoActivity.class);
-                startActivity(intent);*/
+                 intent = new Intent(this.getActivity(), DoctorDetailActivity.class);
+                startActivity(intent);
                 return;
             case R.id.imgNormalChat:
                 MainActivity parActivity=(MainActivity)mActivity;

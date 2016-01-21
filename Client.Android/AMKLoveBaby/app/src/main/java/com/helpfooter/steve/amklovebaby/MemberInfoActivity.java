@@ -134,7 +134,7 @@ public class MemberInfoActivity extends MyActivity implements View.OnClickListen
 
         }
     }
-
+    private long exitTime = 0;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -142,17 +142,23 @@ public class MemberInfoActivity extends MyActivity implements View.OnClickListen
                 this.finish();
                 return;
             case R.id.btnLogout:
-                MemberDao dao=new MemberDao(this);
-                dao.deleteMember();
+                if((System.currentTimeMillis()-exitTime) > 2000){
+                    Toast.makeText(getApplicationContext(), "再按一次退出登录", Toast.LENGTH_SHORT).show();
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    MemberDao dao=new MemberDao(this);
+                    dao.deleteMember();
 
-                StaticVar.Member=null;
-                try{
-                    StaticVar.MainForm.RefreshMember();
-                    StaticVar.MainForm.SetToHome();
-                }catch (Exception e){
-                    e.printStackTrace();
+                    StaticVar.Member=null;
+                    try{
+                        StaticVar.MainForm.RefreshMember();
+                        StaticVar.MainForm.SetToHome();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    this.finish();
                 }
-                this.finish();
+
                 return;
             case R.id.txtSex:
                 Intent intent = new Intent(this, SexSelectActivity.class);

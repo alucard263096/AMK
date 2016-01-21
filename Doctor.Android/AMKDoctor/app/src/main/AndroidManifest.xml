@@ -77,6 +77,12 @@
             android:name="VideoChatActivitytest">
 
         </activity>
+        <activity
+
+            android:name="DoctorDetailActivity">
+
+        </activity>
+
 
 
        <service

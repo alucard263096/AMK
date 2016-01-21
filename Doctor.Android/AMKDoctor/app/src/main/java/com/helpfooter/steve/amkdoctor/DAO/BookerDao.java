@@ -28,6 +28,8 @@ public class BookerDao extends AbstractDao {
 
     }
 
+
+
     public ArrayList<AbstractObj> getMessageNoticeList(){
         return   super.getList(" status='P' and sendmessage<>'1' ");
 
@@ -61,6 +63,7 @@ public class BookerDao extends AbstractDao {
                 "orderdate TEXT," +
                 "ordertime TEXT," +
                 "doctorid int," +
+                "chatsec long," +
                 "chattime varchar," +
                 "member_photo varchar," +
                 "age varchar," +
@@ -132,7 +135,7 @@ public class BookerDao extends AbstractDao {
         util.close();
     }
 
-    public void updateBeginTime(int order_Id)
+    public void updateChatSec(int order_Id,long sec)
     {
         // TODO Auto /*
         util.open();
@@ -140,9 +143,9 @@ public class BookerDao extends AbstractDao {
 
 
         StringBuffer sql = new StringBuffer();
-        sql.append("update tb_booker set begintime=datetime('now', 'localtime') " +
-                " where id=? and begintime is null ");
-        Object[] bindArgs = {order_Id};
+        sql.append("update tb_booker set chatsec=? " +
+                " where id=?  ");
+        Object[] bindArgs = {sec,order_Id};
 
         try {
             util.execSQL(sql.toString(), bindArgs);
