@@ -96,7 +96,7 @@ public class MemberInfoActivity extends MyActivity implements View.OnClickListen
 
 
     private void setTxtSex(String value){
-        if(!value.equals("F")){
+        if(value==null||!value.equals("F")){
             txtSex.setText("男");
             txtSex.setTag("M");
         }else {

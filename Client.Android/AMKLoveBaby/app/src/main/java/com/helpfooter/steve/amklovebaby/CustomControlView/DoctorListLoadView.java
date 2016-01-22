@@ -114,10 +114,10 @@ public class DoctorListLoadView implements View.OnClickListener {
         param.width = 200;
         param.topMargin=30;
         String url= StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
-        /*UrlImageLoader imgLoad=new UrlImageLoader(img,url);
-        imgLoad.start();*/
-        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
-        img.setImageBitmap(bitmap);
+        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();
+        //Bitmap bitmap=UrlImageLoader.GetBitmap(this.ctx, url);
+        //img.setImageBitmap(bitmap);
         //img.setImageResource(R.drawable.doctor_demo);
         img.setBorderColor(Color.parseColor("#919191"));
         img.setLayoutParams(param);

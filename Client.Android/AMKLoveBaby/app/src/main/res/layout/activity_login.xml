@@ -107,6 +107,7 @@
                 android:gravity="center"
                 android:textSize="10dp"
                 android:text="获取验证码"
+                android:textColor="#ffffff"
                 />
 
 

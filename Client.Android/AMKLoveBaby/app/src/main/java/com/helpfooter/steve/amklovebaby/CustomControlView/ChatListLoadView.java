@@ -99,11 +99,11 @@ public class ChatListLoadView  implements View.OnClickListener,IWebLoaderCallBac
        doctor=(DoctorObj)doctorDao.getObj(doctorid);
 
         String doctorphotourl=StaticVar.ImageFolderURL+"doctor/"+doctor.getPhoto();
-        doctorphoto=UrlImageLoader.GetBitmap(doctorphotourl);
+        doctorphoto=UrlImageLoader.GetBitmap(this.mActivity, doctorphotourl);
 
 
         String memberphotourl=StaticVar.ImageFolderURL+"member/"+StaticVar.Member.getPhoto();
-        myphoto=UrlImageLoader.GetBitmap(memberphotourl);
+        myphoto=UrlImageLoader.GetBitmap(this.mActivity,memberphotourl);
 
     }
 

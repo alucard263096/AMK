@@ -25,11 +25,11 @@ public class ImageShower extends Activity {
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("url");
 		ImageView image=(ImageView)findViewById(R.id.bigImage);
-		/*UrlImageLoader imgLoad = new UrlImageLoader(image, url);
-		imgLoad.start();*/
+		UrlImageLoader imgLoad = new UrlImageLoader(image, url);
+		imgLoad.start();
 
-		Bitmap bitmap=UrlImageLoader.GetBitmap(url);
-		image.setImageBitmap(bitmap);
+		//Bitmap bitmap=UrlImageLoader.GetBitmap(this, url);
+		//image.setImageBitmap(bitmap);
 
 		// �����رպ�dialog
 		new Handler().postDelayed(new Runnable() {

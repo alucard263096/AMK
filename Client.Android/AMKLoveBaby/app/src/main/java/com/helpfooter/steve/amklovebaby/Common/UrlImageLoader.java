@@ -11,6 +11,8 @@ import java.net.URL;
 import com.helpfooter.steve.amklovebaby.Utils.StaticVar;
 import com.helpfooter.steve.amklovebaby.Utils.ToolsUtil;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -25,33 +27,68 @@ public class UrlImageLoader extends Thread {
 	private final static String ALBUM_PATH  
     = Environment.getExternalStorageDirectory() +"/"+ StaticVar.ProjectName+ "/imgcache/";
 
+    boolean isgetFromAsset=false;
+
     public void setRunInHandle(boolean runInHandle) {
         this.runInHandle = runInHandle;
     }
 
     boolean runInHandle=false;
 
+    ImageLoadHandle imageLoadHandle;
+
 	ImageView imgView;
 	String url="";
 	Uri uri=null;
-	public UrlImageLoader(ImageView _imgView,String _url){
-		this.imgView=_imgView;
-		this.url=_url;
+	public UrlImageLoader(ImageView _imgView,String _url) {
+        this.imgView = _imgView;
+        this.url = _url;
 
-        File f=new File(ALBUM_PATH);
-        if(f.exists()==false){
+        Bitmap assetImage = getFileFromAsset(_imgView.getContext(), _url);
+        if (assetImage != null) {
+            try {
+                imgView.setImageBitmap(assetImage);
+                Log.i("imageasset", _url);
+                isgetFromAsset = true;
+                return;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                Log.i("imageassetfalse", _url);
+            }
+        } else {
+            Log.i("imageassetnotfound", _url);
+        }
+
+        File f = new File(ALBUM_PATH);
+        if (f.exists() == false) {
             f.mkdirs();
         }
-        String name = ToolsUtil.Encryption(this.url) + this.url.substring(this.url.lastIndexOf("."));
-        File file = new File(f, name);
-        if (file.exists()) {
-            try{
-                imgView.setImageURI(Uri.fromFile(file));
-            }catch (Exception ex){
-                ex.printStackTrace();
-            }
+
+        try {
+            Bitmap bp=GetBitmap(imgView.getContext(),url);
+            imgView.setImageBitmap(bp);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-	}
+
+         imageLoadHandle=new ImageLoadHandle();
+    }
+
+    private static Bitmap getFileFromAsset(Context ctx, String url) {
+        String assetFilePath=url.replace(StaticVar.ImageFolderURL,"");
+        AssetManager assets = ctx.getAssets();
+        InputStream is = null;
+
+        try {
+            is = assets.open( assetFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeStream(is, null, options);
+
+        return bitmap;
+    }
 
     public static Bitmap copressImage(String _url){
         String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
@@ -89,7 +126,12 @@ public class UrlImageLoader extends Thread {
 
 
 
-    public static Bitmap GetBitmap(String _url){
+    public static Bitmap GetBitmap(Context ctx, String _url){
+        Bitmap assetImage=getFileFromAsset(ctx,_url);
+        if(assetImage!=null){
+
+            return  assetImage;
+        }
         File f=new File(ALBUM_PATH);
         String name = ToolsUtil.Encryption(_url) + _url.substring(_url.lastIndexOf("."));
         return  BitmapFactory.decodeFile(ALBUM_PATH+name);
@@ -109,24 +151,44 @@ public class UrlImageLoader extends Thread {
     }
 
 	public void run(){
-        RealRun();
+        try{
+        LoadFromHandle loadFromHandle=new LoadFromHandle();
+        loadFromHandle.mHandler.sendEmptyMessage(0);
+        }catch (Exception ex){
+            RealRun();
+        }
+        //RealRun();
 	}
 
     public void RealRun(){
+        Log.e("imgurl",this.url);
+        if(isgetFromAsset){
+            return;
+        }
         File f=new File(ALBUM_PATH);
         if(f.exists()==false){
             f.mkdirs();
         }
         try{
             uri= GetImageURI(this.url,f);
-            Log.i("imageloader_ready", "yes");
-            if(uri!=null){
-                imgView.setImageURI(uri);
-            }
+            Log.e("imageloader_ready", "yes");
+            imageLoadHandle.mHandler.sendEmptyMessage(0);
         }catch(Exception e){
-            Log.i("imageloader_geterror",e.getMessage());
+            Log.e("imageloader_geterror", e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    class  ImageLoadHandle{
+
+        public Handler mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                Log.e("imageloader_goload", "yes");
+                if(uri!=null){
+                    imgView.setImageURI(uri);
+                }
+            }
+        };
     }
 
     class LoadFromHandle{

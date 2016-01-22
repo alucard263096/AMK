@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,9 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
         lstTxt=new ArrayList<TextView>();
         lstTxt.add(createTxtForLable(taiwanlable));
         for(DoctorSearchLableObj obj:lstLable){
-            lstTxt.add(createTxtForLable(obj));
+            if(!obj.getName().equals("")) {
+                lstTxt.add(createTxtForLable(obj));
+            }
         }
 
         isFristTime=true;
@@ -139,7 +142,9 @@ public class DoctorSearchFragment extends Fragment implements IMyFragment, View.
     }
     private TextView createTxtForLable(DoctorSearchLableObj obj){
         TextView txt=new TextView(this.getActivity());
+        txt.setTextSize(11);
         txt.setPadding(30, 10, 30, 20);
+        txt.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,1.0f);
         layoutParams.setMargins(20, 10, 10, 20);
 

@@ -102,10 +102,10 @@ public class NewsListLoadView implements View.OnClickListener {
         param.mPercentLayoutInfo.widthPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.3f,true);
         String url= StaticVar.ImageFolderURL+"news/"+news.getThumbnail();
         img.setAdjustViewBounds(true);
-       /* UrlImageLoader imgLoad=new UrlImageLoader(img,url);
-        imgLoad.start();*/;
-        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
-        img.setImageBitmap(bitmap);
+        UrlImageLoader imgLoad=new UrlImageLoader(img,url);
+        imgLoad.start();
+        //Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        //img.setImageBitmap(bitmap);
         img.setLayoutParams(param);
 
         return img;

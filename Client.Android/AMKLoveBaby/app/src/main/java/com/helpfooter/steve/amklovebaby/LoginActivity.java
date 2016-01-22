@@ -137,15 +137,18 @@ public class LoginActivity extends MyActivity implements OnClickListener,IWebLoa
     private android.os.Handler sendcodeHandler = new android.os.Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if(sendcodeResult==null||sendcodeResult.getId()!=0){
+            if(sendcodeResult==null){
                 Toast.makeText(LoginActivity.this, "发送验证码失败，请检查网络或者手机号码。", Toast.LENGTH_LONG).show();
             }else {
                 if(sendcodeResult.getId()==-2){
                     Toast.makeText(LoginActivity.this, "该手机号码尚未注册，请先注册。", Toast.LENGTH_LONG).show();
-                }else {
+                }else if(sendcodeResult.getId()==0){
                     VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
                     sendTh.start();;
                     Toast.makeText(LoginActivity.this, "验证码已发送", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "发送验证码失败，请检查网络或者手机号码。", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -163,7 +166,9 @@ public class LoginActivity extends MyActivity implements OnClickListener,IWebLoa
                     StaticVar.Member=memberObj;
                     MemberDao memberDao=new MemberDao(LoginActivity.this);
                     memberDao.refreshMember(memberObj);
-                    StaticVar.MainForm.RefreshMember();
+                    if(StaticVar.MainForm!=null) {
+                        StaticVar.MainForm.RefreshMember();
+                    }
                     LoginActivity.this.finish();
                 }else{
                     Toast.makeText(LoginActivity.this, "验证码不正确或者已过期", Toast.LENGTH_LONG).show();

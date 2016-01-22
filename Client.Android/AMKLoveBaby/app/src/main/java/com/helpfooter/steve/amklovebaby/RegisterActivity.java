@@ -145,7 +145,7 @@ public class RegisterActivity extends MyActivity implements View.OnClickListener
             if(sendcodeResult==null){
                 Toast.makeText(RegisterActivity.this, "发送验证码失败，请检查网络或者手机号码。", Toast.LENGTH_LONG).show();
             }else {
-                if(sendcodeResult.getId()==2){
+                if(sendcodeResult.getId()==-2){
                     Toast.makeText(RegisterActivity.this, "该手机号码已经注册，请直接登录。", Toast.LENGTH_LONG).show();
                 }else if(sendcodeResult.getId()==0){
                     VerifyCodeButtonDisable sendTh=new VerifyCodeButtonDisable(btnSendVerifyCode);
@@ -172,6 +172,9 @@ public class RegisterActivity extends MyActivity implements View.OnClickListener
                     StaticVar.Member=memberObj;
                     MemberDao memberDao=new MemberDao(RegisterActivity.this);
                     memberDao.refreshMember(memberObj);
+                    if(StaticVar.MainForm!=null) {
+                        StaticVar.MainForm.RefreshMember();
+                    }
                     RegisterActivity.this.finish();
                 }
                 else if(registerResult.getId()==-2){

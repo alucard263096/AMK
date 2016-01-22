@@ -41,9 +41,9 @@ public class ImageSilderView extends ViewFlipper  {
         ViewGroup.LayoutParams layoutParams=new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         //imageView.setImageURI(UrlImageLoader);
-       /* UrlImageLoader urlImageLoader=new UrlImageLoader(imageView,url);
-        urlImageLoader.start();*/
-        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        //UrlImageLoader urlImageLoader=new UrlImageLoader(imageView,url);
+        //urlImageLoader.start();
+        Bitmap bitmap=UrlImageLoader.GetBitmap(this.getContext(), url);
         imageView.setImageBitmap(bitmap);
         lstImageView.add(imageView);
         return  imageView;

@@ -220,10 +220,10 @@ public class OrderListLoadView  implements View.OnClickListener,IWebLoaderCallBa
         img.setScaleType(ImageView.ScaleType.FIT_START);*/
         img.setLayoutParams(imgparam);
         String url=order.GetPhotoUrl();
-        /*UrlImageLoader imageLoader=new UrlImageLoader(img,url);
-        imageLoader.start();*/
-        Bitmap bitmap=UrlImageLoader.GetBitmap(url);
-        img.setImageBitmap(bitmap);
+        UrlImageLoader imageLoader=new UrlImageLoader(img,url);
+        imageLoader.start();
+        //Bitmap bitmap=UrlImageLoader.GetBitmap(url);
+        //img.setImageBitmap(bitmap);
 
         TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();

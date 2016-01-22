@@ -156,7 +156,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
         if(dictDoctorImage.containsKey(doctor.getId())){
             bitmap=dictDoctorImage.get(doctor.getId());
         }else {
-             bitmap=UrlImageLoader.GetBitmap(strurl);
+             bitmap=UrlImageLoader.GetBitmap(this.ctx, strurl);
             dictDoctorImage.put(doctor.getId(),bitmap);
         }
         img.setImageBitmap(bitmap);
