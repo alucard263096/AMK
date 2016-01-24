@@ -43,6 +43,7 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         this.comment= cursor.getString(cursor.getColumnIndex("comment"));
         this.service=cursor.getInt(cursor.getColumnIndex("service"));
         this.ability=cursor.getInt(cursor.getColumnIndex("ability"));
+        setChatSec(cursor.getInt(cursor.getColumnIndex("chatsec")));
 
     }
 
@@ -67,6 +68,16 @@ public class OrderObj extends AbstractObj implements IOrderListView {
 
     String age;
     String sex;
+    int chatsec;
+
+    public int getChatSec() {
+        return chatsec;
+    }
+
+
+    public void setChatSec(int chatSec) {
+        this.chatsec = chatSec;
+    }
 
     public String getAge() {
         return age;
@@ -148,8 +159,8 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         this.member_id=Integer.parseInt(lstRowValue.get("member_id"));
         this.name= lstRowValue.get("name");
         this.mobile= lstRowValue.get("mobile");
-        this.age= lstRowValue.get("age");
-        this.sex= lstRowValue.get("sex");
+        this.age = lstRowValue.get("age");
+        this.sex = lstRowValue.get("sex");
         this.price=Integer.parseInt(lstRowValue.get("price"));
         //this.discount=Integer.parseInt(lstRowValue.get("discount"));
         this.act= lstRowValue.get("act");
@@ -168,6 +179,7 @@ public class OrderObj extends AbstractObj implements IOrderListView {
         this.comment= lstRowValue.get("comment");
         this.service= ToolsUtil.StrParseToInt(lstRowValue.get("service"));
         this.ability=ToolsUtil.StrParseToInt(lstRowValue.get("ability"));
+
     }
 
     public String getOrder_no() {

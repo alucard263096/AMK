@@ -74,7 +74,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	int doctor_id;
 	private Chronometer timer;
 	private TextView mTextEnd;//结束聊天
-	private long recordingTime = 0;// 记录下来的总时间
+	private int recordingTime = 0;// 记录下来的总时间
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -391,9 +391,9 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 								if (timer.isActivated()) {
 									timer.stop();
 								}
-								//recordingTime = ;
+								int temp = Integer.parseInt(timer.getText().toString().split(":")[1]);
 								BookerDao bd = new BookerDao(VideoChatActivity.this);
-								bd.updateChatSec(order_id, recordingTime);
+								bd.updateChatSec(order_id, temp);
 
 								destroyCurActivity();
 							}
@@ -440,12 +440,12 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 					if (timer.isActivated()) {
 						timer.stop();
 					}
-					recordingTime = SystemClock.elapsedRealtime();
+					int temp = Integer.parseInt(timer.getText().toString().split(":")[1]);
 					BookerDao bd = new BookerDao(VideoChatActivity.this);
-					bd.updateChatSec(order_id, recordingTime);
+					bd.updateChatSec(order_id, temp);
 
 					BookerObj bObj= bd.getObj(order_id);
-					int mini =(int)(recordingTime/1000);
+					int mini =(int)(temp/60);
 					ChatEndTimeLoader endTimeloader=new ChatEndTimeLoader(VideoChatActivity.this,order_id,mini);
 					endTimeloader.run();
 				} catch (Exception e) {
@@ -599,8 +599,12 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	public void OnAnyChatConnectMessage(boolean bSuccess) {
 		if (!bSuccess) {
 			Toast.makeText(this, "连接服务器失败，自动重连，请稍后...", Toast.LENGTH_LONG).show();
-			timer.stop();
-			recordingTime = SystemClock.elapsedRealtime();
+			if (timer.isActivated()) {
+				timer.stop();
+			}
+			int temp = Integer.parseInt(timer.getText().toString().split(":")[1]);
+			BookerDao bd = new BookerDao(VideoChatActivity.this);
+			bd.updateChatSec(order_id, temp);
 		}
 		anychatSDK.Login(String.valueOf(doctor_id),"");
 	}
@@ -619,6 +623,7 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 	@Override
 	public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
 		int[] userIDArray = anychatSDK.GetOnlineUser();
+
 		if(userIDArray.length>0){
 			userID=userIDArray[0];
 			if(myUserId==userID){
@@ -633,9 +638,10 @@ public class VideoChatActivity extends Activity implements AnyChatBaseEvent,IWeb
 			anychatSDK.UserSpeakControl(-1, 1);// -1表示对本地音频进行控制，打开本地音频
 			anychatSDK.UserCameraControl(userID, 1);
 			anychatSDK.UserSpeakControl(userID, 1);
+			timer.setBase(SystemClock.elapsedRealtime() - recordingTime * 1000);
+			timer.start();
 			//if(bOtherVideoOpened && bSelfVideoOpened) {
-				timer.setBase(SystemClock.elapsedRealtime() - recordingTime);
-				timer.start();
+
 			//}
 		}
 	}

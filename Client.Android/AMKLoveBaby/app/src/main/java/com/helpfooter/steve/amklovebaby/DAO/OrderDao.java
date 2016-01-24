@@ -46,6 +46,7 @@ public class OrderDao extends AbstractDao {
                 "sex varchar," +
                 "price int," +
                 "act varchar," +
+                "chatsec int," +
                 "created_time varchar," +
                 "status varchar," +
                 "process_status varchar," +
@@ -150,6 +151,31 @@ public class OrderDao extends AbstractDao {
         }
 
     }
+
+    public void updateChatSec(int order_Id,int sec)
+    {
+        // TODO Auto /*
+        util.open();
+
+
+
+        StringBuffer sql = new StringBuffer();
+        sql.append("update tb_order set chatsec=? " +
+                " where id=?  ");
+        Object[] bindArgs = {sec,order_Id};
+
+        try {
+            util.execSQL(sql.toString(), bindArgs);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+        util.close();
+
+    }
+
 
     public OrderObj getLatestOrder(boolean isGetSent) {
         Cursor cursor = null;

@@ -31,14 +31,14 @@ public class BookerObj extends AbstractObj {
     String description;
     String age;
     String sex;
-    long chatsec;
+    int chatsec;
 
-    public long getChatSec() {
+    public int getChatSec() {
         return chatsec;
     }
 
 
-    public void setChatSec(long chatSec) {
+    public void setChatSec(int chatSec) {
         this.chatsec = chatSec;
     }
     public String getBegintime() {
@@ -234,6 +234,7 @@ public class BookerObj extends AbstractObj {
         setAge(cursor.getString(cursor.getColumnIndex("age")));
         setSex(cursor.getString(cursor.getColumnIndex("sex")));
         setBegintime(cursor.getString(cursor.getColumnIndex("begintime")));
+        setChatSec(cursor.getInt(cursor.getColumnIndex("chatsec")));
     }
 
     @Override
@@ -258,6 +259,7 @@ public class BookerObj extends AbstractObj {
         this.age = lstRowValue.get("age");
         this.sex=lstRowValue.get("sex");
         this.begintime=lstRowValue.get("begintime");
+        //this.chatsec=Integer.parseInt(lstRowValue.get("chatsec"));
     }
 
 

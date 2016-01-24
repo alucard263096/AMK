@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,9 +20,11 @@ import android.view.MenuItem;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bairuitech.anychat.AnyChatBaseEvent;
@@ -53,7 +56,9 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
     private Button mEndCallBtn;
     private ImageButton mBtnCameraCtrl; // 控制视频的按钮
     private ImageButton mBtnSpeakCtrl; // 控制音频的按钮
-
+    private Chronometer timer;
+    private int order_id;
+    private int recordingTime = 0;// 记录下来的总时间
     public AnyChatCoreSDK anychatSDK;
     OrderObj order;
     DoctorObj doctor;
@@ -63,12 +68,13 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
         setContentView(R.layout.activity_video_chat);
 
         Intent intent = getIntent();
-        int order_id = intent.getIntExtra("Id", 0);
+        order_id = intent.getIntExtra("Id", 0);
         OrderDao orderDao=new OrderDao(this);
         order=(OrderObj)orderDao.getObj(order_id);
         int doctor_id=Integer.parseInt(order.getTag());
         DoctorDao doctorDao=new DoctorDao(this);
         doctor=(DoctorObj)doctorDao.getObj(doctor_id);
+        recordingTime=order.getChatSec();
 
         if(!order.getStatus().equals("P")){
             Toast.makeText(this, "你还没付款，请先付款", Toast.LENGTH_LONG).show();
@@ -179,6 +185,7 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
     private void InitLayout() {
         this.setTitle("在" + doctor.getName() + "的诊室中");
         mMyView = (SurfaceView) findViewById(R.id.surface_local);
+        timer = (Chronometer)this.findViewById(R.id.chronometer);
         mOtherView = (SurfaceView) findViewById(R.id.surface_remote);
         mImgSwitchVideo = (ImageButton) findViewById(R.id.ImgSwichVideo);
         mEndCallBtn = (Button) findViewById(R.id.endCall);
@@ -363,6 +370,12 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
                             @Override
                             public void onClick(DialogInterface dialog,
                                                 int which) {
+                                if (timer.isActivated()) {
+                                    timer.stop();
+                                }
+                                int temp = Integer.parseInt(timer.getText().toString().split(":")[1]);
+                                OrderDao bd = new OrderDao(VideoChatActivity.this);
+                                bd.updateChatSec(order_id, temp);
                                 destroyCurActivity();
                             }
                         })
@@ -482,6 +495,9 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
     public void OnAnyChatConnectMessage(boolean bSuccess) {
         if (!bSuccess) {
             Toast.makeText(this, "连接服务器失败，自动重连，请稍后...", Toast.LENGTH_LONG).show();
+            int temp = Integer.parseInt(timer.getText().toString().split(":")[1]);
+            OrderDao bd = new OrderDao(VideoChatActivity.this);
+            bd.updateChatSec(order_id, temp);
             return;
         }
 
@@ -505,6 +521,7 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
     @Override
     public void OnAnyChatEnterRoomMessage(int dwRoomId, int dwErrorCode) {
         int[] userIDArray = anychatSDK.GetOnlineUser();
+
         if(userIDArray.length>0){
             userID=userIDArray[0];
             if(myUserId==userID){
@@ -519,6 +536,8 @@ public class VideoChatActivity extends MyActivity implements AnyChatBaseEvent {
             anychatSDK.UserSpeakControl(-1, 1);
             anychatSDK.UserCameraControl(userID, 1);
             anychatSDK.UserSpeakControl(userID, 1);
+            timer.setBase(SystemClock.elapsedRealtime() - recordingTime * 1000);
+            timer.start();
         }
     }
 

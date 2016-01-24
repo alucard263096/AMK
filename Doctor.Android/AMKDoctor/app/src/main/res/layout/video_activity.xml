@@ -32,13 +32,26 @@
             app:layout_widthPercent="60%"
             android:layout_toRightOf="@+id/btn_back"
             android:layout_toEndOf="@+id/btn_back" />-->
+        <TextView
+            android:id="@+id/txt_vidsseoEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="20.0sp"
+            app:layout_marginTopPercent="20%"
+
+            app:layout_marginBottomPercent="20%"
+            app:layout_widthPercent="30%"
+            android:layout_centerVertical="true"
+            android:text="累计时长："
+            />
         <Chronometer
             android:id ="@+id/chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_marginTopPercent="20%"
             app:layout_marginBottomPercent="20%"
-            app:layout_widthPercent="60%"
+            app:layout_widthPercent="30%"
 
             android:gravity="center"
             android:format="%s"

@@ -50,7 +50,7 @@ public final class StaticVar {
 	public static String MessageApi="Message";
 	public static HashMap<String,String> dictHashMap=new  HashMap<String,String>();
 	public static MemberObj Member=null;
-	public static String CurrentVersion="1.0.1.37";
+	public static String CurrentVersion="1.0.1.39";
 	public static String TxtType="TXT";
 	public static String IMGType="IMG";
 	public static String DOCType="DOC";

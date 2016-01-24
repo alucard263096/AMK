@@ -63,7 +63,7 @@ public class BookerDao extends AbstractDao {
                 "orderdate TEXT," +
                 "ordertime TEXT," +
                 "doctorid int," +
-                "chatsec long," +
+                "chatsec int," +
                 "chattime varchar," +
                 "member_photo varchar," +
                 "age varchar," +
@@ -135,7 +135,7 @@ public class BookerDao extends AbstractDao {
         util.close();
     }
 
-    public void updateChatSec(int order_Id,long sec)
+    public void updateChatSec(int order_Id,int sec)
     {
         // TODO Auto /*
         util.open();
