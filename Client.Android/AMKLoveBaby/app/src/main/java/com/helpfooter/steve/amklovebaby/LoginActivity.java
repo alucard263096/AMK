@@ -171,7 +171,7 @@ public class LoginActivity extends MyActivity implements OnClickListener,IWebLoa
                     }
                     LoginActivity.this.finish();
                 }else{
-                    Toast.makeText(LoginActivity.this, "验证码不正确或者已过期", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "验证码不正确或者密码错误", Toast.LENGTH_LONG).show();
                 }
             }
         }

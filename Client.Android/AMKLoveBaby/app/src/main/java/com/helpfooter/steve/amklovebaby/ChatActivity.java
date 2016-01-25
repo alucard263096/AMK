@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +39,10 @@ import com.helpfooter.steve.amklovebaby.CustomControlView.ProcessImageView;
 import com.helpfooter.steve.amklovebaby.CustomObject.BottomBarButton;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DAO.DoctorDao;
+import com.helpfooter.steve.amklovebaby.DAO.OrderDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.DoctorObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.MemberObj;
+import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLayoutHelper;
 import com.helpfooter.steve.amklovebaby.Extents.PercentLayout.PercentLinearLayout;
 import com.helpfooter.steve.amklovebaby.Loader.BannerLoader;
@@ -88,6 +91,7 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
     private String capturePath;
     private ProcessImageView piv;
     LinearLayout sublayout = null;
+    OrderObj order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +140,10 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
         int doctor_id = Integer.parseInt(intent.getStringExtra("tag"));
         DoctorDao doctorDao=new DoctorDao(this);
         doctor=(DoctorObj)doctorDao.getObj(doctor_id);
+        OrderDao orderDao=new OrderDao(this);
+        order=(OrderObj)orderDao.getObj(order_id);
+
+
 
     }
     /**
@@ -158,12 +166,29 @@ public class ChatActivity extends MyActivity implements View.OnClickListener {
         mEditTextContent=(EditText)findViewById(R.id.et_sendmessage);
         mTextViewRecevier=(TextView)findViewById(R.id.txt_Receiver);
         mScrollView =(ScrollView)findViewById(R.id.chatScroll);
-        MemberObj member = StaticVar.Member;
-        mTextViewRecevier.setText(member.getName());
+        mTextViewRecevier.setText(doctor.getName());
+
         if(hasNewView==false) {
             chatListLoadView = new ChatListLoadView(this, (PercentLinearLayout) findViewById(R.id.message_chat_list), order_id, doctor.getId(), "C");
             chatListLoadView.LoadContent();
         }
+
+        if(order.getStatus().equals("F")){
+            mBtnSendtxt.setEnabled(false);
+            mBtnSendtxt.setVisibility(View.GONE);
+            mBtnSendpic.setEnabled(false);
+            mBtnSendpic.setVisibility(View.GONE);
+            mBtnSendfile.setEnabled(false);
+            mBtnSendfile.setVisibility(View.GONE);
+            mBtnTakePhoto.setEnabled(false);
+            mBtnTakePhoto.setVisibility(View.GONE);
+            mEditTextContent.setEnabled(false);
+            mEditTextContent.setVisibility(View.GONE);
+
+            ((RelativeLayout)findViewById(R.id.rl_bottom)).setVisibility(View.GONE);
+
+        }
+
     }
 
 

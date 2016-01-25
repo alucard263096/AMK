@@ -87,7 +87,7 @@
 			return	outResult(-2,"no this member ");
 		}
 
-		$sql="select id,title,description,photo from  tb_member_photo where status='A' ";
+		$sql="select id,title,description,photo from  tb_member_photo where status='A' and member_id=$member_id ";
 		$query = $this->dbmgr->query($sql);
 		$result = $this->dbmgr->fetch_array_all($query); 
 		

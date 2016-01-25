@@ -120,6 +120,5 @@
         android:paddingTop="10dp"
         android:background="#ffffff" >
     </LinearLayout>
-</com.helpfooter.steve.amklovebaby.CustomControlView.SlowScrollView>
 
 </LinearLayout>

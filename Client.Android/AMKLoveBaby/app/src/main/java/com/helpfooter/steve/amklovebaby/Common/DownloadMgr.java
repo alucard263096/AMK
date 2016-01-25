@@ -14,14 +14,14 @@ import java.net.URL;
  * Created by Steve on 2015/10/8.
  */
 public class DownloadMgr {
-    public static File getFileFromServer(String path, ProgressDialog pd) throws Exception{
+    public static File getFileFromServer(String path) throws Exception{
         //如果相等的话表示当前的sdcard挂载在手机上并且是可用的
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             URL url = new URL(path);
             HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
             //获取到文件的大小
-            pd.setMax(conn.getContentLength());
+            //pd.setMax(conn.getContentLength());
             InputStream is = conn.getInputStream();
             File file = new File(Environment.getExternalStorageDirectory(), "updata.apk");
             FileOutputStream fos = new FileOutputStream(file);
@@ -33,7 +33,7 @@ public class DownloadMgr {
                 fos.write(buffer, 0, len);
                 total+= len;
                 //获取当前下载量
-                pd.setProgress(total);
+                //pd.setProgress(total);
             }
             fos.close();
             bis.close();

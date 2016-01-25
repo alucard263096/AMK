@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -65,7 +67,14 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
         @Override
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
-            showUpdataDialog();
+            //showUpdataDialog();
+
+            ConnectivityManager connectivityManager=(ConnectivityManager) ctx
+                    .getSystemService(ctx.CONNECTIVITY_SERVICE);;
+            NetworkInfo mWifi = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (mWifi.isConnected() == true) {
+                downLoadApk();
+            }
         }
     };
 
@@ -119,19 +128,19 @@ public class VersionUpdateMgr implements IWebLoaderCallBack {
      * 从服务器中下载APK
      */
     protected void downLoadApk() {
-        final ProgressDialog pd;    //进度条对话框
-        pd = new  ProgressDialog(this.ctx);
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pd.setMessage("正在下载更新");
-        pd.show();
+//        final ProgressDialog pd;    //进度条对话框
+//        pd = new  ProgressDialog(this.ctx);
+//        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//        pd.setMessage("正在下载更新");
+//        pd.show();
         new Thread(){
             @Override
             public void run() {
                 try {
-                    File file = DownloadMgr.getFileFromServer(version.getUrl(), pd);
+                    File file = DownloadMgr.getFileFromServer(version.getUrl());
                     sleep(3000);
                     installApk(file);
-                    pd.dismiss(); //结束掉进度条对话框
+                    //pd.dismiss(); //结束掉进度条对话框
                 } catch (Exception e) {
                     downloadFailDialoghandler.sendEmptyMessage(0);
                     e.printStackTrace();

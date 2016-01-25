@@ -228,6 +228,7 @@ public abstract class WebXmlLoader extends Thread{
 				Toast.makeText(ctx,"网络错误，请检查协议",Toast.LENGTH_LONG).show();
 				return;
 			case 2:
+				Log.e("error url",getCallUrl());
 				Toast.makeText(ctx,"网络错误，请检查网络",Toast.LENGTH_LONG).show();
 				return;
 			case  3:

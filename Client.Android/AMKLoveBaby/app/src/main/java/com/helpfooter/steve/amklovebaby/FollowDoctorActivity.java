@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.helpfooter.steve.amklovebaby.CustomControlView.FollowDoctorListLoadView;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
+import com.helpfooter.steve.amklovebaby.DAO.MemberFollowDoctorDao;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.Interfaces.IWebLoaderCallBack;
 import com.helpfooter.steve.amklovebaby.Loader.MemberFollowDoctorLoader;
@@ -38,7 +39,12 @@ public class FollowDoctorActivity extends MyActivity implements View.OnClickList
         ((ImageView) findViewById(R.id.btnBack)).setOnClickListener(this);
         TextView txtTitle = (TextView)findViewById(R.id.title);
         txtTitle.getPaint().setFakeBoldText(true);
-        MemberFollowDoctorLoader loader=new MemberFollowDoctorLoader(this,StaticVar.Member.getId());
+        int member_id=0;
+        if(StaticVar.Member!=null){
+            member_id=StaticVar.Member.getId();
+        }
+        MemberFollowDoctorDao dao=new MemberFollowDoctorDao(this);
+        MemberFollowDoctorLoader loader=new MemberFollowDoctorLoader(this,member_id);
         loader.setCallBack(this);
         loader.start();
     }

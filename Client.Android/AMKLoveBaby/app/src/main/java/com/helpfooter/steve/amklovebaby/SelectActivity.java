@@ -105,17 +105,17 @@ public abstract class SelectActivity extends Activity implements View.OnClickLis
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.btnOK:
-                if(currentSelect==null){
-                    Toast.makeText(this,"请选择一个选项",Toast.LENGTH_LONG).show();
-                    return;
-                }
-                Intent intent = new Intent();
-                intent.putExtra("return", currentSelect.SelectedValue());
-                intent.putExtra("returnName", currentSelect.DisplayName());
-                setResult(RESULT_OK, intent);
-                this.finish();
-                return;
+//            case R.id.btnOK:
+//                if(currentSelect==null){
+//                    Toast.makeText(this,"请选择一个选项",Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//                Intent intent = new Intent();
+//                intent.putExtra("return", currentSelect.SelectedValue());
+//                intent.putExtra("returnName", currentSelect.DisplayName());
+//                setResult(RESULT_OK, intent);
+//                this.finish();
+//                return;
             case R.id.btnCancel:
                 this.finish();
                 return;
@@ -133,6 +133,14 @@ public abstract class SelectActivity extends Activity implements View.OnClickLis
                     }
                 }
                 currentSelect=(ISelectObj)v.getTag();
+
+
+                Intent intent = new Intent();
+                intent.putExtra("return", currentSelect.SelectedValue());
+                intent.putExtra("returnName", currentSelect.DisplayName());
+                setResult(RESULT_OK, intent);
+                this.finish();
+
         }
     }
     protected android.os.Handler DiaplayListHandler = new android.os.Handler() {

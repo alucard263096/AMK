@@ -66,7 +66,11 @@ public class OrderDetailLoadView implements View.OnClickListener {
             if(!order.getHascomment().equals("Y")){
                 btnSubmit.setText("立即评价");
             }else {
-                btnSubmit.setText("查看评价");
+                if(order.getAct().equals("CC")){
+                    btnSubmit.setText("查看咨询记录");
+                }else{
+                    btnSubmit.setText("查看评价");
+                }
             }
             btnSubmit.setOnClickListener(this);
         }
@@ -146,9 +150,24 @@ public class OrderDetailLoadView implements View.OnClickListener {
             intent.putExtra("tag", String.valueOf(order.getTag()));
             this.ctx.startActivity(intent);
         }else if(order.getStatus().equals("F")){
-            Intent intent = new Intent(this.ctx, OrderCommentActivity.class);
-            intent.putExtra("Id", order.getId());
-            this.ctx.startActivity(intent);
+            if(!order.getHascomment().equals("Y")){
+
+                Intent intent = new Intent(this.ctx, OrderCommentActivity.class);
+                intent.putExtra("Id", order.getId());
+                this.ctx.startActivity(intent);
+            }else{
+
+                if(order.getAct().equals("CC")){
+                    Intent intent = new Intent(this.ctx, ChatActivity.class);
+                    intent.putExtra("orderId", String.valueOf(order.getId()));
+                    intent.putExtra("tag", String.valueOf(order.getTag()));
+                    this.ctx.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(this.ctx, OrderCommentActivity.class);
+                    intent.putExtra("Id", order.getId());
+                    this.ctx.startActivity(intent);
+                }
+            }
         }
     }
 
