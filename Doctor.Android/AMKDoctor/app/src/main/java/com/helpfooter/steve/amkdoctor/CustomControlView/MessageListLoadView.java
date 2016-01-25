@@ -126,8 +126,9 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
        // param.mPercentLayoutInfo.topMarginPercent=new PercentLayoutHelper.PercentLayoutInfo.PercentVal(0.01f,false);
         String strurl=StaticVar.ImageFolderURL+"member/"+obj.getMember_photo();
         Log.i("doctor_photo", strurl);
-
-        Bitmap bitmap=null;
+        UrlImageLoader imgLoad = new UrlImageLoader(img, strurl);
+        imgLoad.start();
+        /*Bitmap bitmap=null;
         int memberid=Integer.parseInt(obj.getMember_id());
         if(dictDoctorImage.containsKey(memberid)){
             bitmap=dictDoctorImage.get(memberid);
@@ -135,7 +136,7 @@ public class MessageListLoadView implements View.OnClickListener,IWebLoaderCallB
             bitmap=UrlImageLoader.GetBitmap(strurl);
             dictDoctorImage.put(memberid,bitmap);
         }
-        img.setImageBitmap(bitmap);
+        img.setImageBitmap(bitmap);*/
        img.setLayoutParams(param);
 
         return img;

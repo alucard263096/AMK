@@ -116,6 +116,21 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 
 		}
 	}
+	private long exitTime = 0;
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+			if((System.currentTimeMillis()-exitTime) > 2000){
+				Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				finish();
+				System.exit(0);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 	private android.os.Handler FirstcodeHandler = new android.os.Handler() {
 		@Override
@@ -196,12 +211,7 @@ public class LoginActivity extends Activity implements 	LoaderManager.LoaderCall
 		super.onStop();
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
 
-		return super.onKeyDown(keyCode, event);
-	}
 
 
 

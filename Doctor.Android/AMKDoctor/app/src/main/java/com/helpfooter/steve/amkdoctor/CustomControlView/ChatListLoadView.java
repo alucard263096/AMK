@@ -88,7 +88,8 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
     private Bitmap memberphoto;
     private Bitmap doctorphoto;
     private String updated_date="";
-
+    private  String doctorphotourl;
+    private  String memberphotourl;
 
 
     public ChatListLoadView(Activity activ, LinearLayout layout, int orderid,MemberObj Member, String currusertype) {
@@ -98,12 +99,12 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
         this.mCurrUserType = currusertype;
         this.member=Member;
 
-        String doctorphotourl=StaticVar.ImageFolderURL+"doctor/"+StaticVar.Doctor.getPhoto();
-        doctorphoto=UrlImageLoader.GetBitmap(doctorphotourl);
+        doctorphotourl=StaticVar.ImageFolderURL+"doctor/"+StaticVar.Doctor.getPhoto();
+        //doctorphoto=UrlImageLoader.GetBitmap(doctorphotourl);
 
 
-        String memberphotourl=StaticVar.ImageFolderURL+"member/"+member.getPhoto();
-        memberphoto=UrlImageLoader.GetBitmap(memberphotourl);
+        memberphotourl=StaticVar.ImageFolderURL+"member/"+member.getPhoto();
+        //memberphoto=UrlImageLoader.GetBitmap(memberphotourl);
     }
 
     ChatLoader loader;
@@ -250,10 +251,14 @@ public class ChatListLoadView implements View.OnClickListener,IWebLoaderCallBack
 
 
         if (obj.getMsgType()) {
-            doctorView.setImageBitmap(memberphoto);
+            //doctorView.setImageBitmap(memberphoto);
+            UrlImageLoader imgLoad = new UrlImageLoader(doctorView, memberphotourl);
+            imgLoad.start();
             content.setGravity(Gravity.LEFT);
         }else {
-            myView.setImageBitmap(doctorphoto);
+           // myView.setImageBitmap(doctorphoto);
+            UrlImageLoader imgLoad = new UrlImageLoader(myView, doctorphotourl);
+            imgLoad.start();
             content.setGravity(Gravity.RIGHT);
         }
 

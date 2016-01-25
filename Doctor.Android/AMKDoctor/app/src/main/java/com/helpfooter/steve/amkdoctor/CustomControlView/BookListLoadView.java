@@ -192,9 +192,9 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
         img.setOnClickListener(this);
         String url=StaticVar.ImageFolderURL+"member/"+booker.getMember_photo();
 
-        /*Bitmap bitmap=UrlImageLoader.GetBitmap(url);
-        img.setImageBitmap(bitmap);*/
-        Bitmap bitmap=null;
+        UrlImageLoader imgLoad = new UrlImageLoader(img, url);
+        imgLoad.start();
+        /*Bitmap bitmap=null;
         int memberid=Integer.parseInt(booker.getCustid());
         if(dictDoctorImage.containsKey(memberid)){
             bitmap=dictDoctorImage.get(memberid);
@@ -202,7 +202,7 @@ public class BookListLoadView implements View.OnClickListener,IWebLoaderCallBack
             bitmap=UrlImageLoader.GetBitmap(url);
             dictDoctorImage.put(memberid,bitmap);
         }
-        img.setImageBitmap(bitmap);
+        img.setImageBitmap(bitmap);*/
 
         TextView txt=new MyTextView(ctx);
         PercentLinearLayout.LayoutParams txtparam= ToolsUtil.getLayoutParamHeightWrap();
