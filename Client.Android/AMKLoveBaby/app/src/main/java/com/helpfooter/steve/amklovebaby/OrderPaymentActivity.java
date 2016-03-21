@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.helpfooter.steve.amklovebaby.Common.MemberMgr;
 import com.helpfooter.steve.amklovebaby.Common.WxpayMgr;
+import com.helpfooter.steve.amklovebaby.Common.XTBpayMgr;
 import com.helpfooter.steve.amklovebaby.CustomObject.MyActivity;
 import com.helpfooter.steve.amklovebaby.DataObjs.AbstractObj;
 import com.helpfooter.steve.amklovebaby.DataObjs.OrderObj;
@@ -149,6 +150,10 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
 
 
 
+                }
+                else if(payment_type.equals("XTB")) {
+                    XTBpayMgr mgr=new XTBpayMgr(this,order);
+                    mgr.pay();
                 }
                 else {
                     Toast.makeText(this,"此支付方式暂未开通",Toast.LENGTH_LONG).show();
