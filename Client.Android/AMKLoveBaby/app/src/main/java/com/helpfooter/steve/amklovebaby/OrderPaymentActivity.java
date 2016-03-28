@@ -152,8 +152,12 @@ public class OrderPaymentActivity extends MyActivity implements View.OnClickList
 
                 }
                 else if(payment_type.equals("XTB")) {
-                    XTBpayMgr mgr=new XTBpayMgr(this,order);
-                    mgr.pay();
+                    dialog();
+                    Intent intentUrl = new Intent();
+                    intentUrl.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(StaticVar.XBTPAYURL+"?order_no="+order.getOrder_no());
+                    intentUrl.setData(content_url);
+                    startActivity(intentUrl);
                 }
                 else {
                     Toast.makeText(this,"此支付方式暂未开通",Toast.LENGTH_LONG).show();
