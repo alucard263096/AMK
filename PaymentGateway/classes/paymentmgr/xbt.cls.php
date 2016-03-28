@@ -14,6 +14,10 @@ class XBTMgr   {
 
 	public function submit($info){
 		Global $CONFIG;
+		echo OpenSdkConfig::APPID;
+		echo OpenSdkConfig::KEYSECRET;
+		echo OpenSdkConfig::SOURCENO;
+
 		$sdk = new SDK(OpenSdkConfig::APPID, OpenSdkConfig::KEYSECRET, OpenSdkConfig::SOURCENO);
 		$mainParams=array(
 			'timestamp' => time()*1000,
@@ -33,7 +37,7 @@ class XBTMgr   {
 		$arr["outCustomerId"]=$info["mobile"];
 		$arr["outTradeNo"]=$info["order_no"];
 		$arr["merchantNo"]=$CONFIG["xbt"]["merchantNo"];
-		$arr["childMerchantNo"]=OpenSdkConfig::SOURCENO;
+		$arr["childMerchantNo"]=$CONFIG["xbt"]["merchantNo"];
 		$arr["amount"]=1;//$info["price"];
 		$arr["currency"]="CNY";
 		$arr["orderBeginTime"]=date('Y-m-d H:i:s');
@@ -43,6 +47,7 @@ class XBTMgr   {
 		$arr["productNo"]="DOCREMOTE";
 		$arr["productName"]="远程医疗服务";
 		$arr["paySource"]="ANDROID";
+		print_r($arr);
 		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
 		$json=json_decode($call,true);
 
