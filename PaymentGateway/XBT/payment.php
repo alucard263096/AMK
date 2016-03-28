@@ -8,6 +8,6 @@ $payment=new XBTMgr();
 $order_no=$_REQUEST["order_no"];
 $info=$orderMgr->getOrderByOrderNo($order_no);
 
-echo $payment->submit($info);
+WindowRedirect( $payment->submit($info));
 
 ?>

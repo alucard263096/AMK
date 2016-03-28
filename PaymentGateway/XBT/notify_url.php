@@ -9,8 +9,8 @@
   
 
 	  if($_REQUEST["tradeStatus"]=="SUCCESS"){
-	  $info=$orderMgr->getOrderByOrderNo($ret["outTradeNo"]);
-		$orderMgr->updateOrderPayment($info["id"],"XBT",$ret["trade_no"]);
+	  $info=$orderMgr->getOrderByOrderNo($_REQUEST["outTradeNo"]);
+		$orderMgr->updateOrderPayment($info["id"],"XBT",$_REQUEST["trade_no"]);
 		$smsMgr->SendQueryConfirm($info["mobile"],$info["tag_name"],$info["order_date"]." ".$info["order_time"]);
 	  }
 
