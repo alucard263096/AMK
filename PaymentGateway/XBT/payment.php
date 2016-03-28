@@ -25,9 +25,9 @@ $price=1;
 
 $arr=array();
 $arr["urlKey"]="cash_desk";
-$arr["loginName"]="18610536079";
-$arr["mobile"]="18610536079";
-$arr["outCustomerId"]="18503054520";
+$arr["loginName"]=$info["mobile"];
+$arr["mobile"]=$info["mobile"];
+//$arr["outCustomerId"]="18503054520";
 $arr["outTradeNo"]=$info["order_no"];
 $arr["merchantNo"]="mer500220160000011801093094151";
 $arr["childMerchantNo"]="mer500220160000011801093094151";
