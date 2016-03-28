@@ -47,7 +47,7 @@ class XBTMgr   {
 		$json=json_decode($call,true);
 
 		if($json["code"]=="1"){
-			return $json["widgetPageUrl"];
+			return $json["data"]["resultInfo"]["widgetPageUrl"];
 		}else{
 			return "ERROR";
 		}
