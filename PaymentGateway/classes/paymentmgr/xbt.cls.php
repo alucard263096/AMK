@@ -46,7 +46,7 @@ class XBTMgr   {
 		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
 		$json=json_decode($call,true);
 
-		if($json["code"]=="0"){
+		if($json["code"]=="1"){
 			return $json["widgetPageUrl"];
 		}else{
 			return "ERROR";
