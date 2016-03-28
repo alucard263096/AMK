@@ -6,10 +6,10 @@ class XBTMgr   {
 	public function __construct()
 	{
 		Global $CONFIG;
-		OpenSdkConfig::APPID=$CONFIG["xbt"]["APPID"];
-		OpenSdkConfig::KEYSECRET=$CONFIG["xbt"]["KEYSECRET"];
-		OpenSdkConfig::SOURCENO=$CONFIG["xbt"]["SOURCENO"];
-		OpenSdkConfig::API_HOST=$CONFIG["xbt"]["API_HOST"];
+		//OpenSdkConfig::APPID=$CONFIG["xbt"]["APPID"];
+		//OpenSdkConfig::KEYSECRET=$CONFIG["xbt"]["KEYSECRET"];
+		//OpenSdkConfig::SOURCENO=$CONFIG["xbt"]["SOURCENO"];
+		//OpenSdkConfig::API_HOST=$CONFIG["xbt"]["API_HOST"];
 	}
 
 	public function submit($info){
