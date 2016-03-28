@@ -46,7 +46,7 @@ class XBTMgr   {
 		$arr["orderNotifyUrl"]=$CONFIG["xbt"]["notify"];
 		$arr["orderFrontNotifyUrl"]=$CONFIG["xbt"]["return"];
 		$arr["productNo"]="DOCREMOTE";
-		$arr["productName"]="远程医疗服务";
+		$arr["productName"]="杩滅▼鍖荤枟鏈嶅姟";
 		$arr["paySource"]="ANDROID";
 		print_r($arr);
 		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
