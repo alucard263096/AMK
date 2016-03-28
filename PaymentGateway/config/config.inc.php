@@ -41,4 +41,8 @@ $CONFIG["sms"]["templeteid"]["bookingsuccess"]="35125";
 $CONFIG["alipay"]["partner"]="2088911829797670";
 $CONFIG["alipay"]["seller_email"]="3188577198@qq.com";
 $CONFIG["alipay"]["key"]="70yr74ztz7uwjtjdxmxrqrlmwuvql63i";
+
+
+
+
 ?>
