@@ -22,7 +22,7 @@ $info=$orderMgr->getOrderByOrderNo($order_no);
 $time=date("YmdHis");
 $price=$info["price"]*100;
 $price=1;
-
+echo $info["mobile"];
 $arr=array();
 $arr["urlKey"]="cash_desk";
 $arr["loginName"]=$info["mobile"];
