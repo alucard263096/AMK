@@ -47,9 +47,9 @@ class XBTMgr   {
 		$arr["paySource"]="ANDROID";
 		
 		$call=$sdk->cashDesk($mainParams, $arr);
-		echo $call;
+		//echo $call;
 		$json=json_decode($call,true);
-		print_r($json);
+		//print_r($json);
 
 		if($json["code"]=="1"){
 			logger_mgr::logInfo("xbt:return=$call");
