@@ -37,10 +37,11 @@ class XBTMgr   {
 		$arr["outCustomerId"]=$info["mobile"];
 		$arr["outTradeNo"]=$info["order_no"];
 		$arr["merchantNo"]=$CONFIG["xbt"]["merchantNo"];
-		$arr["childMerchantNo"]=$CONFIG["xbt"]["merchantNo"];
+		$arr["childMerchantNo"]=OpenSdkConfig::SOURCENO;
 		$arr["amount"]=1;//$info["price"];
 		$arr["currency"]="CNY";
 		$arr["orderBeginTime"]=date('Y-m-d H:i:s');
+		$arr["orderExpireTime"]=date('Y-m-d H:i:s',time()+3600);
 		$arr["orderName"]=$info["order_no"];
 		$arr["orderNotifyUrl"]=$CONFIG["xbt"]["notify"];
 		$arr["orderFrontNotifyUrl"]=$CONFIG["xbt"]["return"];
@@ -49,6 +50,7 @@ class XBTMgr   {
 		$arr["paySource"]="ANDROID";
 		print_r($arr);
 		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
+		echo $call;
 		$json=json_decode($call,true);
 
 		if($json["code"]=="1"){
