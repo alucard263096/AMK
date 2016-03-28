@@ -6,7 +6,7 @@
  * Date: 2015/12/2
  * Time: 15:57
  */
-class Log
+class XBTLog
 {
 
     public static function write($word) {

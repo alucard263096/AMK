@@ -8,7 +8,7 @@
 include_once("config/OpenSdkConfig.php");
 include_once("base/OpenSdkBase.php");
 include_once("exception/OpenSdkException.php");
-//include_once("log/Log.php");
+include_once("log/Log.php");
 
 class SDK extends OpenSdkBase
 {

@@ -42,7 +42,7 @@ class OpenSdkBase
         $response = $this->get($this->accessTokenUrl(), $params);
 
         //LOG
-        Log::write("accesstoken获取返回参数：" . $response);
+        XBTXBTLog::write("accesstoken获取返回参数：" . $response);
 
         return $response;
 
