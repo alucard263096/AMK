@@ -22,7 +22,7 @@ $info=$orderMgr->getOrderByOrderNo($order_no);
 $time=date("YmdHis");
 $price=$info["price"]*100;
 $price=1;
-echo $info["mobile"];
+
 $arr=array();
 $arr["urlKey"]="cash_desk";
 $arr["loginName"]=$info["mobile"];
@@ -41,6 +41,7 @@ $arr["orderFrontNotifyUrl"]="http://www.myhkdoc.com/PaymentGateway/XBT/return_ur
 $arr["productNo"]="DOCREMOTE";
 $arr["productName"]="远程医疗服务";
 $arr["paySource"]="ANDROID";
+print_r($arr);
 echo  htmlspecialchars($sdk->cashDesk($mainParams, $arr));
 
 
