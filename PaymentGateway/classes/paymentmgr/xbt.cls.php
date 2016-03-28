@@ -47,8 +47,10 @@ class XBTMgr   {
 		$json=json_decode($call,true);
 
 		if($json["code"]=="1"){
+			logger_mgr::logInfo("xbt:return=$call");
 			return $json["data"]["resultInfo"]["widgetPageUrl"];
 		}else{
+			logger_mgr::logError("xbt:return=$call");
 			return "ERROR";
 		}
 
