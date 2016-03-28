@@ -46,7 +46,8 @@ class XBTMgr   {
 		$arr["productName"]="远程医疗服务";
 		$arr["paySource"]="ANDROID";
 		
-		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
+		$call=$sdk->cashDesk($mainParams, $arr);
+		echo $call;
 		$json=json_decode($call,true);
 		print_r($json);
 
