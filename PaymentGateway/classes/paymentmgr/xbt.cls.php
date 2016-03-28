@@ -1,58 +1,57 @@
 <?php
 
+require ROOT."/libs/xbt_lib/SDK.php";
 class XBTMgr   {
-	private	$alipay_config;
 
 	public function __construct()
 	{
 		Global $CONFIG;
-
-		$this->alipay_config['partner']		= $CONFIG["alipay"]["partner"];
-
-		$this->alipay_config['seller_email']	= $CONFIG["alipay"]["seller_id"];
-
-		$this->alipay_config['key']			= $CONFIG["alipay"]["key"];
-
-
-		$this->alipay_config['private_key_path']	= ROOT.'/libs/alipay_wap_lib/key/rsa_private_key.pem';
-
-		$this->alipay_config['ali_public_key_path']= ROOT.'/libs/alipay_wap_lib/key/rsa_public_key.pem';
-
-		$this->alipay_config['sign_type']    = 'RSA';
-
-		$this->alipay_config['input_charset']= 'utf-8';
-
-		$this->alipay_config['cacert']    = ROOT.'/libs/alipay_wap_lib/key/cacert.pem';
-
-		$this->alipay_config['transport']    = 'http';
-
+		OpenSdkConfig::APPID=$CONFIG["xbt"]["APPID"];
+		OpenSdkConfig::KEYSECRET=$CONFIG["xbt"]["KEYSECRET"];
+		OpenSdkConfig::SOURCENO=$CONFIG["xbt"]["SOURCENO"];
+		OpenSdkConfig::API_HOST=$CONFIG["xbt"]["API_HOST"];
 	}
 
-	public function notify(){
-		require_once(ROOT."/libs/alipay_wap_lib/alipay_notify.class.php");
-		$alipayNotify = new AlipayNotify($this->alipay_config);
-		$verify_result = $alipayNotify->verifyNotify();
+	public function submit($info){
+		Global $CONFIG;
+		$sdk = new SDK(OpenSdkConfig::APPID, OpenSdkConfig::KEYSECRET, OpenSdkConfig::SOURCENO);
+		$mainParams=array(
+			'timestamp' => time()*1000,
+			'channel' => 'PC',
+			'ipAddress' => '',
+			'sessionId' => '',
+			'deviceFinger' => '',
+			'deviceToken' => '',
+			'longitude' => '',
+			'latitude' => ''
+		);
 		
-		$ret=Array();
-		if($verify_result) {
-				$out_trade_no = $_POST['out_trade_no'];
-				$trade_no = $_POST['trade_no'];
-				$trade_status = $_POST['trade_status'];
+		$arr=array();
+		$arr["urlKey"]="cash_desk";
+		$arr["loginName"]=$info["mobile"];
+		$arr["mobile"]=$info["mobile"];
+		$arr["outCustomerId"]=$info["mobile"];
+		$arr["outTradeNo"]=$info["order_no"];
+		$arr["merchantNo"]=$CONFIG["xbt"]["merchantNo"];
+		$arr["childMerchantNo"]=OpenSdkConfig::SOURCENO;
+		$arr["amount"]=1;//$info["price"];
+		$arr["currency"]="CNY";
+		$arr["orderBeginTime"]=date('Y-m-d H:i:s');
+		$arr["orderName"]=$info["order_no"];
+		$arr["orderNotifyUrl"]=$CONFIG["xbt"]["notify"];
+		$arr["orderFrontNotifyUrl"]=$CONFIG["xbt"]["return"];
+		$arr["productNo"]="DOCREMOTE";
+		$arr["productName"]="远程医疗服务";
+		$arr["paySource"]="ANDROID";
+		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
+		$json=json_decode($call,true);
 
-
-				if($trade_status == 'TRADE_SUCCESS'
-				||$trade_status == 'TRADE_FINISHED'){
-					$ret["result"]="SUCCESS";
-					$ret["trade_no"]=$trade_no;
-				}else{
-				$ret["result"]="FAIL";
-			}
-			
-			
+		if($json["code"]=="0"){
+			return $json["widgetPageUrl"];
 		}else{
-			$ret["result"]="FAIL";
+			return "ERROR";
 		}
-		return $ret;
+
 	}
 }
  
