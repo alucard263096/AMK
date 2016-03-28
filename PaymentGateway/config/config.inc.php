@@ -46,7 +46,7 @@ $CONFIG["alipay"]["key"]="70yr74ztz7uwjtjdxmxrqrlmwuvql63i";
 #[XBT]
 $CONFIG["xbt"]["APPID"]="0f447dda99da4c6288524100d4d19382";
 $CONFIG["xbt"]["KEYSECRET"]="f6fec505f325419a8b6d748d4d15ac07";
-$CONFIG["xbt"]["SOURCENO"]="1151000000201308";merchantNo
+$CONFIG["xbt"]["SOURCENO"]="1151000000201308";
 $CONFIG["xbt"]["API_HOST"]="demo-openapi.wjjr.cc";
 $CONFIG["xbt"]["merchantNo"]="mer500220160000011801093094151";
 $CONFIG["xbt"]["notify"]="http://www.myhkdoc.com/AMK/PaymentGateway/XBT/notify_url.php";
