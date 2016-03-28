@@ -14,9 +14,6 @@ class XBTMgr   {
 
 	public function submit($info){
 		Global $CONFIG;
-		echo OpenSdkConfig::APPID;
-		echo OpenSdkConfig::KEYSECRET;
-		echo OpenSdkConfig::SOURCENO;
 
 		$sdk = new SDK(OpenSdkConfig::APPID, OpenSdkConfig::KEYSECRET, OpenSdkConfig::SOURCENO);
 		$mainParams=array(
@@ -48,10 +45,10 @@ class XBTMgr   {
 		$arr["productNo"]="DOCREMOTE";
 		$arr["productName"]="远程医疗服务";
 		$arr["paySource"]="ANDROID";
-		print_r($arr);
+		
 		$call=htmlspecialchars($sdk->cashDesk($mainParams, $arr));
-		echo $call;
 		$json=json_decode($call,true);
+		print_r($json);
 
 		if($json["code"]=="1"){
 			logger_mgr::logInfo("xbt:return=$call");
