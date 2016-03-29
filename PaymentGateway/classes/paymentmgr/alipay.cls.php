@@ -1,6 +1,6 @@
 <?php
 
-class AlipayMgr implements IPayment  {
+class AlipayMgr  {
 	private	$alipay_config;
 
 	public function __construct()

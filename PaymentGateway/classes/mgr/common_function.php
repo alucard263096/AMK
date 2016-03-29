@@ -124,4 +124,12 @@ function outResult($num,$message,$return=""){
 	return $array;
 }
 
+function ArrayToString($arr){
+	$str="";
+	foreach($arr as $key=>$value){
+		$str.="<$key:$value>
+		";
+	}
+	return $str;
+}
 ?>
