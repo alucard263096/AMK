@@ -33,8 +33,8 @@ class XBTMgr   {
 		$arr["mobile"]=$info["mobile"];
 		$arr["outCustomerId"]=$info["mobile"];
 		$arr["outTradeNo"]=$info["order_no"];
-		$arr["merchantNo"]=$CONFIG["xbt"]["merchantNo"];
-		$arr["childMerchantNo"]=$CONFIG["xbt"]["merchantNo"];
+		$arr["merchantNo"]=OpenSdkConfig::SOURCENO;
+		$arr["childMerchantNo"]=OpenSdkConfig::SOURCENO;
 		$arr["amount"]=1;//$info["price"];
 		$arr["currency"]="CNY";
 		$arr["orderBeginTime"]=date('Y-m-d H:i:s');
